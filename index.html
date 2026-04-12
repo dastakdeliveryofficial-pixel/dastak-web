@@ -1177,9 +1177,213 @@
         .hidden {
             display: none !important;
         }
+
+        /* Logout Button - Top Left */
+        .logout-fab {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 9999;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            gap: 0.4rem;
+            box-shadow: 0 4px 15px rgba(239,68,68,0.4);
+            transition: all 0.3s;
+        }
+        .logout-fab:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(239,68,68,0.5);
+        }
+        .logout-fab.visible {
+            display: flex;
+        }
+
+        /* Push Notification Bell */
+        .notif-bell {
+            position: fixed;
+            top: 12px;
+            right: 70px;
+            z-index: 9999;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(245,158,11,0.4);
+            transition: all 0.3s;
+        }
+        .notif-bell.visible { display: flex; }
+        .notif-bell:hover { transform: scale(1.1); }
+
+        /* Notification Banner (received by customer) */
+        .notif-banner {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99999;
+            background: linear-gradient(135deg, #1e3a5f, #0f172a);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            min-width: 300px;
+            max-width: 90vw;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            transition: top 0.4s cubic-bezier(0.34,1.56,0.64,1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .notif-banner.show { top: 16px; }
+        .notif-banner-icon { font-size: 2rem; }
+        .notif-banner-text h4 { font-size: 0.9rem; color: #f59e0b; margin-bottom: 0.2rem; }
+        .notif-banner-text p { font-size: 0.85rem; opacity: 0.9; }
+        .notif-close {
+            margin-left: auto;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        /* Admin Notification Modal */
+        .notif-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 8000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .notif-overlay.active { display: flex; }
+        .notif-modal {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .notif-modal h3 {
+            color: #1e3a5f;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .notif-modal p { color: #64748b; margin-bottom: 1.5rem; font-size: 0.875rem; }
+        .notif-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            margin-bottom: 1rem;
+            transition: border-color 0.3s;
+        }
+        .notif-input:focus { border-color: #1e3a5f; }
+        .notif-send-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .notif-send-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(245,158,11,0.4); }
+        .notif-cancel-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: none;
+            border: none;
+            color: #64748b;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+
+        /* Delivery charges row in cart */
+        .delivery-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        .delivery-row span:last-child { color: #ef4444; font-weight: 600; }
+        .cart-grand-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.75rem;
+            border-top: 2px solid #e2e8f0;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        .cart-grand-total span:last-child { color: #059669; }
     </style>
 </head>
 <body>
+
+    <!-- Logout Button (Fixed Top Left) -->
+    <button class="logout-fab" id="logoutFab" onclick="handleLogout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span id="logoutLabel">Logout</span>
+    </button>
+
+    <!-- Notification Bell (Admin Only) -->
+    <button class="notif-bell" id="notifBell" onclick="openNotifModal()" title="Send Notification">
+        <i class="fas fa-bell"></i>
+    </button>
+
+    <!-- Notification Banner (Received by Customer) -->
+    <div class="notif-banner" id="notifBanner">
+        <div class="notif-banner-icon">🔔</div>
+        <div class="notif-banner-text">
+            <h4>Dastak Delivery</h4>
+            <p id="notifBannerText">Notification message here</p>
+        </div>
+        <button class="notif-close" onclick="closeNotifBanner()"><i class="fas fa-times"></i></button>
+    </div>
+
+    <!-- Admin Notification Modal -->
+    <div class="notif-overlay" id="notifOverlay">
+        <div class="notif-modal">
+            <h3><i class="fas fa-bell" style="color:#f59e0b;"></i> Send Notification</h3>
+            <p>Yeh notification tamam customers ko milegi jo app khola hua hai.</p>
+            <input type="text" class="notif-input" id="notifTitle" placeholder="Title (e.g. 🎉 Special Offer!)">
+            <textarea class="notif-input" id="notifMessage" rows="3" placeholder="Message likhein... (e.g. Aaj FREE delivery hai sabke liye!)"></textarea>
+            <button class="notif-send-btn" onclick="sendNotification()">
+                <i class="fas fa-paper-plane"></i> Notification Bhejo
+            </button>
+            <button class="notif-cancel-btn" onclick="closeNotifModal()">Wapis Jao</button>
+        </div>
+    </div>
 
     <!-- Landing Page -->
     <div class="landing-page" id="landingPage">
@@ -1286,6 +1490,7 @@
             <div class="admin-tabs">
                 <button class="admin-tab active" onclick="switchTab('add')">Add Product</button>
                 <button class="admin-tab" onclick="switchTab('edit')">Edit/Delete</button>
+                <button class="admin-tab" onclick="switchTab('notif')">🔔 Notification</button>
                 <button class="admin-tab" onclick="switchTab('reset')">Reset Data</button>
             </div>
 
@@ -1331,6 +1536,26 @@
             <div class="tab-content" id="tab-edit">
                 <div class="products-list" id="adminProductsList">
                     <!-- Products will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Notification Tab -->
+            <div class="tab-content" id="tab-notif">
+                <div style="padding: 1rem 0;">
+                    <div style="background:#fef9c3; border:2px solid #f59e0b; border-radius:12px; padding:1rem; margin-bottom:1.5rem;">
+                        <p style="color:#92400e; font-size:0.875rem;">⚡ <strong>Push Notification</strong> — Jab aap notification bhejein, woh tamam customers ko milegi jo app khola hua hai (same device ya doosri tabs mein).</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Notification Title</label>
+                        <input type="text" class="form-input" id="adminNotifTitle" placeholder="e.g. 🎉 Special Offer Today!">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-input" id="adminNotifMessage" rows="4" placeholder="e.g. Aaj sab orders par FREE delivery! Jaldi order karein 🛵"></textarea>
+                    </div>
+                    <button class="admin-btn" onclick="sendAdminNotif()" style="background: linear-gradient(135deg,#f59e0b,#d97706);">
+                        <i class="fas fa-paper-plane"></i> Notification Bhejo
+                    </button>
                 </div>
             </div>
 
@@ -1442,7 +1667,15 @@
                 <label class="address-label">Delivery Address *</label>
                 <textarea class="address-input" id="deliveryAddress" rows="3" placeholder="Enter your complete address with landmark..."></textarea>
             </div>
-            <div class="cart-total">
+            <div class="delivery-row">
+                <span>Items Total:</span>
+                <span id="cartSubtotal">Rs. 0</span>
+            </div>
+            <div class="delivery-row">
+                <span>🛵 Delivery Charges:</span>
+                <span>Rs. 100</span>
+            </div>
+            <div class="cart-grand-total">
                 <span>Total:</span>
                 <span id="cartTotal">Rs. 0</span>
             </div>
@@ -1672,6 +1905,14 @@
             document.getElementById('mainContent').style.display = 'block';
             document.getElementById('mainFooter').style.display = 'block';
             document.getElementById('sidebarAdminSection').style.display = 'none';
+            // Show exit/logout button
+            const fab = document.getElementById('logoutFab');
+            fab.classList.add('visible');
+            document.getElementById('logoutLabel').textContent = 'Exit';
+            fab.style.background = 'linear-gradient(135deg, #64748b, #475569)';
+            fab.style.boxShadow = '0 4px 15px rgba(100,116,139,0.4)';
+            // Request notification permission
+            requestNotificationPermission();
             renderSections();
         }
 
@@ -1695,6 +1936,12 @@
                 document.getElementById('mainContent').style.display = 'block';
                 document.getElementById('mainFooter').style.display = 'block';
                 document.getElementById('sidebarAdminSection').style.display = 'block';
+                // Show admin logout button
+                const fab = document.getElementById('logoutFab');
+                fab.classList.add('visible');
+                document.getElementById('logoutLabel').textContent = 'Logout';
+                // Show notification bell for admin
+                document.getElementById('notifBell').classList.add('visible');
                 renderSections();
                 alert('Welcome Admin!');
             } else {
@@ -1902,9 +2149,12 @@
             const cartItems = document.getElementById('cartItems');
             const cartFooter = document.getElementById('cartFooter');
             const cartTotal = document.getElementById('cartTotal');
+            const cartSubtotal = document.getElementById('cartSubtotal');
             
+            const DELIVERY_CHARGES = 100;
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const subTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const grandTotal = subTotal + DELIVERY_CHARGES;
             
             cartCount.textContent = totalItems;
             
@@ -1941,7 +2191,8 @@
                     </div>
                 `).join('');
                 cartFooter.style.display = 'block';
-                cartTotal.textContent = `Rs. ${totalPrice}`;
+                if (cartSubtotal) cartSubtotal.textContent = `Rs. ${subTotal}`;
+                cartTotal.textContent = `Rs. ${grandTotal}`;
             }
         }
 
@@ -1964,7 +2215,9 @@
                 return;
             }
             
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const DELIVERY_CHARGES = 100;
+            const subTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const grandTotal = subTotal + DELIVERY_CHARGES;
             
             // Build order message
             let message = `*🛒 New Order - Dastak Delivery Matli*%0A%0A`;
@@ -1990,7 +2243,9 @@
             });
             
             message += `━━━━━━━━━━━━━━━%0A`;
-            message += `*💰 Total: Rs. ${totalPrice}*%0A%0A`;
+            message += `*🧾 Items Total: Rs. ${subTotal}*%0A`;
+            message += `*🛵 Delivery Charges: Rs. ${DELIVERY_CHARGES}*%0A`;
+            message += `*💰 Grand Total: Rs. ${grandTotal}*%0A%0A`;
             message += `*📍 Delivery Address:*%0A${address}%0A%0A`;
             message += `Please confirm my order. Thank you! 🙏`;
             
@@ -2177,6 +2432,102 @@
                 alert('Data reset to default successfully!');
             }
         }
+
+        // =========== LOGOUT ===========
+        function handleLogout() {
+            if (confirm('Kya aap waqai logout/exit karna chahte hain?')) {
+                location.reload();
+            }
+        }
+
+        // =========== NOTIFICATIONS ===========
+        function requestNotificationPermission() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission();
+            }
+        }
+
+        function openNotifModal() {
+            document.getElementById('notifOverlay').classList.add('active');
+        }
+
+        function sendAdminNotif() {
+            const title = document.getElementById('adminNotifTitle').value.trim() || '🔔 Dastak Delivery';
+            const message = document.getElementById('adminNotifMessage').value.trim();
+            if (!message) { alert('Pehle message likhein!'); return; }
+            const notifData = { title, message, time: Date.now() };
+            localStorage.setItem('dastakNotification', JSON.stringify(notifData));
+            showNotifBanner(title, message);
+            if ('Notification' in window && Notification.permission === 'granted') {
+                new Notification(title, { body: message });
+            }
+            document.getElementById('adminNotifTitle').value = '';
+            document.getElementById('adminNotifMessage').value = '';
+            alert('✅ Notification send ho gayi!');
+        }
+
+        function closeNotifModal() {
+            document.getElementById('notifOverlay').classList.remove('active');
+        }
+
+        function sendNotification() {
+            const title = document.getElementById('notifTitle').value.trim() || '🔔 Dastak Delivery';
+            const message = document.getElementById('notifMessage').value.trim();
+            if (!message) {
+                alert('Pehle message likhein!');
+                return;
+            }
+
+            // Save notification to localStorage so other tabs/customers see it
+            const notifData = { title, message, time: Date.now() };
+            localStorage.setItem('dastakNotification', JSON.stringify(notifData));
+
+            // Show in-app banner for admin too
+            showNotifBanner(title, message);
+
+            // Browser push notification
+            if ('Notification' in window && Notification.permission === 'granted') {
+                new Notification(title, {
+                    body: message,
+                    icon: 'https://cdn-icons-png.flaticon.com/512/2553/2553642.png'
+                });
+            }
+
+            document.getElementById('notifTitle').value = '';
+            document.getElementById('notifMessage').value = '';
+            closeNotifModal();
+            alert('✅ Notification send ho gayi!');
+        }
+
+        function showNotifBanner(title, message) {
+            document.getElementById('notifBannerText').textContent = message;
+            document.querySelector('.notif-banner-text h4').textContent = title;
+            const banner = document.getElementById('notifBanner');
+            banner.classList.add('show');
+            setTimeout(() => banner.classList.remove('show'), 6000);
+        }
+
+        function closeNotifBanner() {
+            document.getElementById('notifBanner').classList.remove('show');
+        }
+
+        // Listen for notifications from admin (localStorage cross-tab)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'dastakNotification' && e.newValue) {
+                const notif = JSON.parse(e.newValue);
+                // Only show if not admin
+                if (!isAdminLoggedIn) {
+                    showNotifBanner(notif.title, notif.message);
+                    // Browser notification too
+                    if ('Notification' in window && Notification.permission === 'granted') {
+                        new Notification(notif.title, {
+                            body: notif.message,
+                            icon: 'https://cdn-icons-png.flaticon.com/512/2553/2553642.png'
+                        });
+                    }
+                }
+            }
+        });
     </script>
 
 </body>
