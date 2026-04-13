@@ -207,6 +207,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 0.5rem;
         }
 
         .logo-section {
@@ -1178,56 +1179,32 @@
             display: none !important;
         }
 
-        /* Logout Button - Top Left */
-        .logout-fab {
-            position: fixed;
-            top: 12px;
-            left: 12px;
-            z-index: 9999;
-            background: linear-gradient(135deg, #ef4444, #dc2626);
+        /* Header action buttons (logout, notification) */
+        .header-action-btn {
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.3);
             color: white;
-            border: none;
+            height: 42px;
             border-radius: 50px;
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            gap: 0.4rem;
-            box-shadow: 0 4px 15px rgba(239,68,68,0.4);
-            transition: all 0.3s;
-        }
-        .logout-fab:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(239,68,68,0.5);
-        }
-        .logout-fab.visible {
-            display: flex;
-        }
-
-        /* Push Notification Bell */
-        .notif-bell {
-            position: fixed;
-            top: 12px;
-            right: 70px;
-            z-index: 9999;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            font-size: 1.1rem;
             cursor: pointer;
             display: none;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(245,158,11,0.4);
+            gap: 0.4rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 0 0.9rem;
             transition: all 0.3s;
+            white-space: nowrap;
         }
-        .notif-bell.visible { display: flex; }
-        .notif-bell:hover { transform: scale(1.1); }
+        .header-action-btn.visible { display: flex; }
+        .header-action-btn:hover { background: rgba(255,255,255,0.28); transform: translateY(-1px); }
+        .header-action-btn.logout-btn { border-color: rgba(239,68,68,0.6); }
+        .header-action-btn.logout-btn:hover { background: rgba(239,68,68,0.35); }
+        .header-action-btn.notif-btn { border-color: rgba(245,158,11,0.7); }
+        .header-action-btn.notif-btn:hover { background: rgba(245,158,11,0.3); }
+        .header-left { display: flex; align-items: center; gap: 0.6rem; }
+        .header-right { display: flex; align-items: center; gap: 0.6rem; }
 
         /* Notification Banner (received by customer) */
         .notif-banner {
@@ -1346,22 +1323,80 @@
             font-weight: 700;
         }
         .cart-grand-total span:last-child { color: #059669; }
+
+        /* Payment Method Selection */
+        .payment-section { margin-bottom: 1rem; }
+        .payment-label { font-weight: 600; color: #1e293b; margin-bottom: 0.6rem; display: block; }
+        .payment-options { display: flex; flex-direction: column; gap: 0.5rem; }
+        .payment-option {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+        .payment-option:hover { border-color: #1e3a5f; background: #f0f9ff; }
+        .payment-option input[type="radio"] { width: 18px; height: 18px; accent-color: #1e3a5f; cursor: pointer; }
+        .payment-option span { font-size: 0.9rem; font-weight: 500; }
+        .payment-option.selected { border-color: #1e3a5f; background: #eff6ff; }
+
+        /* Sidebar Search */
+        .sidebar-search {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .sidebar-search-input {
+            width: 100%;
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            outline: none;
+            transition: border-color 0.3s;
+            background: #f8fafc;
+        }
+        .sidebar-search-input:focus { border-color: #1e3a5f; background: white; }
+        .sidebar-search-wrap { position: relative; }
+        .sidebar-search-wrap i { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 0.875rem; }
+
+        /* Restaurant Management in Admin */
+        .restaurant-list-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.75rem 1rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            border: 2px solid #e2e8f0;
+        }
+        .restaurant-info { flex: 1; }
+        .restaurant-name-admin { font-weight: 700; color: #1e293b; font-size: 1rem; }
+        .restaurant-sub-admin { font-size: 0.8rem; color: #64748b; }
+        .color-picker-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+        .color-chip {
+            width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
+            border: 3px solid transparent; transition: border-color 0.2s;
+        }
+        .color-chip.active, .color-chip:hover { border-color: #1e293b; }
+        .gradient-options { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem; }
+        .gradient-chip {
+            height: 36px; border-radius: 8px; cursor: pointer;
+            border: 3px solid transparent; transition: border-color 0.2s;
+            font-size: 0.7rem; color: white; display: flex; align-items: center; justify-content: center; font-weight: 600;
+        }
+        .gradient-chip.active, .gradient-chip:hover { border-color: #1e293b; }
+
+        /* Admin tabs scrollable on mobile */
+        .admin-tabs { overflow-x: auto; flex-wrap: nowrap !important; }
+        .admin-tabs::-webkit-scrollbar { height: 3px; }
+        .admin-tabs::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        .admin-tab { white-space: nowrap; }
     </style>
 </head>
 <body>
 
-    <!-- Logout Button (Fixed Top Left) -->
-    <button class="logout-fab" id="logoutFab" onclick="handleLogout()">
-        <i class="fas fa-sign-out-alt"></i>
-        <span id="logoutLabel">Logout</span>
-    </button>
-
-    <!-- Notification Bell (Admin Only) -->
-    <button class="notif-bell" id="notifBell" onclick="openNotifModal()" title="Send Notification">
-        <i class="fas fa-bell"></i>
-    </button>
-
-    <!-- Notification Banner (Received by Customer) -->
+    <!-- Notification Banner -->
     <div class="notif-banner" id="notifBanner">
         <div class="notif-banner-icon">🔔</div>
         <div class="notif-banner-text">
@@ -1430,36 +1465,22 @@
             <div class="sidebar-title">Dastak Delivery</div>
             <div class="sidebar-subtitle">Matli - Complete Food Delivery</div>
         </div>
+        <!-- Sidebar Search -->
+        <div class="sidebar-search">
+            <div class="sidebar-search-wrap">
+                <i class="fas fa-search"></i>
+                <input type="text" class="sidebar-search-input" id="sidebarSearchInput" placeholder="Restaurant ya category dhundein..." oninput="filterSidebarNav()">
+            </div>
+        </div>
         <div class="sidebar-nav">
             <div class="nav-section">
                 <div class="nav-section-title">Restaurants</div>
-                <div class="nav-item active" onclick="showSection('all')">
+                <div class="nav-item active" onclick="showSection('all')" data-label="All Items">
                     <i class="fas fa-th-large"></i>
                     <span>All Items</span>
                 </div>
-                <div class="nav-item" onclick="showSection('ipp')">
-                    <i class="fas fa-pizza-slice"></i>
-                    <span>Italian Pizza Palace (IPP)</span>
-                </div>
-                <div class="nav-item" onclick="showSection('almadina')">
-                    <i class="fas fa-bowl-rice"></i>
-                    <span>Al Madina Biryani</span>
-                </div>
-                <div class="nav-item" onclick="showSection('domino')">
-                    <i class="fas fa-pizza-slice"></i>
-                    <span>Domino Pizza</span>
-                </div>
-                <div class="nav-item" onclick="showSection('siraj')">
-                    <i class="fas fa-utensils"></i>
-                    <span>Siraj Home Food</span>
-                </div>
-                <div class="nav-item" onclick="showSection('friend')">
-                    <i class="fas fa-bread-slice"></i>
-                    <span>Friend Bakery</span>
-                </div>
-                <div class="nav-item" onclick="showSection('special')">
-                    <i class="fas fa-star"></i>
-                    <span>Special Flavor</span>
+                <div id="sidebarRestaurantList">
+                    <!-- Dynamically rendered -->
                 </div>
             </div>
             
@@ -1488,39 +1509,35 @@
         </div>
         <div class="admin-content">
             <div class="admin-tabs">
-                <button class="admin-tab active" onclick="switchTab('add')">Add Product</button>
-                <button class="admin-tab" onclick="switchTab('edit')">Edit/Delete</button>
+                <button class="admin-tab active" onclick="switchTab('add')">➕ Add Item</button>
+                <button class="admin-tab" onclick="switchTab('restaurants')">🏪 Restaurants</button>
+                <button class="admin-tab" onclick="switchTab('edit')">✏️ Edit/Delete</button>
                 <button class="admin-tab" onclick="switchTab('notif')">🔔 Notification</button>
-                <button class="admin-tab" onclick="switchTab('reset')">Reset Data</button>
+                <button class="admin-tab" onclick="switchTab('reset')">🔄 Reset</button>
             </div>
 
             <!-- Add Product Tab -->
             <div class="tab-content active" id="tab-add">
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">Product Name</label>
+                        <label class="form-label">Product Name *</label>
                         <input type="text" class="form-input" id="adminProductName" placeholder="e.g. Zinger Burger">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Price (Rs.)</label>
+                        <label class="form-label">Price (Rs.) *</label>
                         <input type="number" class="form-input" id="adminProductPrice" placeholder="e.g. 350">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">Category/Restaurant</label>
+                        <label class="form-label">Restaurant *</label>
                         <select class="form-select" id="adminProductCategory">
-                            <option value="ipp">Italian Pizza Palace (IPP)</option>
-                            <option value="almadina">Al Madina Biryani</option>
-                            <option value="domino">Domino Pizza</option>
-                            <option value="siraj">Siraj Home Food</option>
-                            <option value="friend">Friend Bakery</option>
-                            <option value="special">Special Flavor</option>
+                            <!-- Dynamically filled -->
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Variation (Optional)</label>
-                        <input type="text" class="form-input" id="adminProductVariation" placeholder="e.g. Small/Medium/Large or 1 Pao/1 Kg">
+                        <input type="text" class="form-input" id="adminProductVariation" placeholder="e.g. Small / 1 Kg / Regular">
                     </div>
                 </div>
                 <div class="form-group">
@@ -1528,11 +1545,62 @@
                     <input type="text" class="form-input" id="adminProductEmoji" placeholder="e.g. 🍔 🍕 🍗" maxlength="2">
                 </div>
                 <button class="admin-btn" onclick="addProduct()">
-                    <i class="fas fa-plus"></i> Add Product
+                    <i class="fas fa-plus"></i> Add Item
                 </button>
             </div>
 
-            <!-- Edit/Delete Tab -->
+            <!-- Restaurants Management Tab -->
+            <div class="tab-content" id="tab-restaurants">
+                <div style="margin-bottom:1.5rem;">
+                    <h4 style="color:#1e3a5f; margin-bottom:1rem; font-size:1rem;">➕ Naya Restaurant Add Karein</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Restaurant Name *</label>
+                            <input type="text" class="form-input" id="newRestName" placeholder="e.g. Ali Broast House">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tagline / Subtitle</label>
+                            <input type="text" class="form-input" id="newRestSubtitle" placeholder="e.g. Best Broast in Matli">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Icon (Font Awesome)</label>
+                            <select class="form-select" id="newRestIcon">
+                                <option value="fa-utensils">🍴 Utensils</option>
+                                <option value="fa-pizza-slice">🍕 Pizza</option>
+                                <option value="fa-bowl-rice">🍛 Bowl/Biryani</option>
+                                <option value="fa-bread-slice">🍞 Bread/Bakery</option>
+                                <option value="fa-burger">🍔 Burger</option>
+                                <option value="fa-star">⭐ Star</option>
+                                <option value="fa-fire">🔥 Fire</option>
+                                <option value="fa-leaf">🌿 Leaf</option>
+                                <option value="fa-ice-cream">🍦 Ice Cream</option>
+                                <option value="fa-drumstick-bite">🍗 Chicken</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Header Color Theme</label>
+                            <select class="form-select" id="newRestColor">
+                                <option value="ipp">🔴 Red (Pizza Palace style)</option>
+                                <option value="almadina">🟢 Green (Al Madina style)</option>
+                                <option value="domino">🔵 Blue (Domino style)</option>
+                                <option value="siraj">🟠 Orange (Siraj style)</option>
+                                <option value="friend">🟣 Purple (Friend style)</option>
+                                <option value="special">🩷 Pink (Special style)</option>
+                                <option value="deals">🟡 Gold (Deals style)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="admin-btn" onclick="addRestaurant()" style="margin-top:0.5rem;">
+                        <i class="fas fa-store"></i> Restaurant Add Karein
+                    </button>
+                </div>
+                <div style="border-top:2px solid #e2e8f0; padding-top:1.5rem;">
+                    <h4 style="color:#1e3a5f; margin-bottom:1rem; font-size:1rem;">📋 Existing Restaurants</h4>
+                    <div id="adminRestaurantsList"></div>
+                </div>
+            </div>
             <div class="tab-content" id="tab-edit">
                 <div class="products-list" id="adminProductsList">
                     <!-- Products will be loaded here -->
@@ -1586,6 +1654,12 @@
             <input type="hidden" id="editProductId">
             <input type="hidden" id="editProductCategory">
             <div class="form-group">
+                <label class="form-label">Restaurant Change Karein</label>
+                <select class="form-select" id="editProductCategorySelect">
+                    <!-- Dynamically filled -->
+                </select>
+            </div>
+            <div class="form-group">
                 <label class="form-label">Product Name</label>
                 <input type="text" class="form-input" id="editProductName">
             </div>
@@ -1607,11 +1681,63 @@
         </div>
     </div>
 
+    <!-- Edit Restaurant Modal -->
+    <div class="admin-overlay" id="editRestOverlay" onclick="closeEditRestModal()"></div>
+    <div class="admin-panel" id="editRestModal" style="max-width: 500px;">
+        <div class="admin-header">
+            <h2><i class="fas fa-store"></i> Restaurant Edit</h2>
+            <button class="close-admin" onclick="closeEditRestModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="admin-content">
+            <input type="hidden" id="editRestKey">
+            <div class="form-group">
+                <label class="form-label">Restaurant Name</label>
+                <input type="text" class="form-input" id="editRestName">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Tagline / Subtitle</label>
+                <input type="text" class="form-input" id="editRestSubtitle">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Icon</label>
+                <select class="form-select" id="editRestIcon">
+                    <option value="fa-utensils">🍴 Utensils</option>
+                    <option value="fa-pizza-slice">🍕 Pizza</option>
+                    <option value="fa-bowl-rice">🍛 Bowl/Biryani</option>
+                    <option value="fa-bread-slice">🍞 Bread/Bakery</option>
+                    <option value="fa-burger">🍔 Burger</option>
+                    <option value="fa-star">⭐ Star</option>
+                    <option value="fa-fire">🔥 Fire</option>
+                    <option value="fa-leaf">🌿 Leaf</option>
+                    <option value="fa-ice-cream">🍦 Ice Cream</option>
+                    <option value="fa-drumstick-bite">🍗 Chicken</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Color Theme</label>
+                <select class="form-select" id="editRestColor">
+                    <option value="ipp">🔴 Red</option>
+                    <option value="almadina">🟢 Green</option>
+                    <option value="domino">🔵 Blue</option>
+                    <option value="siraj">🟠 Orange</option>
+                    <option value="friend">🟣 Purple</option>
+                    <option value="special">🩷 Pink</option>
+                    <option value="deals">🟡 Gold</option>
+                </select>
+            </div>
+            <button class="admin-btn" onclick="saveRestaurantEdit()">
+                <i class="fas fa-save"></i> Save Changes
+            </button>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="header" id="mainHeader" style="display: none;">
         <div class="container">
             <div class="header-content">
-                <div class="logo-section">
+                <div class="header-left">
                     <button class="menu-btn" onclick="toggleSidebar()">
                         <i class="fas fa-bars"></i>
                     </button>
@@ -1619,12 +1745,24 @@
                         <i class="fas fa-motorcycle"></i>
                         <span>Dastak Delivery</span>
                     </div>
+                    <!-- Logout / Exit — header left side -->
+                    <button class="header-action-btn logout-btn" id="logoutFab" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span id="logoutLabel">Exit</span>
+                    </button>
                 </div>
-                <button class="cart-btn" onclick="toggleCart()">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span>Cart</span>
-                    <span class="cart-count" id="cartCount">0</span>
-                </button>
+                <div class="header-right">
+                    <!-- Admin Notification Bell -->
+                    <button class="header-action-btn notif-btn" id="notifBell" onclick="openNotifModal()" title="Notification Bhejein">
+                        <i class="fas fa-bell"></i>
+                        <span>Notify</span>
+                    </button>
+                    <button class="cart-btn" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Cart</span>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -1634,7 +1772,7 @@
         <div class="container">
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-input" id="searchInput" placeholder="Search food, deals, biryani..." onkeyup="searchProducts()">
+                <input type="text" class="search-input" id="searchInput" placeholder="🔍 Restaurant ya item dhundein... (e.g. Al Madina, Pizza, Biryani)" onkeyup="searchProducts()">
             </div>
         </div>
     </section>
@@ -1664,8 +1802,26 @@
         </div>
         <div class="cart-footer" id="cartFooter" style="display: none;">
             <div class="address-section">
-                <label class="address-label">Delivery Address *</label>
+                <label class="address-label">📍 Delivery Address *</label>
                 <textarea class="address-input" id="deliveryAddress" rows="3" placeholder="Enter your complete address with landmark..."></textarea>
+            </div>
+            <!-- Payment Method -->
+            <div class="payment-section">
+                <label class="payment-label">💳 Payment Method *</label>
+                <div class="payment-options">
+                    <label class="payment-option" id="pay-cash">
+                        <input type="radio" name="paymentMethod" value="cash" checked onchange="updatePaymentStyle()">
+                        <span>💵 Cash on Delivery</span>
+                    </label>
+                    <label class="payment-option" id="pay-online">
+                        <input type="radio" name="paymentMethod" value="online" onchange="updatePaymentStyle()">
+                        <span>📱 Online Payment (EasyPaisa/JazzCash)</span>
+                    </label>
+                    <label class="payment-option" id="pay-half">
+                        <input type="radio" name="paymentMethod" value="half" onchange="updatePaymentStyle()">
+                        <span>🤝 Half Cash & Half Online</span>
+                    </label>
+                </div>
             </div>
             <div class="delivery-row">
                 <span>Items Total:</span>
@@ -1905,14 +2061,13 @@
             document.getElementById('mainContent').style.display = 'block';
             document.getElementById('mainFooter').style.display = 'block';
             document.getElementById('sidebarAdminSection').style.display = 'none';
-            // Show exit/logout button
+            // Show Exit button in header
             const fab = document.getElementById('logoutFab');
             fab.classList.add('visible');
             document.getElementById('logoutLabel').textContent = 'Exit';
-            fab.style.background = 'linear-gradient(135deg, #64748b, #475569)';
-            fab.style.boxShadow = '0 4px 15px rgba(100,116,139,0.4)';
             // Request notification permission
             requestNotificationPermission();
+            renderSidebarNav();
             renderSections();
         }
 
@@ -1942,6 +2097,8 @@
                 document.getElementById('logoutLabel').textContent = 'Logout';
                 // Show notification bell for admin
                 document.getElementById('notifBell').classList.add('visible');
+                renderSidebarNav();
+                fillCategoryDropdowns();
                 renderSections();
                 alert('Welcome Admin!');
             } else {
@@ -2034,9 +2191,10 @@
             `;
         }
 
-        // Search Products
+        // Smart Search — restaurant name + items + fuzzy suggestions
         function searchProducts() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const raw = document.getElementById('searchInput').value;
+            const searchTerm = raw.toLowerCase().trim();
             const container = document.getElementById('mainContainer');
             
             if (searchTerm === '') {
@@ -2044,51 +2202,99 @@
                 return;
             }
 
-            // Filter products across all categories
-            let results = [];
+            // 1. Check if search term matches a restaurant name
+            const restaurantMatch = Object.keys(categories).find(key =>
+                categories[key].name.toLowerCase().includes(searchTerm)
+            );
+
+            // 2. Exact/partial product match across all restaurants
+            let exactResults = [];
             Object.keys(categories).forEach(key => {
                 const cat = categories[key];
-                const matching = cat.products.filter(p => 
-                    p.name.toLowerCase().includes(searchTerm) || 
-                    (p.variation && p.variation.toLowerCase().includes(searchTerm))
+                const matching = cat.products.filter(p =>
+                    p.name.toLowerCase().includes(searchTerm) ||
+                    (p.variation && p.variation.toLowerCase().includes(searchTerm)) ||
+                    cat.name.toLowerCase().includes(searchTerm) // restaurant name match shows all items
                 );
                 if (matching.length > 0) {
-                    results.push({ key, category: cat, products: matching });
+                    exactResults.push({ key, category: cat, products: matching });
                 }
             });
 
+            // 3. Fuzzy / suggestions — words that partially match
+            let suggestionResults = [];
+            if (exactResults.length === 0) {
+                const words = searchTerm.split(/\s+/);
+                Object.keys(categories).forEach(key => {
+                    const cat = categories[key];
+                    const matching = cat.products.filter(p => {
+                        const haystack = (p.name + ' ' + (p.variation || '') + ' ' + cat.name).toLowerCase();
+                        return words.some(w => w.length >= 2 && haystack.includes(w));
+                    });
+                    if (matching.length > 0) {
+                        suggestionResults.push({ key, category: cat, products: matching });
+                    }
+                });
+            }
+
+            const results = exactResults.length > 0 ? exactResults : suggestionResults;
+            const isSuggestion = exactResults.length === 0 && suggestionResults.length > 0;
+
             if (results.length === 0) {
+                // No match at all — show friendly message with tips
                 container.innerHTML = `
-                    <div style="text-align: center; padding: 3rem; color: #64748b;">
-                        <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
-                        <p>No products found matching "${searchTerm}"</p>
-                    </div>
-                `;
+                    <div style="text-align:center; padding:3rem 1rem; color:#64748b;">
+                        <div style="font-size:3.5rem; margin-bottom:1rem;">🔍</div>
+                        <h3 style="color:#1e293b; margin-bottom:0.5rem;">"${raw}" nahi mila</h3>
+                        <p style="margin-bottom:1.5rem;">Koi match nahi hua. Yeh try karein:</p>
+                        <div style="display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; margin-bottom:1.5rem;">
+                            ${Object.keys(categories).map(k =>
+                                `<button onclick="document.getElementById('searchInput').value='${categories[k].name}'; searchProducts();"
+                                    style="background:#f1f5f9; border:2px solid #e2e8f0; border-radius:20px; padding:0.4rem 1rem; cursor:pointer; font-size:0.85rem; font-weight:600; color:#1e3a5f;">
+                                    ${categories[k].name}
+                                </button>`
+                            ).join('')}
+                        </div>
+                        <button onclick="document.getElementById('searchInput').value=''; renderSections();"
+                            style="background:#1e3a5f; color:white; border:none; border-radius:10px; padding:0.6rem 1.5rem; cursor:pointer; font-weight:600;">
+                            <i class="fas fa-times"></i> Search Clear Karein
+                        </button>
+                    </div>`;
                 return;
             }
 
-            container.innerHTML = results.map(({key, category, products}) => `
+            // Render results
+            const headerHtml = isSuggestion
+                ? `<div style="background:#fef9c3; border:2px solid #f59e0b; border-radius:12px; padding:0.75rem 1rem; margin-bottom:1rem; color:#92400e; font-size:0.875rem;">
+                       💡 <strong>"${raw}"</strong> ka exact match nahi mila — yeh milte julte results hain:
+                   </div>`
+                : (restaurantMatch
+                    ? `<div style="background:#d1fae5; border:2px solid #059669; border-radius:12px; padding:0.75rem 1rem; margin-bottom:1rem; color:#065f46; font-size:0.875rem;">
+                           🏪 <strong>"${categories[restaurantMatch].name}"</strong> ke tamam items dikh rahe hain
+                       </div>`
+                    : '');
+
+            container.innerHTML = headerHtml + results.map(({key, category, products}) => `
                 <div class="section-header">
                     <h2 class="section-title">
                         <i class="fas ${category.icon}"></i>
                         ${category.name}
                     </h2>
-                    <span class="section-badge">${products.length} Found</span>
+                    <span class="section-badge">${products.length} ${isSuggestion ? 'Suggestions' : 'Found'}</span>
                 </div>
                 <div class="category-card">
                     <div class="category-header ${category.class}">
-                        <div class="category-icon">
-                            <i class="fas ${category.icon}"></i>
-                        </div>
+                        <div class="category-icon"><i class="fas ${category.icon}"></i></div>
                         <div>
                             <div class="category-title">${category.name}</div>
-                            <div class="category-subtitle">Search Results</div>
+                            <div class="category-subtitle">${isSuggestion ? 'Milte Julte Items' : 'Search Results'}</div>
                         </div>
                     </div>
                     <div class="products-container">
                         <div class="products-grid">
                             ${products.map(product => `
                                 <div class="product-item" onclick="addToCart(${product.id}, '${key}')">
+                                    ${product.price > 1000 ? '<span class="deal-badge">DEAL</span>' : ''}
                                     <div class="product-img">${product.emoji}</div>
                                     <div class="product-name">${product.name}</div>
                                     <div class="product-price">Rs. ${product.price}</div>
@@ -2204,27 +2410,40 @@
             sidebar.classList.toggle('active');
         }
 
+        function updatePaymentStyle() {
+            document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
+            const selected = document.querySelector('input[name="paymentMethod"]:checked');
+            if (selected) selected.closest('.payment-option').classList.add('selected');
+        }
+
         // WhatsApp Checkout
         function checkoutWhatsApp() {
             if (cart.length === 0) return;
             
             const address = document.getElementById('deliveryAddress').value.trim();
             if (!address) {
-                alert('Please enter your delivery address!');
+                alert('Delivery address likhein!');
                 document.getElementById('deliveryAddress').focus();
                 return;
             }
+
+            const paymentRadio = document.querySelector('input[name="paymentMethod"]:checked');
+            const paymentValue = paymentRadio ? paymentRadio.value : 'cash';
+            const paymentLabels = {
+                cash: '💵 Cash on Delivery',
+                online: '📱 Online Payment (EasyPaisa/JazzCash)',
+                half: '🤝 Half Cash & Half Online'
+            };
+            const paymentText = paymentLabels[paymentValue] || 'Cash on Delivery';
             
             const DELIVERY_CHARGES = 100;
             const subTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const grandTotal = subTotal + DELIVERY_CHARGES;
             
-            // Build order message
             let message = `*🛒 New Order - Dastak Delivery Matli*%0A%0A`;
             message += `*📦 Order Details:*%0A`;
             message += `━━━━━━━━━━━━━━━%0A%0A`;
             
-            // Group by category
             const grouped = {};
             cart.forEach(item => {
                 if (!grouped[item.category]) grouped[item.category] = [];
@@ -2246,16 +2465,12 @@
             message += `*🧾 Items Total: Rs. ${subTotal}*%0A`;
             message += `*🛵 Delivery Charges: Rs. ${DELIVERY_CHARGES}*%0A`;
             message += `*💰 Grand Total: Rs. ${grandTotal}*%0A%0A`;
+            message += `*💳 Payment Method:* ${paymentText}%0A%0A`;
             message += `*📍 Delivery Address:*%0A${address}%0A%0A`;
             message += `Please confirm my order. Thank you! 🙏`;
             
-            // WhatsApp number: 03202609175 (Pakistan format)
             const phoneNumber = '923202609175';
-            
-            // Using wa.me format with pre-filled message
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
-            
-            // Open WhatsApp
             window.open(whatsappUrl, '_blank');
         }
 
@@ -2264,6 +2479,7 @@
             document.getElementById('adminOverlay').classList.add('active');
             document.getElementById('adminPanel').classList.add('active');
             toggleSidebar();
+            fillCategoryDropdowns();
             renderAdminProducts();
         }
 
@@ -2284,6 +2500,9 @@
             if (tab === 'edit') {
                 renderAdminProducts();
             }
+            if (tab === 'restaurants') {
+                renderAdminRestaurants();
+            }
         }
 
         function renderAdminProducts() {
@@ -2294,8 +2513,9 @@
                 const cat = categories[key];
                 html += `
                     <div class="category-group">
-                        <div class="category-header-admin">
-                            <i class="fas ${cat.icon}"></i> ${cat.name}
+                        <div class="category-header-admin" style="display:flex;justify-content:space-between;align-items:center;">
+                            <span><i class="fas ${cat.icon}"></i> ${cat.name}</span>
+                            <span style="font-size:0.75rem;color:#64748b;">${cat.products.length} items</span>
                         </div>
                 `;
                 
@@ -2327,6 +2547,147 @@
             list.innerHTML = html;
         }
 
+        // =========== RESTAURANT MANAGEMENT ===========
+        function renderAdminRestaurants() {
+            const list = document.getElementById('adminRestaurantsList');
+            let html = '';
+            Object.keys(categories).forEach(key => {
+                const cat = categories[key];
+                html += `
+                    <div class="restaurant-list-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name-admin"><i class="fas ${cat.icon}" style="color:#1e3a5f;margin-right:0.5rem;"></i>${cat.name}</div>
+                            <div class="restaurant-sub-admin">${cat.subtitle || ''} • ${cat.products.length} items</div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="edit-btn" onclick="openEditRestModal('${key}')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="delete-btn" onclick="deleteRestaurant('${key}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            list.innerHTML = html || '<p style="color:#64748b;text-align:center;padding:1rem;">Koi restaurant nahi mila.</p>';
+        }
+
+        function fillCategoryDropdowns() {
+            // Fill Add Product dropdown
+            const addSelect = document.getElementById('adminProductCategory');
+            if (addSelect) {
+                addSelect.innerHTML = Object.keys(categories).map(key =>
+                    `<option value="${key}">${categories[key].name}</option>`
+                ).join('');
+            }
+            // Fill Edit Product dropdown
+            const editSelect = document.getElementById('editProductCategorySelect');
+            if (editSelect) {
+                editSelect.innerHTML = Object.keys(categories).map(key =>
+                    `<option value="${key}">${categories[key].name}</option>`
+                ).join('');
+            }
+        }
+
+        function renderSidebarNav() {
+            const container = document.getElementById('sidebarRestaurantList');
+            if (!container) return;
+            container.innerHTML = Object.keys(categories).map(key => {
+                const cat = categories[key];
+                return `<div class="nav-item" onclick="showSection('${key}')" data-label="${cat.name}">
+                    <i class="fas ${cat.icon}"></i>
+                    <span>${cat.name}</span>
+                </div>`;
+            }).join('');
+        }
+
+        function filterSidebarNav() {
+            const q = document.getElementById('sidebarSearchInput').value.toLowerCase();
+            document.querySelectorAll('#sidebarRestaurantList .nav-item').forEach(item => {
+                const label = item.getAttribute('data-label') || '';
+                item.style.display = label.toLowerCase().includes(q) ? 'flex' : 'none';
+            });
+            // Also show/hide "All Items"
+            const allItem = document.querySelector('.sidebar-nav .nav-item[data-label="All Items"]');
+            if (allItem) allItem.style.display = 'All Items'.toLowerCase().includes(q) ? 'flex' : 'none';
+        }
+
+        function addRestaurant() {
+            const name = document.getElementById('newRestName').value.trim();
+            const subtitle = document.getElementById('newRestSubtitle').value.trim();
+            const icon = document.getElementById('newRestIcon').value;
+            const colorClass = document.getElementById('newRestColor').value;
+
+            if (!name) { alert('Restaurant ka naam likhein!'); return; }
+
+            // Generate key from name
+            const key = name.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '') + '_' + Date.now();
+
+            categories[key] = {
+                name,
+                icon,
+                class: colorClass,
+                subtitle: subtitle || name,
+                products: []
+            };
+
+            localStorage.setItem('dastakCategories', JSON.stringify(categories));
+            document.getElementById('newRestName').value = '';
+            document.getElementById('newRestSubtitle').value = '';
+            renderSidebarNav();
+            fillCategoryDropdowns();
+            renderAdminRestaurants();
+            renderSections();
+            alert(`✅ "${name}" restaurant add ho gaya!`);
+        }
+
+        function openEditRestModal(key) {
+            const cat = categories[key];
+            document.getElementById('editRestKey').value = key;
+            document.getElementById('editRestName').value = cat.name;
+            document.getElementById('editRestSubtitle').value = cat.subtitle || '';
+            document.getElementById('editRestIcon').value = cat.icon;
+            document.getElementById('editRestColor').value = cat.class;
+            document.getElementById('editRestOverlay').classList.add('active');
+            document.getElementById('editRestModal').classList.add('active');
+        }
+
+        function closeEditRestModal() {
+            document.getElementById('editRestOverlay').classList.remove('active');
+            document.getElementById('editRestModal').classList.remove('active');
+        }
+
+        function saveRestaurantEdit() {
+            const key = document.getElementById('editRestKey').value;
+            categories[key].name = document.getElementById('editRestName').value.trim();
+            categories[key].subtitle = document.getElementById('editRestSubtitle').value.trim();
+            categories[key].icon = document.getElementById('editRestIcon').value;
+            categories[key].class = document.getElementById('editRestColor').value;
+            localStorage.setItem('dastakCategories', JSON.stringify(categories));
+            closeEditRestModal();
+            renderAdminRestaurants();
+            fillCategoryDropdowns();
+            renderSidebarNav();
+            renderSections();
+            alert('✅ Restaurant update ho gaya!');
+        }
+
+        function deleteRestaurant(key) {
+            const cat = categories[key];
+            if (cat.products.length > 0) {
+                if (!confirm(`"${cat.name}" mein ${cat.products.length} items hain. Kya aap yeh aur iske tamam items delete karna chahte hain?`)) return;
+            } else {
+                if (!confirm(`"${cat.name}" delete karna chahte hain?`)) return;
+            }
+            delete categories[key];
+            localStorage.setItem('dastakCategories', JSON.stringify(categories));
+            renderAdminRestaurants();
+            fillCategoryDropdowns();
+            renderSidebarNav();
+            renderSections();
+        }
+
         function addProduct() {
             const name = document.getElementById('adminProductName').value.trim();
             const price = parseInt(document.getElementById('adminProductPrice').value);
@@ -2335,39 +2696,30 @@
             const emoji = document.getElementById('adminProductEmoji').value.trim() || '📦';
             
             if (!name || !price) {
-                alert('Please fill required fields (Name and Price)!');
+                alert('Naam aur price zaroori hain!');
+                return;
+            }
+            if (!categories[category]) {
+                alert('Pehle restaurant select karein!');
                 return;
             }
             
-            // Generate new ID
             const allIds = Object.values(categories).flatMap(c => c.products.map(p => p.id));
             const newId = allIds.length > 0 ? Math.max(...allIds) + 1 : 1;
             
-            // Add product
-            const newProduct = {
-                id: newId,
-                name: name,
-                price: price,
-                emoji: emoji
-            };
-            
+            const newProduct = { id: newId, name, price, emoji };
             if (variation) newProduct.variation = variation;
             
             categories[category].products.push(newProduct);
-            
-            // Save to localStorage
             localStorage.setItem('dastakCategories', JSON.stringify(categories));
             
-            // Clear form
             document.getElementById('adminProductName').value = '';
             document.getElementById('adminProductPrice').value = '';
             document.getElementById('adminProductVariation').value = '';
             document.getElementById('adminProductEmoji').value = '';
             
-            // Refresh
             renderSections();
-            
-            alert('Product added successfully!');
+            alert(`✅ "${name}" add ho gaya "${categories[category].name}" mein!`);
         }
 
         function openEditModal(categoryKey, productId) {
@@ -2376,6 +2728,9 @@
             
             document.getElementById('editProductId').value = productId;
             document.getElementById('editProductCategory').value = categoryKey;
+            // Fill category select and set current value
+            fillCategoryDropdowns();
+            document.getElementById('editProductCategorySelect').value = categoryKey;
             document.getElementById('editProductName').value = product.name;
             document.getElementById('editProductPrice').value = product.price;
             document.getElementById('editProductVariation').value = product.variation || '';
@@ -2394,24 +2749,31 @@
         function saveEdit() {
             if (!editingProduct) return;
             
-            const categoryKey = document.getElementById('editProductCategory').value;
+            const oldCategoryKey = document.getElementById('editProductCategory').value;
+            const newCategoryKey = document.getElementById('editProductCategorySelect').value;
             const productId = parseInt(document.getElementById('editProductId').value);
             
-            const product = categories[categoryKey].products.find(p => p.id === productId);
+            // Find product in old category
+            const product = categories[oldCategoryKey].products.find(p => p.id === productId);
             
             product.name = document.getElementById('editProductName').value.trim();
             product.price = parseInt(document.getElementById('editProductPrice').value);
             product.variation = document.getElementById('editProductVariation').value.trim();
             product.emoji = document.getElementById('editProductEmoji').value.trim() || product.emoji;
             
-            // Save to localStorage
+            // If category changed, move the product
+            if (newCategoryKey !== oldCategoryKey) {
+                categories[oldCategoryKey].products = categories[oldCategoryKey].products.filter(p => p.id !== productId);
+                categories[newCategoryKey].products.push(product);
+            }
+            
             localStorage.setItem('dastakCategories', JSON.stringify(categories));
             
             closeEditModal();
             renderAdminProducts();
             renderSections();
             
-            alert('Product updated successfully!');
+            alert('✅ Product update ho gaya!');
         }
 
         function deleteProduct(categoryKey, productId) {
