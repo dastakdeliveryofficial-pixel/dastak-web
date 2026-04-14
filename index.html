@@ -1,18 +1,4 @@
 <!DOCTYPE html>
-<!--
-╔══════════════════════════════════════════════════════════════╗
-║           🔥 FIREBASE SETUP — ZAROORI STEPS                 ║
-╠══════════════════════════════════════════════════════════════╣
-║  1. https://console.firebase.google.com → New Project        ║
-║  2. Firestore Database → Create → "Start in test mode"       ║
-║  3. Project Settings → Your Apps → </> Web App → Register    ║
-║  4. Apni config copy karein aur neeche daalen:               ║
-║     apiKey, authDomain, projectId, storageBucket,            ║
-║     messagingSenderId, appId                                  ║
-║  5. "YOUR_API_KEY" etc. replace karein                        ║
-║  6. File save karein — sab kuch Firebase mein save hoga!     ║
-╚══════════════════════════════════════════════════════════════╝
--->
 <html lang="ur">
 <head>
     <meta charset="UTF-8">
@@ -1407,82 +1393,51 @@
         .admin-tabs::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
         .admin-tab { white-space: nowrap; }
     </style>
-    <!-- ✅ Firebase SDK -->
+    <!-- Firebase SDK -->
     <script type="module">
-      // ══════════════════════════════════════════════════
-      //  🔥 APNI FIREBASE CONFIG YAHAN DAALEN
-      //  Firebase Console → Project Settings → Your Apps
-      // ══════════════════════════════════════════════════
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-      import { getFirestore, doc, getDoc, setDoc, onSnapshot, collection, deleteDoc }
-        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { initializeApp }   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc, onSnapshot }
+                                   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-      const firebaseConfig = {
-        apiKey:            "AIzaSyBvyivY5eMZ6RJ8x2DW5DCtVjeOdWwIvRE",
-        authDomain:        "dastak-delivery-257ad.firebaseapp.com",
-        projectId:         "dastak-delivery-257ad",
-        storageBucket:     "dastak-delivery-257ad.firebasestorage.app",
-        messagingSenderId: "208026439170",
-        appId:             "1:208026439170:web:cc707d16d565338a3aa11b"
-      };
+        const firebaseConfig = {
+            apiKey:            "AIzaSyBvyivY5eMZ6RJ8x2DW5DCtVjeOdWwIvRE",
+            authDomain:        "dastak-delivery-257ad.firebaseapp.com",
+            projectId:         "dastak-delivery-257ad",
+            storageBucket:     "dastak-delivery-257ad.firebasestorage.app",
+            messagingSenderId: "208026439170",
+            appId:             "1:208026439170:web:cc707d16d565338a3aa11b"
+        };
 
-      const app = initializeApp(firebaseConfig);
-      const db  = getFirestore(app);
+        const app = initializeApp(firebaseConfig);
+        const db  = getFirestore(app);
 
-      // ── Global helpers so main script can call them ──
-      window._db        = db;
-      window._fbDoc     = doc;
-      window._fbGetDoc  = getDoc;
-      window._fbSetDoc  = setDoc;
-      window._fbOnSnap  = onSnapshot;
-      window._fbCol     = collection;
-      window._fbDelDoc  = deleteDoc;
-      window._firebaseReady = true;
+        // Global access dena main script ko
+        window._db       = db;
+        window._doc      = doc;
+        window._getDoc   = getDoc;
+        window._setDoc   = setDoc;
+        window._fbReady  = true;
 
-      // ── Real-time listener: categories change hone par auto-reload ──
-      onSnapshot(doc(db, "dastak", "categories"), (snap) => {
-        if (snap.exists()) {
-          const data = snap.data().data;
-          window.categories = data;
-          // _syncCategories updates local var AND re-renders if on main screen
-          if (typeof window._syncCategories === 'function') window._syncCategories(data);
-        }
-      });
-
-      // ── Real-time listener: notifications ──
-      onSnapshot(doc(db, "dastak", "notification"), (snap) => {
-        if (snap.exists() && !window.isAdminLoggedIn) {
-          const n = snap.data();
-          if (n.time && n.time > (window._lastNotifTime || 0)) {
-            window._lastNotifTime = n.time;
-            if (typeof window.showNotifBanner === 'function') {
-              window.showNotifBanner(n.title, n.message);
+        // Real-time listener — koi bhi device se data change hone par auto update
+        onSnapshot(doc(db, "dastak", "categories"), (snap) => {
+            if (snap.exists() && typeof window._onCategoriesUpdate === 'function') {
+                window._onCategoriesUpdate(snap.data().data);
             }
-            if ('Notification' in window && Notification.permission === 'granted') {
-              new Notification(n.title, { body: n.message });
+        });
+
+        // Real-time notification listener
+        onSnapshot(doc(db, "dastak", "notification"), (snap) => {
+            if (snap.exists() && typeof window._onNotification === 'function') {
+                const n = snap.data();
+                if (n.time && n.time > (window._lastNotifTime || 0)) {
+                    window._lastNotifTime = n.time;
+                    if (!window.isAdminLoggedIn) window._onNotification(n.title, n.message);
+                }
             }
-          }
-        }
-      });
+        });
     </script>
 </head>
 <body>
-
-    <!-- 🔥 Firebase Loading Screen -->
-    <div id="firebaseLoader" style="
-        position:fixed;top:0;left:0;width:100%;height:100%;
-        background:linear-gradient(135deg,#1e3a5f,#0f172a);
-        z-index:99999;display:flex;flex-direction:column;
-        align-items:center;justify-content:center;gap:1rem;">
-        <i class="fas fa-motorcycle" style="font-size:4rem;color:#f59e0b;"></i>
-        <h2 style="color:white;font-size:1.5rem;">Dastak Delivery</h2>
-        <div style="color:rgba(255,255,255,0.7);font-size:0.9rem;">Data load ho raha hai...</div>
-        <div style="width:50px;height:50px;border:4px solid rgba(255,255,255,0.2);
-            border-top-color:#f59e0b;border-radius:50%;animation:spin 0.8s linear infinite;margin-top:0.5rem;"></div>
-        <div id="firebaseError" style="display:none;background:rgba(239,68,68,0.2);border:1px solid #ef4444;
-            color:#fca5a5;padding:1rem 1.5rem;border-radius:12px;max-width:320px;text-align:center;font-size:0.85rem;margin-top:1rem;"></div>
-    </div>
-    <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
 
     <!-- Notification Banner -->
     <div class="notif-banner" id="notifBanner">
@@ -1939,39 +1894,9 @@
     </footer>
 
     <script>
-        // ══════════════════════════════════════════════
-        //  FIREBASE HELPER — saare saves yahan se jaate hain
-        // ══════════════════════════════════════════════
-        async function fbSaveCategories() {
-            try {
-                await window._fbSetDoc(
-                    window._fbDoc(window._db, "dastak", "categories"),
-                    { data: categories }
-                );
-            } catch(e) {
-                console.error("Firebase save error:", e);
-                alert("❌ Data save nahi hua. Internet check karein.\n" + e.message);
-            }
-        }
-
-        async function fbSendNotification(title, message) {
-            try {
-                await window._fbSetDoc(
-                    window._fbDoc(window._db, "dastak", "notification"),
-                    { title, message, time: Date.now() }
-                );
-            } catch(e) {
-                console.error("Notification error:", e);
-                alert("❌ Notification nahi gai. " + e.message);
-            }
-        }
-
-        // ══════════════════════════════════════════════
-        //  APP CONFIG
-        // ══════════════════════════════════════════════
+        // Admin password - Change this to your preferred password
         const ADMIN_PASSWORD = 'dastak123';
-        window.isAdminLoggedIn = false;
-        window._lastNotifTime  = 0;
+        let isAdminLoggedIn = false;
 
         // Default Data with all restaurants
         const defaultData = {
@@ -2165,110 +2090,77 @@
             }
         };
 
-        // ══════════════════════════════════════════════
-        //  DATA — Firebase se load hoga
-        // ══════════════════════════════════════════════
-        // NOTE: 'categories' is NOT a simple var — always use
-        // the getter below so it stays in sync with Firebase
-        var categories = {};
+        // ── Firebase save helper ──
+        async function saveToFirebase() {
+            if (!window._fbReady) return;
+            try {
+                await window._setDoc(window._doc(window._db, "dastak", "categories"), { data: categories });
+            } catch(e) { console.error("Firebase save error:", e); }
+        }
 
-        // Every time Firebase updates, this syncs local var AND re-renders if on main screen
-        window._syncCategories = function(data) {
+        // ── Firebase notification helper ──
+        async function sendNotifToFirebase(title, message) {
+            if (!window._fbReady) return;
+            try {
+                await window._setDoc(window._doc(window._db, "dastak", "notification"),
+                    { title, message, time: Date.now() });
+            } catch(e) { console.error("Notif error:", e); }
+        }
+
+        // Real-time update callback — dusre devices se changes aane par
+        window._onCategoriesUpdate = function(data) {
             categories = data;
-            window.categories = data;
-            // Agar main screen visible hai toh turant render karo
-            const mainContent = document.getElementById('mainContent');
-            if (mainContent && mainContent.style.display !== 'none') {
-                renderSidebarNav();
+            // Agar main screen visible hai toh re-render
+            if (document.getElementById('mainContent').style.display !== 'none') {
                 renderSections();
-                fillCategoryDropdowns();
+                renderSidebarNav();
+                if (window.isAdminLoggedIn) fillCategoryDropdowns();
             }
         };
 
+        // Real-time notification callback
+        window._onNotification = function(title, message) {
+            showNotifBanner(title, message);
+            if ('Notification' in window && Notification.permission === 'granted') {
+                new Notification(title, { body: message });
+            }
+        };
+
+        // ── Data initialize ──
+        let categories = JSON.parse(JSON.stringify(defaultData)); // fallback
+        let _fbLoaded = false;
         let cart = [];
         let currentSection = 'all';
         let editingProduct = null;
 
-        // ══════════════════════════════════════════════
-        //  INIT — Firebase ready hone par data load karo
-        // ══════════════════════════════════════════════
-        async function initApp() {
-            const loader = document.getElementById('firebaseLoader');
-
-            // ── Helper: default data se app shuru karo ──
-            function startWithDefaultData(reason) {
-                console.warn("Fallback to default data:", reason);
-                window._syncCategories(JSON.parse(JSON.stringify(defaultData)));
-                loader.style.display = 'none';
-                const warn = document.createElement('div');
-                warn.style.cssText = 'position:fixed;bottom:10px;left:50%;transform:translateX(-50%);background:#fef3c7;border:1px solid #f59e0b;color:#92400e;padding:0.6rem 1.2rem;border-radius:10px;font-size:0.8rem;z-index:9999;text-align:center;max-width:90vw;';
-                warn.innerHTML = '⚠️ <b>Offline Mode</b> — Firebase connect nahi hua<br><small>Data changes save nahi honge. File download karke open karein.</small>';
-                document.body.appendChild(warn);
-                setTimeout(() => warn.remove(), 8000);
-            }
-
-            // Wait for Firebase module (max 5s)
-            let waited = 0;
-            while (!window._firebaseReady && waited < 50) {
-                await new Promise(r => setTimeout(r, 100));
-                waited++;
-            }
-
-            // Firebase load nahi hua (sandbox/preview environment) — default se chalao
-            if (!window._firebaseReady) {
-                startWithDefaultData("Firebase SDK blocked (preview mode)");
-                return;
-            }
-
-            try {
-                const snap = await window._fbGetDoc(
-                    window._fbDoc(window._db, "dastak", "categories")
-                );
-                if (snap.exists()) {
-                    window._syncCategories(snap.data().data);
-                } else {
-                    // Pehli baar: default data Firebase mein save karo
-                    window._syncCategories(JSON.parse(JSON.stringify(defaultData)));
-                    await fbSaveCategories();
-                }
-                loader.style.display = 'none';
-
-            } catch(e) {
-                startWithDefaultData(e.message);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', initApp);
-
         // Landing Page Functions
-        function enterCustomerMode() {
+        async function enterCustomerMode() {
             document.getElementById('landingPage').style.display = 'none';
             document.getElementById('mainHeader').style.display = 'block';
             document.getElementById('searchSection').style.display = 'block';
             document.getElementById('mainContent').style.display = 'block';
             document.getElementById('mainFooter').style.display = 'block';
             document.getElementById('sidebarAdminSection').style.display = 'none';
-            // Show Exit button in header
             const fab = document.getElementById('logoutFab');
             fab.classList.add('visible');
             document.getElementById('logoutLabel').textContent = 'Exit';
-            // Request notification permission
             requestNotificationPermission();
-            // Agar categories already loaded hain toh render karo
-            // Agar nahi hain toh _syncCategories khud render karega jab data aayega
-            if (Object.keys(categories).length > 0) {
-                renderSidebarNav();
-                renderSections();
-            } else {
-                // Loading message dikhao main content mein
-                document.getElementById('mainContainer').innerHTML = `
-                    <div style="text-align:center;padding:3rem;color:#64748b;">
-                        <div style="font-size:3rem;margin-bottom:1rem;">⏳</div>
-                        <p style="font-size:1rem;">Restaurants load ho rahe hain...</p>
-                    </div>`;
-                document.getElementById('sidebarRestaurantList').innerHTML = `
-                    <div style="padding:1rem;color:#94a3b8;font-size:0.85rem;">Loading...</div>`;
+
+            // Agar Firebase se data abhi nahi aaya toh wait karo (max 4s)
+            if (!_fbLoaded && window._fbReady) {
+                document.getElementById('mainContainer').innerHTML =
+                    `<div style="text-align:center;padding:4rem 1rem;color:#64748b;">
+                        <div style="font-size:2.5rem;margin-bottom:1rem;">⏳</div>
+                        <p>Restaurants load ho rahe hain...</p>
+                     </div>`;
+                let w = 0;
+                while (!_fbLoaded && w < 40) {
+                    await new Promise(r => setTimeout(r, 100));
+                    w++;
+                }
             }
+            renderSidebarNav();
+            renderSections();
         }
 
         function showAdminLogin() {
@@ -2280,7 +2172,7 @@
             document.getElementById('adminPassword').value = '';
         }
 
-        function loginAdmin() {
+        async function loginAdmin() {
             const password = document.getElementById('adminPassword').value;
             if (password === ADMIN_PASSWORD) {
                 isAdminLoggedIn = true;
@@ -2295,11 +2187,17 @@
                 fab.classList.add('visible');
                 document.getElementById('logoutLabel').textContent = 'Logout';
                 document.getElementById('notifBell').classList.add('visible');
-                if (Object.keys(categories).length > 0) {
-                    renderSidebarNav();
-                    fillCategoryDropdowns();
-                    renderSections();
+                // Wait for Firebase data if not loaded yet
+                if (!_fbLoaded && window._fbReady) {
+                    let w = 0;
+                    while (!_fbLoaded && w < 40) {
+                        await new Promise(r => setTimeout(r, 100));
+                        w++;
+                    }
                 }
+                renderSidebarNav();
+                fillCategoryDropdowns();
+                renderSections();
                 alert('Welcome Admin!');
             } else {
                 alert('Incorrect password!');
@@ -2310,6 +2208,33 @@
             isAdminLoggedIn = false;
             location.reload();
         }
+
+        // Initialize — Firebase se data load karo
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Wait for Firebase module (max 5s)
+            let waited = 0;
+            while (!window._fbReady && waited < 50) {
+                await new Promise(r => setTimeout(r, 100));
+                waited++;
+            }
+            if (window._fbReady) {
+                try {
+                    const snap = await window._getDoc(window._doc(window._db, "dastak", "categories"));
+                    if (snap.exists()) {
+                        categories = snap.data().data;
+                    } else {
+                        // Pehli baar — default data Firebase mein save karo
+                        await saveToFirebase();
+                    }
+                    _fbLoaded = true;
+                } catch(e) {
+                    console.warn("Firebase error, using default data:", e.message);
+                    _fbLoaded = true; // fallback — default data se chalega
+                }
+            } else {
+                _fbLoaded = true; // Firebase nahi chala, default se chalega
+            }
+        });
 
         // Toggle Sidebar
         function toggleSidebar() {
@@ -2827,7 +2752,7 @@
                 products: []
             };
 
-            fbSaveCategories();
+            saveToFirebase();
             document.getElementById('newRestName').value = '';
             document.getElementById('newRestSubtitle').value = '';
             renderSidebarNav();
@@ -2859,7 +2784,7 @@
             categories[key].subtitle = document.getElementById('editRestSubtitle').value.trim();
             categories[key].icon = document.getElementById('editRestIcon').value;
             categories[key].class = document.getElementById('editRestColor').value;
-            fbSaveCategories();
+            saveToFirebase();
             closeEditRestModal();
             renderAdminRestaurants();
             fillCategoryDropdowns();
@@ -2876,7 +2801,7 @@
                 if (!confirm(`"${cat.name}" delete karna chahte hain?`)) return;
             }
             delete categories[key];
-            fbSaveCategories();
+            saveToFirebase();
             renderAdminRestaurants();
             fillCategoryDropdowns();
             renderSidebarNav();
@@ -2906,7 +2831,7 @@
             if (variation) newProduct.variation = variation;
             
             categories[category].products.push(newProduct);
-            fbSaveCategories();
+            saveToFirebase();
             
             document.getElementById('adminProductName').value = '';
             document.getElementById('adminProductPrice').value = '';
@@ -2962,7 +2887,7 @@
                 categories[newCategoryKey].products.push(product);
             }
             
-            fbSaveCategories();
+            saveToFirebase();
             
             closeEditModal();
             renderAdminProducts();
@@ -2974,7 +2899,7 @@
         function deleteProduct(categoryKey, productId) {
             if (confirm('Are you sure you want to delete this product?')) {
                 categories[categoryKey].products = categories[categoryKey].products.filter(p => p.id !== productId);
-                fbSaveCategories();
+                saveToFirebase();
                 renderAdminProducts();
                 renderSections();
             }
@@ -2982,20 +2907,15 @@
 
         function resetData() {
             if (confirm('This will reset ALL data to default. Are you sure?')) {
+                // Firebase reset below
                 categories = JSON.parse(JSON.stringify(defaultData));
-                window.categories = categories;
-                fbSaveCategories();
+                saveToFirebase();
                 renderSections();
                 renderSidebarNav();
                 renderAdminProducts();
                 alert('Data reset to default successfully!');
             }
         }
-
-        // Expose functions for Firebase real-time listener
-        window.renderSections        = function() { renderSections(); };
-        window.renderSidebarNav      = function() { renderSidebarNav(); };
-        window.fillCategoryDropdowns = function() { fillCategoryDropdowns(); };
 
         // =========== LOGOUT ===========
         function handleLogout() {
@@ -3019,7 +2939,7 @@
             const title = document.getElementById('adminNotifTitle').value.trim() || '🔔 Dastak Delivery';
             const message = document.getElementById('adminNotifMessage').value.trim();
             if (!message) { alert('Pehle message likhein!'); return; }
-            fbSendNotification(title, message);
+            sendNotifToFirebase(title, message);
             showNotifBanner(title, message);
             if ('Notification' in window && Notification.permission === 'granted') {
                 new Notification(title, { body: message });
@@ -3037,8 +2957,8 @@
             const title = document.getElementById('notifTitle').value.trim() || '🔔 Dastak Delivery';
             const message = document.getElementById('notifMessage').value.trim();
             if (!message) { alert('Pehle message likhein!'); return; }
-            // Firebase se notification bhejo — real-time listener sabko dikhayega
-            fbSendNotification(title, message);
+            // Firebase se notification bhejo — real-time har device ko milegi
+            sendNotifToFirebase(title, message);
             showNotifBanner(title, message);
             if ('Notification' in window && Notification.permission === 'granted') {
                 new Notification(title, {
@@ -3059,12 +2979,11 @@
             banner.classList.add('show');
             setTimeout(() => banner.classList.remove('show'), 6000);
         }
-        window.showNotifBanner = showNotifBanner;
 
         function closeNotifBanner() {
             document.getElementById('notifBanner').classList.remove('show');
         }
-        // NOTE: Real-time notification listener is in the Firebase module above
+        // (Real-time notification from Firebase module listener above)
     </script>
 
 </body>
