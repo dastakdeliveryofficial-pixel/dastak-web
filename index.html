@@ -541,6 +541,10 @@
         .friend { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
         .special { background: linear-gradient(135deg, #ec4899, #db2777); }
         .deals { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .hussain { background: linear-gradient(135deg, #b45309, #78350f); }
+        .cheezybite { background: linear-gradient(135deg, #0891b2, #0e7490); }
+        .pkrestaurant { background: linear-gradient(135deg, #be123c, #9f1239); }
+        .almurtaza { background: linear-gradient(135deg, #15803d, #166534); }
 
         .products-container {
             padding: 1.25rem;
@@ -1131,32 +1135,45 @@
             .category-grid {
                 grid-template-columns: 1fr;
             }
-            
             .products-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
             .cart-sidebar, .sidebar {
                 max-width: 100%;
             }
-            
             .admin-panel {
                 width: 95%;
                 max-height: 95vh;
             }
-            
             .form-row {
                 grid-template-columns: 1fr;
             }
-
             .landing-options {
                 flex-direction: column;
                 align-items: center;
             }
-
             .landing-btn {
                 width: 80%;
             }
+            /* Header mobile fixes */
+            .header { padding: 0.6rem 0; overflow: hidden; }
+            .header-content { gap: 0.3rem; flex-wrap: nowrap; }
+            .logo { font-size: 1rem; gap: 0.4rem; }
+            .logo i { font-size: 1.4rem; }
+            .logo span { white-space: nowrap; }
+            .header-left { gap: 0.3rem; flex-shrink: 1; min-width: 0; overflow: hidden; }
+            .header-right { flex-shrink: 0; gap: 0.3rem; }
+            .menu-btn { width: 38px; height: 38px; flex-shrink: 0; }
+            .cart-btn { padding: 0.5rem 0.75rem; font-size: 0.8rem; flex-shrink: 0; }
+            .cart-btn span:first-of-type { display: none; } /* hide "Cart" text on small screens */
+            .header-action-btn { padding: 0 0.6rem; font-size: 0.75rem; height: 36px; }
+            .header-action-btn span { display: none; } /* hide label text, show only icon */
+            /* Fix body overflow */
+            body { overflow-x: hidden; }
+            * { max-width: 100%; }
+        }
+        @media (max-width: 400px) {
+            .logo span { display: none; } /* hide text on very small screens */
         }
 
         /* Animations */
@@ -2057,11 +2074,9 @@
                 class: "special",
                 subtitle: "Premium Taste & Quality",
                 products: [
-                    // Super Deals
                     { id: 101, name: "Super Deal 1", price: 1399, emoji: "🎁", variation: "3 Small Pizza + 1 Ltr Cold Drink" },
                     { id: 102, name: "Super Deal 2", price: 1699, emoji: "🎁", variation: "2 Medium Pizza + 1 Ltr Cold Drink" },
                     { id: 103, name: "Super Deal 3", price: 2249, emoji: "🎁", variation: "2 Large Pizza + 1.5 Ltr Cold Drink" },
-                    // Pizza
                     { id: 104, name: "Domino Special", price: 499, emoji: "🍕", variation: "Small" },
                     { id: 105, name: "Domino Special", price: 899, emoji: "🍕", variation: "Medium" },
                     { id: 106, name: "Domino Special", price: 1699, emoji: "🍕", variation: "Large" },
@@ -2069,23 +2084,441 @@
                     { id: 108, name: "Peri Peri Pizza", price: 949, emoji: "🍕", variation: "Medium" },
                     { id: 109, name: "Double Cheese Pizza", price: 549, emoji: "🧀", variation: "Small" },
                     { id: 110, name: "Double Cheese Pizza", price: 949, emoji: "🧀", variation: "Medium" },
-                    // Burgers
                     { id: 111, name: "Zinger Burger", price: 299, emoji: "🍔", variation: "Regular" },
                     { id: 112, name: "Zinger Cheese Burger", price: 349, emoji: "🍔", variation: "Regular" },
                     { id: 113, name: "Tower Burger", price: 499, emoji: "🍔", variation: "Regular" },
-                    // Rolls
                     { id: 114, name: "Chicken Roll", price: 199, emoji: "🌯", variation: "Regular" },
                     { id: 115, name: "Zinger Roll", price: 199, emoji: "🌯", variation: "Regular" },
                     { id: 116, name: "Kabab Roll", price: 299, emoji: "🌯", variation: "Regular" },
-                    // Pasta
                     { id: 117, name: "Special Pasta", price: 499, emoji: "🍝", variation: "Regular" },
                     { id: 118, name: "Creamy Pasta", price: 599, emoji: "🍝", variation: "Regular" },
-                    // Shawarma
                     { id: 119, name: "Chicken Shawarma", price: 199, emoji: "🌯", variation: "Regular" },
                     { id: 120, name: "Zinger Shawarma", price: 249, emoji: "🌯", variation: "Regular" },
-                    // Loaded Fries
                     { id: 121, name: "Loaded Fries", price: 499, emoji: "🍟", variation: "Regular" },
                     { id: 122, name: "Pizza Fries", price: 549, emoji: "🍟", variation: "Regular" }
+                ]
+            },
+
+            // ══════════════════════════════════
+            //  HUSSAIN FOOD CORNER
+            // ══════════════════════════════════
+            hussain: {
+                name: "Hussain Food Corner",
+                icon: "fa-utensils",
+                class: "hussain",
+                subtitle: "Home Delivery • 0307-7939900",
+                products: [
+                    // Pizza
+                    { id: 200, name: "HFC Special Pizza", price: 550, emoji: "🍕", variation: "Small" },
+                    { id: 201, name: "HFC Special Pizza", price: 900, emoji: "🍕", variation: "Medium" },
+                    { id: 202, name: "HFC Special Pizza", price: 1250, emoji: "🍕", variation: "Large" },
+                    { id: 203, name: "Tikka Pizza", price: 500, emoji: "🍕", variation: "Small" },
+                    { id: 204, name: "Tikka Pizza", price: 850, emoji: "🍕", variation: "Medium" },
+                    { id: 205, name: "Tikka Pizza", price: 1200, emoji: "🍕", variation: "Large" },
+                    { id: 206, name: "Fajita Pizza", price: 500, emoji: "🍕", variation: "Small" },
+                    { id: 207, name: "Fajita Pizza", price: 850, emoji: "🍕", variation: "Medium" },
+                    { id: 208, name: "Fajita Pizza", price: 1200, emoji: "🍕", variation: "Large" },
+                    { id: 209, name: "Lazania Pizza", price: 750, emoji: "🍕", variation: "Small" },
+                    { id: 210, name: "Lazania Pizza", price: 1150, emoji: "🍕", variation: "Medium" },
+                    { id: 211, name: "Lazania Pizza", price: 1600, emoji: "🍕", variation: "Large" },
+                    { id: 212, name: "Calzone Pizza", price: 750, emoji: "🍕", variation: "Small" },
+                    { id: 213, name: "Calzone Pizza", price: 1150, emoji: "🍕", variation: "Medium" },
+                    { id: 214, name: "Calzone Pizza", price: 1600, emoji: "🍕", variation: "Large" },
+                    { id: 215, name: "BBQ Pizza", price: 650, emoji: "🍕", variation: "Small" },
+                    { id: 216, name: "BBQ Pizza", price: 1000, emoji: "🍕", variation: "Medium" },
+                    { id: 217, name: "BBQ Pizza", price: 1400, emoji: "🍕", variation: "Large" },
+                    { id: 218, name: "Pepperoni Pizza", price: 700, emoji: "🍕", variation: "Small" },
+                    { id: 219, name: "Pepperoni Pizza", price: 1200, emoji: "🍕", variation: "Medium" },
+                    { id: 220, name: "Pepperoni Pizza", price: 1700, emoji: "🍕", variation: "Large" },
+                    { id: 221, name: "Mughlai Pizza", price: 700, emoji: "🍕", variation: "Small" },
+                    { id: 222, name: "Mughlai Pizza", price: 1100, emoji: "🍕", variation: "Medium" },
+                    { id: 223, name: "Mughlai Pizza", price: 1500, emoji: "🍕", variation: "Large" },
+                    { id: 224, name: "Mughlai Kababish", price: 1400, emoji: "🍕", variation: "Medium" },
+                    { id: 225, name: "Mughlai Kababish", price: 1800, emoji: "🍕", variation: "Large" },
+                    { id: 226, name: "Kababish Pizza", price: 750, emoji: "🍕", variation: "Small" },
+                    { id: 227, name: "Kababish Pizza", price: 1150, emoji: "🍕", variation: "Medium" },
+                    { id: 228, name: "Kababish Pizza", price: 1600, emoji: "🍕", variation: "Large" },
+                    { id: 229, name: "Crown Pizza", price: 1150, emoji: "👑", variation: "Medium" },
+                    { id: 230, name: "Crown Pizza", price: 1600, emoji: "👑", variation: "Large" },
+                    { id: 231, name: "Vegetable Pizza", price: 500, emoji: "🥦", variation: "Small" },
+                    { id: 232, name: "Vegetable Pizza", price: 800, emoji: "🥦", variation: "Medium" },
+                    { id: 233, name: "Vegetable Pizza", price: 1100, emoji: "🥦", variation: "Large" },
+                    { id: 234, name: "Cheese Lover Pizza", price: 500, emoji: "🧀", variation: "Small" },
+                    { id: 235, name: "Cheese Lover Pizza", price: 800, emoji: "🧀", variation: "Medium" },
+                    { id: 236, name: "Cheese Lover Pizza", price: 1100, emoji: "🧀", variation: "Large" },
+                    { id: 237, name: "Pizza Roll", price: 550, emoji: "🌯", variation: "Regular" },
+                    { id: 238, name: "Pizza Pratha", price: 500, emoji: "🫓", variation: "Regular" },
+                    // Pasta
+                    { id: 239, name: "Creamy Pasta", price: 500, emoji: "🍝", variation: "Regular" },
+                    { id: 240, name: "Spicy Pasta", price: 500, emoji: "🍝", variation: "Regular" },
+                    { id: 241, name: "Vegi Pasta", price: 450, emoji: "🍝", variation: "Regular" },
+                    { id: 242, name: "Pizza Fries", price: 450, emoji: "🍟", variation: "Regular" },
+                    // Fries
+                    { id: 243, name: "Plain Fries", price: 200, emoji: "🍟", variation: "Regular" },
+                    { id: 244, name: "Masala Fries", price: 200, emoji: "🍟", variation: "Regular" },
+                    { id: 245, name: "Mayo Fries", price: 250, emoji: "🍟", variation: "Regular" },
+                    // BBQ
+                    { id: 246, name: "Spicy Tikka Chest", price: 400, emoji: "🍗", variation: "Regular" },
+                    { id: 247, name: "Spicy Tikka Leg", price: 380, emoji: "🍗", variation: "Regular" },
+                    { id: 248, name: "Malai Tikka", price: 450, emoji: "🍗", variation: "Regular" },
+                    { id: 249, name: "Achari Tikka", price: 450, emoji: "🍗", variation: "Regular" },
+                    { id: 250, name: "Spicy Boti", price: 270, emoji: "🍢", variation: "Regular" },
+                    { id: 251, name: "Behari Boti", price: 300, emoji: "🍢", variation: "Regular" },
+                    { id: 252, name: "Achari Boti", price: 300, emoji: "🍢", variation: "Regular" },
+                    { id: 253, name: "Malai Boti", price: 280, emoji: "🍢", variation: "Regular" },
+                    { id: 254, name: "Beef Boti", price: 400, emoji: "🍢", variation: "Regular" },
+                    { id: 255, name: "Reshmi Kabab", price: 150, emoji: "🧆", variation: "Regular" },
+                    { id: 256, name: "Seekh Kabab", price: 150, emoji: "🧆", variation: "Regular" },
+                    { id: 257, name: "Beef Kabab", price: 250, emoji: "🧆", variation: "Regular" },
+                    { id: 258, name: "Gola Kabab", price: 350, emoji: "🧆", variation: "Regular" },
+                    // Burgers
+                    { id: 259, name: "Zinger Burger", price: 350, emoji: "🍔", variation: "Regular" },
+                    { id: 260, name: "Crispy Mayo Burger", price: 400, emoji: "🍔", variation: "Regular" },
+                    { id: 261, name: "Cheese Burger", price: 430, emoji: "🍔", variation: "Regular" },
+                    { id: 262, name: "Arabic Subway Burger", price: 450, emoji: "🍔", variation: "Regular" },
+                    { id: 263, name: "Jumbo Burger", price: 650, emoji: "🍔", variation: "Regular" },
+                    { id: 264, name: "BBQ Burger", price: 400, emoji: "🍔", variation: "Regular" },
+                    { id: 265, name: "Peti Burger", price: 350, emoji: "🍔", variation: "Regular" },
+                    { id: 266, name: "Peti Cheese Burger", price: 430, emoji: "🍔", variation: "Regular" },
+                    { id: 267, name: "Vegi Burger", price: 250, emoji: "🥗", variation: "Regular" },
+                    { id: 268, name: "Club Sandwich", price: 450, emoji: "🥪", variation: "Regular" },
+                    { id: 269, name: "Creamy Club", price: 450, emoji: "🥪", variation: "Regular" },
+                    { id: 270, name: "BBQ Club", price: 550, emoji: "🥪", variation: "Regular" },
+                    // Rolls
+                    { id: 271, name: "Special Roll", price: 350, emoji: "🌯", variation: "Regular" },
+                    { id: 272, name: "Chatni Roll", price: 250, emoji: "🌯", variation: "Regular" },
+                    { id: 273, name: "Malai Chatni Roll", price: 250, emoji: "🌯", variation: "Regular" },
+                    { id: 274, name: "Malai Mayo Roll", price: 270, emoji: "🌯", variation: "Regular" },
+                    { id: 275, name: "Mayo Cheese Roll", price: 350, emoji: "🌯", variation: "Regular" },
+                    { id: 276, name: "Achari Roll", price: 300, emoji: "🌯", variation: "Regular" },
+                    { id: 277, name: "Garlic Roll", price: 300, emoji: "🌯", variation: "Regular" },
+                    { id: 278, name: "Kabab Roll", price: 250, emoji: "🌯", variation: "Regular" },
+                    { id: 279, name: "Zinger Roll", price: 270, emoji: "🌯", variation: "Regular" },
+                    { id: 280, name: "Dawn Zinger Roll", price: 270, emoji: "🌯", variation: "Regular" },
+                    { id: 281, name: "Dawn Cheese Roll", price: 350, emoji: "🌯", variation: "Regular" },
+                    { id: 282, name: "Vegetable Roll", price: 220, emoji: "🌯", variation: "Regular" },
+                    // Crispy Chicken
+                    { id: 283, name: "Injected Broast - Qtr Leg", price: 550, emoji: "🍗", variation: "Regular" },
+                    { id: 284, name: "Injected Broast - Qtr Chest", price: 600, emoji: "🍗", variation: "Regular" },
+                    { id: 285, name: "Injected Broast - Half (4 Pcs)", price: 1150, emoji: "🍗", variation: "4 Pcs" },
+                    { id: 286, name: "Injected Broast - Full (8 Pcs)", price: 2200, emoji: "🍗", variation: "8 Pcs" },
+                    { id: 287, name: "Arabian Inj. Nuggets", price: 550, emoji: "🍗", variation: "5 Piece" },
+                    { id: 288, name: "Arabian Inj. Nuggets", price: 1050, emoji: "🍗", variation: "12 Piece" },
+                    { id: 289, name: "Regular Broast Qtr", price: 450, emoji: "🍗", variation: "Regular" },
+                    { id: 290, name: "Regular Broast with Special Mayo", price: 500, emoji: "🍗", variation: "Regular" },
+                    { id: 291, name: "Hot Shot", price: 600, emoji: "🌶️", variation: "10 Piece" },
+                    // Sauce
+                    { id: 292, name: "Raita", price: 50, emoji: "🥣", variation: "Regular" },
+                    { id: 293, name: "Imli Chatni", price: 40, emoji: "🫙", variation: "Regular" },
+                    { id: 294, name: "Spicy Red Chatni", price: 70, emoji: "🌶️", variation: "Regular" },
+                    { id: 295, name: "Mayo Dip", price: 50, emoji: "🫙", variation: "Regular" },
+                    { id: 296, name: "Special Mayo", price: 80, emoji: "🫙", variation: "Regular" },
+                    // Other
+                    { id: 297, name: "Chapati", price: 20, emoji: "🫓", variation: "Regular" },
+                    { id: 298, name: "Poori Pratha", price: 50, emoji: "🫓", variation: "Regular" },
+                    { id: 299, name: "Bread Slice", price: 15, emoji: "🍞", variation: "Regular" }
+                ]
+            },
+
+            // ══════════════════════════════════
+            //  CHEEZY BITE PIZZA & GRILL
+            // ══════════════════════════════════
+            cheezybite: {
+                name: "Cheezy Bite Pizza & Grill",
+                icon: "fa-pizza-slice",
+                class: "cheezybite",
+                subtitle: "Near Marvi Hospital, Main Road Matli",
+                products: [
+                    // Special Pizza
+                    { id: 300, name: "Nawabi Pizza", price: 500, emoji: "🍕", variation: "Small" },
+                    { id: 301, name: "Nawabi Pizza", price: 950, emoji: "🍕", variation: "Medium" },
+                    { id: 302, name: "Nawabi Pizza", price: 1400, emoji: "🍕", variation: "Large" },
+                    { id: 303, name: "Malai Boti Pizza", price: 500, emoji: "🍕", variation: "Small" },
+                    { id: 304, name: "Malai Boti Pizza", price: 950, emoji: "🍕", variation: "Medium" },
+                    { id: 305, name: "Malai Boti Pizza", price: 1400, emoji: "🍕", variation: "Large" },
+                    { id: 306, name: "Lazania Pizza", price: 500, emoji: "🍕", variation: "Small" },
+                    { id: 307, name: "Lazania Pizza", price: 950, emoji: "🍕", variation: "Medium" },
+                    { id: 308, name: "Lazania Pizza", price: 1400, emoji: "🍕", variation: "Large" },
+                    { id: 309, name: "Crown Crust Pizza", price: 500, emoji: "👑", variation: "Small" },
+                    { id: 310, name: "Crown Crust Pizza", price: 950, emoji: "👑", variation: "Medium" },
+                    { id: 311, name: "Crown Crust Pizza", price: 1400, emoji: "👑", variation: "Large" },
+                    { id: 312, name: "Behari Kabab Pizza", price: 500, emoji: "🍕", variation: "Small" },
+                    { id: 313, name: "Behari Kabab Pizza", price: 950, emoji: "🍕", variation: "Medium" },
+                    { id: 314, name: "Behari Kabab Pizza", price: 1400, emoji: "🍕", variation: "Large" },
+                    { id: 315, name: "Kabab Crust Pizza", price: 500, emoji: "🍕", variation: "Small" },
+                    { id: 316, name: "Kabab Crust Pizza", price: 950, emoji: "🍕", variation: "Medium" },
+                    { id: 317, name: "Kabab Crust Pizza", price: 1400, emoji: "🍕", variation: "Large" },
+                    { id: 318, name: "Supreme Pizza", price: 500, emoji: "🍕", variation: "Small" },
+                    { id: 319, name: "Supreme Pizza", price: 950, emoji: "🍕", variation: "Medium" },
+                    { id: 320, name: "Supreme Pizza", price: 1400, emoji: "🍕", variation: "Large" },
+                    { id: 321, name: "Four Season Pizza", price: 500, emoji: "🍕", variation: "Small" },
+                    { id: 322, name: "Four Season Pizza", price: 950, emoji: "🍕", variation: "Medium" },
+                    { id: 323, name: "Four Season Pizza", price: 1400, emoji: "🍕", variation: "Large" },
+                    { id: 324, name: "Paproni Pizza", price: 500, emoji: "🍕", variation: "Small" },
+                    { id: 325, name: "Paproni Pizza", price: 950, emoji: "🍕", variation: "Medium" },
+                    { id: 326, name: "Paproni Pizza", price: 1400, emoji: "🍕", variation: "Large" },
+                    { id: 327, name: "Royal Roll Crust Pizza", price: 500, emoji: "🍕", variation: "Small" },
+                    { id: 328, name: "Royal Roll Crust Pizza", price: 950, emoji: "🍕", variation: "Medium" },
+                    { id: 329, name: "Royal Roll Crust Pizza", price: 1400, emoji: "🍕", variation: "Large" },
+                    { id: 330, name: "Matka Pizza", price: 600, emoji: "🍕", variation: "Small" },
+                    { id: 331, name: "Matka Pizza", price: 800, emoji: "🍕", variation: "Medium" },
+                    { id: 332, name: "Matka Pizza", price: 1400, emoji: "🍕", variation: "Large" },
+                    // Regular Pizza
+                    { id: 333, name: "Chicken Tikka Pizza", price: 400, emoji: "🍕", variation: "Small" },
+                    { id: 334, name: "Chicken Tikka Pizza", price: 800, emoji: "🍕", variation: "Medium" },
+                    { id: 335, name: "Chicken Tikka Pizza", price: 1000, emoji: "🍕", variation: "Large" },
+                    { id: 336, name: "Chicken Fajita Pizza", price: 400, emoji: "🍕", variation: "Small" },
+                    { id: 337, name: "Chicken Fajita Pizza", price: 800, emoji: "🍕", variation: "Medium" },
+                    { id: 338, name: "Chicken Fajita Pizza", price: 1000, emoji: "🍕", variation: "Large" },
+                    { id: 339, name: "Smoky Chicken Pizza", price: 400, emoji: "🍕", variation: "Small" },
+                    { id: 340, name: "Smoky Chicken Pizza", price: 800, emoji: "🍕", variation: "Medium" },
+                    { id: 341, name: "Smoky Chicken Pizza", price: 1000, emoji: "🍕", variation: "Large" },
+                    { id: 342, name: "Achari Pizza", price: 400, emoji: "🍕", variation: "Small" },
+                    { id: 343, name: "Achari Pizza", price: 800, emoji: "🍕", variation: "Medium" },
+                    { id: 344, name: "Achari Pizza", price: 1000, emoji: "🍕", variation: "Large" },
+                    { id: 345, name: "Hot & Spicy Pizza", price: 400, emoji: "🌶️", variation: "Small" },
+                    { id: 346, name: "Hot & Spicy Pizza", price: 800, emoji: "🌶️", variation: "Medium" },
+                    { id: 347, name: "Hot & Spicy Pizza", price: 1000, emoji: "🌶️", variation: "Large" },
+                    { id: 348, name: "Vegi Lover Pizza", price: 400, emoji: "🥦", variation: "Small" },
+                    { id: 349, name: "Vegi Lover Pizza", price: 800, emoji: "🥦", variation: "Medium" },
+                    { id: 350, name: "Vegi Lover Pizza", price: 1000, emoji: "🥦", variation: "Large" },
+                    { id: 351, name: "Cheese Lover Pizza", price: 400, emoji: "🧀", variation: "Small" },
+                    { id: 352, name: "Cheese Lover Pizza", price: 800, emoji: "🧀", variation: "Medium" },
+                    { id: 353, name: "Cheese Lover Pizza", price: 1000, emoji: "🧀", variation: "Large" },
+                    { id: 354, name: "Mayo Garlic Pizza", price: 400, emoji: "🍕", variation: "Small" },
+                    { id: 355, name: "Mayo Garlic Pizza", price: 800, emoji: "🍕", variation: "Medium" },
+                    { id: 356, name: "Mayo Garlic Pizza", price: 1000, emoji: "🍕", variation: "Large" },
+                    { id: 357, name: "Afghani Tikka Pizza", price: 400, emoji: "🍕", variation: "Small" },
+                    { id: 358, name: "Afghani Tikka Pizza", price: 800, emoji: "🍕", variation: "Medium" },
+                    { id: 359, name: "Afghani Tikka Pizza", price: 1000, emoji: "🍕", variation: "Large" },
+                    // Deals
+                    { id: 360, name: "Student Deal", price: 500, emoji: "🎓", variation: "1 Zinger + 1 Fries + 1 Regular Drink" },
+                    { id: 361, name: "Deal 2", price: 1600, emoji: "🎁", variation: "3 Paty Burger + 3 Zinger Shawarma + 1 Ltr Drink" },
+                    { id: 362, name: "Deal 3", price: 750, emoji: "🎁", variation: "4 Pcs Hot Shot + 4 Pcs Hot Wings + 4 Pcs Nuggets + 500ml Drink" },
+                    { id: 363, name: "Deal 4", price: 600, emoji: "🎁", variation: "Half Crown Pasta + Half Fries + Half Ltr Drink" },
+                    { id: 364, name: "Mix Treat Deal", price: 1600, emoji: "🎁", variation: "1 Large Pizza + 1 Paratha Roll + 5 Wings + 1.5 Ltr Drink" },
+                    { id: 365, name: "Delight Deal", price: 1450, emoji: "🎁", variation: "2 Small Pizza + 2 Zinger Burger + 1 Ltr Drink" },
+                    { id: 366, name: "Lunch & Midnight Deal", price: 2150, emoji: "🌙", variation: "2 Large Pizza + 2 Ltr Drink" },
+                    { id: 367, name: "Med Pizza Deal", price: 1750, emoji: "🎁", variation: "2 Medium Pizza + 1.5 Ltr Drink" },
+                    { id: 368, name: "Small Pizza Deal", price: 1700, emoji: "🎁", variation: "4 Small Pizza + 1.5 Ltr Drink" },
+                    { id: 369, name: "Family Deal 1", price: 2000, emoji: "👨‍👩‍👧‍👦", variation: "3 Small Pizza + Full Creamy Pasta + 1.5 Ltr Drink" },
+                    { id: 370, name: "Family Deal 2", price: 2700, emoji: "👨‍👩‍👧‍👦", variation: "2 Medium Pizza + 2 Zinger Burger + 2 Chapli Burger + 1 Jumbo Drink" },
+                    // Sandwiches
+                    { id: 371, name: "Afghani Sandwich", price: 500, emoji: "🥪", variation: "Regular" },
+                    { id: 372, name: "Max Chicken Sandwich", price: 500, emoji: "🥪", variation: "Regular" },
+                    { id: 373, name: "Tikka Sandwich", price: 500, emoji: "🥪", variation: "Regular" },
+                    // Burgers
+                    { id: 374, name: "Special Lawa Burger", price: 700, emoji: "🍔", variation: "Regular" },
+                    { id: 375, name: "Zinger Burger", price: 300, emoji: "🍔", variation: "Regular" },
+                    { id: 376, name: "Grill Burger", price: 400, emoji: "🍔", variation: "Regular" },
+                    { id: 377, name: "Tower Burger", price: 500, emoji: "🍔", variation: "Regular" },
+                    { id: 378, name: "Patti Burger", price: 280, emoji: "🍔", variation: "Regular" },
+                    { id: 379, name: "Chapli Burger", price: 280, emoji: "🍔", variation: "Regular" },
+                    { id: 380, name: "Barbeque Burger", price: 500, emoji: "🍔", variation: "Regular" },
+                    { id: 381, name: "Yum Pum Burger", price: 500, emoji: "🍔", variation: "Regular" },
+                    { id: 382, name: "Pizza Burger", price: 550, emoji: "🍔", variation: "Regular" },
+                    // Shawarma
+                    { id: 383, name: "Turkish Shawarma", price: 500, emoji: "🌯", variation: "Regular" },
+                    { id: 384, name: "Zinger Shawarma", price: 250, emoji: "🌯", variation: "Regular" },
+                    { id: 385, name: "Behari Shawarma", price: 300, emoji: "🌯", variation: "Regular" },
+                    { id: 386, name: "Shahi Shawarma", price: 350, emoji: "🌯", variation: "Regular" },
+                    // BBQ / Bar.B.Q
+                    { id: 387, name: "Chicken Spicy Tikka", price: 400, emoji: "🍗", variation: "Regular" },
+                    { id: 388, name: "Chicken Malai Boti", price: 430, emoji: "🍗", variation: "Regular" },
+                    { id: 389, name: "Chicken Behari Boti", price: 250, emoji: "🍗", variation: "Regular" },
+                    { id: 390, name: "Chicken Reshmi Kabab", price: 250, emoji: "🧆", variation: "Regular" },
+                    { id: 391, name: "Chicken Gola Kabab", price: 250, emoji: "🧆", variation: "Regular" },
+                    { id: 392, name: "Chicken Broast", price: 430, emoji: "🍗", variation: "Regular" },
+                    // Side Orders
+                    { id: 393, name: "Hot Wings", price: 600, emoji: "🍗", variation: "Regular" },
+                    { id: 394, name: "BBQ Wings", price: 700, emoji: "🍗", variation: "Regular" },
+                    { id: 395, name: "Nuggets", price: 550, emoji: "🍗", variation: "Regular" },
+                    { id: 396, name: "Crispy Chicken", price: 200, emoji: "🍗", variation: "Regular" },
+                    { id: 397, name: "Hot Shot", price: 500, emoji: "🌶️", variation: "Regular" },
+                    { id: 398, name: "Hot Shot Cheese Wings", price: 700, emoji: "🌶️", variation: "Regular" },
+                    // Pasta
+                    { id: 399, name: "Macaroni Pasta", price: 300, emoji: "🍝", variation: "Half" },
+                    { id: 400, name: "Macaroni Pasta", price: 600, emoji: "🍝", variation: "Full" },
+                    { id: 401, name: "Spaghetti Pasta", price: 300, emoji: "🍝", variation: "Half" },
+                    { id: 402, name: "Spaghetti Pasta", price: 600, emoji: "🍝", variation: "Full" },
+                    { id: 403, name: "Crunchy Pasta", price: 300, emoji: "🍝", variation: "Half" },
+                    { id: 404, name: "Crunchy Pasta", price: 600, emoji: "🍝", variation: "Full" },
+                    { id: 405, name: "Lasania Pasta", price: 400, emoji: "🍝", variation: "Half" },
+                    { id: 406, name: "Lasania Pasta", price: 800, emoji: "🍝", variation: "Full" },
+                    { id: 407, name: "Creamy Pasta", price: 400, emoji: "🍝", variation: "Half" },
+                    { id: 408, name: "Creamy Pasta", price: 800, emoji: "🍝", variation: "Full" },
+                    // Paratha
+                    { id: 409, name: "BBQ Lacha Paratha", price: 500, emoji: "🫓", variation: "Regular" },
+                    { id: 410, name: "Pizza Paratha", price: 400, emoji: "🫓", variation: "Regular" },
+                    { id: 411, name: "Zinger Cheese Paratha", price: 350, emoji: "🫓", variation: "Regular" },
+                    { id: 412, name: "Chicken Cheese Paratha", price: 300, emoji: "🫓", variation: "Regular" },
+                    { id: 413, name: "Chicken Paratha", price: 250, emoji: "🫓", variation: "Regular" },
+                    // Fries
+                    { id: 414, name: "Mayo Fries", price: 200, emoji: "🍟", variation: "Small" },
+                    { id: 415, name: "Mayo Fries", price: 400, emoji: "🍟", variation: "Large" },
+                    { id: 416, name: "Pizza Fries", price: 250, emoji: "🍟", variation: "Small" },
+                    { id: 417, name: "Pizza Fries", price: 500, emoji: "🍟", variation: "Large" },
+                    { id: 418, name: "Loaded Fries", price: 300, emoji: "🍟", variation: "Small" },
+                    { id: 419, name: "Loaded Fries", price: 450, emoji: "🍟", variation: "Large" },
+                    { id: 420, name: "Plain Fries", price: 150, emoji: "🍟", variation: "Small" },
+                    { id: 421, name: "Plain Fries", price: 300, emoji: "🍟", variation: "Large" }
+                ]
+            },
+
+            // ══════════════════════════════════
+            //  P.K. RESTAURANT
+            // ══════════════════════════════════
+            pkrestaurant: {
+                name: "P.K. Restaurant",
+                icon: "fa-utensils",
+                class: "pkrestaurant",
+                subtitle: "Matli — Desi & Fast Food",
+                products: [
+                    // Roll & Pizza
+                    { id: 500, name: "Special Pizza Paratha", price: 600, emoji: "🫓", variation: "Regular" },
+                    { id: 501, name: "Pizza Paratha", price: 450, emoji: "🫓", variation: "Regular" },
+                    { id: 502, name: "Pizza Pratha (Special)", price: 550, emoji: "🫓", variation: "Regular" },
+                    { id: 503, name: "Vegetable Paratha", price: 350, emoji: "🫓", variation: "Regular" },
+                    { id: 504, name: "BBQ Paratha", price: 400, emoji: "🫓", variation: "Regular" },
+                    { id: 505, name: "Chicken Kabab Roll", price: 250, emoji: "🌯", variation: "Regular" },
+                    { id: 506, name: "Shagger Roll", price: 300, emoji: "🌯", variation: "Regular" },
+                    { id: 507, name: "Chicken Roll", price: 200, emoji: "🌯", variation: "Regular" },
+                    { id: 508, name: "Chicken Chatni Roll", price: 200, emoji: "🌯", variation: "Regular" },
+                    { id: 509, name: "Chicken Mayo Roll", price: 200, emoji: "🌯", variation: "Regular" },
+                    { id: 510, name: "Zinger Roll", price: 250, emoji: "🌯", variation: "Regular" },
+                    // BBQ / Barbeque
+                    { id: 511, name: "Chicken Tikka", price: 400, emoji: "🍗", variation: "Regular" },
+                    { id: 512, name: "Chicken Malai Tikka", price: 450, emoji: "🍗", variation: "Regular" },
+                    { id: 513, name: "Chicken Green Tikka", price: 450, emoji: "🍗", variation: "Regular" },
+                    { id: 514, name: "Spicy Boti", price: 250, emoji: "🍢", variation: "Regular" },
+                    { id: 515, name: "Malai Boti", price: 250, emoji: "🍢", variation: "Regular" },
+                    { id: 516, name: "Behari Boti", price: 250, emoji: "🍢", variation: "Regular" },
+                    { id: 517, name: "Reshmi Kabab", price: 200, emoji: "🧆", variation: "Regular" },
+                    { id: 518, name: "Gola Kabab", price: 250, emoji: "🧆", variation: "Regular" },
+                    // Regular Dish
+                    { id: 519, name: "Chicken Qorma", price: 300, emoji: "🥘", variation: "Regular" },
+                    { id: 520, name: "Qeema Fry", price: 300, emoji: "🥘", variation: "Regular" },
+                    { id: 521, name: "Daal Moong", price: 200, emoji: "🥣", variation: "Regular" },
+                    { id: 522, name: "Daal Chana", price: 200, emoji: "🥣", variation: "Regular" },
+                    { id: 523, name: "Sabzi", price: 200, emoji: "🥦", variation: "Regular" },
+                    { id: 524, name: "Anda Qeema", price: 200, emoji: "🍳", variation: "Regular" },
+                    { id: 525, name: "Anda Choola", price: 250, emoji: "🍳", variation: "Regular" },
+                    { id: 526, name: "Chapati", price: 20, emoji: "🫓", variation: "Regular" },
+                    { id: 527, name: "Roti", price: 20, emoji: "🫓", variation: "Regular" },
+                    { id: 528, name: "Qandhari Naan (Single)", price: 30, emoji: "🫓", variation: "Regular" },
+                    { id: 529, name: "Qandhari Naan (Double)", price: 60, emoji: "🫓", variation: "Regular" },
+                    // Fast Food
+                    { id: 530, name: "Zinger Burger", price: 350, emoji: "🍔", variation: "Regular" },
+                    { id: 531, name: "Broast", price: 400, emoji: "🍗", variation: "Regular" },
+                    { id: 532, name: "Sandwich", price: 350, emoji: "🥪", variation: "Regular" },
+                    { id: 533, name: "Finger Chips", price: 200, emoji: "🍟", variation: "Regular" },
+                    // Cold Drinks
+                    { id: 534, name: "Cold Drink Regular", price: 70, emoji: "🥤", variation: "Regular" },
+                    { id: 535, name: "Cold Drink 1.5 Ltr", price: 220, emoji: "🥤", variation: "1.5 Ltr" },
+                    { id: 536, name: "Cold Drink 1 Ltr", price: 170, emoji: "🥤", variation: "1 Ltr" },
+                    { id: 537, name: "Cold Drink 500ml", price: 120, emoji: "🥤", variation: "500ml" },
+                    { id: 538, name: "Salad", price: 100, emoji: "🥗", variation: "Regular" },
+                    { id: 539, name: "Raita", price: 100, emoji: "🥣", variation: "Regular" },
+                    // Subah Ka Nashta
+                    { id: 540, name: "Special Doodh Patti Chai", price: 100, emoji: "☕", variation: "Regular" },
+                    { id: 541, name: "Doodh Patti Chai", price: 80, emoji: "☕", variation: "Regular" },
+                    { id: 542, name: "Anda", price: 70, emoji: "🥚", variation: "Regular" },
+                    { id: 543, name: "Paratha", price: 50, emoji: "🫓", variation: "Regular" },
+                    { id: 544, name: "Choola", price: 200, emoji: "🥣", variation: "Regular" },
+                    { id: 545, name: "Mineral Water Large", price: 120, emoji: "💧", variation: "Large" },
+                    { id: 546, name: "Mineral Water Half", price: 60, emoji: "💧", variation: "Half" }
+                ]
+            },
+
+            // ══════════════════════════════════
+            //  AL-MURTAZA HOTEL & RESTAURANT
+            // ══════════════════════════════════
+            almurtaza: {
+                name: "Al-Murtaza Hotel & Restaurant",
+                icon: "fa-bowl-rice",
+                class: "almurtaza",
+                subtitle: "Lazzat aur Zaiqe se Bharpoor",
+                products: [
+                    // Fast Food
+                    { id: 600, name: "Zinger Burger", price: 400, emoji: "🍔", variation: "Regular" },
+                    { id: 601, name: "Broast", price: 450, emoji: "🍗", variation: "Regular" },
+                    { id: 602, name: "Club Sandwich", price: 400, emoji: "🥪", variation: "Regular" },
+                    { id: 603, name: "Nuggets", price: 400, emoji: "🍗", variation: "Regular" },
+                    { id: 604, name: "Fries", price: 150, emoji: "🍟", variation: "Regular" },
+                    // Kabab
+                    { id: 605, name: "Chicken Reshmi Kabab", price: 200, emoji: "🧆", variation: "Regular" },
+                    { id: 606, name: "Chicken Gola Kabab", price: 250, emoji: "🧆", variation: "Regular" },
+                    { id: 607, name: "Beef Reshmi Kabab", price: 250, emoji: "🧆", variation: "Regular" },
+                    { id: 608, name: "Beef Gola Kabab", price: 300, emoji: "🧆", variation: "Regular" },
+                    // Roll
+                    { id: 609, name: "Chicken Chatni Roll", price: 250, emoji: "🌯", variation: "Regular" },
+                    { id: 610, name: "Chicken Spacy Roll", price: 250, emoji: "🌯", variation: "Regular" },
+                    { id: 611, name: "Chicken Mayo Roll", price: 250, emoji: "🌯", variation: "Regular" },
+                    { id: 612, name: "Chicken Reshmi Kabab Roll", price: 250, emoji: "🌯", variation: "Regular" },
+                    { id: 613, name: "Chicken Malai Boti Roll", price: 300, emoji: "🌯", variation: "Regular" },
+                    { id: 614, name: "Chicken Green Boti Roll", price: 300, emoji: "🌯", variation: "Regular" },
+                    { id: 615, name: "Chicken Crispy Roll", price: 250, emoji: "🌯", variation: "Regular" },
+                    // Barbeque
+                    { id: 616, name: "Chicken Spacy Tikka", price: 400, emoji: "🍗", variation: "Regular" },
+                    { id: 617, name: "Chicken Malai Tikka", price: 450, emoji: "🍗", variation: "Regular" },
+                    { id: 618, name: "Chicken Green Tikka", price: 450, emoji: "🍗", variation: "Regular" },
+                    // Boti
+                    { id: 619, name: "Chicken Spacy Boti", price: 250, emoji: "🍢", variation: "Regular" },
+                    { id: 620, name: "Chicken Malai Boti", price: 250, emoji: "🍢", variation: "Regular" },
+                    { id: 621, name: "Chicken Green Boti", price: 250, emoji: "🍢", variation: "Regular" },
+                    { id: 622, name: "Beef Spacy Boti", price: 300, emoji: "🍢", variation: "Regular" },
+                    // Desi Dishes
+                    { id: 623, name: "Daal Moong Double Fry", price: 200, emoji: "🥣", variation: "Regular" },
+                    { id: 624, name: "Lakhni Daal Moong", price: 250, emoji: "🥣", variation: "Regular" },
+                    { id: 625, name: "Chana Daal Double Fry", price: 200, emoji: "🥣", variation: "Regular" },
+                    { id: 626, name: "Lakhni Daal Chana", price: 250, emoji: "🥣", variation: "Regular" },
+                    { id: 627, name: "Chicken Qorma", price: 250, emoji: "🥘", variation: "Regular" },
+                    { id: 628, name: "Sabzi", price: 200, emoji: "🥦", variation: "Regular" },
+                    { id: 629, name: "Roti", price: 20, emoji: "🫓", variation: "Regular" },
+                    { id: 630, name: "Chai", price: 80, emoji: "☕", variation: "Regular" },
+                    { id: 631, name: "Doodh Patti Chai", price: 80, emoji: "☕", variation: "Regular" },
+                    { id: 632, name: "Chapati Roti", price: 20, emoji: "🫓", variation: "Regular" },
+                    { id: 633, name: "Pani Bari Bottle", price: 120, emoji: "💧", variation: "Regular" },
+                    { id: 634, name: "Pani Chhoti Bottle", price: 60, emoji: "💧", variation: "Regular" },
+                    { id: 635, name: "Regular Cold Drink", price: 60, emoji: "🥤", variation: "Regular" },
+                    { id: 636, name: "Cold Drink 1.5 Ltr", price: 220, emoji: "🥤", variation: "1.5 Ltr" },
+                    { id: 637, name: "Raita Regular", price: 40, emoji: "🥣", variation: "Regular" },
+                    { id: 638, name: "Salad", price: 80, emoji: "🥗", variation: "Regular" },
+                    { id: 639, name: "Steak Regular", price: 60, emoji: "🥩", variation: "Regular" },
+                    { id: 640, name: "Special Raita", price: 50, emoji: "🥣", variation: "Regular" },
+                    { id: 641, name: "Special Salad", price: 100, emoji: "🥗", variation: "Regular" },
+                    // Mutton (per Kg)
+                    { id: 642, name: "Al-Murtaza Special Mutton Karahi", price: 2000, emoji: "🥘", variation: "Half Kg" },
+                    { id: 643, name: "Al-Murtaza Special Mutton Karahi", price: 4000, emoji: "🥘", variation: "1 Kg" },
+                    { id: 644, name: "Mutton Peshawari Karahi", price: 2000, emoji: "🥘", variation: "Half Kg" },
+                    { id: 645, name: "Mutton Peshawari Karahi", price: 4000, emoji: "🥘", variation: "1 Kg" },
+                    { id: 646, name: "Mutton White Karahi", price: 2100, emoji: "🥘", variation: "Half Kg" },
+                    { id: 647, name: "Mutton White Karahi", price: 4200, emoji: "🥘", variation: "1 Kg" },
+                    { id: 648, name: "Mutton Green Karahi", price: 2100, emoji: "🥘", variation: "Half Kg" },
+                    { id: 649, name: "Mutton Green Karahi", price: 4200, emoji: "🥘", variation: "1 Kg" },
+                    { id: 650, name: "Mutton Brown", price: 2000, emoji: "🥘", variation: "Half Kg" },
+                    { id: 651, name: "Mutton Brown", price: 4000, emoji: "🥘", variation: "1 Kg" },
+                    { id: 652, name: "Mutton Balochi Karahi Lahsun", price: 2000, emoji: "🥘", variation: "Half Kg" },
+                    { id: 653, name: "Mutton Balochi Karahi Lahsun", price: 4000, emoji: "🥘", variation: "1 Kg" },
+                    { id: 654, name: "Mutton Namkeen Karahi", price: 2000, emoji: "🥘", variation: "Half Kg" },
+                    { id: 655, name: "Mutton Namkeen Karahi", price: 4000, emoji: "🥘", variation: "1 Kg" },
+                    // Chicken Karahi (per Kg)
+                    { id: 656, name: "Al-Murtaza Chicken Special Karahi", price: 1100, emoji: "🍗", variation: "Half Kg" },
+                    { id: 657, name: "Al-Murtaza Chicken Special Karahi", price: 2200, emoji: "🍗", variation: "1 Kg" },
+                    { id: 658, name: "Chicken Peshawari Karahi", price: 1000, emoji: "🍗", variation: "Half Kg" },
+                    { id: 659, name: "Chicken Peshawari Karahi", price: 2000, emoji: "🍗", variation: "1 Kg" },
+                    { id: 660, name: "Chicken White Karahi", price: 1100, emoji: "🍗", variation: "Half Kg" },
+                    { id: 661, name: "Chicken White Karahi", price: 2200, emoji: "🍗", variation: "1 Kg" },
+                    { id: 662, name: "Chicken Green Karahi", price: 1100, emoji: "🍗", variation: "Half Kg" },
+                    { id: 663, name: "Chicken Green Karahi", price: 2200, emoji: "🍗", variation: "1 Kg" },
+                    { id: 664, name: "Chicken Balochi Karahi", price: 1000, emoji: "🍗", variation: "Half Kg" },
+                    { id: 665, name: "Chicken Balochi Karahi", price: 2000, emoji: "🍗", variation: "1 Kg" },
+                    { id: 666, name: "Chicken Brown", price: 1000, emoji: "🍗", variation: "Half Kg" },
+                    { id: 667, name: "Chicken Brown", price: 2000, emoji: "🍗", variation: "1 Kg" },
+                    { id: 668, name: "Chicken Handi", price: 1200, emoji: "🍗", variation: "Half Kg" },
+                    { id: 669, name: "Chicken Handi", price: 2400, emoji: "🍗", variation: "1 Kg" },
+                    { id: 670, name: "Al-Murtaza Desi Chicken Bt Karahi", price: 1350, emoji: "🍗", variation: "Half Kg" },
+                    { id: 671, name: "Al-Murtaza Desi Chicken Bt Karahi", price: 2700, emoji: "🍗", variation: "1 Kg" }
                 ]
             }
         };
@@ -2431,6 +2864,25 @@
         }
 
         // Add to Cart
+        // Cart sound — Web Audio API se woosh effect
+        function playCartSound() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.08);
+                osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.18);
+                gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+                osc.start(ctx.currentTime);
+                osc.stop(ctx.currentTime + 0.25);
+            } catch(e) {}
+        }
+
         function addToCart(productId, categoryKey) {
             const product = categories[categoryKey].products.find(p => p.id === productId);
             const existingItem = cart.find(item => item.id === productId);
@@ -2442,6 +2894,7 @@
             }
             
             updateCartUI();
+            playCartSound();
             
             // Visual feedback
             const btn = event.target.closest('.product-item');
