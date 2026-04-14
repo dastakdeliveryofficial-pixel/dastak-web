@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ur">
 <head>
@@ -1453,6 +1454,7 @@
             }
         });
     </script>
+<base target="_blank">
 </head>
 <body>
 
@@ -2579,7 +2581,19 @@
             document.getElementById('logoutLabel').textContent = 'Exit';
             requestNotificationPermission();
 
-            // Agar Firebase se data abhi nahi aaya toh wait karo (max 4s)
+            // STEP 1: Pehle localStorage se check karo (backup)
+            const localData = localStorage.getItem('dastak_categories');
+            if (localData && !_fbLoaded) {
+                try {
+                    categories = JSON.parse(localData);
+                    console.log('✅ Loaded from localStorage');
+                    _fbLoaded = true;
+                } catch(e) {
+                    console.warn('localStorage error:', e);
+                }
+            }
+
+            // STEP 2: Agar Firebase se data abhi nahi aaya toh wait karo (max 4s)
             if (!_fbLoaded && window._fbReady) {
                 document.getElementById('mainContainer').innerHTML =
                     `<div style="text-align:center;padding:4rem 1rem;color:#64748b;">
@@ -2592,6 +2606,14 @@
                     w++;
                 }
             }
+
+            // STEP 3: Agar abhi bhi nahi loaded, default use karo
+            if (!_fbLoaded) {
+                categories = JSON.parse(JSON.stringify(defaultData));
+                _fbLoaded = true;
+                console.log('✅ Loaded from defaultData');
+            }
+
             renderSidebarNav();
             renderSections();
         }
@@ -3024,7 +3046,9 @@
             });
             
             Object.keys(grouped).forEach(cat => {
-                message += `*${categories[cat].name}:*%0A`;
+                // Safety check - agar category missing hai toh bhi kaam kare
+                const catName = categories[cat] ? categories[cat].name : cat.toUpperCase();
+                message += `*${catName}:*%0A`;
                 grouped[cat].forEach(item => {
                     message += `• ${item.emoji} ${item.name}`;
                     if (item.variation) message += ` (${item.variation})`;
@@ -3360,9 +3384,13 @@
 
         function resetData() {
             if (confirm('This will reset ALL data to default. Are you sure?')) {
-                // Firebase reset below
+                // Clear localStorage to avoid conflicts
+                localStorage.removeItem('dastak_categories');
+                // Force reload from defaultData completely
                 categories = JSON.parse(JSON.stringify(defaultData));
+                // Save fresh to Firebase
                 saveToFirebase();
+                // Force re-render
                 renderSections();
                 renderSidebarNav();
                 renderAdminProducts();
