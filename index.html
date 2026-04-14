@@ -1,4 +1,18 @@
 <!DOCTYPE html>
+<!--
+╔══════════════════════════════════════════════════════════════╗
+║           🔥 FIREBASE SETUP — ZAROORI STEPS                 ║
+╠══════════════════════════════════════════════════════════════╣
+║  1. https://console.firebase.google.com → New Project        ║
+║  2. Firestore Database → Create → "Start in test mode"       ║
+║  3. Project Settings → Your Apps → </> Web App → Register    ║
+║  4. Apni config copy karein aur neeche daalen:               ║
+║     apiKey, authDomain, projectId, storageBucket,            ║
+║     messagingSenderId, appId                                  ║
+║  5. "YOUR_API_KEY" etc. replace karein                        ║
+║  6. File save karein — sab kuch Firebase mein save hoga!     ║
+╚══════════════════════════════════════════════════════════════╝
+-->
 <html lang="ur">
 <head>
     <meta charset="UTF-8">
@@ -6,9 +20,6 @@
     <title>Dastak Delivery - Matli</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     <style>
         * {
             margin: 0;
@@ -20,176 +31,6 @@
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc;
             color: #1e293b;
-            overflow-x: hidden;
-        }
-
-        /* Loading Screen - Smooth & Professional */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
-            z-index: 999999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-
-        .loading-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .loading-content {
-            text-align: center;
-            animation: fadeInUp 0.6s ease;
-        }
-
-        .loading-logo {
-            width: 120px;
-            height: 120px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255,255,255,0.2);
-            animation: pulse 2s infinite;
-        }
-
-        .loading-logo i {
-            font-size: 4rem;
-            color: #f59e0b;
-            animation: bounce 1s infinite;
-        }
-
-        .loading-text {
-            color: white;
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .loading-subtext {
-            color: rgba(255,255,255,0.7);
-            font-size: 0.95rem;
-            margin-bottom: 2rem;
-        }
-
-        .loading-bar {
-            width: 200px;
-            height: 4px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 2px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .loading-progress {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #f59e0b, #fbbf24);
-            border-radius: 2px;
-            transition: width 0.3s ease;
-            animation: loadingShine 1.5s infinite;
-        }
-
-        .loading-dots {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .loading-dot {
-            width: 8px;
-            height: 8px;
-            background: rgba(255,255,255,0.4);
-            border-radius: 50%;
-            animation: dotPulse 1.4s infinite;
-        }
-
-        .loading-dot:nth-child(2) { animation-delay: 0.2s; }
-        .loading-dot:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245,158,11,0.4); }
-            50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(245,158,11,0); }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes loadingShine {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-
-        @keyframes dotPulse {
-            0%, 100% { transform: scale(1); opacity: 0.4; }
-            50% { transform: scale(1.2); opacity: 1; }
-        }
-
-        /* Skeleton Loading for Cards */
-        .skeleton {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            border-radius: 12px;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        .skeleton-card {
-            height: 400px;
-            margin-bottom: 1.5rem;
-        }
-
-        .skeleton-header {
-            height: 80px;
-            margin-bottom: 1rem;
-        }
-
-        .skeleton-item {
-            height: 120px;
-            margin-bottom: 0.75rem;
-        }
-
-        /* Restaurant Card Loading State */
-        .restaurant-loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 3rem;
-            color: #64748b;
-        }
-
-        .restaurant-loading i {
-            font-size: 2rem;
-            margin-right: 1rem;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         /* Landing Page */
@@ -205,19 +46,11 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-
-        .landing-page.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
         }
 
         .landing-logo {
             text-align: center;
             margin-bottom: 3rem;
-            animation: fadeInUp 0.8s ease;
         }
 
         .landing-logo i {
@@ -242,7 +75,6 @@
             gap: 2rem;
             flex-wrap: wrap;
             justify-content: center;
-            animation: fadeInUp 0.8s ease 0.2s both;
         }
 
         .landing-btn {
@@ -303,13 +135,10 @@
             display: none;
             align-items: center;
             justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
         .login-overlay.active {
             display: flex;
-            opacity: 1;
         }
 
         .login-box {
@@ -319,12 +148,6 @@
             width: 90%;
             max-width: 400px;
             text-align: center;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-
-        .login-overlay.active .login-box {
-            transform: scale(1);
         }
 
         .login-box h2 {
@@ -345,7 +168,6 @@
             margin-bottom: 1rem;
             font-size: 1rem;
             outline: none;
-            transition: border-color 0.3s;
         }
 
         .login-input:focus {
@@ -387,12 +209,6 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            transform: translateY(-100%);
-            transition: transform 0.4s ease;
-        }
-
-        .header.visible {
-            transform: translateY(0);
         }
 
         .container {
@@ -615,14 +431,6 @@
             background: white;
             padding: 2rem 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: all 0.4s ease;
-        }
-
-        .search-section.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .search-container {
@@ -658,7 +466,6 @@
         /* Main Content */
         .main-content {
             padding: 2rem 0;
-            min-height: 60vh;
         }
 
         .section-header {
@@ -705,21 +512,11 @@
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             transition: transform 0.3s, box-shadow 0.3s;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideIn 0.5s ease forwards;
         }
 
         .category-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .category-header {
@@ -728,12 +525,6 @@
             gap: 0.75rem;
             padding: 1.25rem;
             color: white;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .category-header:hover {
-            filter: brightness(1.1);
         }
 
         .category-icon {
@@ -1347,14 +1138,6 @@
             padding: 2rem 0;
             text-align: center;
             margin-top: 3rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s ease;
-        }
-
-        .footer.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         /* Responsive */
@@ -1388,22 +1171,29 @@
             .landing-btn {
                 width: 80%;
             }
+        }
 
-            .loading-logo {
-                width: 100px;
-                height: 100px;
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-            .loading-logo i {
-                font-size: 3rem;
-            }
+        .category-card {
+            animation: slideIn 0.5s ease-out forwards;
         }
 
         .hidden {
             display: none !important;
         }
 
-        /* Header action buttons */
+        /* Header action buttons (logout, notification) */
         .header-action-btn {
             background: rgba(255,255,255,0.15);
             border: 2px solid rgba(255,255,255,0.3);
@@ -1430,7 +1220,7 @@
         .header-left { display: flex; align-items: center; gap: 0.6rem; }
         .header-right { display: flex; align-items: center; gap: 0.6rem; }
 
-        /* Notification Banner */
+        /* Notification Banner (received by customer) */
         .notif-banner {
             position: fixed;
             top: -100px;
@@ -1597,107 +1387,102 @@
         .restaurant-info { flex: 1; }
         .restaurant-name-admin { font-weight: 700; color: #1e293b; font-size: 1rem; }
         .restaurant-sub-admin { font-size: 0.8rem; color: #64748b; }
+        .color-picker-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+        .color-chip {
+            width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
+            border: 3px solid transparent; transition: border-color 0.2s;
+        }
+        .color-chip.active, .color-chip:hover { border-color: #1e293b; }
+        .gradient-options { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem; }
+        .gradient-chip {
+            height: 36px; border-radius: 8px; cursor: pointer;
+            border: 3px solid transparent; transition: border-color 0.2s;
+            font-size: 0.7rem; color: white; display: flex; align-items: center; justify-content: center; font-weight: 600;
+        }
+        .gradient-chip.active, .gradient-chip:hover { border-color: #1e293b; }
 
         /* Admin tabs scrollable on mobile */
         .admin-tabs { overflow-x: auto; flex-wrap: nowrap !important; }
         .admin-tabs::-webkit-scrollbar { height: 3px; }
         .admin-tabs::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
         .admin-tab { white-space: nowrap; }
-
-        /* Collapsed restaurant card */
-        .category-card.collapsed .products-container {
-            display: none;
-        }
-        .category-card.collapsed .category-header {
-            border-radius: 16px;
-        }
-        .expand-icon {
-            margin-left: auto;
-            transition: transform 0.3s;
-        }
-        .category-card.collapsed .expand-icon {
-            transform: rotate(-90deg);
-        }
-
-        /* View Products Button */
-        .view-products-btn {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 2px solid rgba(255,255,255,0.3);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.875rem;
-            font-weight: 600;
-            transition: all 0.3s;
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .view-products-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.05);
-        }
-        .view-products-btn.loading {
-            opacity: 0.7;
-            pointer-events: none;
-        }
-        .view-products-btn.loading i {
-            animation: spin 1s linear infinite;
-        }
-
-        /* Load More Button */
-        .load-more-container {
-            text-align: center;
-            padding: 2rem;
-        }
-        .load-more-btn {
-            background: linear-gradient(135deg, #1e3a5f, #0f172a);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        .load-more-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(30,58,95,0.3);
-        }
-        .load-more-btn i {
-            transition: transform 0.3s;
-        }
-        .load-more-btn:hover i {
-            transform: translateY(3px);
-        }
     </style>
+    <!-- ✅ Firebase SDK -->
+    <script type="module">
+      // ══════════════════════════════════════════════════
+      //  🔥 APNI FIREBASE CONFIG YAHAN DAALEN
+      //  Firebase Console → Project Settings → Your Apps
+      // ══════════════════════════════════════════════════
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { getFirestore, doc, getDoc, setDoc, onSnapshot, collection, deleteDoc }
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey:            "AIzaSyBvyivY5eMZ6RJ8x2DW5DCtVjeOdWwIvRE",
+        authDomain:        "dastak-delivery-257ad.firebaseapp.com",
+        projectId:         "dastak-delivery-257ad",
+        storageBucket:     "dastak-delivery-257ad.firebasestorage.app",
+        messagingSenderId: "208026439170",
+        appId:             "1:208026439170:web:cc707d16d565338a3aa11b"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db  = getFirestore(app);
+
+      // ── Global helpers so main script can call them ──
+      window._db        = db;
+      window._fbDoc     = doc;
+      window._fbGetDoc  = getDoc;
+      window._fbSetDoc  = setDoc;
+      window._fbOnSnap  = onSnapshot;
+      window._fbCol     = collection;
+      window._fbDelDoc  = deleteDoc;
+      window._firebaseReady = true;
+
+      // ── Real-time listener: categories change hone par auto-reload ──
+      onSnapshot(doc(db, "dastak", "categories"), (snap) => {
+        if (snap.exists()) {
+          const data = snap.data().data;
+          window.categories = data;
+          // _syncCategories updates local var AND re-renders if on main screen
+          if (typeof window._syncCategories === 'function') window._syncCategories(data);
+        }
+      });
+
+      // ── Real-time listener: notifications ──
+      onSnapshot(doc(db, "dastak", "notification"), (snap) => {
+        if (snap.exists() && !window.isAdminLoggedIn) {
+          const n = snap.data();
+          if (n.time && n.time > (window._lastNotifTime || 0)) {
+            window._lastNotifTime = n.time;
+            if (typeof window.showNotifBanner === 'function') {
+              window.showNotifBanner(n.title, n.message);
+            }
+            if ('Notification' in window && Notification.permission === 'granted') {
+              new Notification(n.title, { body: n.message });
+            }
+          }
+        }
+      });
+    </script>
 </head>
 <body>
 
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content">
-            <div class="loading-logo">
-                <i class="fas fa-motorcycle"></i>
-            </div>
-            <div class="loading-text">Dastak Delivery</div>
-            <div class="loading-subtext">Matli's Best Food Delivery</div>
-            <div class="loading-bar">
-                <div class="loading-progress" id="loadingProgress"></div>
-            </div>
-            <div class="loading-dots">
-                <div class="loading-dot"></div>
-                <div class="loading-dot"></div>
-                <div class="loading-dot"></div>
-            </div>
-        </div>
+    <!-- 🔥 Firebase Loading Screen -->
+    <div id="firebaseLoader" style="
+        position:fixed;top:0;left:0;width:100%;height:100%;
+        background:linear-gradient(135deg,#1e3a5f,#0f172a);
+        z-index:99999;display:flex;flex-direction:column;
+        align-items:center;justify-content:center;gap:1rem;">
+        <i class="fas fa-motorcycle" style="font-size:4rem;color:#f59e0b;"></i>
+        <h2 style="color:white;font-size:1.5rem;">Dastak Delivery</h2>
+        <div style="color:rgba(255,255,255,0.7);font-size:0.9rem;">Data load ho raha hai...</div>
+        <div style="width:50px;height:50px;border:4px solid rgba(255,255,255,0.2);
+            border-top-color:#f59e0b;border-radius:50%;animation:spin 0.8s linear infinite;margin-top:0.5rem;"></div>
+        <div id="firebaseError" style="display:none;background:rgba(239,68,68,0.2);border:1px solid #ef4444;
+            color:#fca5a5;padding:1rem 1.5rem;border-radius:12px;max-width:320px;text-align:center;font-size:0.85rem;margin-top:1rem;"></div>
     </div>
+    <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
 
     <!-- Notification Banner -->
     <div class="notif-banner" id="notifBanner">
@@ -2037,7 +1822,7 @@
     </div>
 
     <!-- Header -->
-    <header class="header" id="mainHeader">
+    <header class="header" id="mainHeader" style="display: none;">
         <div class="container">
             <div class="header-content">
                 <div class="header-left">
@@ -2071,7 +1856,7 @@
     </header>
 
     <!-- Search Section -->
-    <section class="search-section" id="searchSection">
+    <section class="search-section" id="searchSection" style="display: none;">
         <div class="container">
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
@@ -2081,7 +1866,7 @@
     </section>
 
     <!-- Main Content -->
-    <main class="main-content" id="mainContent">
+    <main class="main-content" id="mainContent" style="display: none;">
         <div class="container" id="mainContainer">
             <!-- Sections will be loaded here -->
         </div>
@@ -2112,7 +1897,7 @@
             <div class="payment-section">
                 <label class="payment-label">💳 Payment Method *</label>
                 <div class="payment-options">
-                    <label class="payment-option selected" id="pay-cash">
+                    <label class="payment-option" id="pay-cash">
                         <input type="radio" name="paymentMethod" value="cash" checked onchange="updatePaymentStyle()">
                         <span>💵 Cash on Delivery</span>
                     </label>
@@ -2146,7 +1931,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer" id="mainFooter">
+    <footer class="footer" id="mainFooter" style="display: none;">
         <div class="container">
             <p>&copy; 2026 Dastak Delivery Matli. All rights reserved.</p>
             <p style="margin-top: 0.5rem; font-size: 0.875rem;">Fastest Delivery in Town</p>
@@ -2154,315 +1939,336 @@
     </footer>
 
     <script>
-        // ==========================================
-        // FIREBASE CONFIGURATION
-        // ==========================================
-        const firebaseConfig = {
-            // AAP YAHAN APNI FIREBASE CONFIG DALEIN
-            // Firebase Console > Project Settings > Your apps > SDK setup and configuration
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
+        // ══════════════════════════════════════════════
+        //  FIREBASE HELPER — saare saves yahan se jaate hain
+        // ══════════════════════════════════════════════
+        async function fbSaveCategories() {
+            try {
+                await window._fbSetDoc(
+                    window._fbDoc(window._db, "dastak", "categories"),
+                    { data: categories }
+                );
+            } catch(e) {
+                console.error("Firebase save error:", e);
+                alert("❌ Data save nahi hua. Internet check karein.\n" + e.message);
+            }
+        }
+
+        async function fbSendNotification(title, message) {
+            try {
+                await window._fbSetDoc(
+                    window._fbDoc(window._db, "dastak", "notification"),
+                    { title, message, time: Date.now() }
+                );
+            } catch(e) {
+                console.error("Notification error:", e);
+                alert("❌ Notification nahi gai. " + e.message);
+            }
+        }
+
+        // ══════════════════════════════════════════════
+        //  APP CONFIG
+        // ══════════════════════════════════════════════
+        const ADMIN_PASSWORD = 'dastak123';
+        window.isAdminLoggedIn = false;
+        window._lastNotifTime  = 0;
+
+        // Default Data with all restaurants
+        const defaultData = {
+            ipp: {
+                name: "Italian Pizza Palace (IPP)",
+                icon: "fa-pizza-slice",
+                class: "ipp",
+                subtitle: "Best Pizza & Fast Food in Matli",
+                products: [
+                    // Deals
+                    { id: 1, name: "Deal 1 - This or That", price: 590, emoji: "🍔", variation: "1 Zinger + 2 Shawarma OR 1 Small Pizza + 4 Wings" },
+                    { id: 2, name: "All in One Deal", price: 1200, emoji: "🎁", variation: "1 Small Pizza + 2 Shawarma + 1 Zinger + 4 Wings" },
+                    { id: 3, name: "Italian Deal", price: 800, emoji: "🍕", variation: "1 Small Pizza + 1 Zinger + 345ml Drink" },
+                    { id: 4, name: "Family Deal", price: 1550, emoji: "👨‍👩‍👧‍👦", variation: "1 Large Pizza + 2 Shawarma + 4 Wings + 1 Drink" },
+                    { id: 5, name: "Weekend Family Deal", price: 1400, emoji: "🎉", variation: "1 Large Pizza + 4 Wings + 2 Shawarma" },
+                    { id: 6, name: "Mega Deal", price: 2000, emoji: "🚀", variation: "1 Large Special Pizza + 3 Zinger + 6 Wings" },
+                    { id: 7, name: "Super Saver", price: 1150, emoji: "💰", variation: "1 Small Pizza + 2 Shawarma + 1 Fries + 4 Wings + Drink" },
+                    { id: 8, name: "Shawarma Special", price: 500, emoji: "🌯", variation: "2 Chicken Shawarma + 2 Wings + 1 Fries" },
+                    { id: 9, name: "Italian Deal 2", price: 700, emoji: "🍟", variation: "2 Zinger Burgers + Fries + 345ml Drink" },
+                    { id: 10, name: "Special Family Deal", price: 1690, emoji: "🍕", variation: "1 Large + 1 Small Pizza + 6 Wings + Fries + Drink" },
+                    // Pizza
+                    { id: 11, name: "Chicken Fajita", price: 450, emoji: "🍕", variation: "Small" },
+                    { id: 12, name: "Chicken Fajita", price: 750, emoji: "🍕", variation: "Medium" },
+                    { id: 13, name: "Chicken Fajita", price: 1000, emoji: "🍕", variation: "Large" },
+                    { id: 14, name: "Special Pizza", price: 450, emoji: "🍕", variation: "Small" },
+                    { id: 15, name: "Special Pizza", price: 750, emoji: "🍕", variation: "Medium" },
+                    { id: 16, name: "Special Pizza", price: 1000, emoji: "🍕", variation: "Large" },
+                    { id: 17, name: "Tikka Pizza", price: 500, emoji: "🍕", variation: "Small" },
+                    { id: 18, name: "Tikka Pizza", price: 850, emoji: "🍕", variation: "Medium" },
+                    { id: 19, name: "Tikka Pizza", price: 1200, emoji: "🍕", variation: "Large" },
+                    { id: 20, name: "Cheese Lover", price: 550, emoji: "🧀", variation: "Small" },
+                    { id: 21, name: "Cheese Lover", price: 800, emoji: "🧀", variation: "Medium" },
+                    { id: 22, name: "Cheese Lover", price: 1100, emoji: "🧀", variation: "Large" },
+                    { id: 23, name: "BBQ Pizza", price: 650, emoji: "🍕", variation: "Small" },
+                    { id: 24, name: "BBQ Pizza", price: 1000, emoji: "🍕", variation: "Medium" },
+                    { id: 25, name: "BBQ Pizza", price: 1400, emoji: "🍕", variation: "Large" },
+                    // Fast Food
+                    { id: 26, name: "Zinger Burger", price: 320, emoji: "🍔", variation: "Regular" },
+                    { id: 27, name: "Chicken Burger", price: 250, emoji: "🍔", variation: "Regular" },
+                    { id: 28, name: "Tower Burger", price: 450, emoji: "🍔", variation: "Regular" },
+                    { id: 29, name: "Cheese Burger", price: 400, emoji: "🍔", variation: "Regular" },
+                    { id: 30, name: "Chicken Shawarma", price: 120, emoji: "🌯", variation: "Regular" },
+                    { id: 31, name: "Special Shawarma", price: 150, emoji: "🌯", variation: "Regular" },
+                    { id: 32, name: "Zinger Roll", price: 230, emoji: "🌯", variation: "Regular" },
+                    { id: 33, name: "French Fries", price: 150, emoji: "🍟", variation: "Regular" },
+                    { id: 34, name: "Hot Crispy Wings", price: 200, emoji: "🍗", variation: "4 Pcs" }
+                ]
+            },
+            almadina: {
+                name: "Al Madina Biryani",
+                icon: "fa-bowl-rice",
+                class: "almadina",
+                subtitle: "Sindhi Biryani Specialist",
+                products: [
+                    // Beef Biryani
+                    { id: 35, name: "Beef Biryani", price: 90, emoji: "🍛", variation: "1 Pao" },
+                    { id: 36, name: "Beef Biryani", price: 130, emoji: "🍛", variation: "Adha Kilo (1/2 Kg)" },
+                    { id: 37, name: "Beef Biryani", price: 180, emoji: "🍛", variation: "Sawa Kilo (3/4 Kg)" },
+                    { id: 38, name: "Beef Biryani", price: 360, emoji: "🍛", variation: "1 Kg (Full)" },
+                    { id: 39, name: "Beef Biryani", price: 720, emoji: "🍛", variation: "2 Kg (Double)" },
+                    // Chicken Biryani
+                    { id: 40, name: "Chicken Biryani", price: 140, emoji: "🍗", variation: "1 Pao" },
+                    { id: 41, name: "Chicken Biryani", price: 180, emoji: "🍗", variation: "Adha Kilo (1/2 Kg)" },
+                    { id: 42, name: "Chicken Biryani", price: 230, emoji: "🍗", variation: "Sawa Kilo (3/4 Kg)" },
+                    { id: 43, name: "Chicken Biryani", price: 460, emoji: "🍗", variation: "1 Kg (Full)" },
+                    { id: 44, name: "Chicken Biryani", price: 920, emoji: "🍗", variation: "2 Kg (Double)" },
+                    // Special Biryani
+                    { id: 45, name: "Achari Chicken Biryani", price: 230, emoji: "🌶️", variation: "Adha Kilo" },
+                    { id: 46, name: "Achari Chicken Biryani", price: 460, emoji: "🌶️", variation: "1 Kg" },
+                    { id: 47, name: "Kofta Biryani", price: 280, emoji: "🧆", variation: "Adha Kilo" },
+                    { id: 48, name: "Kofta Biryani", price: 560, emoji: "🧆", variation: "1 Kg" },
+                    { id: 49, name: "Kofta Biryani", price: 560, emoji: "🧆", variation: "4 Pcs Special" },
+                    // Extras
+                    { id: 50, name: "Special Raita", price: 100, emoji: "🥣", variation: "Full Bowl" },
+                    { id: 51, name: "Cold Drink", price: 60, emoji: "🥤", variation: "250ml" },
+                    { id: 52, name: "Cold Drink", price: 70, emoji: "🥤", variation: "500ml" },
+                    { id: 53, name: "Raita", price: 20, emoji: "🥣", variation: "Small" }
+                ]
+            },
+            domino: {
+                name: "Domino Pizza",
+                icon: "fa-pizza-slice",
+                class: "domino",
+                subtitle: "Family Restaurant & Deals",
+                products: [
+                    // Deals
+                    { id: 54, name: "Deal #1", price: 499, emoji: "🎁", variation: "1 Zinger + 1 Fries + 500ml Drink" },
+                    { id: 55, name: "Deal #2", price: 1549, emoji: "🎁", variation: "5 Zinger + 1 Ltr Drink" },
+                    { id: 56, name: "Deal #3", price: 899, emoji: "🎁", variation: "1 Small Pizza + 1 Zinger + 1 Fries + 500ml Drink" },
+                    { id: 57, name: "Deal #4", price: 1899, emoji: "🎁", variation: "1 Large Pizza + 1 Zinger + 1 Paratha Roll + 1 Large Fries + 1 Ltr Drink" },
+                    { id: 58, name: "Deal #5", price: 1249, emoji: "🎁", variation: "1 Medium Pizza + 5 Hot Shots + 1 Fries + 500ml Drink" },
+                    { id: 59, name: "Deal #6", price: 1599, emoji: "🎁", variation: "1 Medium Pizza + 2 Zinger + 1 Fries + 1.5 Ltr Drink" },
+                    { id: 60, name: "Deal #7", price: 1749, emoji: "🎁", variation: "1 Small + 1 Medium Pizza + 5 Hot Wings + 1 Fries + 1 Ltr Drink" },
+                    { id: 61, name: "Deal #8", price: 1549, emoji: "🎁", variation: "2 Small Pizza + 2 Zinger + 1 Ltr Drink" },
+                    { id: 62, name: "Deal #9", price: 2149, emoji: "🎁", variation: "1 Large Pizza + 2 Zinger + 2 Shawarma + 1 Ltr Drink" },
+                    { id: 63, name: "Birthday Deal", price: 6999, emoji: "🎂", variation: "4 Medium Pizza + 4 Zinger + 3 Large Fries + 1 Pound Cake + 2x1.5 Ltr Drink" },
+                    // Pizza
+                    { id: 64, name: "Domino Special Pizza", price: 499, emoji: "🍕", variation: "Small" },
+                    { id: 65, name: "Domino Special Pizza", price: 899, emoji: "🍕", variation: "Medium" },
+                    { id: 66, name: "Domino Special Pizza", price: 1249, emoji: "🍕", variation: "Large" },
+                    { id: 67, name: "Peri Peri Pizza", price: 499, emoji: "🍕", variation: "Small" },
+                    { id: 68, name: "Peri Peri Pizza", price: 949, emoji: "🍕", variation: "Medium" },
+                    { id: 69, name: "Chicken Tikka Pizza", price: 449, emoji: "🍕", variation: "Small" },
+                    { id: 70, name: "Chicken Tikka Pizza", price: 849, emoji: "🍕", variation: "Medium" },
+                    // Burgers
+                    { id: 71, name: "Zinger Burger", price: 299, emoji: "🍔", variation: "Regular" },
+                    { id: 72, name: "Chicken Patty Burger", price: 249, emoji: "🍔", variation: "Regular" },
+                    { id: 73, name: "Tower Burger", price: 499, emoji: "🍔", variation: "Regular" },
+                    // Fried Chicken
+                    { id: 74, name: "Hot Wings", price: 499, emoji: "🍗", variation: "10 Pcs" },
+                    { id: 75, name: "Peri Peri Wings", price: 549, emoji: "🍗", variation: "10 Pcs" },
+                    { id: 76, name: "Chicken Broast Chest", price: 399, emoji: "🍗", variation: "2 Pcs" }
+                ]
+            },
+            siraj: {
+                name: "Siraj Home Food",
+                icon: "fa-utensils",
+                class: "siraj",
+                subtitle: "Home Style Desi Food",
+                products: [
+                    { id: 77, name: "Qeema ka Salan", price: 250, emoji: "🥘", variation: "Full Plate" },
+                    { id: 78, name: "Roti", price: 30, emoji: "🫓", variation: "Per Piece" },
+                    { id: 79, name: "Shami Kabab", price: 100, emoji: "🧆", variation: "3 Pcs" },
+                    { id: 80, name: "Anda Paratha", price: 120, emoji: "🥚", variation: "1 Pc" },
+                    { id: 81, name: "Kofta ka Salan", price: 250, emoji: "🥘", variation: "Full Plate" },
+                    { id: 82, name: "Achar", price: 100, emoji: "🌶️", variation: "Bottle" },
+                    { id: 83, name: "Macaroni", price: 200, emoji: "🍝", variation: "Full Plate" },
+                    { id: 84, name: "Fried Kofta", price: 300, emoji: "🧆", variation: "5 Pcs" },
+                    { id: 85, name: "Chawal ki Roti", price: 30, emoji: "🫓", variation: "Per Piece" },
+                    { id: 86, name: "Anda Qeema", price: 200, emoji: "🍳", variation: "Full Plate" },
+                    { id: 87, name: "Aloo Fry", price: 100, emoji: "🥔", variation: "Full Plate" },
+                    { id: 88, name: "Kadahi", price: 500, emoji: "🥘", variation: "1 Pao" }
+                ]
+            },
+            friend: {
+                name: "Friend Bakery",
+                icon: "fa-bread-slice",
+                class: "friend",
+                subtitle: "Fresh Bakery & Deals",
+                products: [
+                    { id: 89, name: "Deal 1", price: 1100, emoji: "🎁", variation: "2 Small Pizza + 1 Zinger + 1 Zinger Roll + 1 Ltr Drink" },
+                    { id: 90, name: "Deal 2", price: 1250, emoji: "🎁", variation: "1 Medium Pizza + 1 Zinger + 1 Zinger Roll + 1.5 Ltr Drink" },
+                    { id: 91, name: "Deal 3", price: 1000, emoji: "🎁", variation: "1 Medium Pizza + 1 Pizza Fries + 1 Zinger Roll" },
+                    { id: 92, name: "Deal 4", price: 550, emoji: "🎁", variation: "2 Zinger Burger + 1 Cool Drink 500ml" },
+                    { id: 93, name: "Deal 5", price: 800, emoji: "🎁", variation: "1 Zinger Burger + 1 Zinger Roll + 1 Pasta + 1 Cool Drink 500ml" },
+                    { id: 94, name: "Deal 6", price: 1600, emoji: "🎁", variation: "1 Large Pizza + 1 Small Pizza + 1.5 Ltr Drink" },
+                    { id: 95, name: "Small Pizza", price: 500, emoji: "🍕", variation: "Regular" },
+                    { id: 96, name: "Medium Pizza", price: 800, emoji: "🍕", variation: "Regular" },
+                    { id: 97, name: "Large Pizza", price: 1400, emoji: "🍕", variation: "Regular" },
+                    { id: 98, name: "Zinger Burger", price: 280, emoji: "🍔", variation: "Regular" },
+                    { id: 99, name: "Zinger Roll", price: 250, emoji: "🌯", variation: "Regular" },
+                    { id: 100, name: "Pasta", price: 350, emoji: "🍝", variation: "Regular" }
+                ]
+            },
+            special: {
+                name: "Special Flavor",
+                icon: "fa-star",
+                class: "special",
+                subtitle: "Premium Taste & Quality",
+                products: [
+                    // Super Deals
+                    { id: 101, name: "Super Deal 1", price: 1399, emoji: "🎁", variation: "3 Small Pizza + 1 Ltr Cold Drink" },
+                    { id: 102, name: "Super Deal 2", price: 1699, emoji: "🎁", variation: "2 Medium Pizza + 1 Ltr Cold Drink" },
+                    { id: 103, name: "Super Deal 3", price: 2249, emoji: "🎁", variation: "2 Large Pizza + 1.5 Ltr Cold Drink" },
+                    // Pizza
+                    { id: 104, name: "Domino Special", price: 499, emoji: "🍕", variation: "Small" },
+                    { id: 105, name: "Domino Special", price: 899, emoji: "🍕", variation: "Medium" },
+                    { id: 106, name: "Domino Special", price: 1699, emoji: "🍕", variation: "Large" },
+                    { id: 107, name: "Peri Peri Pizza", price: 499, emoji: "🍕", variation: "Small" },
+                    { id: 108, name: "Peri Peri Pizza", price: 949, emoji: "🍕", variation: "Medium" },
+                    { id: 109, name: "Double Cheese Pizza", price: 549, emoji: "🧀", variation: "Small" },
+                    { id: 110, name: "Double Cheese Pizza", price: 949, emoji: "🧀", variation: "Medium" },
+                    // Burgers
+                    { id: 111, name: "Zinger Burger", price: 299, emoji: "🍔", variation: "Regular" },
+                    { id: 112, name: "Zinger Cheese Burger", price: 349, emoji: "🍔", variation: "Regular" },
+                    { id: 113, name: "Tower Burger", price: 499, emoji: "🍔", variation: "Regular" },
+                    // Rolls
+                    { id: 114, name: "Chicken Roll", price: 199, emoji: "🌯", variation: "Regular" },
+                    { id: 115, name: "Zinger Roll", price: 199, emoji: "🌯", variation: "Regular" },
+                    { id: 116, name: "Kabab Roll", price: 299, emoji: "🌯", variation: "Regular" },
+                    // Pasta
+                    { id: 117, name: "Special Pasta", price: 499, emoji: "🍝", variation: "Regular" },
+                    { id: 118, name: "Creamy Pasta", price: 599, emoji: "🍝", variation: "Regular" },
+                    // Shawarma
+                    { id: 119, name: "Chicken Shawarma", price: 199, emoji: "🌯", variation: "Regular" },
+                    { id: 120, name: "Zinger Shawarma", price: 249, emoji: "🌯", variation: "Regular" },
+                    // Loaded Fries
+                    { id: 121, name: "Loaded Fries", price: 499, emoji: "🍟", variation: "Regular" },
+                    { id: 122, name: "Pizza Fries", price: 549, emoji: "🍟", variation: "Regular" }
+                ]
+            }
         };
 
-        // Initialize Firebase
-        let db;
-        let firebaseInitialized = false;
+        // ══════════════════════════════════════════════
+        //  DATA — Firebase se load hoga
+        // ══════════════════════════════════════════════
+        // NOTE: 'categories' is NOT a simple var — always use
+        // the getter below so it stays in sync with Firebase
+        var categories = {};
 
-        try {
-            firebase.initializeApp(firebaseConfig);
-            db = firebase.firestore();
-            firebaseInitialized = true;
-            console.log("Firebase initialized successfully");
-        } catch (e) {
-            console.error("Firebase initialization failed:", e);
-            // Fallback to localStorage mode
-            firebaseInitialized = false;
-        }
+        // Every time Firebase updates, this syncs local var AND re-renders if on main screen
+        window._syncCategories = function(data) {
+            categories = data;
+            window.categories = data;
+            // Agar main screen visible hai toh turant render karo
+            const mainContent = document.getElementById('mainContent');
+            if (mainContent && mainContent.style.display !== 'none') {
+                renderSidebarNav();
+                renderSections();
+                fillCategoryDropdowns();
+            }
+        };
 
-        // Firestore settings for offline persistence (FREE - saves reads)
-        if (firebaseInitialized) {
-            db.enablePersistence({ synchronizeTabs: true })
-                .catch((err) => {
-                    if (err.code == 'failed-precondition') {
-                        console.log('Multiple tabs open, persistence can only be enabled in one tab at a a time.');
-                    } else if (err.code == 'unimplemented') {
-                        console.log('Browser doesn\'t support persistence');
-                    }
-                });
-        }
-
-        // Admin password
-        const ADMIN_PASSWORD = 'dastak123';
-        let isAdminLoggedIn = false;
-
-        // Cache for restaurant data (to minimize reads)
-        let restaurantCache = {};
-        let categoriesMeta = {}; // Only metadata, no products
         let cart = [];
         let currentSection = 'all';
         let editingProduct = null;
-        let loadedRestaurants = new Set(); // Track which restaurants are loaded
 
-        // ==========================================
-        // LOADING SCREEN FUNCTIONS
-        // ==========================================
-        function showLoading() {
-            const loadingScreen = document.getElementById('loadingScreen');
-            loadingScreen.classList.remove('hidden');
-            updateLoadingProgress(0);
-        }
+        // ══════════════════════════════════════════════
+        //  INIT — Firebase ready hone par data load karo
+        // ══════════════════════════════════════════════
+        async function initApp() {
+            const loader = document.getElementById('firebaseLoader');
 
-        function hideLoading() {
-            const loadingScreen = document.getElementById('loadingScreen');
-            loadingScreen.classList.add('hidden');
-        }
-
-        function updateLoadingProgress(percent) {
-            const progress = document.getElementById('loadingProgress');
-            if (progress) {
-                progress.style.width = percent + '%';
+            // ── Helper: default data se app shuru karo ──
+            function startWithDefaultData(reason) {
+                console.warn("Fallback to default data:", reason);
+                window._syncCategories(JSON.parse(JSON.stringify(defaultData)));
+                loader.style.display = 'none';
+                const warn = document.createElement('div');
+                warn.style.cssText = 'position:fixed;bottom:10px;left:50%;transform:translateX(-50%);background:#fef3c7;border:1px solid #f59e0b;color:#92400e;padding:0.6rem 1.2rem;border-radius:10px;font-size:0.8rem;z-index:9999;text-align:center;max-width:90vw;';
+                warn.innerHTML = '⚠️ <b>Offline Mode</b> — Firebase connect nahi hua<br><small>Data changes save nahi honge. File download karke open karein.</small>';
+                document.body.appendChild(warn);
+                setTimeout(() => warn.remove(), 8000);
             }
-        }
 
-        // Simulate loading steps
-        async function simulateLoading() {
-            const steps = [
-                { percent: 20, delay: 300, text: 'Connecting...' },
-                { percent: 50, delay: 400, text: 'Loading restaurants...' },
-                { percent: 80, delay: 300, text: 'Preparing menu...' },
-                { percent: 100, delay: 200, text: 'Ready!' }
-            ];
-
-            for (let step of steps) {
-                await new Promise(resolve => setTimeout(resolve, step.delay));
-                updateLoadingProgress(step.percent);
+            // Wait for Firebase module (max 5s)
+            let waited = 0;
+            while (!window._firebaseReady && waited < 50) {
+                await new Promise(r => setTimeout(r, 100));
+                waited++;
             }
-            
-            await new Promise(resolve => setTimeout(resolve, 300));
-            hideLoading();
-        }
 
-        // ==========================================
-        // FIREBASE DATA FUNCTIONS (Optimized for FREE tier)
-        // ==========================================
-
-        // 1. Load only restaurant metadata (names, icons, colors) - 1 read per restaurant doc
-        async function loadRestaurantsMeta() {
-            if (!firebaseInitialized) {
-                // Fallback to localStorage
-                const saved = localStorage.getItem('dastakCategories');
-                if (saved) {
-                    categoriesMeta = JSON.parse(saved);
-                    Object.keys(categoriesMeta).forEach(key => {
-                        // Remove products from meta, keep only header info
-                        if (categoriesMeta[key].products) {
-                            delete categoriesMeta[key].products;
-                        }
-                    });
-                }
-                return categoriesMeta;
+            // Firebase load nahi hua (sandbox/preview environment) — default se chalao
+            if (!window._firebaseReady) {
+                startWithDefaultData("Firebase SDK blocked (preview mode)");
+                return;
             }
 
             try {
-                const snapshot = await db.collection('restaurants').get();
-                categoriesMeta = {};
-                snapshot.forEach(doc => {
-                    const data = doc.data();
-                    categoriesMeta[doc.id] = {
-                        name: data.name,
-                        icon: data.icon || 'fa-utensils',
-                        class: data.class || 'ipp',
-                        subtitle: data.subtitle || '',
-                        productCount: data.productCount || 0
-                    };
-                });
-                
-                // Cache in localStorage for offline
-                localStorage.setItem('dastakCategoriesMeta', JSON.stringify(categoriesMeta));
-                return categoriesMeta;
-            } catch (e) {
-                console.error("Error loading restaurants:", e);
-                // Fallback to cache
-                const cached = localStorage.getItem('dastakCategoriesMeta');
-                if (cached) {
-                    categoriesMeta = JSON.parse(cached);
-                }
-                return categoriesMeta;
-            }
-        }
-
-        // 2. Load products for ONE restaurant only when clicked (LAZY LOADING)
-        async function loadRestaurantProducts(restaurantId) {
-            // Check cache first
-            if (restaurantCache[restaurantId]) {
-                console.log(`Using cached data for ${restaurantId}`);
-                return restaurantCache[restaurantId];
-            }
-
-            if (!firebaseInitialized) {
-                // Fallback to localStorage
-                const saved = localStorage.getItem('dastakCategories');
-                if (saved) {
-                    const allData = JSON.parse(saved);
-                    return allData[restaurantId]?.products || [];
-                }
-                return [];
-            }
-
-            try {
-                console.log(`Loading products for ${restaurantId} from Firestore...`);
-                const snapshot = await db.collection('restaurants').doc(restaurantId)
-                    .collection('products').get();
-                
-                const products = [];
-                snapshot.forEach(doc => {
-                    products.push({ id: doc.id, ...doc.data() });
-                });
-
-                // Cache the result
-                restaurantCache[restaurantId] = products;
-                
-                // Also update localStorage cache
-                const currentCache = JSON.parse(localStorage.getItem('dastakProductCache') || '{}');
-                currentCache[restaurantId] = products;
-                localStorage.setItem('dastakProductCache', JSON.stringify(currentCache));
-
-                return products;
-            } catch (e) {
-                console.error(`Error loading products for ${restaurantId}:`, e);
-                // Try cache
-                const cached = JSON.parse(localStorage.getItem('dastakProductCache') || '{}');
-                return cached[restaurantId] || [];
-            }
-        }
-
-        // 3. Save restaurant metadata (admin function)
-        async function saveRestaurantMeta(restaurantId, data) {
-            if (!firebaseInitialized) {
-                // Fallback to localStorage
-                const saved = JSON.parse(localStorage.getItem('dastakCategories') || '{}');
-                saved[restaurantId] = { ...saved[restaurantId], ...data };
-                localStorage.setItem('dastakCategories', JSON.stringify(saved));
-                return true;
-            }
-
-            try {
-                await db.collection('restaurants').doc(restaurantId).set(data, { merge: true });
-                return true;
-            } catch (e) {
-                console.error("Error saving restaurant:", e);
-                return false;
-            }
-        }
-
-        // 4. Save product to restaurant (admin function)
-        async function saveProduct(restaurantId, productId, productData) {
-            if (!firebaseInitialized) {
-                // Fallback to localStorage
-                const saved = JSON.parse(localStorage.getItem('dastakCategories') || '{}');
-                if (!saved[restaurantId]) saved[restaurantId] = { products: [] };
-                if (!saved[restaurantId].products) saved[restaurantId].products = [];
-                
-                const idx = saved[restaurantId].products.findIndex(p => p.id == productId);
-                if (idx >= 0) {
-                    saved[restaurantId].products[idx] = { ...saved[restaurantId].products[idx], ...productData };
+                const snap = await window._fbGetDoc(
+                    window._fbDoc(window._db, "dastak", "categories")
+                );
+                if (snap.exists()) {
+                    window._syncCategories(snap.data().data);
                 } else {
-                    saved[restaurantId].products.push({ id: productId, ...productData });
+                    // Pehli baar: default data Firebase mein save karo
+                    window._syncCategories(JSON.parse(JSON.stringify(defaultData)));
+                    await fbSaveCategories();
                 }
-                localStorage.setItem('dastakCategories', JSON.stringify(saved));
-                return true;
-            }
+                loader.style.display = 'none';
 
-            try {
-                await db.collection('restaurants').doc(restaurantId)
-                    .collection('products').doc(String(productId))
-                    .set(productData, { merge: true });
-                
-                // Update cache
-                if (restaurantCache[restaurantId]) {
-                    const idx = restaurantCache[restaurantId].findIndex(p => p.id == productId);
-                    if (idx >= 0) {
-                        restaurantCache[restaurantId][idx] = { ...restaurantCache[restaurantId][idx], ...productData };
-                    } else {
-                        restaurantCache[restaurantId].push({ id: productId, ...productData });
-                    }
-                }
-                
-                // Update product count
-                const currentCount = restaurantCache[restaurantId] ? restaurantCache[restaurantId].length : 0;
-                await db.collection('restaurants').doc(restaurantId).update({ productCount: currentCount });
-                
-                return true;
-            } catch (e) {
-                console.error("Error saving product:", e);
-                return false;
+            } catch(e) {
+                startWithDefaultData(e.message);
             }
         }
 
-        // 5. Delete product (admin function)
-        async function deleteProductFirebase(restaurantId, productId) {
-            if (!firebaseInitialized) {
-                const saved = JSON.parse(localStorage.getItem('dastakCategories') || '{}');
-                if (saved[restaurantId] && saved[restaurantId].products) {
-                    saved[restaurantId].products = saved[restaurantId].products.filter(p => p.id != productId);
-                    localStorage.setItem('dastakCategories', JSON.stringify(saved));
-                }
-                return true;
-            }
-
-            try {
-                await db.collection('restaurants').doc(restaurantId)
-                    .collection('products').doc(String(productId)).delete();
-                
-                // Update cache
-                if (restaurantCache[restaurantId]) {
-                    restaurantCache[restaurantId] = restaurantCache[restaurantId].filter(p => p.id != productId);
-                }
-                
-                return true;
-            } catch (e) {
-                console.error("Error deleting product:", e);
-                return false;
-            }
-        }
-
-        // ==========================================
-        // UI FUNCTIONS
-        // ==========================================
+        document.addEventListener('DOMContentLoaded', initApp);
 
         // Landing Page Functions
-        async function enterCustomerMode() {
-            showLoading();
-            updateLoadingProgress(10);
-            
-            // Load metadata only (not products)
-            await loadRestaurantsMeta();
-            updateLoadingProgress(60);
-            
-            document.getElementById('landingPage').classList.add('hidden');
-            document.getElementById('mainHeader').classList.add('visible');
-            document.getElementById('searchSection').classList.add('visible');
-            document.getElementById('mainFooter').classList.add('visible');
+        function enterCustomerMode() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('mainHeader').style.display = 'block';
+            document.getElementById('searchSection').style.display = 'block';
+            document.getElementById('mainContent').style.display = 'block';
+            document.getElementById('mainFooter').style.display = 'block';
             document.getElementById('sidebarAdminSection').style.display = 'none';
-            
             // Show Exit button in header
             const fab = document.getElementById('logoutFab');
             fab.classList.add('visible');
             document.getElementById('logoutLabel').textContent = 'Exit';
-            
-            renderSidebarNav();
-            updateLoadingProgress(100);
-            
-            setTimeout(() => {
-                hideLoading();
-                renderRestaurantListOnly(); // Show only headers, no products yet
-            }, 300);
-            
+            // Request notification permission
             requestNotificationPermission();
+            // Agar categories already loaded hain toh render karo
+            // Agar nahi hain toh _syncCategories khud render karega jab data aayega
+            if (Object.keys(categories).length > 0) {
+                renderSidebarNav();
+                renderSections();
+            } else {
+                // Loading message dikhao main content mein
+                document.getElementById('mainContainer').innerHTML = `
+                    <div style="text-align:center;padding:3rem;color:#64748b;">
+                        <div style="font-size:3rem;margin-bottom:1rem;">⏳</div>
+                        <p style="font-size:1rem;">Restaurants load ho rahe hain...</p>
+                    </div>`;
+                document.getElementById('sidebarRestaurantList').innerHTML = `
+                    <div style="padding:1rem;color:#94a3b8;font-size:0.85rem;">Loading...</div>`;
+            }
         }
 
         function showAdminLogin() {
@@ -2474,45 +2280,35 @@
             document.getElementById('adminPassword').value = '';
         }
 
-        async function loginAdmin() {
+        function loginAdmin() {
             const password = document.getElementById('adminPassword').value;
             if (password === ADMIN_PASSWORD) {
-                showLoading();
                 isAdminLoggedIn = true;
                 hideAdminLogin();
-                
-                await loadRestaurantsMeta();
-                
-                document.getElementById('landingPage').classList.add('hidden');
-                document.getElementById('mainHeader').classList.add('visible');
-                document.getElementById('searchSection').classList.add('visible');
-                document.getElementById('mainFooter').classList.add('visible');
+                document.getElementById('landingPage').style.display = 'none';
+                document.getElementById('mainHeader').style.display = 'block';
+                document.getElementById('searchSection').style.display = 'block';
+                document.getElementById('mainContent').style.display = 'block';
+                document.getElementById('mainFooter').style.display = 'block';
                 document.getElementById('sidebarAdminSection').style.display = 'block';
-                
                 const fab = document.getElementById('logoutFab');
                 fab.classList.add('visible');
                 document.getElementById('logoutLabel').textContent = 'Logout';
                 document.getElementById('notifBell').classList.add('visible');
-                
-                renderSidebarNav();
-                fillCategoryDropdowns();
-                
-                setTimeout(() => {
-                    hideLoading();
-                    renderRestaurantListOnly();
-                }, 500);
-                
-                showNotifBanner('Welcome Admin!', 'Aap admin panel mein hain.');
+                if (Object.keys(categories).length > 0) {
+                    renderSidebarNav();
+                    fillCategoryDropdowns();
+                    renderSections();
+                }
+                alert('Welcome Admin!');
             } else {
                 alert('Incorrect password!');
             }
         }
 
         function logoutAdmin() {
-            if (confirm('Kya aap waqai logout karna chahte hain?')) {
-                isAdminLoggedIn = false;
-                location.reload();
-            }
+            isAdminLoggedIn = false;
+            location.reload();
         }
 
         // Toggle Sidebar
@@ -2524,7 +2320,7 @@
         }
 
         // Show Section
-        async function showSection(section) {
+        function showSection(section) {
             currentSection = section;
             
             // Update nav items
@@ -2533,128 +2329,34 @@
             });
             event.target.closest('.nav-item').classList.add('active');
             
-            if (section === 'all') {
-                renderRestaurantListOnly();
-            } else {
-                await loadAndShowRestaurant(section);
-            }
-            
+            renderSections();
             toggleSidebar();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Render only restaurant headers (NO products - saves reads!)
-        function renderRestaurantListOnly() {
+        // Render Sections
+        function renderSections() {
             const container = document.getElementById('mainContainer');
-            container.innerHTML = '';
             
-            Object.keys(categoriesMeta).forEach((key, index) => {
-                const category = categoriesMeta[key];
-                const card = createRestaurantCardHTML(key, category, index);
-                container.innerHTML += card;
-            });
-        }
-
-        // Create collapsed restaurant card (header only)
-        function createRestaurantCardHTML(key, category, index) {
-            return `
-                <div class="category-card collapsed" id="restaurant-${key}" style="animation-delay: ${index * 0.1}s">
-                    <div class="category-header ${category.class}" onclick="toggleRestaurant('${key}')">
-                        <div class="category-icon">
-                            <i class="fas ${category.icon}"></i>
-                        </div>
-                        <div>
-                            <div class="category-title">${category.name}</div>
-                            <div class="category-subtitle">${category.subtitle}</div>
-                        </div>
-                        <button class="view-products-btn" id="btn-${key}" onclick="event.stopPropagation(); loadRestaurant('${key}')">
-                            <i class="fas fa-utensils"></i>
-                            <span>View Menu</span>
-                            <i class="fas fa-chevron-down expand-icon"></i>
-                        </button>
-                    </div>
-                    <div class="products-container" id="products-${key}">
-                        <div class="restaurant-loading">
-                            <i class="fas fa-spinner"></i>
-                            <span>Click "View Menu" to load items...</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        // Toggle restaurant expand/collapse
-        function toggleRestaurant(key) {
-            const card = document.getElementById(`restaurant-${key}`);
-            card.classList.toggle('collapsed');
-        }
-
-        // Load specific restaurant products (LAZY LOADING)
-        async function loadRestaurant(key) {
-            const btn = document.getElementById(`btn-${key}`);
-            const container = document.getElementById(`products-${key}`);
-            
-            // If already loaded, just toggle
-            if (loadedRestaurants.has(key)) {
-                toggleRestaurant(key);
-                return;
+            if (currentSection === 'all') {
+                // Show all sections
+                container.innerHTML = Object.keys(categories).map(key => createSectionHTML(key, categories[key])).join('');
+            } else {
+                // Show specific section
+                container.innerHTML = createSectionHTML(currentSection, categories[currentSection]);
             }
-            
-            // Show loading state
-            btn.classList.add('loading');
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
-            
-            // Load products from Firebase
-            const products = await loadRestaurantProducts(key);
-            
-            // Render products
-            container.innerHTML = `
-                <div class="products-grid">
-                    ${products.map(product => `
-                        <div class="product-item" onclick="addToCart('${product.id}', '${key}')">
-                            ${product.price > 1000 ? '<span class="deal-badge">DEAL</span>' : ''}
-                            <div class="product-img">${product.emoji || '📦'}</div>
-                            <div class="product-name">${product.name}</div>
-                            <div class="product-price">Rs. ${product.price}</div>
-                            ${product.variation ? `<div class="product-variation">${product.variation}</div>` : ''}
-                            <button class="add-btn" onclick="event.stopPropagation(); addToCart('${product.id}', '${key}')">
-                                <i class="fas fa-plus"></i> Add
-                            </button>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-            
-            // Mark as loaded
-            loadedRestaurants.add(key);
-            
-            // Update button
-            btn.classList.remove('loading');
-            btn.innerHTML = `
-                <i class="fas fa-check"></i>
-                <span>${products.length} Items</span>
-                <i class="fas fa-chevron-down expand-icon"></i>
-            `;
-            
-            // Expand the card
-            const card = document.getElementById(`restaurant-${key}`);
-            card.classList.remove('collapsed');
         }
 
-        // Load and show specific restaurant (from sidebar)
-        async function loadAndShowRestaurant(key) {
-            const container = document.getElementById('mainContainer');
-            const category = categoriesMeta[key];
-            
-            container.innerHTML = `
+        // Create Section HTML
+        function createSectionHTML(key, category) {
+            return `
                 <div class="section-header">
                     <h2 class="section-title">
                         <i class="fas ${category.icon}"></i>
                         ${category.name}
                     </h2>
-                    <span class="section-badge" id="count-${key}">Loading...</span>
+                    <span class="section-badge">${category.products.length} Items</span>
                 </div>
-                <div class="category-card" id="restaurant-${key}">
+                <div class="category-card">
                     <div class="category-header ${category.class}">
                         <div class="category-icon">
                             <i class="fas ${category.icon}"></i>
@@ -2664,112 +2366,135 @@
                             <div class="category-subtitle">${category.subtitle}</div>
                         </div>
                     </div>
-                    <div class="products-container" id="products-${key}">
-                        <div class="restaurant-loading">
-                            <i class="fas fa-spinner fa-spin"></i>
-                            <span>Loading delicious items...</span>
+                    <div class="products-container">
+                        <div class="products-grid">
+                            ${category.products.map(product => `
+                                <div class="product-item" onclick="addToCart(${product.id}, '${key}')">
+                                    ${product.price > 1000 ? '<span class="deal-badge">DEAL</span>' : ''}
+                                    <div class="product-img">${product.emoji}</div>
+                                    <div class="product-name">${product.name}</div>
+                                    <div class="product-price">Rs. ${product.price}</div>
+                                    ${product.variation ? `<div class="product-variation">${product.variation}</div>` : ''}
+                                    <button class="add-btn" onclick="event.stopPropagation(); addToCart(${product.id}, '${key}')">
+                                        <i class="fas fa-plus"></i> Add
+                                    </button>
+                                </div>
+                            `).join('')}
                         </div>
                     </div>
                 </div>
             `;
-            
-            const products = await loadRestaurantProducts(key);
-            
-            document.getElementById(`count-${key}`).textContent = `${products.length} Items`;
-            document.getElementById(`products-${key}`).innerHTML = `
-                <div class="products-grid">
-                    ${products.map(product => `
-                        <div class="product-item" onclick="addToCart('${product.id}', '${key}')">
-                            ${product.price > 1000 ? '<span class="deal-badge">DEAL</span>' : ''}
-                            <div class="product-img">${product.emoji || '📦'}</div>
-                            <div class="product-name">${product.name}</div>
-                            <div class="product-price">Rs. ${product.price}</div>
-                            ${product.variation ? `<div class="product-variation">${product.variation}</div>` : ''}
-                            <button class="add-btn" onclick="event.stopPropagation(); addToCart('${product.id}', '${key}')">
-                                <i class="fas fa-plus"></i> Add
-                            </button>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-            
-            loadedRestaurants.add(key);
         }
 
-        // Smart Search
-        async function searchProducts() {
+        // Smart Search — restaurant name + items + fuzzy suggestions
+        function searchProducts() {
             const raw = document.getElementById('searchInput').value;
             const searchTerm = raw.toLowerCase().trim();
             const container = document.getElementById('mainContainer');
             
             if (searchTerm === '') {
-                renderRestaurantListOnly();
+                renderSections();
                 return;
             }
 
-            // Search in all loaded restaurants
-            const results = [];
-            
-            for (let key of Object.keys(categoriesMeta)) {
-                // Load if not cached
-                let products = restaurantCache[key];
-                if (!products) {
-                    products = await loadRestaurantProducts(key);
-                }
-                
-                const matching = products.filter(p =>
+            // 1. Check if search term matches a restaurant name
+            const restaurantMatch = Object.keys(categories).find(key =>
+                categories[key].name.toLowerCase().includes(searchTerm)
+            );
+
+            // 2. Exact/partial product match across all restaurants
+            let exactResults = [];
+            Object.keys(categories).forEach(key => {
+                const cat = categories[key];
+                const matching = cat.products.filter(p =>
                     p.name.toLowerCase().includes(searchTerm) ||
-                    (p.variation && p.variation.toLowerCase().includes(searchTerm))
+                    (p.variation && p.variation.toLowerCase().includes(searchTerm)) ||
+                    cat.name.toLowerCase().includes(searchTerm) // restaurant name match shows all items
                 );
-                
-                if (matching.length > 0 || categoriesMeta[key].name.toLowerCase().includes(searchTerm)) {
-                    results.push({ 
-                        key, 
-                        category: categoriesMeta[key], 
-                        products: matching.length > 0 ? matching : products 
-                    });
+                if (matching.length > 0) {
+                    exactResults.push({ key, category: cat, products: matching });
                 }
+            });
+
+            // 3. Fuzzy / suggestions — words that partially match
+            let suggestionResults = [];
+            if (exactResults.length === 0) {
+                const words = searchTerm.split(/\s+/);
+                Object.keys(categories).forEach(key => {
+                    const cat = categories[key];
+                    const matching = cat.products.filter(p => {
+                        const haystack = (p.name + ' ' + (p.variation || '') + ' ' + cat.name).toLowerCase();
+                        return words.some(w => w.length >= 2 && haystack.includes(w));
+                    });
+                    if (matching.length > 0) {
+                        suggestionResults.push({ key, category: cat, products: matching });
+                    }
+                });
             }
 
+            const results = exactResults.length > 0 ? exactResults : suggestionResults;
+            const isSuggestion = exactResults.length === 0 && suggestionResults.length > 0;
+
             if (results.length === 0) {
+                // No match at all — show friendly message with tips
                 container.innerHTML = `
                     <div style="text-align:center; padding:3rem 1rem; color:#64748b;">
                         <div style="font-size:3.5rem; margin-bottom:1rem;">🔍</div>
                         <h3 style="color:#1e293b; margin-bottom:0.5rem;">"${raw}" nahi mila</h3>
-                        <button onclick="document.getElementById('searchInput').value=''; renderRestaurantListOnly();"
+                        <p style="margin-bottom:1.5rem;">Koi match nahi hua. Yeh try karein:</p>
+                        <div style="display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; margin-bottom:1.5rem;">
+                            ${Object.keys(categories).map(k =>
+                                `<button onclick="document.getElementById('searchInput').value='${categories[k].name}'; searchProducts();"
+                                    style="background:#f1f5f9; border:2px solid #e2e8f0; border-radius:20px; padding:0.4rem 1rem; cursor:pointer; font-size:0.85rem; font-weight:600; color:#1e3a5f;">
+                                    ${categories[k].name}
+                                </button>`
+                            ).join('')}
+                        </div>
+                        <button onclick="document.getElementById('searchInput').value=''; renderSections();"
                             style="background:#1e3a5f; color:white; border:none; border-radius:10px; padding:0.6rem 1.5rem; cursor:pointer; font-weight:600;">
-                            <i class="fas fa-times"></i> Clear Search
+                            <i class="fas fa-times"></i> Search Clear Karein
                         </button>
                     </div>`;
                 return;
             }
 
-            container.innerHTML = results.map(({key, category, products}) => `
+            // Render results
+            const headerHtml = isSuggestion
+                ? `<div style="background:#fef9c3; border:2px solid #f59e0b; border-radius:12px; padding:0.75rem 1rem; margin-bottom:1rem; color:#92400e; font-size:0.875rem;">
+                       💡 <strong>"${raw}"</strong> ka exact match nahi mila — yeh milte julte results hain:
+                   </div>`
+                : (restaurantMatch
+                    ? `<div style="background:#d1fae5; border:2px solid #059669; border-radius:12px; padding:0.75rem 1rem; margin-bottom:1rem; color:#065f46; font-size:0.875rem;">
+                           🏪 <strong>"${categories[restaurantMatch].name}"</strong> ke tamam items dikh rahe hain
+                       </div>`
+                    : '');
+
+            container.innerHTML = headerHtml + results.map(({key, category, products}) => `
                 <div class="section-header">
                     <h2 class="section-title">
                         <i class="fas ${category.icon}"></i>
                         ${category.name}
                     </h2>
-                    <span class="section-badge">${products.length} Found</span>
+                    <span class="section-badge">${products.length} ${isSuggestion ? 'Suggestions' : 'Found'}</span>
                 </div>
                 <div class="category-card">
                     <div class="category-header ${category.class}">
                         <div class="category-icon"><i class="fas ${category.icon}"></i></div>
                         <div>
                             <div class="category-title">${category.name}</div>
-                            <div class="category-subtitle">Search Results</div>
+                            <div class="category-subtitle">${isSuggestion ? 'Milte Julte Items' : 'Search Results'}</div>
                         </div>
                     </div>
                     <div class="products-container">
                         <div class="products-grid">
                             ${products.map(product => `
-                                <div class="product-item" onclick="addToCart('${product.id}', '${key}')">
+                                <div class="product-item" onclick="addToCart(${product.id}, '${key}')">
                                     ${product.price > 1000 ? '<span class="deal-badge">DEAL</span>' : ''}
-                                    <div class="product-img">${product.emoji || '📦'}</div>
+                                    <div class="product-img">${product.emoji}</div>
                                     <div class="product-name">${product.name}</div>
                                     <div class="product-price">Rs. ${product.price}</div>
                                     ${product.variation ? `<div class="product-variation">${product.variation}</div>` : ''}
-                                    <button class="add-btn" onclick="event.stopPropagation(); addToCart('${product.id}', '${key}')">
+                                    <button class="add-btn" onclick="event.stopPropagation(); addToCart(${product.id}, '${key}')">
                                         <i class="fas fa-plus"></i> Add
                                     </button>
                                 </div>
@@ -2782,16 +2507,8 @@
 
         // Add to Cart
         function addToCart(productId, categoryKey) {
-            // Find product in cache
-            const products = restaurantCache[categoryKey] || [];
-            const product = products.find(p => p.id == productId);
-            
-            if (!product) {
-                console.error('Product not found:', productId, categoryKey);
-                return;
-            }
-            
-            const existingItem = cart.find(item => item.id == productId && item.category == categoryKey);
+            const product = categories[categoryKey].products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
             
             if (existingItem) {
                 existingItem.quantity++;
@@ -2811,11 +2528,11 @@
 
         // Update Quantity
         function updateQuantity(productId, change) {
-            const item = cart.find(item => item.id == productId);
+            const item = cart.find(item => item.id === productId);
             if (item) {
                 item.quantity += change;
                 if (item.quantity <= 0) {
-                    cart = cart.filter(i => i.id != productId);
+                    cart = cart.filter(i => i.id !== productId);
                 }
             }
             updateCartUI();
@@ -2823,7 +2540,7 @@
 
         // Remove from Cart
         function removeFromCart(productId) {
-            cart = cart.filter(item => item.id != productId);
+            cart = cart.filter(item => item.id !== productId);
             updateCartUI();
         }
 
@@ -2854,7 +2571,7 @@
             } else {
                 cartItems.innerHTML = cart.map(item => `
                     <div class="cart-item">
-                        <div class="cart-item-img">${item.emoji || '📦'}</div>
+                        <div class="cart-item-img">${item.emoji}</div>
                         <div class="cart-item-details">
                             <div class="cart-item-name">${item.name}</div>
                             ${item.variation ? `<div style="font-size: 0.75rem; color: #64748b;">${item.variation}</div>` : ''}
@@ -2929,10 +2646,9 @@
             });
             
             Object.keys(grouped).forEach(cat => {
-                const catName = categoriesMeta[cat]?.name || cat;
-                message += `*${catName}:*%0A`;
+                message += `*${categories[cat].name}:*%0A`;
                 grouped[cat].forEach(item => {
-                    message += `• ${item.emoji || '📦'} ${item.name}`;
+                    message += `• ${item.emoji} ${item.name}`;
                     if (item.variation) message += ` (${item.variation})`;
                     message += `%0A`;
                     message += `  ${item.quantity} × Rs. ${item.price} = Rs. ${item.quantity * item.price}%0A`;
@@ -2968,48 +2684,51 @@
         }
 
         function switchTab(tab) {
+            // Update tabs
             document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
             event.target.classList.add('active');
             
+            // Update content
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.getElementById(`tab-${tab}`).classList.add('active');
             
-            if (tab === 'edit') renderAdminProducts();
-            if (tab === 'restaurants') renderAdminRestaurants();
+            if (tab === 'edit') {
+                renderAdminProducts();
+            }
+            if (tab === 'restaurants') {
+                renderAdminRestaurants();
+            }
         }
 
-        async function renderAdminProducts() {
+        function renderAdminProducts() {
             const list = document.getElementById('adminProductsList');
-            list.innerHTML = '<div class="restaurant-loading"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
             
             let html = '';
-            for (let key of Object.keys(categoriesMeta)) {
-                const cat = categoriesMeta[key];
-                const products = await loadRestaurantProducts(key);
-                
+            Object.keys(categories).forEach(key => {
+                const cat = categories[key];
                 html += `
                     <div class="category-group">
                         <div class="category-header-admin" style="display:flex;justify-content:space-between;align-items:center;">
                             <span><i class="fas ${cat.icon}"></i> ${cat.name}</span>
-                            <span style="font-size:0.75rem;color:#64748b;">${products.length} items</span>
+                            <span style="font-size:0.75rem;color:#64748b;">${cat.products.length} items</span>
                         </div>
                 `;
                 
-                products.forEach(product => {
+                cat.products.forEach(product => {
                     html += `
                         <div class="product-list-item">
                             <div class="product-info">
-                                <div class="product-name-admin">${product.emoji || '📦'} ${product.name}</div>
+                                <div class="product-name-admin">${product.emoji} ${product.name}</div>
                                 <div class="product-price-admin">
                                     Rs. ${product.price}
                                     ${product.variation ? `• ${product.variation}` : ''}
                                 </div>
                             </div>
                             <div class="product-actions">
-                                <button class="edit-btn" onclick="openEditModal('${key}', '${product.id}')">
+                                <button class="edit-btn" onclick="openEditModal('${key}', ${product.id})">
                                     <i class="fas fa-edit"></i> Edit
                                 </button>
-                                <button class="delete-btn" onclick="deleteProduct('${key}', '${product.id}')">
+                                <button class="delete-btn" onclick="deleteProduct('${key}', ${product.id})">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -3018,22 +2737,22 @@
                 });
                 
                 html += '</div>';
-            }
+            });
             
             list.innerHTML = html;
         }
 
-        // Restaurant Management
+        // =========== RESTAURANT MANAGEMENT ===========
         function renderAdminRestaurants() {
             const list = document.getElementById('adminRestaurantsList');
             let html = '';
-            Object.keys(categoriesMeta).forEach(key => {
-                const cat = categoriesMeta[key];
+            Object.keys(categories).forEach(key => {
+                const cat = categories[key];
                 html += `
                     <div class="restaurant-list-item">
                         <div class="restaurant-info">
                             <div class="restaurant-name-admin"><i class="fas ${cat.icon}" style="color:#1e3a5f;margin-right:0.5rem;"></i>${cat.name}</div>
-                            <div class="restaurant-sub-admin">${cat.subtitle || ''} • ${cat.productCount || 0} items</div>
+                            <div class="restaurant-sub-admin">${cat.subtitle || ''} • ${cat.products.length} items</div>
                         </div>
                         <div class="product-actions">
                             <button class="edit-btn" onclick="openEditRestModal('${key}')">
@@ -3050,16 +2769,18 @@
         }
 
         function fillCategoryDropdowns() {
+            // Fill Add Product dropdown
             const addSelect = document.getElementById('adminProductCategory');
             if (addSelect) {
-                addSelect.innerHTML = Object.keys(categoriesMeta).map(key =>
-                    `<option value="${key}">${categoriesMeta[key].name}</option>`
+                addSelect.innerHTML = Object.keys(categories).map(key =>
+                    `<option value="${key}">${categories[key].name}</option>`
                 ).join('');
             }
+            // Fill Edit Product dropdown
             const editSelect = document.getElementById('editProductCategorySelect');
             if (editSelect) {
-                editSelect.innerHTML = Object.keys(categoriesMeta).map(key =>
-                    `<option value="${key}">${categoriesMeta[key].name}</option>`
+                editSelect.innerHTML = Object.keys(categories).map(key =>
+                    `<option value="${key}">${categories[key].name}</option>`
                 ).join('');
             }
         }
@@ -3067,8 +2788,8 @@
         function renderSidebarNav() {
             const container = document.getElementById('sidebarRestaurantList');
             if (!container) return;
-            container.innerHTML = Object.keys(categoriesMeta).map(key => {
-                const cat = categoriesMeta[key];
+            container.innerHTML = Object.keys(categories).map(key => {
+                const cat = categories[key];
                 return `<div class="nav-item" onclick="showSection('${key}')" data-label="${cat.name}">
                     <i class="fas ${cat.icon}"></i>
                     <span>${cat.name}</span>
@@ -3082,11 +2803,12 @@
                 const label = item.getAttribute('data-label') || '';
                 item.style.display = label.toLowerCase().includes(q) ? 'flex' : 'none';
             });
+            // Also show/hide "All Items"
             const allItem = document.querySelector('.sidebar-nav .nav-item[data-label="All Items"]');
             if (allItem) allItem.style.display = 'All Items'.toLowerCase().includes(q) ? 'flex' : 'none';
         }
 
-        async function addRestaurant() {
+        function addRestaurant() {
             const name = document.getElementById('newRestName').value.trim();
             const subtitle = document.getElementById('newRestSubtitle').value.trim();
             const icon = document.getElementById('newRestIcon').value;
@@ -3094,34 +2816,29 @@
 
             if (!name) { alert('Restaurant ka naam likhein!'); return; }
 
+            // Generate key from name
             const key = name.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '') + '_' + Date.now();
 
-            const data = {
+            categories[key] = {
                 name,
                 icon,
                 class: colorClass,
                 subtitle: subtitle || name,
-                productCount: 0,
-                createdAt: new Date().toISOString()
+                products: []
             };
 
-            const success = await saveRestaurantMeta(key, data);
-            if (success) {
-                categoriesMeta[key] = data;
-                document.getElementById('newRestName').value = '';
-                document.getElementById('newRestSubtitle').value = '';
-                renderSidebarNav();
-                fillCategoryDropdowns();
-                renderAdminRestaurants();
-                renderRestaurantListOnly();
-                alert(`✅ "${name}" restaurant add ho gaya!`);
-            } else {
-                alert('Error adding restaurant!');
-            }
+            fbSaveCategories();
+            document.getElementById('newRestName').value = '';
+            document.getElementById('newRestSubtitle').value = '';
+            renderSidebarNav();
+            fillCategoryDropdowns();
+            renderAdminRestaurants();
+            renderSections();
+            alert(`✅ "${name}" restaurant add ho gaya!`);
         }
 
         function openEditRestModal(key) {
-            const cat = categoriesMeta[key];
+            const cat = categories[key];
             document.getElementById('editRestKey').value = key;
             document.getElementById('editRestName').value = cat.name;
             document.getElementById('editRestSubtitle').value = cat.subtitle || '';
@@ -3136,63 +2853,37 @@
             document.getElementById('editRestModal').classList.remove('active');
         }
 
-        async function saveRestaurantEdit() {
+        function saveRestaurantEdit() {
             const key = document.getElementById('editRestKey').value;
-            const data = {
-                name: document.getElementById('editRestName').value.trim(),
-                subtitle: document.getElementById('editRestSubtitle').value.trim(),
-                icon: document.getElementById('editRestIcon').value,
-                class: document.getElementById('editRestColor').value
-            };
-            
-            const success = await saveRestaurantMeta(key, data);
-            if (success) {
-                categoriesMeta[key] = { ...categoriesMeta[key], ...data };
-                closeEditRestModal();
-                renderAdminRestaurants();
-                fillCategoryDropdowns();
-                renderSidebarNav();
-                renderRestaurantListOnly();
-                alert('✅ Restaurant update ho gaya!');
-            }
-        }
-
-        async function deleteRestaurant(key) {
-            const cat = categoriesMeta[key];
-            if (!confirm(`"${cat.name}" delete karna chahte hain?`)) return;
-            
-            if (!firebaseInitialized) {
-                const saved = JSON.parse(localStorage.getItem('dastakCategories') || '{}');
-                delete saved[key];
-                localStorage.setItem('dastakCategories', JSON.stringify(saved));
-            } else {
-                try {
-                    // Delete all products first
-                    const productsSnapshot = await db.collection('restaurants').doc(key).collection('products').get();
-                    const batch = db.batch();
-                    productsSnapshot.forEach(doc => {
-                        batch.delete(doc.ref);
-                    });
-                    await batch.commit();
-                    
-                    // Delete restaurant doc
-                    await db.collection('restaurants').doc(key).delete();
-                } catch (e) {
-                    console.error("Error deleting restaurant:", e);
-                }
-            }
-            
-            delete categoriesMeta[key];
-            delete restaurantCache[key];
-            loadedRestaurants.delete(key);
-            
+            categories[key].name = document.getElementById('editRestName').value.trim();
+            categories[key].subtitle = document.getElementById('editRestSubtitle').value.trim();
+            categories[key].icon = document.getElementById('editRestIcon').value;
+            categories[key].class = document.getElementById('editRestColor').value;
+            fbSaveCategories();
+            closeEditRestModal();
             renderAdminRestaurants();
             fillCategoryDropdowns();
             renderSidebarNav();
-            renderRestaurantListOnly();
+            renderSections();
+            alert('✅ Restaurant update ho gaya!');
         }
 
-        async function addProduct() {
+        function deleteRestaurant(key) {
+            const cat = categories[key];
+            if (cat.products.length > 0) {
+                if (!confirm(`"${cat.name}" mein ${cat.products.length} items hain. Kya aap yeh aur iske tamam items delete karna chahte hain?`)) return;
+            } else {
+                if (!confirm(`"${cat.name}" delete karna chahte hain?`)) return;
+            }
+            delete categories[key];
+            fbSaveCategories();
+            renderAdminRestaurants();
+            fillCategoryDropdowns();
+            renderSidebarNav();
+            renderSections();
+        }
+
+        function addProduct() {
             const name = document.getElementById('adminProductName').value.trim();
             const price = parseInt(document.getElementById('adminProductPrice').value);
             const category = document.getElementById('adminProductCategory').value;
@@ -3203,43 +2894,42 @@
                 alert('Naam aur price zaroori hain!');
                 return;
             }
-            
-            const productId = Date.now().toString();
-            const data = { name, price, emoji };
-            if (variation) data.variation = variation;
-            
-            const success = await saveProduct(category, productId, data);
-            if (success) {
-                document.getElementById('adminProductName').value = '';
-                document.getElementById('adminProductPrice').value = '';
-                document.getElementById('adminProductVariation').value = '';
-                document.getElementById('adminProductEmoji').value = '';
-                
-                // Update count
-                categoriesMeta[category].productCount = (categoriesMeta[category].productCount || 0) + 1;
-                await saveRestaurantMeta(category, { productCount: categoriesMeta[category].productCount });
-                
-                alert(`✅ "${name}" add ho gaya!`);
-            } else {
-                alert('Error adding product!');
+            if (!categories[category]) {
+                alert('Pehle restaurant select karein!');
+                return;
             }
+            
+            const allIds = Object.values(categories).flatMap(c => c.products.map(p => p.id));
+            const newId = allIds.length > 0 ? Math.max(...allIds) + 1 : 1;
+            
+            const newProduct = { id: newId, name, price, emoji };
+            if (variation) newProduct.variation = variation;
+            
+            categories[category].products.push(newProduct);
+            fbSaveCategories();
+            
+            document.getElementById('adminProductName').value = '';
+            document.getElementById('adminProductPrice').value = '';
+            document.getElementById('adminProductVariation').value = '';
+            document.getElementById('adminProductEmoji').value = '';
+            
+            renderSections();
+            alert(`✅ "${name}" add ho gaya "${categories[category].name}" mein!`);
         }
 
-        async function openEditModal(categoryKey, productId) {
-            const products = await loadRestaurantProducts(categoryKey);
-            const product = products.find(p => p.id == productId);
-            if (!product) return;
-            
+        function openEditModal(categoryKey, productId) {
+            const product = categories[categoryKey].products.find(p => p.id === productId);
             editingProduct = { categoryKey, productId };
             
             document.getElementById('editProductId').value = productId;
             document.getElementById('editProductCategory').value = categoryKey;
+            // Fill category select and set current value
             fillCategoryDropdowns();
             document.getElementById('editProductCategorySelect').value = categoryKey;
             document.getElementById('editProductName').value = product.name;
             document.getElementById('editProductPrice').value = product.price;
             document.getElementById('editProductVariation').value = product.variation || '';
-            document.getElementById('editProductEmoji').value = product.emoji || '📦';
+            document.getElementById('editProductEmoji').value = product.emoji;
             
             document.getElementById('editOverlay').classList.add('active');
             document.getElementById('editModal').classList.add('active');
@@ -3251,72 +2941,70 @@
             editingProduct = null;
         }
 
-        async function saveEdit() {
+        function saveEdit() {
             if (!editingProduct) return;
             
-            const oldCategory = document.getElementById('editProductCategory').value;
-            const newCategory = document.getElementById('editProductCategorySelect').value;
-            const productId = document.getElementById('editProductId').value;
+            const oldCategoryKey = document.getElementById('editProductCategory').value;
+            const newCategoryKey = document.getElementById('editProductCategorySelect').value;
+            const productId = parseInt(document.getElementById('editProductId').value);
             
-            const data = {
-                name: document.getElementById('editProductName').value.trim(),
-                price: parseInt(document.getElementById('editProductPrice').value),
-                variation: document.getElementById('editProductVariation').value.trim(),
-                emoji: document.getElementById('editProductEmoji').value.trim() || '📦'
-            };
+            // Find product in old category
+            const product = categories[oldCategoryKey].products.find(p => p.id === productId);
             
-            // If category changed, delete from old and add to new
-            if (newCategory !== oldCategory) {
-                await deleteProductFirebase(oldCategory, productId);
-                await saveProduct(newCategory, productId, data);
-                
-                // Update counts
-                categoriesMeta[oldCategory].productCount = Math.max(0, (categoriesMeta[oldCategory].productCount || 1) - 1);
-                categoriesMeta[newCategory].productCount = (categoriesMeta[newCategory].productCount || 0) + 1;
-                await saveRestaurantMeta(oldCategory, { productCount: categoriesMeta[oldCategory].productCount });
-                await saveRestaurantMeta(newCategory, { productCount: categoriesMeta[newCategory].productCount });
-            } else {
-                await saveProduct(oldCategory, productId, data);
+            product.name = document.getElementById('editProductName').value.trim();
+            product.price = parseInt(document.getElementById('editProductPrice').value);
+            product.variation = document.getElementById('editProductVariation').value.trim();
+            product.emoji = document.getElementById('editProductEmoji').value.trim() || product.emoji;
+            
+            // If category changed, move the product
+            if (newCategoryKey !== oldCategoryKey) {
+                categories[oldCategoryKey].products = categories[oldCategoryKey].products.filter(p => p.id !== productId);
+                categories[newCategoryKey].products.push(product);
             }
+            
+            fbSaveCategories();
             
             closeEditModal();
             renderAdminProducts();
+            renderSections();
+            
             alert('✅ Product update ho gaya!');
         }
 
-        async function deleteProduct(categoryKey, productId) {
-            if (!confirm('Are you sure you want to delete this product?')) return;
-            
-            const success = await deleteProductFirebase(categoryKey, productId);
-            if (success) {
-                // Update count
-                categoriesMeta[categoryKey].productCount = Math.max(0, (categoriesMeta[categoryKey].productCount || 1) - 1);
-                await saveRestaurantMeta(categoryKey, { productCount: categoriesMeta[categoryKey].productCount });
-                
+        function deleteProduct(categoryKey, productId) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                categories[categoryKey].products = categories[categoryKey].products.filter(p => p.id !== productId);
+                fbSaveCategories();
                 renderAdminProducts();
+                renderSections();
             }
         }
 
         function resetData() {
             if (confirm('This will reset ALL data to default. Are you sure?')) {
-                localStorage.removeItem('dastakCategories');
-                localStorage.removeItem('dastakCategoriesMeta');
-                localStorage.removeItem('dastakProductCache');
-                restaurantCache = {};
-                loadedRestaurants.clear();
-                categoriesMeta = {};
-                alert('Data reset! Please refresh the page.');
-                location.reload();
+                categories = JSON.parse(JSON.stringify(defaultData));
+                window.categories = categories;
+                fbSaveCategories();
+                renderSections();
+                renderSidebarNav();
+                renderAdminProducts();
+                alert('Data reset to default successfully!');
             }
         }
 
+        // Expose functions for Firebase real-time listener
+        window.renderSections        = function() { renderSections(); };
+        window.renderSidebarNav      = function() { renderSidebarNav(); };
+        window.fillCategoryDropdowns = function() { fillCategoryDropdowns(); };
+
+        // =========== LOGOUT ===========
         function handleLogout() {
             if (confirm('Kya aap waqai logout/exit karna chahte hain?')) {
                 location.reload();
             }
         }
 
-        // Notifications
+        // =========== NOTIFICATIONS ===========
         function requestNotificationPermission() {
             if ('Notification' in window && Notification.permission === 'default') {
                 Notification.requestPermission();
@@ -3327,34 +3015,15 @@
             document.getElementById('notifOverlay').classList.add('active');
         }
 
-        async function sendAdminNotif() {
+        function sendAdminNotif() {
             const title = document.getElementById('adminNotifTitle').value.trim() || '🔔 Dastak Delivery';
             const message = document.getElementById('adminNotifMessage').value.trim();
             if (!message) { alert('Pehle message likhein!'); return; }
-            
-            // Save to Firestore for cross-device sync (optional, uses 1 write)
-            if (firebaseInitialized) {
-                try {
-                    await db.collection('notifications').add({
-                        title,
-                        message,
-                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                        sentBy: 'admin'
-                    });
-                } catch (e) {
-                    console.log('Notification saved locally only');
-                }
-            }
-            
-            // Local broadcast
-            const notifData = { title, message, time: Date.now() };
-            localStorage.setItem('dastakNotification', JSON.stringify(notifData));
+            fbSendNotification(title, message);
             showNotifBanner(title, message);
-            
             if ('Notification' in window && Notification.permission === 'granted') {
                 new Notification(title, { body: message });
             }
-            
             document.getElementById('adminNotifTitle').value = '';
             document.getElementById('adminNotifMessage').value = '';
             alert('✅ Notification send ho gayi!');
@@ -3368,15 +3037,15 @@
             const title = document.getElementById('notifTitle').value.trim() || '🔔 Dastak Delivery';
             const message = document.getElementById('notifMessage').value.trim();
             if (!message) { alert('Pehle message likhein!'); return; }
-
-            const notifData = { title, message, time: Date.now() };
-            localStorage.setItem('dastakNotification', JSON.stringify(notifData));
+            // Firebase se notification bhejo — real-time listener sabko dikhayega
+            fbSendNotification(title, message);
             showNotifBanner(title, message);
-
             if ('Notification' in window && Notification.permission === 'granted') {
-                new Notification(title, { body: message });
+                new Notification(title, {
+                    body: message,
+                    icon: 'https://cdn-icons-png.flaticon.com/512/2553/2553642.png'
+                });
             }
-
             document.getElementById('notifTitle').value = '';
             document.getElementById('notifMessage').value = '';
             closeNotifModal();
@@ -3390,37 +3059,12 @@
             banner.classList.add('show');
             setTimeout(() => banner.classList.remove('show'), 6000);
         }
+        window.showNotifBanner = showNotifBanner;
 
         function closeNotifBanner() {
             document.getElementById('notifBanner').classList.remove('show');
         }
-
-        // Listen for notifications from other tabs
-        window.addEventListener('storage', function(e) {
-            if (e.key === 'dastakNotification' && e.newValue) {
-                const notif = JSON.parse(e.newValue);
-                if (!isAdminLoggedIn) {
-                    showNotifBanner(notif.title, notif.message);
-                    if ('Notification' in window && Notification.permission === 'granted') {
-                        new Notification(notif.title, { body: notif.message });
-                    }
-                }
-            }
-        });
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            // Show loading screen initially
-            showLoading();
-            
-            // Simulate initial loading
-            setTimeout(() => {
-                updateLoadingProgress(100);
-                setTimeout(() => {
-                    hideLoading();
-                }, 300);
-            }, 1500);
-        });
+        // NOTE: Real-time notification listener is in the Firebase module above
     </script>
 
 </body>
