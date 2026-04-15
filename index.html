@@ -546,6 +546,7 @@
         .pkrestaurant { background: linear-gradient(135deg, #be123c, #9f1239); }
         .almurtaza { background: linear-gradient(135deg, #15803d, #166534); }
         .nayabazar { background: linear-gradient(135deg, #ff7f01, #e65100); }
+        .sabzibazaar { background: linear-gradient(135deg, #2e7d32, #1b5e20); }
 
         .products-container {
             padding: 1.25rem;
@@ -1652,6 +1653,7 @@
                                 <option value="special">🩷 Pink (Special style)</option>
                                 <option value="deals">🟡 Gold (Deals style)</option>
                                 <option value="nayabazar">🟠 Naya Bazar Orange</option>
+                                <option value="sabzibazaar">🥬 Sabzi Bazaar Green</option>
                             </select>
                         </div>
                     </div>
@@ -2697,6 +2699,105 @@
                     { id: 849, name: "Delite Air Freshener 300ml", price: 227, emoji: "🌸", variation: "300ml" },
                     { id: 850, name: "Harpic Bathroom Cleaner 225ml", price: 288, emoji: "🧹", variation: "225ml" },
                     { id: 851, name: "Commander Coconut Soap 1Kg", price: 186, emoji: "🧼", variation: "1Kg" }
+                ]
+            },
+
+            // ══════════════════════════════════
+            //  SABZI BAZAAR - Fresh Vegetables & Seafood
+            // ══════════════════════════════════
+            sabzibazaar: {
+                name: "Sabzi Bazaar - Fresh Sabzi",
+                icon: "fa-leaf",
+                class: "sabzibazaar",
+                subtitle: "Fresh Vegetables & Seafood - sabzibazaar.pk",
+                products: [
+                    // ── Fresh Vegetables (تازہ سبزیاں) ──
+                    { id: 900, name: "Mattar (مٹر)", price: 81, emoji: "🟢", variation: "1 Kg" },
+                    { id: 901, name: "Achar Mirch", price: 34, emoji: "🌶️", variation: "1 Kg" },
+                    { id: 902, name: "Karri Patta (کڑی پتے)", price: 27, emoji: "🍃", variation: "Bunch" },
+                    { id: 903, name: "Gol Begun", price: 34, emoji: "🟣", variation: "1 Kg" },
+                    { id: 904, name: "Gajar (گاجر)", price: 108, emoji: "🥕", variation: "1 Kg" },
+                    { id: 905, name: "Gunwar Phalli (گوار پھلی)", price: 203, emoji: "🫘", variation: "1 Kg" },
+                    { id: 906, name: "Tamatar (ٹماٹر)", price: 54, emoji: "🍅", variation: "1 Kg" },
+                    { id: 907, name: "Arvi (آرویی)", price: 162, emoji: "🥔", variation: "1 Kg" },
+                    { id: 908, name: "White Aalu", price: 61, emoji: "🥔", variation: "1 Kg" },
+                    { id: 909, name: "Toori (توریٔ)", price: 189, emoji: "🥒", variation: "1 Kg" },
+                    { id: 910, name: "Shimla Mirch (شملہ مرچ)", price: 27, emoji: "🫑", variation: "1 Kg" },
+                    { id: 911, name: "Piyaaz (پیاز)", price: 54, emoji: "🧅", variation: "1 Kg" },
+                    { id: 912, name: "Bhindi (بھنڈی)", price: 108, emoji: "🟢", variation: "1 Kg" },
+                    { id: 913, name: "Podina (پودینہ)", price: 16, emoji: "🌿", variation: "Bunch" },
+                    { id: 914, name: "Teenday (ٹینڈے)", price: 68, emoji: "🟢", variation: "1 Kg" },
+                    { id: 915, name: "Lemons (لیموں)", price: 236, emoji: "🍋", variation: "1 Kg" },
+                    { id: 916, name: "Looki (لوکی)", price: 108, emoji: "🟢", variation: "1 Kg" },
+                    { id: 917, name: "Hari Mirch (ہری مرچ)", price: 61, emoji: "🌶️", variation: "1 Kg" },
+                    { id: 918, name: "Adrak (ادرک)", price: 149, emoji: "🫚", variation: "1 Kg" },
+                    { id: 919, name: "Lassan (لہسن)", price: 152, emoji: "🧄", variation: "1 Kg" },
+                    { id: 920, name: "Kheera (کھیرا)", price: 41, emoji: "🥒", variation: "1 Kg" },
+                    { id: 921, name: "Hara Dhaniya (ہرا دھنیا)", price: 16, emoji: "🌿", variation: "Bunch" },
+                    { id: 922, name: "Band Gobi (پتہ گوبھی)", price: 54, emoji: "🥬", variation: "1 Kg" },
+                    { id: 923, name: "Karela (کریلا)", price: 81, emoji: "🟢", variation: "1 Kg" },
+                    { id: 924, name: "Paalak (پالک)", price: 108, emoji: "🥬", variation: "Bunch" },
+                    { id: 925, name: "Lamba Begun (لمبا بیگن)", price: 34, emoji: "🟣", variation: "1 Kg" },
+                    { id: 926, name: "Hari Piyaaz (ہری پیاز)", price: 41, emoji: "🧅", variation: "Bunch" },
+                    { id: 927, name: "Pakoda Mirch (بڑی مرچ)", price: 34, emoji: "🌶️", variation: "1 Kg" },
+                    // ── Fresh Seafood (تازہ سمندری خوراک) ──
+                    { id: 930, name: "Surmai", price: 1700, emoji: "🐟", variation: "1 Kg" },
+                    { id: 931, name: "Heera Fish", price: 1400, emoji: "🐟", variation: "1 Kg" },
+                    { id: 932, name: "Gissar Fish", price: 1450, emoji: "🐟", variation: "1 Kg" },
+                    { id: 933, name: "Dhothar Fish", price: 1400, emoji: "🐟", variation: "1 Kg" },
+                    { id: 934, name: "Mahi Mahi Amloshk", price: 750, emoji: "🐟", variation: "1 Kg" },
+                    { id: 935, name: "Rahu Fish", price: 850, emoji: "🐟", variation: "1 Kg" },
+                    { id: 936, name: "Croker Golden Mushka", price: 1300, emoji: "🐟", variation: "1 Kg" },
+                    { id: 937, name: "Tuna Fish", price: 950, emoji: "🐟", variation: "1 Kg" },
+                    { id: 938, name: "Cobia Sangra", price: 1200, emoji: "🐟", variation: "1 Kg" },
+                    { id: 939, name: "Queen Fish Saram", price: 750, emoji: "🐟", variation: "1 Kg" },
+                    { id: 940, name: "White Paplet", price: 2500, emoji: "🐟", variation: "1 Kg" },
+                    { id: 941, name: "Irani Paplet", price: 1400, emoji: "🐟", variation: "1 Kg" },
+                    { id: 942, name: "Crimson Jobfish Khopra", price: 1250, emoji: "🐟", variation: "1 Kg" },
+                    { id: 943, name: "Lady Fish", price: 1400, emoji: "🐟", variation: "1 Kg" },
+                    { id: 944, name: "Cat Fish Khagga", price: 560, emoji: "🐟", variation: "1 Kg" },
+                    { id: 945, name: "Indian Mackerel Bangda", price: 600, emoji: "🐟", variation: "1 Kg" },
+                    { id: 946, name: "Halibut Hajam", price: 1100, emoji: "🐟", variation: "1 Kg" },
+                    { id: 947, name: "Terapon Ginghra", price: 650, emoji: "🐟", variation: "1 Kg" },
+                    { id: 948, name: "Tilapiya Daiya", price: 750, emoji: "🐟", variation: "1 Kg" },
+                    { id: 949, name: "Flathead (Kukkar)", price: 850, emoji: "🐟", variation: "1 Kg" },
+                    { id: 950, name: "Seabream Safaid Dandia", price: 650, emoji: "🐟", variation: "1 Kg" },
+                    { id: 951, name: "Red Cod (Daama)", price: 950, emoji: "🐟", variation: "1 Kg" },
+                    { id: 952, name: "Pompano (Sonaf Fish)", price: 825, emoji: "🐟", variation: "1 Kg" },
+                    { id: 953, name: "Bhetki (Dangri)", price: 1500, emoji: "🐟", variation: "1 Kg" },
+                    { id: 954, name: "Bridle Bream (Captain)", price: 875, emoji: "🐟", variation: "1 Kg" },
+                    { id: 955, name: "Black Kund Fish", price: 750, emoji: "🐟", variation: "1 Kg" },
+                    { id: 956, name: "Milk Fish (Sulemani)", price: 700, emoji: "🐟", variation: "1 Kg" },
+                    { id: 957, name: "Emperor (Mulla)", price: 950, emoji: "🐟", variation: "1 Kg" },
+                    { id: 958, name: "Black Pomfret (Kala Paplait)", price: 1350, emoji: "🐟", variation: "1 Kg" },
+                    { id: 959, name: "Parrot Fish (Hareed)", price: 950, emoji: "🐟", variation: "1 Kg" },
+                    { id: 960, name: "Bombay Duck (Bombil)", price: 650, emoji: "🐟", variation: "1 Kg" },
+                    { id: 961, name: "Seabas (Dangri)", price: 1600, emoji: "🐟", variation: "1 Kg" },
+                    { id: 962, name: "Mahi Mahi Boneless", price: 1500, emoji: "🐟", variation: "1 Kg" },
+                    // ── Prawns (جھینگے) ──
+                    { id: 970, name: "Medium Prawns", price: 1350, emoji: "🦐", variation: "1 Kg" },
+                    { id: 971, name: "Large Prawns", price: 1600, emoji: "🦐", variation: "1 Kg" },
+                    { id: 972, name: "Small Prawns", price: 970, emoji: "🦐", variation: "1 Kg" },
+                    { id: 973, name: "Flower Prawns", price: 1800, emoji: "🦐", variation: "1 Kg" },
+                    { id: 974, name: "Tiger Prawns (XL)", price: 4200, emoji: "🦐", variation: "1 Kg" },
+                    { id: 975, name: "Tiger Prawns (Large)", price: 3800, emoji: "🦐", variation: "1 Kg" },
+                    { id: 976, name: "Tiger Prawns (Medium)", price: 3500, emoji: "🦐", variation: "1 Kg" },
+                    { id: 977, name: "Tiger Prawns (Small)", price: 3300, emoji: "🦐", variation: "1 Kg" },
+                    { id: 978, name: "Tiger Prawns (Mini)", price: 2500, emoji: "🦐", variation: "1 Kg" },
+                    // ── Dry Fruits & Honey (خشک میوہ جات اور شہد) ──
+                    { id: 980, name: "Almond (Badam)", price: 1800, emoji: "🥜", variation: "1 Kg" },
+                    { id: 981, name: "Wall Nut (Akhrot)", price: 1050, emoji: "🥜", variation: "1 Kg" },
+                    { id: 982, name: "Kajoo (Cashew Nut)", price: 2200, emoji: "🥜", variation: "1 Kg" },
+                    { id: 983, name: "Kishmish", price: 800, emoji: "🥜", variation: "1 Kg" },
+                    { id: 984, name: "Dates (Irani)", price: 600, emoji: "🫘", variation: "1 Kg" },
+                    { id: 985, name: "Pista (Pistachio)", price: 1100, emoji: "🥜", variation: "1 Kg" },
+                    { id: 986, name: "Walnuts (Akhrot Giri)", price: 1600, emoji: "🥜", variation: "1 Kg" },
+                    { id: 987, name: "Black Kishmish", price: 1000, emoji: "🥜", variation: "1 Kg" },
+                    { id: 988, name: "Natural Mix Flower Honey", price: 1200, emoji: "🍯", variation: "1 Kg" },
+                    { id: 989, name: "Natural Berry Honey (Premium)", price: 2500, emoji: "🍯", variation: "1 Kg" },
+                    { id: 990, name: "Natural Berry Honey (Regular)", price: 2000, emoji: "🍯", variation: "1 Kg" },
+                    { id: 991, name: "Natural Berry Honey (Small)", price: 1300, emoji: "🍯", variation: "500g" },
+                    { id: 992, name: "Shilajit", price: 1350, emoji: "🏔️", variation: "Pack" }
                 ]
             }
         };
