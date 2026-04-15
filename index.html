@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ur">
 <head>
@@ -546,6 +545,7 @@
         .cheezybite { background: linear-gradient(135deg, #0891b2, #0e7490); }
         .pkrestaurant { background: linear-gradient(135deg, #be123c, #9f1239); }
         .almurtaza { background: linear-gradient(135deg, #15803d, #166534); }
+        .nayabazar { background: linear-gradient(135deg, #ff7f01, #e65100); }
 
         .products-container {
             padding: 1.25rem;
@@ -1454,7 +1454,6 @@
             }
         });
     </script>
-<base target="_blank">
 </head>
 <body>
 
@@ -1639,6 +1638,7 @@
                                 <option value="fa-leaf">🌿 Leaf</option>
                                 <option value="fa-ice-cream">🍦 Ice Cream</option>
                                 <option value="fa-drumstick-bite">🍗 Chicken</option>
+                                <option value="fa-shopping-basket">🛒 Grocery</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -1651,6 +1651,7 @@
                                 <option value="friend">🟣 Purple (Friend style)</option>
                                 <option value="special">🩷 Pink (Special style)</option>
                                 <option value="deals">🟡 Gold (Deals style)</option>
+                                <option value="nayabazar">🟠 Naya Bazar Orange</option>
                             </select>
                         </div>
                     </div>
@@ -2522,6 +2523,181 @@
                     { id: 670, name: "Al-Murtaza Desi Chicken Bt Karahi", price: 1350, emoji: "🍗", variation: "Half Kg" },
                     { id: 671, name: "Al-Murtaza Desi Chicken Bt Karahi", price: 2700, emoji: "🍗", variation: "1 Kg" }
                 ]
+            },
+
+            // ══════════════════════════════════
+            //  NAYA BAZAR - Grocery Delivery
+            // ══════════════════════════════════
+            nayabazar: {
+                name: "Naya Bazar - Grocery",
+                icon: "fa-shopping-basket",
+                class: "nayabazar",
+                subtitle: "Grocery Delivery - nayabazar.pk",
+                products: [
+                    // Masala Jaat
+                    { id: 700, name: "National Biryani Masala 39g", price: 138, emoji: "🌶️", variation: "Pack" },
+                    { id: 701, name: "National Bombay Biryani Masala 55g", price: 141, emoji: "🌶️", variation: "Pack" },
+                    { id: 702, name: "National Qorma Masala 43g", price: 141, emoji: "🌶️", variation: "Pack" },
+                    { id: 703, name: "National Haleem Masala 43g", price: 141, emoji: "🌶️", variation: "Pack" },
+                    { id: 704, name: "National Karahi Masala 47g", price: 141, emoji: "🌶️", variation: "Pack" },
+                    { id: 705, name: "National Achaar Ghosht Masala 43g", price: 141, emoji: "🌶️", variation: "Pack" },
+                    { id: 706, name: "National Chicken Tikka Masala 40g", price: 126, emoji: "🌶️", variation: "Pack" },
+                    { id: 707, name: "National Tikka Boti Masala 44g", price: 141, emoji: "🌶️", variation: "Pack" },
+                    { id: 708, name: "National Nihari Masala 56g", price: 141, emoji: "🌶️", variation: "Pack" },
+                    { id: 709, name: "National Kofta Masala 43g", price: 141, emoji: "🌶️", variation: "Pack" },
+                    { id: 710, name: "National Broast Masala 97g", price: 138, emoji: "🍗", variation: "Pack" },
+                    { id: 711, name: "National Fish Masala 40g", price: 138, emoji: "🐟", variation: "Pack" },
+                    { id: 712, name: "National Chat Masala 45g", price: 114, emoji: "🌶️", variation: "Pack" },
+                    { id: 713, name: "National Kasuri Methi 25g", price: 84, emoji: "🌿", variation: "Pack" },
+                    { id: 714, name: "National Haldi Powder 50g", price: 136, emoji: "🟡", variation: "Pack" },
+                    { id: 715, name: "National Kali Mirch Powder 25g", price: 167, emoji: "⚫", variation: "Pack" },
+                    { id: 716, name: "National Garam Masala 25g", price: 154, emoji: "🌶️", variation: "Pack" },
+                    { id: 717, name: "National Adrak Powder 50g", price: 238, emoji: "🫚", variation: "Pack" },
+                    { id: 718, name: "National Lasan Powder 50g", price: 238, emoji: "🧄", variation: "Pack" },
+                    { id: 719, name: "National Red Chilli Powder 100g", price: 159, emoji: "🔴", variation: "Pack" },
+                    { id: 720, name: "Shan Biryani Masala 45g", price: 143, emoji: "🌶️", variation: "Pack" },
+                    { id: 721, name: "Shan Qorma Masala 50g", price: 137, emoji: "🌶️", variation: "Pack" },
+                    { id: 722, name: "Shan Bombay Biryani Masala 60g", price: 143, emoji: "🌶️", variation: "Pack" },
+                    { id: 723, name: "Shan Pilau Biryani Masala 40g", price: 143, emoji: "🌶️", variation: "Pack" },
+                    { id: 724, name: "Shan Daal Masala 100g", price: 144, emoji: "🌶️", variation: "Pack" },
+                    { id: 725, name: "Shan Karahi Masala 50g", price: 143, emoji: "🌶️", variation: "Pack" },
+                    { id: 726, name: "Shan Achar Gosht Masala 50g", price: 143, emoji: "🌶️", variation: "Pack" },
+                    { id: 727, name: "Shan Chicken Tikka Masala 45g", price: 143, emoji: "🌶️", variation: "Pack" },
+                    { id: 728, name: "Shan Chapli Kabab Masala 100g", price: 143, emoji: "🌶️", variation: "Pack" },
+                    { id: 729, name: "Shan Fried Fish Masala 50g", price: 143, emoji: "🐟", variation: "Pack" },
+                    { id: 730, name: "Italia Garlic Paste 330g", price: 378, emoji: "🧄", variation: "Jar" },
+                    { id: 731, name: "Italia Ginger Paste 330g", price: 387, emoji: "🫚", variation: "Jar" },
+                    { id: 732, name: "Italia Chicken Powder 100g", price: 142, emoji: "🍗", variation: "Jar" },
+                    { id: 733, name: "Knorr Pulao Cube 18g", price: 72, emoji: "🧊", variation: "Cube" },
+                    { id: 734, name: "Knorr Chicken Cube 18g", price: 72, emoji: "🧊", variation: "Cube" },
+                    // Oil & Ghee
+                    { id: 735, name: "Dalda Banaspati Ghee 1 Kg", price: 591, emoji: "🫙", variation: "1 Kg" },
+                    { id: 736, name: "Manpasand Banaspati Ghee 900g", price: 503, emoji: "🫙", variation: "900g" },
+                    { id: 737, name: "Tullo Banaspati Ghee 1 Kg", price: 549, emoji: "🫙", variation: "1 Kg" },
+                    { id: 738, name: "Nemat Banaspati Ghee 1 Kg", price: 569, emoji: "🫙", variation: "1 Kg" },
+                    { id: 739, name: "Sultan Banaspati Ghee 1 Kg", price: 544, emoji: "🫙", variation: "1 Kg" },
+                    { id: 740, name: "Rabi Banaspati Ghee 1 Kg", price: 532, emoji: "🫙", variation: "1 Kg" },
+                    { id: 741, name: "Rehmat Banaspati Ghee 1 Kg", price: 496, emoji: "🫙", variation: "1 Kg" },
+                    { id: 742, name: "Khyber Ghee 1 Kg", price: 454, emoji: "🫙", variation: "1 Kg" },
+                    { id: 743, name: "Dalda Cooking Oil 3 Ltr", price: 1844, emoji: "🧴", variation: "3 Ltr" },
+                    { id: 744, name: "Dalda Cooking Oil 4.5 Ltr", price: 2748, emoji: "🧴", variation: "4.5 Ltr" },
+                    { id: 745, name: "Dalda Cooking Oil 1 Ltr", price: 591, emoji: "🧴", variation: "1 Ltr" },
+                    { id: 746, name: "Dalda Canola Oil 1 Ltr", price: 588, emoji: "🧴", variation: "1 Ltr" },
+                    { id: 747, name: "Dalda Sunflower Oil 1 Ltr", price: 593, emoji: "🧴", variation: "1 Ltr" },
+                    { id: 748, name: "Tullo Cooking Oil 1 Ltr", price: 549, emoji: "🧴", variation: "1 Ltr" },
+                    { id: 749, name: "Nemat Cooking Oil 1 Ltr", price: 574, emoji: "🧴", variation: "1 Ltr" },
+                    { id: 750, name: "Sultan Cooking Oil 1 Ltr", price: 553, emoji: "🧴", variation: "1 Ltr" },
+                    { id: 751, name: "Sultan Sunflower Oil 1 Ltr", price: 554, emoji: "🧴", variation: "1 Ltr" },
+                    { id: 752, name: "Rabi Cooking Oil 1 Ltr", price: 542, emoji: "🧴", variation: "1 Ltr" },
+                    // Tea & Coffee
+                    { id: 753, name: "Tapal Danedar Tea 900g", price: 1738, emoji: "🍵", variation: "900g" },
+                    { id: 754, name: "Tapal Danedar Tea 430g", price: 864, emoji: "🍵", variation: "430g" },
+                    { id: 755, name: "Tapal Danedar Tea 170g", price: 362, emoji: "🍵", variation: "170g" },
+                    { id: 756, name: "Tapal Danedar Tea 85g", price: 184, emoji: "🍵", variation: "85g" },
+                    { id: 757, name: "Lipton Yellow Label Tea 900g", price: 1957, emoji: "☕", variation: "900g" },
+                    { id: 758, name: "Lipton Yellow Label Tea 430g", price: 1037, emoji: "☕", variation: "430g" },
+                    { id: 759, name: "Lipton Yellow Label Tea 140g", price: 384, emoji: "☕", variation: "140g" },
+                    { id: 760, name: "Vital Tea 900g", price: 1743, emoji: "🍵", variation: "900g" },
+                    { id: 761, name: "Vital Tea 430g", price: 874, emoji: "🍵", variation: "430g" },
+                    { id: 762, name: "Vital Tea 170g", price: 369, emoji: "🍵", variation: "170g" },
+                    { id: 763, name: "Supreme Tea 430g", price: 836, emoji: "🍵", variation: "430g" },
+                    { id: 764, name: "Supreme Tea 900g", price: 1667, emoji: "🍵", variation: "900g" },
+                    { id: 765, name: "Tapal Family Mixture Tea 430g", price: 872, emoji: "🍵", variation: "430g" },
+                    { id: 766, name: "Nescafe Classic Coffee 100g", price: 1964, emoji: "☕", variation: "Jar" },
+                    { id: 767, name: "Nescafe Classic Coffee 50g", price: 999, emoji: "☕", variation: "Jar" },
+                    { id: 768, name: "Nescafe 3in1 Sachet 20g", price: 74, emoji: "☕", variation: "Sachet" },
+                    { id: 769, name: "Nestle Everyday Milk 350g", price: 726, emoji: "🥛", variation: "350g" },
+                    { id: 770, name: "Nestle Everyday Milk 230g", price: 487, emoji: "🥛", variation: "230g" },
+                    { id: 771, name: "Milkana Condensed Milk 390g", price: 347, emoji: "🥛", variation: "390g" },
+                    { id: 772, name: "Milkana Condensed Milk 1 Kg", price: 742, emoji: "🥛", variation: "1 Kg" },
+                    // Sharbat & Squash
+                    { id: 773, name: "Qarshi Jam-e-Shirin 1500ml", price: 886, emoji: "🧃", variation: "1500ml" },
+                    { id: 774, name: "Qarshi Jam-e-Shirin 800ml", price: 496, emoji: "🧃", variation: "800ml" },
+                    { id: 775, name: "Qarshi Jam-e-Shirin 500ml", price: 327, emoji: "🧃", variation: "500ml" },
+                    { id: 776, name: "Rooh Afza 800ml", price: 492, emoji: "🌹", variation: "800ml" },
+                    { id: 777, name: "Orange Tang Pouch 125g", price: 97, emoji: "🍊", variation: "125g" },
+                    { id: 778, name: "Mango Tang Pouch 125g", price: 97, emoji: "🥭", variation: "125g" },
+                    { id: 779, name: "Pine Apple Tang Pouch 125g", price: 97, emoji: "🍍", variation: "125g" },
+                    { id: 780, name: "Orange Tang Pouch 375g", price: 326, emoji: "🍊", variation: "375g" },
+                    { id: 781, name: "Mango Tang Pouch 375g", price: 339, emoji: "🥭", variation: "375g" },
+                    { id: 782, name: "Orange Tang Jar 750g", price: 799, emoji: "🍊", variation: "750g" },
+                    { id: 783, name: "Mango Tang Jar 750g", price: 799, emoji: "🥭", variation: "750g" },
+                    { id: 784, name: "Qarshi Johar Joshanda", price: 23, emoji: "🍵", variation: "Sachet" },
+                    { id: 785, name: "Hashmi Ispaghol Chilka 25g", price: 208, emoji: "🌿", variation: "25g" },
+                    { id: 786, name: "Eno Fruit Salt Sachet 5g", price: 19, emoji: "💧", variation: "Sachet" },
+                    // Dry Fruits
+                    { id: 787, name: "Ajwa Khajoor 100g", price: 278, emoji: "🫘", variation: "100g" },
+                    { id: 788, name: "Khajoor Irani 250g", price: 146, emoji: "🫘", variation: "250g" },
+                    { id: 789, name: "Khajoor Mazafati Premium 500g", price: 543, emoji: "🫘", variation: "500g" },
+                    { id: 790, name: "Badam Giri 250g", price: 726, emoji: "🥜", variation: "250g" },
+                    { id: 791, name: "Pista With Shell 100g", price: 388, emoji: "🥜", variation: "100g" },
+                    { id: 792, name: "Kaju (Cashew Nut) 100g", price: 389, emoji: "🥜", variation: "100g" },
+                    { id: 793, name: "Akhrot Giri (Walnut) 100g", price: 339, emoji: "🥜", variation: "100g" },
+                    { id: 794, name: "Akhrot Sabat 250g", price: 246, emoji: "🥜", variation: "250g" },
+                    { id: 795, name: "Badam Sabat 250g", price: 249, emoji: "🥜", variation: "250g" },
+                    { id: 796, name: "Chuhare (Dried Dates) 100g", price: 59, emoji: "🫘", variation: "100g" },
+                    { id: 797, name: "Chia Seeds 100g", price: 187, emoji: "🌱", variation: "100g" },
+                    { id: 798, name: "Khopra Giri (Coconut) 100g", price: 158, emoji: "🥥", variation: "100g" },
+                    // Achaar
+                    { id: 799, name: "National Mango Achar 370g", price: 314, emoji: "🫙", variation: "370g" },
+                    { id: 800, name: "National Mixed Achar 370g", price: 316, emoji: "🫙", variation: "370g" },
+                    { id: 801, name: "National Mixed Achar 900g", price: 628, emoji: "🫙", variation: "900g" },
+                    { id: 802, name: "National Mix Achar Pouch", price: 98, emoji: "🫙", variation: "Pouch" },
+                    { id: 803, name: "National Grushed Achar 390g", price: 418, emoji: "🫙", variation: "390g" },
+                    { id: 804, name: "National Grushed Achar 750g", price: 667, emoji: "🫙", variation: "750g" },
+                    { id: 805, name: "Shangrila Mixed Pickle 325g", price: 289, emoji: "🫙", variation: "325g" },
+                    { id: 806, name: "Shangrila Mixed Pickle 800g", price: 586, emoji: "🫙", variation: "800g" },
+                    // Breakfast Spreads & Jam
+                    { id: 807, name: "Choco Bliss Milky Cocoa Spread 180g", price: 479, emoji: "🍫", variation: "180g" },
+                    { id: 808, name: "Choco Bliss Milky Cocoa Spread 350g", price: 764, emoji: "🍫", variation: "350g" },
+                    { id: 809, name: "Choco Bliss Hazelnut Spread 180g", price: 508, emoji: "🍫", variation: "180g" },
+                    { id: 810, name: "Choco Bliss Hazelnut Spread 350g", price: 893, emoji: "🍫", variation: "350g" },
+                    { id: 811, name: "Choco Bliss Peanut Spread 180g", price: 472, emoji: "🥜", variation: "180g" },
+                    { id: 812, name: "Young's Peanut Butter 340g Creamy", price: 786, emoji: "🥜", variation: "340g" },
+                    { id: 813, name: "Young's Peanut Butter 320g Crunchy", price: 814, emoji: "🥜", variation: "320g" },
+                    { id: 814, name: "National Mango Jam 400g", price: 318, emoji: "🍯", variation: "400g" },
+                    { id: 815, name: "National Mix Fruit Jam 420g", price: 318, emoji: "🍯", variation: "420g" },
+                    { id: 816, name: "National Strawberry Jam 420g", price: 486, emoji: "🍓", variation: "420g" },
+                    { id: 817, name: "National Apple Jam 420g", price: 318, emoji: "🍯", variation: "420g" },
+                    { id: 818, name: "National Mango Jam 200g", price: 219, emoji: "🍯", variation: "200g" },
+                    { id: 819, name: "National Apple Jam 200g", price: 217, emoji: "🍯", variation: "200g" },
+                    { id: 820, name: "Hashmi Honey 75g", price: 152, emoji: "🍯", variation: "75g" },
+                    { id: 821, name: "Hashmi Honey 300g", price: 478, emoji: "🍯", variation: "300g" },
+                    { id: 822, name: "Italia Natural Honey 250g", price: 486, emoji: "🍯", variation: "250g" },
+                    // Snacks & Beverages
+                    { id: 823, name: "Lays French Cheese 30g", price: 28, emoji: "🥔", variation: "Small" },
+                    { id: 824, name: "Lays Yogurt & Herb 100g", price: 92, emoji: "🥔", variation: "Large" },
+                    { id: 825, name: "Lays Classic 50g", price: 47, emoji: "🥔", variation: "Medium" },
+                    { id: 826, name: "Wavy Lays BBQ 30g", price: 28, emoji: "🥔", variation: "Small" },
+                    { id: 827, name: "Kurkure Chatpati Dahi 30g", price: 29, emoji: "🍿", variation: "Small" },
+                    { id: 828, name: "Slanty Small Pack", price: 28, emoji: "🍿", variation: "Small" },
+                    { id: 829, name: "Prince Biscuits Snack Pack", price: 48, emoji: "🍪", variation: "Pack" },
+                    { id: 830, name: "Choco Lava Biscuits", price: 38, emoji: "🍪", variation: "Pack" },
+                    { id: 831, name: "Giggly Pizzo Jelly 50g", price: 48, emoji: "🍬", variation: "50g" },
+                    { id: 832, name: "Smile Strawberry Donut Cake", price: 47, emoji: "🍩", variation: "Pack" },
+                    { id: 833, name: "Peek Freans Gluco Teddy Cake", price: 38, emoji: "🍪", variation: "Pack" },
+                    { id: 834, name: "Butter Love Biscuits Box", price: 94, emoji: "🍪", variation: "Box" },
+                    // Skin Care & Body
+                    { id: 835, name: "Himalaya Neem Face Wash 50ml", price: 292, emoji: "🧴", variation: "50ml" },
+                    { id: 836, name: "Faiza Beauty Cream", price: 237, emoji: "🧴", variation: "Economy" },
+                    { id: 837, name: "Pond's Moisturising Lotion 200ml", price: 578, emoji: "🧴", variation: "200ml" },
+                    { id: 838, name: "Golden Pearl Face Wash 150ml", price: 388, emoji: "🧴", variation: "150ml" },
+                    { id: 839, name: "YC Whitening Vitamin C Face Wash", price: 397, emoji: "🧴", variation: "100ml" },
+                    { id: 840, name: "Garnier Vitamin C Face Wash 100ml", price: 544, emoji: "🧴", variation: "100ml" },
+                    { id: 841, name: "Pond's Bright Beauty Cream 50g", price: 448, emoji: "🧴", variation: "50g" },
+                    { id: 842, name: "Glow & Lovely Face Wash 50g", price: 194, emoji: "🧴", variation: "50g" },
+                    // Body Spray
+                    { id: 843, name: "Creation Lamis Body Spray 200ml", price: 527, emoji: "💨", variation: "200ml" },
+                    { id: 844, name: "Markhor Code Body Spray 120ml", price: 593, emoji: "💨", variation: "120ml" },
+                    { id: 845, name: "Havoc Deodorant Spray 200ml", price: 894, emoji: "💨", variation: "200ml" },
+                    { id: 846, name: "Fogg Marco Body Spray 120ml", price: 748, emoji: "💨", variation: "120ml" },
+                    // Household
+                    { id: 847, name: "Rose Petal Tissue 275 Pulls", price: 436, emoji: "🧻", variation: "275 Pulls" },
+                    { id: 848, name: "Rose Petal Tissue Box 70 Pulls", price: 139, emoji: "🧻", variation: "70 Pulls" },
+                    { id: 849, name: "Delite Air Freshener 300ml", price: 227, emoji: "🌸", variation: "300ml" },
+                    { id: 850, name: "Harpic Bathroom Cleaner 225ml", price: 288, emoji: "🧹", variation: "225ml" },
+                    { id: 851, name: "Commander Coconut Soap 1Kg", price: 186, emoji: "🧼", variation: "1Kg" }
+                ]
             }
         };
 
@@ -2581,19 +2757,7 @@
             document.getElementById('logoutLabel').textContent = 'Exit';
             requestNotificationPermission();
 
-            // STEP 1: Pehle localStorage se check karo (backup)
-            const localData = localStorage.getItem('dastak_categories');
-            if (localData && !_fbLoaded) {
-                try {
-                    categories = JSON.parse(localData);
-                    console.log('✅ Loaded from localStorage');
-                    _fbLoaded = true;
-                } catch(e) {
-                    console.warn('localStorage error:', e);
-                }
-            }
-
-            // STEP 2: Agar Firebase se data abhi nahi aaya toh wait karo (max 4s)
+            // Agar Firebase se data abhi nahi aaya toh wait karo (max 4s)
             if (!_fbLoaded && window._fbReady) {
                 document.getElementById('mainContainer').innerHTML =
                     `<div style="text-align:center;padding:4rem 1rem;color:#64748b;">
@@ -2606,14 +2770,6 @@
                     w++;
                 }
             }
-
-            // STEP 3: Agar abhi bhi nahi loaded, default use karo
-            if (!_fbLoaded) {
-                categories = JSON.parse(JSON.stringify(defaultData));
-                _fbLoaded = true;
-                console.log('✅ Loaded from defaultData');
-            }
-
             renderSidebarNav();
             renderSections();
         }
@@ -3046,9 +3202,7 @@
             });
             
             Object.keys(grouped).forEach(cat => {
-                // Safety check - agar category missing hai toh bhi kaam kare
-                const catName = categories[cat] ? categories[cat].name : cat.toUpperCase();
-                message += `*${catName}:*%0A`;
+                message += `*${categories[cat].name}:*%0A`;
                 grouped[cat].forEach(item => {
                     message += `• ${item.emoji} ${item.name}`;
                     if (item.variation) message += ` (${item.variation})`;
@@ -3384,13 +3538,9 @@
 
         function resetData() {
             if (confirm('This will reset ALL data to default. Are you sure?')) {
-                // Clear localStorage to avoid conflicts
-                localStorage.removeItem('dastak_categories');
-                // Force reload from defaultData completely
+                // Firebase reset below
                 categories = JSON.parse(JSON.stringify(defaultData));
-                // Save fresh to Firebase
                 saveToFirebase();
-                // Force re-render
                 renderSections();
                 renderSidebarNav();
                 renderAdminProducts();
