@@ -2933,7 +2933,17 @@
                 try {
                     const snap = await window._getDoc(window._doc(window._db, "dastak", "categories"));
                     if (snap.exists()) {
-                        categories = snap.data().data;
+                        const fbData = snap.data().data;
+                        // Merge: Firebase data + missing default categories (so no category is lost)
+                        categories = { ...JSON.parse(JSON.stringify(defaultData)), ...fbData };
+                        // Ensure every Firebase category has all required fields
+                        Object.keys(categories).forEach(key => {
+                            if (!categories[key].name) categories[key].name = key;
+                            if (!categories[key].icon) categories[key].icon = 'fa-store';
+                            if (!categories[key].class) categories[key].class = 'default';
+                            if (!categories[key].products) categories[key].products = [];
+                            if (!categories[key].subtitle) categories[key].subtitle = '';
+                        });
                     } else {
                         // Pehli baar — default data Firebase mein save karo
                         await saveToFirebase();
@@ -3163,13 +3173,31 @@
         }
 
         function addToCart(productId, categoryKey) {
+            // Validate category exists
+            if (!categories[categoryKey]) {
+                console.error('Category not found:', categoryKey);
+                return;
+            }
             const product = categories[categoryKey].products.find(p => p.id === productId);
+            if (!product) {
+                console.error('Product not found:', productId, 'in category:', categoryKey);
+                return;
+            }
+            
             const existingItem = cart.find(item => item.id === productId);
             
             if (existingItem) {
                 existingItem.quantity++;
             } else {
-                cart.push({ ...product, quantity: 1, category: categoryKey });
+                cart.push({ 
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    emoji: product.emoji,
+                    variation: product.variation || '',
+                    quantity: 1, 
+                    category: categoryKey 
+                });
             }
             
             updateCartUI();
@@ -3270,7 +3298,10 @@
 
         // WhatsApp Checkout
         function checkoutWhatsApp() {
-            if (cart.length === 0) return;
+            if (cart.length === 0) {
+                alert('Cart khaali hai! Pehle items add karein.');
+                return;
+            }
             
             const address = document.getElementById('deliveryAddress').value.trim();
             if (!address) {
@@ -3286,43 +3317,57 @@
                 online: '📱 Online Payment (EasyPaisa/JazzCash)',
                 half: '🤝 Half Cash & Half Online'
             };
-            const paymentText = paymentLabels[paymentValue] || 'Cash on Delivery';
+            const paymentText = paymentLabels[paymentValue] || '💵 Cash on Delivery';
             
             const DELIVERY_CHARGES = 100;
             const subTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const grandTotal = subTotal + DELIVERY_CHARGES;
             
-            let message = `*🛒 New Order - Dastak Delivery Matli*%0A%0A`;
-            message += `*📦 Order Details:*%0A`;
-            message += `━━━━━━━━━━━━━━━%0A%0A`;
+            let message = `*🛒 New Order - Dastak Delivery Matli*\n\n`;
+            message += `*📦 Order Details:*\n`;
+            message += `━━━━━━━━━━━━━━━\n\n`;
             
+            // Group items by category safely
             const grouped = {};
+            const uncategorized = [];
+            
             cart.forEach(item => {
-                if (!grouped[item.category]) grouped[item.category] = [];
-                grouped[item.category].push(item);
+                const catKey = item.category || 'unknown';
+                if (!grouped[catKey]) grouped[catKey] = [];
+                grouped[catKey].push(item);
             });
             
             Object.keys(grouped).forEach(cat => {
-                message += `*${categories[cat].name}:*%0A`;
+                // Safely get category name - fallback if category not found
+                const catInfo = categories[cat];
+                const catName = catInfo ? catInfo.name : cat;
+                
+                message += `*${catName}:*\n`;
                 grouped[cat].forEach(item => {
-                    message += `• ${item.emoji} ${item.name}`;
+                    const itemName = item.name || 'Unknown Item';
+                    const itemEmoji = item.emoji || '📦';
+                    const itemPrice = item.price || 0;
+                    const itemQty = item.quantity || 1;
+                    
+                    message += `• ${itemEmoji} ${itemName}`;
                     if (item.variation) message += ` (${item.variation})`;
-                    message += `%0A`;
-                    message += `  ${item.quantity} × Rs. ${item.price} = Rs. ${item.quantity * item.price}%0A`;
+                    message += `\n`;
+                    message += `  ${itemQty} × Rs. ${itemPrice} = Rs. ${itemQty * itemPrice}\n`;
                 });
-                message += `%0A`;
+                message += `\n`;
             });
             
-            message += `━━━━━━━━━━━━━━━%0A`;
-            message += `*🧾 Items Total: Rs. ${subTotal}*%0A`;
-            message += `*🛵 Delivery Charges: Rs. ${DELIVERY_CHARGES}*%0A`;
-            message += `*💰 Grand Total: Rs. ${grandTotal}*%0A%0A`;
-            message += `*💳 Payment Method:* ${paymentText}%0A%0A`;
-            message += `*📍 Delivery Address:*%0A${address}%0A%0A`;
+            message += `━━━━━━━━━━━━━━━\n`;
+            message += `*🧾 Items Total: Rs. ${subTotal}*\n`;
+            message += `*🛵 Delivery Charges: Rs. ${DELIVERY_CHARGES}*\n`;
+            message += `*💰 Grand Total: Rs. ${grandTotal}*\n\n`;
+            message += `*💳 Payment Method:* ${paymentText}\n\n`;
+            message += `*📍 Delivery Address:*\n${address}\n\n`;
             message += `Please confirm my order. Thank you! 🙏`;
             
             const phoneNumber = '923202609175';
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            // Use encodeURIComponent for safe WhatsApp message
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
 
