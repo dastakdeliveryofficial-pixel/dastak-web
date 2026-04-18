@@ -501,7 +501,7 @@
         }
 
         .category-card:hover {
-            transform: translateY(-5px);
+            /* transform disabled to prevent jitter */
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
 
@@ -572,7 +572,7 @@
         .product-item:hover {
             border-color: #1e3a5f;
             background: white;
-            transform: scale(1.02);
+            /* transform disabled to prevent jitter */
         }
 
         .product-img {
@@ -1193,8 +1193,8 @@
             .logo span { display: none; } /* hide text on very small screens */
         }
 
-        /* Animations */
-        @keyframes slideIn {
+        /* Animations — DISABLED to prevent jitter/shake */
+        /* @keyframes slideIn {
             from {
                 opacity: 0;
                 transform: translateY(20px);
@@ -1203,10 +1203,10 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
+        } */
 
         .category-card {
-            animation: slideIn 0.5s ease-out forwards;
+            /* animation: slideIn 0.5s ease-out forwards; */
         }
 
         .hidden {
@@ -1232,7 +1232,7 @@
             white-space: nowrap;
         }
         .header-action-btn.visible { display: flex; }
-        .header-action-btn:hover { background: rgba(255,255,255,0.28); transform: translateY(-1px); }
+        .header-action-btn:hover { background: rgba(255,255,255,0.28); }
         .header-action-btn.logout-btn { border-color: rgba(239,68,68,0.6); }
         .header-action-btn.logout-btn:hover { background: rgba(239,68,68,0.35); }
         .header-action-btn.notif-btn { border-color: rgba(245,158,11,0.7); }
@@ -1326,7 +1326,7 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-        .notif-send-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(245,158,11,0.4); }
+        .notif-send-btn:hover { box-shadow: 0 4px 15px rgba(245,158,11,0.4); }
         .notif-cancel-btn {
             width: 100%;
             padding: 0.75rem;
@@ -2938,6 +2938,9 @@
             }
             renderSidebarNav();
             renderSections();
+            // Set initial history state
+            history.replaceState({ section: 'all' }, '', '#all');
+            navHistory = ['all'];
         }
 
         function showAdminLogin() {
@@ -2975,6 +2978,9 @@
                 renderSidebarNav();
                 fillCategoryDropdowns();
                 renderSections();
+                // Set initial history state
+                history.replaceState({ section: 'all' }, '', '#all');
+                navHistory = ['all'];
                 alert('Welcome Admin!');
             } else {
                 alert('Incorrect password!');
@@ -3032,18 +3038,53 @@
         }
 
         // Show Section
-        function showSection(section) {
+        // ── Page Navigation with Browser History ──
+        let navHistory = ['all']; // Track navigation history
+        let isNavigating = false; // Prevent double-push on popstate
+
+        function showSection(section, pushHistory) {
+            if (section === currentSection && pushHistory !== false) return; // Already on this page
+            
             currentSection = section;
             
-            // Update nav items
+            // Push to browser history (so back button works)
+            if (pushHistory !== false) {
+                history.pushState({ section: section }, '', '#' + section);
+                navHistory.push(section);
+            }
+            
+            // Update nav items active state
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
+                const label = item.getAttribute('data-label') || '';
+                if ((section === 'all' && label === 'All Items') || 
+                    (categories[section] && label === categories[section].name)) {
+                    item.classList.add('active');
+                }
             });
-            event.target.closest('.nav-item').classList.add('active');
             
             renderSections();
-            toggleSidebar();
+            
+            // Close sidebar after selection
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar && sidebar.classList.contains('active')) {
+                toggleSidebar();
+            }
+            
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function(e) {
+            if (e.state && e.state.section !== undefined) {
+                isNavigating = true;
+                showSection(e.state.section, false);
+                isNavigating = false;
+            } else {
+                showSection('all', false);
+            }
+        });
 
         // Render Sections
         function renderSections() {
@@ -3052,9 +3093,38 @@
             if (currentSection === 'all') {
                 // Show all sections
                 container.innerHTML = Object.keys(categories).map(key => createSectionHTML(key, categories[key])).join('');
+                // Hide back button on home page
+                const backBtn = document.getElementById('navBackBtn');
+                if (backBtn) backBtn.style.display = 'none';
             } else {
-                // Show specific section
-                container.innerHTML = createSectionHTML(currentSection, categories[currentSection]);
+                // Show specific section — with back button at top
+                const cat = categories[currentSection];
+                if (cat) {
+                    container.innerHTML = `
+                        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;padding:0.5rem 0;">
+                            <button onclick="goBack()" id="navBackBtn" style="display:flex;align-items:center;gap:0.4rem;background:#1e3a5f;color:white;border:none;border-radius:10px;padding:0.5rem 1rem;font-size:0.85rem;font-weight:600;cursor:pointer;">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                            <span style="color:#64748b;font-size:0.85rem;">${cat.name}</span>
+                        </div>
+                        ${createSectionHTML(currentSection, cat)}
+                    `;
+                } else {
+                    // Category not found — go back to all
+                    currentSection = 'all';
+                    container.innerHTML = Object.keys(categories).map(key => createSectionHTML(key, categories[key])).join('');
+                }
+            }
+        }
+
+        // Go back to previous page
+        function goBack() {
+            if (navHistory.length > 1) {
+                navHistory.pop(); // Remove current
+                const prev = navHistory[navHistory.length - 1];
+                history.back(); // Browser back
+            } else {
+                showSection('all');
             }
         }
 
@@ -3284,31 +3354,16 @@
             });
         }
         
-        // Upload image to Firebase Storage
+        // Upload product image — base64 (fast, reliable, no setup needed)
         async function uploadProductImage(file, categoryKey, productId) {
+            // Primary: compress to base64 — works 100%, no Firebase Storage setup needed
+            // Base64 images store directly in Firestore with product data
             try {
-                // Wait for Firebase Storage to be ready
-                if (!window._storage) {
-                    throw new Error('Firebase Storage not loaded yet');
-                }
-                
-                // Compress image: max 400x400px, quality 0.75
-                const compressed = await compressImage(file, 400, 400, 0.75);
-                
-                // Create storage reference: products/{categoryKey}/{productId}.jpg
-                const filePath = `products/${categoryKey}/${productId}_${Date.now()}.jpg`;
-                const storageReference = window._storageRef(window._storage, filePath);
-                
-                // Upload
-                const snapshot = await window._uploadBytes(storageReference, compressed);
-                
-                // Get download URL
-                const downloadURL = await window._getDownloadURL(snapshot.ref);
-                return downloadURL;
+                const base64 = await compressToBase64(file, 300, 300, 0.7);
+                return base64;
             } catch (error) {
-                console.error('Image upload error:', error);
-                // Fallback: use base64 if Firebase Storage fails
-                return compressToBase64(file, 200, 200, 0.6);
+                console.error('Image compression error:', error);
+                throw error;
             }
         }
         
@@ -3423,11 +3478,11 @@
             updateCartUI();
             playCartSound();
             
-            // Visual feedback
+            // Visual feedback — brief border flash instead of scale shake
             const btn = event.target.closest('.product-item');
             if (btn) {
-                btn.style.transform = 'scale(0.95)';
-                setTimeout(() => btn.style.transform = 'scale(1.02)', 100);
+                btn.style.borderColor = '#10b981';
+                setTimeout(() => { btn.style.borderColor = ''; }, 300);
             }
         }
 
@@ -3815,6 +3870,7 @@
             const variation = document.getElementById('adminProductVariation').value.trim();
             const emoji = document.getElementById('adminProductEmoji').value.trim() || '📦';
             const imageInput = document.getElementById('adminProductImage');
+            const btn = document.querySelector('#tab-add .admin-btn');
             
             if (!name || !price) {
                 alert('Naam aur price zaroori hain!');
@@ -3833,21 +3889,20 @@
             
             // Handle image upload
             if (imageInput.files && imageInput.files[0]) {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                btn.disabled = true;
+                
                 try {
-                    // Show loading on button
-                    const btn = document.querySelector('#tab-add .admin-btn');
-                    const originalText = btn.innerHTML;
-                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
-                    btn.disabled = true;
-                    
                     const imageUrl = await uploadProductImage(imageInput.files[0], category, newId);
                     newProduct.image = imageUrl;
-                    
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
                 } catch (err) {
                     console.error('Image upload failed:', err);
-                    alert('Image upload nahi hui. Product bina image ke add hoga.');
+                    alert('Image process nahi hui. Product bina image ke add hoga.');
+                } finally {
+                    // Always restore button
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
                 }
             }
             
@@ -3861,6 +3916,7 @@
             removeAdminImage(); // Clear image input
             
             renderSections();
+            renderAdminProducts();
             alert(`✅ "${name}" add ho gaya "${categories[category].name}" mein!`);
         }
 
@@ -3912,6 +3968,7 @@
             const newCategoryKey = document.getElementById('editProductCategorySelect').value;
             const productId = parseInt(document.getElementById('editProductId').value);
             const editImageInput = document.getElementById('editProductImage');
+            const btn = document.querySelector('#editModal .admin-btn');
             
             // Find product in old category
             const product = categories[oldCategoryKey].products.find(p => p.id === productId);
@@ -3928,20 +3985,19 @@
             
             // Handle new image upload
             if (editImageInput.files && editImageInput.files[0]) {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                btn.disabled = true;
+                
                 try {
-                    const btn = document.querySelector('#editModal .admin-btn');
-                    const originalText = btn.innerHTML;
-                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
-                    btn.disabled = true;
-                    
                     const imageUrl = await uploadProductImage(editImageInput.files[0], newCategoryKey, productId);
                     product.image = imageUrl;
-                    
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
                 } catch (err) {
                     console.error('Image upload failed:', err);
-                    alert('Image upload nahi hui. Product bina image ke save hoga.');
+                    alert('Image process nahi hui. Product bina image ke save hoga.');
+                } finally {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
                 }
             }
             
