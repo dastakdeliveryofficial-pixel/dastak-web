@@ -586,6 +586,13 @@
             justify-content: center;
             font-size: 2rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
         }
 
         .product-name {
@@ -745,6 +752,14 @@
             justify-content: center;
             font-size: 1.75rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .cart-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
         }
 
         .cart-item-details {
@@ -1417,6 +1432,8 @@
         import { initializeApp }   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, doc, getDoc, setDoc, onSnapshot }
                                    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, deleteObject }
+                                   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
         const firebaseConfig = {
             apiKey:            "AIzaSyBvyivY5eMZ6RJ8x2DW5DCtVjeOdWwIvRE",
@@ -1429,6 +1446,7 @@
 
         const app = initializeApp(firebaseConfig);
         const db  = getFirestore(app);
+        const storage = getStorage(app);
 
         // Global access dena main script ko
         window._db       = db;
@@ -1436,6 +1454,12 @@
         window._getDoc   = getDoc;
         window._setDoc   = setDoc;
         window._fbReady  = true;
+        // Firebase Storage helpers
+        window._storage       = storage;
+        window._storageRef    = storageRef;
+        window._uploadBytes   = uploadBytes;
+        window._getDownloadURL = getDownloadURL;
+        window._deleteObject  = deleteObject;
 
         // Real-time listener — koi bhi device se data change hone par auto update
         onSnapshot(doc(db, "dastak", "categories"), (snap) => {
@@ -1606,6 +1630,22 @@
                     <label class="form-label">Emoji/Icon</label>
                     <input type="text" class="form-input" id="adminProductEmoji" placeholder="e.g. 🍔 🍕 🍗" maxlength="2">
                 </div>
+                <div class="form-group">
+                    <label class="form-label">📷 Product Image (Optional)</label>
+                    <div style="display:flex; align-items:center; gap:0.75rem;">
+                        <input type="file" id="adminProductImage" accept="image/*" style="display:none;" onchange="previewAdminImage(this, 'adminImagePreview')">
+                        <button type="button" class="form-input" style="cursor:pointer; text-align:center; color:#64748b; flex:1;" onclick="document.getElementById('adminProductImage').click()">
+                            <i class="fas fa-cloud-upload-alt"></i> Choose Image
+                        </button>
+                        <button type="button" id="adminRemoveImageBtn" style="display:none; background:#fee2e2; color:#dc2626; border:none; border-radius:8px; padding:0.5rem 0.75rem; cursor:pointer; font-size:0.8rem;" onclick="removeAdminImage()">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div id="adminImagePreview" style="display:none; margin-top:0.5rem; text-align:center;">
+                        <img id="adminImagePreviewImg" style="max-width:80px; max-height:80px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+                    </div>
+                    <p style="font-size:0.7rem; color:#94a3b8; margin-top:0.25rem;">JPG, PNG, WEBP — Image emoji ki jagah dikhegi</p>
+                </div>
                 <button class="admin-btn" onclick="addProduct()">
                     <i class="fas fa-plus"></i> Add Item
                 </button>
@@ -1739,6 +1779,21 @@
             <div class="form-group">
                 <label class="form-label">Emoji</label>
                 <input type="text" class="form-input" id="editProductEmoji" maxlength="2">
+            </div>
+            <div class="form-group">
+                <label class="form-label">📷 Product Image</label>
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <input type="file" id="editProductImage" accept="image/*" style="display:none;" onchange="previewAdminImage(this, 'editImagePreview')">
+                    <button type="button" class="form-input" style="cursor:pointer; text-align:center; color:#64748b; flex:1;" onclick="document.getElementById('editProductImage').click()">
+                        <i class="fas fa-cloud-upload-alt"></i> Choose Image
+                    </button>
+                    <button type="button" id="editRemoveImageBtn" style="display:none; background:#fee2e2; color:#dc2626; border:none; border-radius:8px; padding:0.5rem 0.75rem; cursor:pointer; font-size:0.8rem;" onclick="removeEditImage()">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div id="editImagePreview" style="display:none; margin-top:0.5rem; text-align:center;">
+                    <img id="editImagePreviewImg" style="max-width:80px; max-height:80px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+                </div>
             </div>
             <button class="admin-btn" onclick="saveEdit()">
                 <i class="fas fa-save"></i> Save Changes
@@ -2821,7 +2876,17 @@
 
         // Real-time update callback — dusre devices se changes aane par
         window._onCategoriesUpdate = function(data) {
-            categories = data;
+            if (!data) return;
+            // Merge with default data so no category is lost
+            categories = { ...JSON.parse(JSON.stringify(defaultData)), ...data };
+            // Ensure every category has required fields
+            Object.keys(categories).forEach(key => {
+                if (!categories[key].name) categories[key].name = key;
+                if (!categories[key].icon) categories[key].icon = 'fa-store';
+                if (!categories[key].class) categories[key].class = 'default';
+                if (!categories[key].products) categories[key].products = [];
+                if (!categories[key].subtitle) categories[key].subtitle = '';
+            });
             // Agar main screen visible hai toh re-render
             if (document.getElementById('mainContent').style.display !== 'none') {
                 renderSections();
@@ -2993,6 +3058,14 @@
             }
         }
 
+        // Helper: render product image or emoji
+        function renderProductIcon(product) {
+            if (product.image) {
+                return `<img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.parentElement.innerHTML='${product.emoji || '📦'}'">`;
+            }
+            return product.emoji || '📦';
+        }
+
         // Create Section HTML
         function createSectionHTML(key, category) {
             return `
@@ -3018,7 +3091,7 @@
                             ${category.products.map(product => `
                                 <div class="product-item" onclick="addToCart(${product.id}, '${key}')">
                                     ${product.price > 1000 ? '<span class="deal-badge">DEAL</span>' : ''}
-                                    <div class="product-img">${product.emoji}</div>
+                                    <div class="product-img">${renderProductIcon(product)}</div>
                                     <div class="product-name">${product.name}</div>
                                     <div class="product-price">Rs. ${product.price}</div>
                                     ${product.variation ? `<div class="product-variation">${product.variation}</div>` : ''}
@@ -3137,7 +3210,7 @@
                             ${products.map(product => `
                                 <div class="product-item" onclick="addToCart(${product.id}, '${key}')">
                                     ${product.price > 1000 ? '<span class="deal-badge">DEAL</span>' : ''}
-                                    <div class="product-img">${product.emoji}</div>
+                                    <div class="product-img">${renderProductIcon(product)}</div>
                                     <div class="product-name">${product.name}</div>
                                     <div class="product-price">Rs. ${product.price}</div>
                                     ${product.variation ? `<div class="product-variation">${product.variation}</div>` : ''}
@@ -3172,6 +3245,152 @@
             } catch(e) {}
         }
 
+        // ── Image Upload & Compression Functions ──
+        
+        // Compress image before upload (resize + quality reduction)
+        function compressImage(file, maxWidth, maxHeight, quality) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        let w = img.width;
+                        let h = img.height;
+                        
+                        // Maintain aspect ratio
+                        if (w > maxWidth) { h = h * (maxWidth / w); w = maxWidth; }
+                        if (h > maxHeight) { w = w * (maxHeight / h); h = maxHeight; }
+                        
+                        canvas.width = w;
+                        canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, w, h);
+                        
+                        // Convert to blob
+                        canvas.toBlob(function(blob) {
+                            if (blob) {
+                                resolve(blob);
+                            } else {
+                                reject(new Error('Image compression failed'));
+                            }
+                        }, 'image/jpeg', quality || 0.7);
+                    };
+                    img.onerror = () => reject(new Error('Failed to load image'));
+                    img.src = e.target.result;
+                };
+                reader.onerror = () => reject(new Error('Failed to read file'));
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        // Upload image to Firebase Storage
+        async function uploadProductImage(file, categoryKey, productId) {
+            try {
+                // Wait for Firebase Storage to be ready
+                if (!window._storage) {
+                    throw new Error('Firebase Storage not loaded yet');
+                }
+                
+                // Compress image: max 400x400px, quality 0.75
+                const compressed = await compressImage(file, 400, 400, 0.75);
+                
+                // Create storage reference: products/{categoryKey}/{productId}.jpg
+                const filePath = `products/${categoryKey}/${productId}_${Date.now()}.jpg`;
+                const storageReference = window._storageRef(window._storage, filePath);
+                
+                // Upload
+                const snapshot = await window._uploadBytes(storageReference, compressed);
+                
+                // Get download URL
+                const downloadURL = await window._getDownloadURL(snapshot.ref);
+                return downloadURL;
+            } catch (error) {
+                console.error('Image upload error:', error);
+                // Fallback: use base64 if Firebase Storage fails
+                return compressToBase64(file, 200, 200, 0.6);
+            }
+        }
+        
+        // Fallback: compress to base64 data URL
+        function compressToBase64(file, maxWidth, maxHeight, quality) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        let w = img.width;
+                        let h = img.height;
+                        if (w > maxWidth) { h = h * (maxWidth / w); w = maxWidth; }
+                        if (h > maxHeight) { w = w * (maxHeight / h); h = maxHeight; }
+                        canvas.width = w;
+                        canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, w, h);
+                        resolve(canvas.toDataURL('image/jpeg', quality || 0.6));
+                    };
+                    img.onerror = () => reject('Failed to load image');
+                    img.src = e.target.result;
+                };
+                reader.onerror = () => reject('Failed to read file');
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        // Preview image in admin panel
+        function previewAdminImage(input, previewId) {
+            const preview = document.getElementById(previewId);
+            const previewImg = document.getElementById(previewId + 'Img');
+            const removeBtn = previewId === 'adminImagePreview' 
+                ? document.getElementById('adminRemoveImageBtn')
+                : document.getElementById('editRemoveImageBtn');
+            
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                
+                // Validate file type
+                if (!file.type.startsWith('image/')) {
+                    alert('Sirf image files allowed hain! (JPG, PNG, WEBP)');
+                    input.value = '';
+                    return;
+                }
+                
+                // Validate file size (max 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('Image 5MB se chhoti honi chahiye!');
+                    input.value = '';
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    preview.style.display = 'block';
+                    if (removeBtn) removeBtn.style.display = 'inline-flex';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        // Remove image preview (Add Product form)
+        function removeAdminImage() {
+            document.getElementById('adminProductImage').value = '';
+            document.getElementById('adminImagePreview').style.display = 'none';
+            document.getElementById('adminImagePreviewImg').src = '';
+            document.getElementById('adminRemoveImageBtn').style.display = 'none';
+        }
+        
+        // Remove image preview (Edit Product form)
+        function removeEditImage() {
+            document.getElementById('editProductImage').value = '';
+            document.getElementById('editImagePreview').style.display = 'none';
+            document.getElementById('editImagePreviewImg').src = '';
+            document.getElementById('editRemoveImageBtn').style.display = 'none';
+            // Mark that user wants to remove the existing image
+            document.getElementById('editProductImage').dataset.removeImage = 'true';
+        }
+
         function addToCart(productId, categoryKey) {
             // Validate category exists
             if (!categories[categoryKey]) {
@@ -3194,6 +3413,7 @@
                     name: product.name,
                     price: product.price,
                     emoji: product.emoji,
+                    image: product.image || '',
                     variation: product.variation || '',
                     quantity: 1, 
                     category: categoryKey 
@@ -3256,7 +3476,7 @@
             } else {
                 cartItems.innerHTML = cart.map(item => `
                     <div class="cart-item">
-                        <div class="cart-item-img">${item.emoji}</div>
+                        <div class="cart-item-img">${renderProductIcon(item)}</div>
                         <div class="cart-item-details">
                             <div class="cart-item-name">${item.name}</div>
                             ${item.variation ? `<div style="font-size: 0.75rem; color: #64748b;">${item.variation}</div>` : ''}
@@ -3417,10 +3637,13 @@
                 `;
                 
                 cat.products.forEach(product => {
+                    const iconHtml = product.image 
+                        ? `<img src="${product.image}" style="width:28px;height:28px;border-radius:6px;object-fit:cover;vertical-align:middle;margin-right:4px;" onerror="this.outerHTML='${product.emoji || '📦'}'">` 
+                        : (product.emoji || '📦');
                     html += `
                         <div class="product-list-item">
                             <div class="product-info">
-                                <div class="product-name-admin">${product.emoji} ${product.name}</div>
+                                <div class="product-name-admin">${iconHtml} ${product.name}</div>
                                 <div class="product-price-admin">
                                     Rs. ${product.price}
                                     ${product.variation ? `• ${product.variation}` : ''}
@@ -3585,12 +3808,13 @@
             renderSections();
         }
 
-        function addProduct() {
+        async function addProduct() {
             const name = document.getElementById('adminProductName').value.trim();
             const price = parseInt(document.getElementById('adminProductPrice').value);
             const category = document.getElementById('adminProductCategory').value;
             const variation = document.getElementById('adminProductVariation').value.trim();
             const emoji = document.getElementById('adminProductEmoji').value.trim() || '📦';
+            const imageInput = document.getElementById('adminProductImage');
             
             if (!name || !price) {
                 alert('Naam aur price zaroori hain!');
@@ -3607,6 +3831,26 @@
             const newProduct = { id: newId, name, price, emoji };
             if (variation) newProduct.variation = variation;
             
+            // Handle image upload
+            if (imageInput.files && imageInput.files[0]) {
+                try {
+                    // Show loading on button
+                    const btn = document.querySelector('#tab-add .admin-btn');
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+                    btn.disabled = true;
+                    
+                    const imageUrl = await uploadProductImage(imageInput.files[0], category, newId);
+                    newProduct.image = imageUrl;
+                    
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                } catch (err) {
+                    console.error('Image upload failed:', err);
+                    alert('Image upload nahi hui. Product bina image ke add hoga.');
+                }
+            }
+            
             categories[category].products.push(newProduct);
             saveToFirebase();
             
@@ -3614,6 +3858,7 @@
             document.getElementById('adminProductPrice').value = '';
             document.getElementById('adminProductVariation').value = '';
             document.getElementById('adminProductEmoji').value = '';
+            removeAdminImage(); // Clear image input
             
             renderSections();
             alert(`✅ "${name}" add ho gaya "${categories[category].name}" mein!`);
@@ -3633,6 +3878,23 @@
             document.getElementById('editProductVariation').value = product.variation || '';
             document.getElementById('editProductEmoji').value = product.emoji;
             
+            // Show existing image if any
+            const editImageInput = document.getElementById('editProductImage');
+            const editImagePreview = document.getElementById('editImagePreview');
+            const editImagePreviewImg = document.getElementById('editImagePreviewImg');
+            const editRemoveImageBtn = document.getElementById('editRemoveImageBtn');
+            editImageInput.value = '';
+            editImageInput.dataset.removeImage = 'false';
+            
+            if (product.image) {
+                editImagePreviewImg.src = product.image;
+                editImagePreview.style.display = 'block';
+                editRemoveImageBtn.style.display = 'inline-flex';
+            } else {
+                editImagePreview.style.display = 'none';
+                editRemoveImageBtn.style.display = 'none';
+            }
+            
             document.getElementById('editOverlay').classList.add('active');
             document.getElementById('editModal').classList.add('active');
         }
@@ -3643,12 +3905,13 @@
             editingProduct = null;
         }
 
-        function saveEdit() {
+        async function saveEdit() {
             if (!editingProduct) return;
             
             const oldCategoryKey = document.getElementById('editProductCategory').value;
             const newCategoryKey = document.getElementById('editProductCategorySelect').value;
             const productId = parseInt(document.getElementById('editProductId').value);
+            const editImageInput = document.getElementById('editProductImage');
             
             // Find product in old category
             const product = categories[oldCategoryKey].products.find(p => p.id === productId);
@@ -3657,6 +3920,30 @@
             product.price = parseInt(document.getElementById('editProductPrice').value);
             product.variation = document.getElementById('editProductVariation').value.trim();
             product.emoji = document.getElementById('editProductEmoji').value.trim() || product.emoji;
+            
+            // Handle image: check if user wants to remove existing image
+            if (editImageInput.dataset.removeImage === 'true') {
+                delete product.image;
+            }
+            
+            // Handle new image upload
+            if (editImageInput.files && editImageInput.files[0]) {
+                try {
+                    const btn = document.querySelector('#editModal .admin-btn');
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+                    btn.disabled = true;
+                    
+                    const imageUrl = await uploadProductImage(editImageInput.files[0], newCategoryKey, productId);
+                    product.image = imageUrl;
+                    
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                } catch (err) {
+                    console.error('Image upload failed:', err);
+                    alert('Image upload nahi hui. Product bina image ke save hoga.');
+                }
+            }
             
             // If category changed, move the product
             if (newCategoryKey !== oldCategoryKey) {
