@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dastak Delivery - Matli</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Inter',sans-serif;background-color:#f8fafc;color:#1e293b}
-        .header{background:linear-gradient(135deg,#1e3a5f 0%,#0f172a 100%);color:white;padding:1rem 0;position:sticky;top:0;z-index:1000;box-shadow:0 4px 20px rgba(0,0,0,0.1)}
+        .header{background:linear-gradient(135deg,#1e3a5f 0%,#0f172a 100%);color:white;padding:1rem 0;position:sticky;top:0;z-index:1000;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
         .container{max-width:1200px;margin:0 auto;padding:0 1rem}
         .header-content{display:flex;justify-content:space-between;align-items:center;gap:0.5rem}
         .header-left{display:flex;align-items:center;gap:0.6rem}
@@ -67,6 +67,10 @@
         .friend{background:linear-gradient(135deg,#7c3aed,#6d28d9)}
         .special{background:linear-gradient(135deg,#ec4899,#db2777)}
         .deals{background:linear-gradient(135deg,#f59e0b,#d97706)}
+        .cheezybite{background:linear-gradient(135deg,#e11d48,#be123c)}
+        .pkrestaurant{background:linear-gradient(135deg,#0891b2,#0e7490)}
+        .almurtaza{background:linear-gradient(135deg,#65a30d,#4d7c0f)}
+        .hussain{background:linear-gradient(135deg,#c2410c,#9a3412)}
         .products-container{padding:1.25rem}
         .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.75rem}
         .product-item{background:#f8fafc;border-radius:12px;padding:0.75rem;text-align:center;cursor:pointer;transition:all 0.3s;border:2px solid transparent;position:relative}
@@ -97,6 +101,7 @@
         .cart-item-img{width:60px;height:60px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.75rem;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
         .cart-item-details{flex:1}
         .cart-item-name{font-weight:600;color:#1e293b;margin-bottom:0.25rem}
+        .cart-item-variants{font-size:0.75rem;color:#64748b;margin-bottom:0.25rem;line-height:1.4}
         .cart-item-price{color:#059669;font-weight:700;font-size:0.875rem}
         .quantity-controls{display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem}
         .qty-btn{width:28px;height:28px;border:none;background:#e2e8f0;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
@@ -125,10 +130,10 @@
         .checkout-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,211,102,0.4)}
         .admin-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:3000;opacity:0;visibility:hidden;transition:all 0.3s}
         .admin-overlay.active{opacity:1;visibility:visible}
-        .admin-panel{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.9);width:90%;max-width:800px;max-height:90vh;background:white;border-radius:20px;z-index:3001;opacity:0;visibility:hidden;transition:all 0.3s;overflow:hidden;display:flex;flex-direction:column}
+        .admin-panel{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.9);width:90%;max-width:860px;max-height:90vh;background:white;border-radius:20px;z-index:3001;opacity:0;visibility:hidden;transition:all 0.3s;overflow:hidden;display:flex;flex-direction:column}
         .admin-panel.active{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
         .admin-header{background:linear-gradient(135deg,#1e3a5f 0%,#0f172a 100%);color:white;padding:1.5rem;display:flex;justify-content:space-between;align-items:center}
-        .admin-header h2{display:flex;align-items:center;gap:0.75rem}
+        .admin-header h2{display:flex;align-items:center;gap:0.75rem;font-size:1.1rem}
         .close-admin{background:rgba(255,255,255,0.2);border:none;color:white;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.25rem;transition:all 0.3s}
         .close-admin:hover{background:rgba(255,255,255,0.3);transform:rotate(90deg)}
         .admin-content{padding:1.5rem;overflow-y:auto;flex:1}
@@ -140,30 +145,29 @@
         .tab-content{display:none}
         .tab-content.active{display:block}
         .form-group{margin-bottom:1.25rem}
-        .form-label{display:block;font-weight:600;color:#1e293b;margin-bottom:0.5rem}
+        .form-label{display:block;font-weight:600;color:#1e293b;margin-bottom:0.5rem;font-size:0.9rem}
         .form-input,.form-select{width:100%;padding:0.75rem 1rem;border:2px solid #e2e8f0;border-radius:10px;font-size:1rem;outline:none;transition:all 0.3s;font-family:'Inter',sans-serif}
         .form-input:focus,.form-select:focus{border-color:#1e3a5f;box-shadow:0 0 0 4px rgba(30,58,95,0.1)}
         .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
         .admin-btn{background:linear-gradient(135deg,#1e3a5f 0%,#0f172a 100%);color:white;border:none;padding:1rem;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;transition:all 0.3s;margin-top:1rem}
         .admin-btn:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(30,58,95,0.3)}
         .admin-btn.secondary{background:#64748b}
+        .admin-btn.danger{background:linear-gradient(135deg,#dc2626,#991b1b)}
         .products-list{margin-top:1.5rem;border-top:2px solid #e2e8f0;padding-top:1.5rem}
         .category-group{margin-bottom:2rem}
         .category-header-admin{font-size:1.1rem;font-weight:700;color:#1e3a5f;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:2px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center}
-        .product-list-item{display:flex;justify-content:space-between;align-items:center;padding:0.75rem;background:#f8fafc;border-radius:8px;margin-bottom:0.5rem;flex-wrap:wrap;gap:0.5rem}
-        .product-info{flex:1}
+        .product-list-item{display:flex;justify-content:space-between;align-items:center;padding:0.75rem;background:#f8fafc;border-radius:8px;margin-bottom:0.5rem;flex-wrap:wrap;gap:0.5rem;border:1px solid #e2e8f0}
+        .product-info{flex:1;min-width:150px}
         .product-name-admin{font-weight:600;color:#1e293b;font-size:0.9rem}
         .product-price-admin{color:#059669;font-size:0.8rem}
+        .product-var-admin{font-size:0.72rem;color:#64748b;margin-top:0.15rem}
+        .product-timing-admin{font-size:0.7rem;color:#f59e0b;margin-top:0.15rem;display:flex;align-items:center;gap:0.25rem}
         .product-actions{display:flex;gap:0.5rem}
         .edit-btn,.delete-btn{padding:0.4rem 0.75rem;border:none;border-radius:6px;cursor:pointer;font-size:0.8rem;transition:all 0.3s}
         .edit-btn{background:#3b82f6;color:white}
         .delete-btn{background:#ef4444;color:white}
         .edit-btn:hover{background:#2563eb}
         .delete-btn:hover{background:#dc2626}
-        .restaurant-list-item{display:flex;justify-content:space-between;align-items:center;padding:0.75rem 1rem;background:#f8fafc;border-radius:10px;margin-bottom:0.5rem;border:2px solid #e2e8f0}
-        .restaurant-info{flex:1}
-        .restaurant-name-admin{font-weight:700;color:#1e293b;font-size:0.95rem}
-        .restaurant-sub-admin{font-size:0.8rem;color:#64748b}
         .variation-hint{font-size:0.72rem;color:#94a3b8;margin-top:0.3rem;line-height:1.4}
         .login-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:5001;display:none;align-items:center;justify-content:center}
         .login-overlay.active{display:flex}
@@ -212,13 +216,14 @@
         .pd-name{font-size:1.2rem;font-weight:700;color:#1e293b;margin-bottom:0.25rem}
         .pd-base-price{font-size:1rem;color:#059669;font-weight:700;margin-bottom:0.25rem}
         .pd-desc{font-size:0.875rem;color:#64748b;margin-bottom:1.25rem;line-height:1.5}
-        .pd-variations-label{font-size:0.8rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.625rem;display:block}
-        .pd-variations{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem}
-        .pd-var-btn{border:2px solid #e2e8f0;background:white;border-radius:10px;padding:0.45rem 0.875rem;cursor:pointer;transition:all 0.2s;text-align:left}
-        .pd-var-btn:hover{border-color:#1e3a5f;background:#f0f9ff}
-        .pd-var-btn.active{border-color:#1e3a5f;background:#eff6ff}
-        .pd-var-btn .var-name{font-size:0.85rem;font-weight:600;color:#1e293b;display:block}
-        .pd-var-btn .var-price{font-size:0.8rem;color:#059669;font-weight:700;display:block;margin-top:0.1rem}
+        .pd-var-group{margin-bottom:1rem}
+        .pd-var-type-label{font-size:0.78rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem;display:block}
+        .pd-var-options{display:flex;flex-wrap:wrap;gap:0.5rem}
+        .pd-var-opt{border:2px solid #e2e8f0;background:white;border-radius:10px;padding:0.45rem 0.875rem;cursor:pointer;transition:all 0.2s;text-align:left}
+        .pd-var-opt:hover{border-color:#1e3a5f;background:#f0f9ff}
+        .pd-var-opt.active{border-color:#1e3a5f;background:#eff6ff}
+        .pd-var-opt .vname{font-size:0.85rem;font-weight:600;color:#1e293b;display:block}
+        .pd-var-opt .vprice{font-size:0.78rem;color:#059669;font-weight:700;display:block;margin-top:0.1rem}
         .pd-qty-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
         .pd-qty-label{font-size:0.9rem;font-weight:600;color:#1e293b}
         .pd-qty-controls{display:flex;align-items:center;gap:0.75rem}
@@ -235,11 +240,33 @@
         .timing-banner-text h3{color:#92400e;font-size:1rem;margin-bottom:0.25rem}
         .timing-banner-text p{color:#78350f;font-size:0.85rem;line-height:1.4}
         .timing-banner-time{font-size:0.8rem;color:#92400e;font-weight:700;background:rgba(146,64,14,0.1);padding:0.4rem 0.75rem;border-radius:8px;white-space:nowrap}
-        .timing-rest-row{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;background:#f8fafc;border-radius:8px;margin-bottom:0.4rem;border:1px solid #e2e8f0}
-        .timing-rest-row span{font-size:0.875rem;font-weight:500;color:#1e293b}
-        .timing-rest-row label{display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:#64748b;cursor:pointer}
-        .timing-rest-row input[type="checkbox"]{width:16px;height:16px;accent-color:#1e3a5f;cursor:pointer}
         .footer{background:#0f172a;color:white;padding:2rem 0;text-align:center;margin-top:3rem}
+        /* Variation Builder */
+        .var-builder{background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;padding:1rem;margin-bottom:0.75rem}
+        .var-builder-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem}
+        .var-builder-header input{font-weight:700;font-size:0.95rem;border:none;background:transparent;outline:none;width:60%;color:#1e293b;padding:0.25rem 0;border-bottom:2px solid #e2e8f0}
+        .var-builder-header input:focus{border-bottom-color:#1e3a5f}
+        .var-remove-type{background:#ef4444;color:white;border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:0.8rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0}
+        .var-remove-type:hover{background:#dc2626;transform:scale(1.1)}
+        .var-opt-row{display:flex;gap:0.5rem;align-items:center;margin-bottom:0.4rem}
+        .var-opt-row input{flex:1;padding:0.5rem 0.75rem;border:2px solid #e2e8f0;border-radius:8px;font-size:0.85rem;outline:none;font-family:'Inter',sans-serif}
+        .var-opt-row input:focus{border-color:#1e3a5f}
+        .var-opt-row input[type="number"]{max-width:100px}
+        .var-opt-remove{background:#fee2e2;color:#ef4444;border:none;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:0.7rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s}
+        .var-opt-remove:hover{background:#ef4444;color:white}
+        .var-add-opt{background:#e0f2fe;color:#1e40af;border:2px dashed #3b82f6;padding:0.35rem 0.75rem;border-radius:8px;cursor:pointer;font-size:0.8rem;font-weight:600;width:100%;margin-top:0.25rem;transition:all 0.2s}
+        .var-add-opt:hover{background:#bfdbfe}
+        .add-var-type-btn{background:#e0f2fe;color:#1e40af;border:2px dashed #3b82f6;padding:0.75rem;border-radius:12px;cursor:pointer;font-size:0.9rem;font-weight:700;width:100%;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:0.5rem}
+        .add-var-type-btn:hover{background:#bfdbfe;border-color:#2563eb}
+        .timing-row{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap}
+        .timing-row label{display:flex;align-items:center;gap:0.4rem;cursor:pointer;font-size:0.85rem;color:#475569;white-space:nowrap}
+        .timing-row input[type="time"]{padding:0.4rem 0.5rem;border:2px solid #e2e8f0;border-radius:8px;font-size:0.85rem;outline:none;font-family:'Inter',sans-serif}
+        .timing-row input[type="time"]:focus{border-color:#1e3a5f}
+        .timing-indicator{display:inline-flex;align-items:center;gap:0.25rem;font-size:0.7rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:20px}
+        .timing-indicator.on{background:#dcfce7;color:#16a34a}
+        .timing-indicator.off{background:#fef9c3;color:#a16207}
+        .timing-indicator.always{background:#e0f2fe;color:#2563eb}
+        .edit-var-builder{background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;padding:1rem;margin-bottom:0.75rem;max-height:300px;overflow-y:auto}
         @keyframes slideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
         .category-card{animation:slideIn 0.5s ease-out forwards}
         @media(max-width:768px){
@@ -265,11 +292,7 @@
             <div class="pd-image-wrap" id="pdImage"></div>
             <div class="pd-name" id="pdName"></div>
             <div class="pd-base-price" id="pdBasePrice"></div>
-            <div class="pd-desc" id="pdDesc"></div>
-            <div id="pdVariationsSection" style="display:none">
-                <span class="pd-variations-label">Size / Variation Chunein</span>
-                <div class="pd-variations" id="pdVariations"></div>
-            </div>
+            <div id="pdVariationsSection"></div>
             <div class="pd-qty-row">
                 <span class="pd-qty-label">Quantity</span>
                 <div class="pd-qty-controls">
@@ -351,18 +374,17 @@
 </div>
 
 <!-- Admin Panel -->
-<div class="admin-overlay" id="adminOverlay" onclick="closeAdmin()"></div>
+<div class="admin-overlay" id="adminOverlay" onclick="closeAdmin(event)"></div>
 <div class="admin-panel" id="adminPanel">
     <div class="admin-header">
         <h2><i class="fas fa-cog"></i> Admin Panel</h2>
-        <button class="close-admin" onclick="closeAdmin()"><i class="fas fa-times"></i></button>
+        <button class="close-admin" onclick="closeAdminDirect()"><i class="fas fa-times"></i></button>
     </div>
     <div class="admin-content">
         <div class="admin-tabs">
             <button class="admin-tab active" onclick="switchTab('add',this)">➕ Add Item</button>
             <button class="admin-tab" onclick="switchTab('restaurants',this)">🏪 Restaurants</button>
             <button class="admin-tab" onclick="switchTab('edit',this)">✏️ Edit/Delete</button>
-            <button class="admin-tab" onclick="switchTab('timing',this)">⏰ Timing</button>
             <button class="admin-tab" onclick="switchTab('notif',this)">🔔 Notification</button>
             <button class="admin-tab" onclick="switchTab('reset',this)">🔄 Reset</button>
         </div>
@@ -375,24 +397,38 @@
                     <input type="text" class="form-input" id="adminProductName" placeholder="e.g. Zinger Burger">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Price (Rs.) *</label>
+                    <label class="form-label">Base Price (Rs.) *</label>
                     <input type="number" class="form-input" id="adminProductPrice" placeholder="e.g. 350">
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label">Restaurant *</label>
-                    <select class="form-select" id="adminProductCategory"></select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Variation / Sizes</label>
-                    <input type="text" class="form-input" id="adminProductVariation" placeholder="e.g. Small:350, Medium:500">
-                    <p class="variation-hint">💡 Format: <b>Name:Price</b>, comma separated<br>Misal: <code>Small:350, Medium:600, Large:900</code></p>
-                </div>
+            <div class="form-group">
+                <label class="form-label">Restaurant *</label>
+                <select class="form-select" id="adminProductCategory"></select>
             </div>
             <div class="form-group">
                 <label class="form-label">Emoji/Icon</label>
-                <input type="text" class="form-input" id="adminProductEmoji" placeholder="e.g. 🍔" maxlength="2">
+                <input type="text" class="form-input" id="adminProductEmoji" placeholder="e.g. 🍔" maxlength="2" style="max-width:120px">
+            </div>
+            <!-- Variation Builder -->
+            <div class="form-group">
+                <label class="form-label"><i class="fas fa-sliders-h" style="color:#f59e0b"></i> Variations (Optional)</label>
+                <p class="variation-hint">💡 Jitni variation types chahiye — Size, Flavor, Color, Type — sab add kar sakte hain. Har type ke andar jitni options chahiye (1,2,3,4,5...) de sakte hain. Price individual hai.</p>
+                <div id="addVarBuilders"></div>
+                <button type="button" class="add-var-type-btn" onclick="addVarTypeBuilder('add')"><i class="fas fa-plus"></i> Variation Type Add Karein</button>
+            </div>
+            <!-- Individual Timing -->
+            <div class="form-group">
+                <label class="form-label"><i class="fas fa-clock" style="color:#f59e0b"></i> Individual Timing (Optional)</label>
+                <p class="variation-hint">💡 Leave empty for 24/7 availability. Set specific time for this product only.</p>
+                <div class="timing-row">
+                    <label><input type="checkbox" id="addTimingEnabled" onchange="document.getElementById('addTimingFields').style.display=this.checked?'flex':'none'"> Enable timing</label>
+                </div>
+                <div id="addTimingFields" class="timing-row" style="display:none;margin-top:0.5rem">
+                    <label>Start:</label>
+                    <input type="time" id="addTimingStart" value="18:00">
+                    <label>End:</label>
+                    <input type="time" id="addTimingEnd" value="01:30">
+                </div>
             </div>
             <button class="admin-btn" onclick="addProduct()"><i class="fas fa-plus"></i> Add Item</button>
         </div>
@@ -451,45 +487,6 @@
             <div class="products-list" id="adminProductsList"></div>
         </div>
 
-        <!-- Timing -->
-        <div class="tab-content" id="tab-timing">
-            <div style="background:#fef9c3;border:2px solid #f59e0b;border-radius:12px;padding:1rem;margin-bottom:1.5rem">
-                <p style="color:#92400e;font-size:0.875rem">⏰ <strong>Time-Based Availability</strong> — Jab enable ho, customers ko sirf set time par items dikhenge. Admin ko hamesha sab dikhega.</p>
-            </div>
-            <div class="form-group">
-                <label style="display:flex;align-items:center;gap:0.6rem;cursor:pointer;font-weight:600;color:#1e293b">
-                    <input type="checkbox" id="timingEnabled" onchange="timingToggleChanged()" style="width:20px;height:20px;accent-color:#1e3a5f;cursor:pointer">
-                    <span>Enable Time Restriction</span>
-                </label>
-            </div>
-            <div id="timingFields" style="display:none">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Start Time</label>
-                        <input type="time" class="form-input" id="timingStart" value="18:00">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">End Time</label>
-                        <input type="time" class="form-input" id="timingEnd" value="01:30">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Unavailable Message (Customer ko dikhega)</label>
-                    <input type="text" class="form-input" id="timingMessage" placeholder="Yeh items sirf 6:00 PM se 1:30 AM available hain">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Restaurant Overrides</label>
-                    <p style="font-size:0.75rem;color:#64748b;margin-bottom:0.5rem">☑ = Time restriction apply | ☐ = Hamesha available (24/7)</p>
-                    <div id="timingRestaurants"></div>
-                </div>
-                <div style="background:#eff6ff;border-radius:12px;padding:1rem;margin-bottom:1rem">
-                    <p style="font-size:0.85rem;color:#1e40af"><i class="fas fa-info-circle"></i> <strong>Current Status:</strong> <span id="timingCurrentStatus">Checking...</span></p>
-                    <p style="font-size:0.8rem;color:#64748b;margin-top:0.25rem">Current time: <span id="timingCurrentTime"></span></p>
-                </div>
-                <button class="admin-btn" onclick="saveTimingSettings()"><i class="fas fa-save"></i> Save Timing Settings</button>
-            </div>
-        </div>
-
         <!-- Notification -->
         <div class="tab-content" id="tab-notif">
             <div style="padding:1rem 0">
@@ -513,8 +510,8 @@
             <div style="text-align:center;padding:2rem">
                 <i class="fas fa-exclamation-triangle" style="font-size:3rem;color:#f59e0b;margin-bottom:1rem"></i>
                 <h3 style="margin-bottom:1rem">Reset All Data?</h3>
-                <p style="color:#64748b;margin-bottom:2rem">This will restore all defaults and delete custom additions.</p>
-                <button class="admin-btn secondary" onclick="resetData()"><i class="fas fa-refresh"></i> Reset to Default</button>
+                <p style="color:#64748b;margin-bottom:2rem">Yeh sab data reset karega aur custom additions delete hongi.</p>
+                <button class="admin-btn danger" onclick="resetData()"><i class="fas fa-refresh"></i> Reset to Default</button>
             </div>
         </div>
     </div>
@@ -522,39 +519,52 @@
 
 <!-- Edit Product Modal -->
 <div class="admin-overlay" id="editOverlay" onclick="closeEditModal()"></div>
-<div class="admin-panel" id="editModal" style="max-width:500px">
+<div class="admin-panel" id="editModal" style="max-width:600px">
     <div class="admin-header">
         <h2><i class="fas fa-edit"></i> Edit Product</h2>
         <button class="close-admin" onclick="closeEditModal()"><i class="fas fa-times"></i></button>
     </div>
     <div class="admin-content">
         <input type="hidden" id="editProductId">
-        <input type="hidden" id="editProductCategory">
+        <input type="hidden" id="editProductOrigCategory">
         <div class="form-group">
             <label class="form-label">Restaurant</label>
             <select class="form-select" id="editProductCategorySelect"></select>
         </div>
-        <div class="form-group">
-            <label class="form-label">Product Name</label>
-            <input type="text" class="form-input" id="editProductName">
-        </div>
-        <div class="form-group">
-            <label class="form-label">Price (Rs.)</label>
-            <input type="number" class="form-input" id="editProductPrice">
-        </div>
-        <div class="form-group">
-            <label class="form-label">Variation / Sizes</label>
-            <input type="text" class="form-input" id="editProductVariation">
-            <p class="variation-hint">💡 Format: <b>Name:Price</b> comma separated</p>
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Product Name</label>
+                <input type="text" class="form-input" id="editProductName">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Base Price (Rs.)</label>
+                <input type="number" class="form-input" id="editProductPrice">
+            </div>
         </div>
         <div class="form-group">
             <label class="form-label">Emoji</label>
-            <input type="text" class="form-input" id="editProductEmoji" maxlength="2">
+            <input type="text" class="form-input" id="editProductEmoji" maxlength="2" style="max-width:120px">
+        </div>
+        <div class="form-group">
+            <label class="form-label"><i class="fas fa-sliders-h" style="color:#f59e0b"></i> Variations</label>
+            <div id="editVarBuilders"></div>
+            <button type="button" class="add-var-type-btn" onclick="addVarTypeBuilder('edit')"><i class="fas fa-plus"></i> Variation Type Add Karein</button>
+        </div>
+        <div class="form-group">
+            <label class="form-label"><i class="fas fa-clock" style="color:#f59e0b"></i> Individual Timing</label>
+            <div class="timing-row">
+                <label><input type="checkbox" id="editTimingEnabled" onchange="document.getElementById('editTimingFields').style.display=this.checked?'flex':'none'"> Enable timing</label>
+            </div>
+            <div id="editTimingFields" class="timing-row" style="display:none;margin-top:0.5rem">
+                <label>Start:</label>
+                <input type="time" id="editTimingStart" value="18:00">
+                <label>End:</label>
+                <input type="time" id="editTimingEnd" value="01:30">
+            </div>
         </div>
         <button class="admin-btn" onclick="saveEdit()"><i class="fas fa-save"></i> Save Changes</button>
     </div>
 </div>
-
 
 <!-- Edit Restaurant Modal -->
 <div class="admin-overlay" id="editRestOverlay" onclick="closeEditRestModal()"></div>
@@ -565,39 +575,10 @@
     </div>
     <div class="admin-content">
         <input type="hidden" id="editRestKey">
-        <div class="form-group">
-            <label class="form-label">Restaurant Name</label>
-            <input type="text" class="form-input" id="editRestName">
-        </div>
-        <div class="form-group">
-            <label class="form-label">Tagline</label>
-            <input type="text" class="form-input" id="editRestSubtitle">
-        </div>
-        <div class="form-group">
-            <label class="form-label">Icon</label>
-            <select class="form-select" id="editRestIcon">
-                <option value="fa-utensils">🍴 Utensils</option>
-                <option value="fa-pizza-slice">🍕 Pizza</option>
-                <option value="fa-bowl-rice">🍛 Biryani</option>
-                <option value="fa-bread-slice">🍞 Bakery</option>
-                <option value="fa-burger">🍔 Burger</option>
-                <option value="fa-star">⭐ Star</option>
-                <option value="fa-fire">🔥 Fire</option>
-                <option value="fa-drumstick-bite">🍗 Chicken</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="form-label">Color Theme</label>
-            <select class="form-select" id="editRestColor">
-                <option value="ipp">🔴 Red</option>
-                <option value="almadina">🟢 Green</option>
-                <option value="domino">🔵 Blue</option>
-                <option value="siraj">🟠 Orange</option>
-                <option value="friend">🟣 Purple</option>
-                <option value="special">🩷 Pink</option>
-                <option value="deals">🟡 Gold</option>
-            </select>
-        </div>
+        <div class="form-group"><label class="form-label">Restaurant Name</label><input type="text" class="form-input" id="editRestName"></div>
+        <div class="form-group"><label class="form-label">Tagline</label><input type="text" class="form-input" id="editRestSubtitle"></div>
+        <div class="form-group"><label class="form-label">Icon</label><select class="form-select" id="editRestIcon"><option value="fa-utensils">🍴 Utensils</option><option value="fa-pizza-slice">🍕 Pizza</option><option value="fa-bowl-rice">🍛 Biryani</option><option value="fa-bread-slice">🍞 Bakery</option><option value="fa-burger">🍔 Burger</option><option value="fa-star">⭐ Star</option><option value="fa-fire">🔥 Fire</option><option value="fa-drumstick-bite">🍗 Chicken</option></select></div>
+        <div class="form-group"><label class="form-label">Color Theme</label><select class="form-select" id="editRestColor"><option value="ipp">🔴 Red</option><option value="almadina">🟢 Green</option><option value="domino">🔵 Blue</option><option value="siraj">🟠 Orange</option><option value="friend">🟣 Purple</option><option value="special">🩷 Pink</option><option value="deals">🟡 Gold</option></select></div>
         <button class="admin-btn" onclick="saveRestaurantEdit()"><i class="fas fa-save"></i> Save Changes</button>
     </div>
 </div>
@@ -667,18 +648,9 @@
         <div class="payment-section">
             <label class="payment-label">💳 Payment Method *</label>
             <div class="payment-options">
-                <label class="payment-option selected" id="pay-cash">
-                    <input type="radio" name="paymentMethod" value="cash" checked onchange="updatePaymentStyle()">
-                    <span>💵 Cash on Delivery</span>
-                </label>
-                <label class="payment-option" id="pay-online">
-                    <input type="radio" name="paymentMethod" value="online" onchange="updatePaymentStyle()">
-                    <span>📱 Online Payment</span>
-                </label>
-                <label class="payment-option" id="pay-half">
-                    <input type="radio" name="paymentMethod" value="half" onchange="updatePaymentStyle()">
-                    <span>🤝 Half Cash & Half Online</span>
-                </label>
+                <label class="payment-option selected" id="pay-cash"><input type="radio" name="paymentMethod" value="cash" checked onchange="updatePaymentStyle()"><span>💵 Cash on Delivery</span></label>
+                <label class="payment-option" id="pay-online"><input type="radio" name="paymentMethod" value="online" onchange="updatePaymentStyle()"><span>📱 Online Payment</span></label>
+                <label class="payment-option" id="pay-half"><input type="radio" name="paymentMethod" value="half" onchange="updatePaymentStyle()"><span>🤝 Half Cash & Half Online</span></label>
             </div>
         </div>
         <div class="delivery-row"><span>Items Total:</span><span id="cartSubtotal">Rs. 0</span></div>
@@ -697,34 +669,19 @@
 </footer>
 
 <script>
-// ═══════════════════════════════════════════════════
-// CONFIG
-// ═══════════════════════════════════════════════════
-var ADMIN_PASSWORD = 'dastak123';
-var isAdminLoggedIn = false;
-var cart = [];
-var currentSection = 'all';
-var editingProduct = null;
-
-// Timing settings
-var defaultTimingSettings = {
-    enabled: false,
-    startTime: '18:00',
-    endTime: '01:30',
-    restaurantOverrides: {},
-    unavailableMessage: 'Yeh items sirf 6:00 PM se 1:30 AM ke darmiyan available hain.'
-};
-var timingSettings = JSON.parse(localStorage.getItem('dastakTiming')) || JSON.parse(JSON.stringify(defaultTimingSettings));
+var ADMIN_PASSWORD='dastak123';
+var isAdminLoggedIn=false;
+var cart=[];
+var currentSection='all';
+var editingProduct=null;
 
 // ═══════════════════════════════════════════════════
-// DEFAULT DATA
+// DEFAULT DATA — Purana format products ke andar
+// variationTypes nahi hoga (backward compatibility)
 // ═══════════════════════════════════════════════════
-var defaultData = {
+var defaultData= {
 
-            // ══════════════════════════════════
-            //  HUSSAIN FOOD CORNER
-            // ══════════════════════════════════
-
+          
      // ══════════════════════════════════
             //  CHEEZY BITE PIZZA & GRILL
             // ══════════════════════════════════
@@ -1026,7 +983,11 @@ var defaultData = {
                     { id: 671, name: "Al-Murtaza Desi Chicken Bt Karahi", price: 2700, emoji: "🍗", variation: "1 Kg" }
                 ]
             },
- hussain: {
+			  // ══════════════════════════════════
+            //  HUSSAIN FOOD CORNER
+            // ══════════════════════════════════
+
+			hussain: {
                 name: "Hussain Food Corner",
                 icon: "fa-utensils",
                 class: "hussain",
@@ -1302,809 +1263,444 @@ var defaultData = {
         ]
     }
 };
-
-var categories = JSON.parse(localStorage.getItem('dastakCategories')) || JSON.parse(JSON.stringify(defaultData));
+var categories=JSON.parse(localStorage.getItem('dastakCategories'))||JSON.parse(JSON.stringify(defaultData));
 
 // ═══════════════════════════════════════════════════
-// TIME-BASED AVAILABILITY
+// PRODUCT AVAILABILITY — Individual timing check
 // ═══════════════════════════════════════════════════
-function isWithinServiceHours(restaurantKey) {
-    if (isAdminLoggedIn) return true;
-    if (!timingSettings.enabled) return true;
-    if (restaurantKey && timingSettings.restaurantOverrides[restaurantKey] === false) return true;
-    var now = new Date();
-    var curMin = now.getHours() * 60 + now.getMinutes();
-    var sp = (timingSettings.startTime || '18:00').split(':');
-    var ep = (timingSettings.endTime || '01:30').split(':');
-    var startMin = parseInt(sp[0]) * 60 + parseInt(sp[1]);
-    var endMin = parseInt(ep[0]) * 60 + parseInt(ep[1]);
-    if (startMin > endMin) {
-        return curMin >= startMin || curMin <= endMin;
-    } else {
-        return curMin >= startMin && curMin <= endMin;
+function isProductAvailable(product){
+    if(isAdminLoggedIn)return true;
+    if(!product.timing||!product.timing.enabled)return true;
+    return isTimeInRange(product.timing.startTime,product.timing.endTime);
+}
+function isTimeInRange(startStr,endStr){
+    var now=new Date();
+    var curMin=now.getHours()*60+now.getMinutes();
+    var sp=(startStr||'18:00').split(':');
+    var ep=(endStr||'01:30').split(':');
+    var sMin=parseInt(sp[0])*60+parseInt(sp[1]);
+    var eMin=parseInt(ep[0])*60+parseInt(ep[1]);
+    if(sMin>eMin)return curMin>=sMin||curMin<=eMin;
+    return curMin>=sMin&&curMin<=eMin;
+}
+function formatTime(t){if(!t)return'';var p=t.split(':');var h=parseInt(p[0]),m=parseInt(p[1]);var ap=h>=12?'PM':'AM';var h12=h===0?12:h>12?h-12:h;return h12+':'+String(m).padStart(2,'0')+' '+ap;}
+function getProductTimingHTML(product){
+    if(!product.timing||!product.timing.enabled)return'<span class="timing-indicator always"><i class="fas fa-infinity"></i> 24/7</span>';
+    var avail=isProductAvailable(product);
+    if(avail)return'<span class="timing-indicator on"><i class="fas fa-check-circle"></i> '+formatTime(product.timing.startTime)+' – '+formatTime(product.timing.endTime)+'</span>';
+    return'<span class="timing-indicator off"><i class="fas fa-moon"></i> '+formatTime(product.timing.startTime)+' – '+formatTime(product.timing.endTime)+'</span>';
+}
+function getUnavailableReason(product){
+    if(!product.timing||!product.timing.enabled)return'Abhi available nahi';
+    return'Available '+formatTime(product.timing.startTime)+' se '+formatTime(product.timing.endTime);
+}
+
+// ═══════════════════════════════════════════════════
+// VARIATION HELPERS
+// variationTypes: [{type:"Size",options:[{name:"Small",price:350},{name:"Medium",price:500}]}]
+// Purana format (variation string) bhi support karega
+// ═══════════════════════════════════════════════════
+function getVariationTypes(product){
+    // Naya format
+    if(product.variationTypes&&product.variationTypes.length>0)return product.variationTypes;
+    // Purana format — variation string ko ek type mein convert karo
+    if(product.variation){
+        var opts=parseOldVariation(product.variation,product.price);
+        if(opts.length>0)return[{type:"Option",options:opts}];
     }
+    return[];
 }
-
-function formatTime(t) {
-    var p = t.split(':');
-    var h = parseInt(p[0]), m = parseInt(p[1]);
-    var ap = h >= 12 ? 'PM' : 'AM';
-    var h12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
-    return h12 + ':' + String(m).padStart(2, '0') + ' ' + ap;
-}
-
-function getNextOpenTime() {
-    if (!timingSettings.enabled || isAdminLoggedIn) return null;
-    var sp = (timingSettings.startTime || '18:00').split(':');
-    var startH = parseInt(sp[0]);
-    var curH = new Date().getHours();
-    if (curH < startH) return 'Aaj ' + formatTime(timingSettings.startTime);
-    return 'Kal ' + formatTime(timingSettings.startTime);
-}
-
-function getTimingBannerHTML() {
-    if (isAdminLoggedIn || !timingSettings.enabled) return '';
-    var anyOff = false;
-    var keys = Object.keys(categories);
-    for (var i = 0; i < keys.length; i++) {
-        if (!isWithinServiceHours(keys[i])) { anyOff = true; break; }
+function parseOldVariation(str,basePrice){
+    if(!str||!str.trim())return[];
+    var parts=str.split(',');
+    var result=[];
+    var hasPrice=false;
+    for(var i=0;i<parts.length;i++){if(parts[i].trim().indexOf(':')>=0){hasPrice=true;break;}}
+    for(var i=0;i<parts.length;i++){
+        var p=parts[i].trim();if(!p)continue;
+        if(hasPrice){var ci=p.lastIndexOf(':');if(ci>0){var nm=p.substring(0,ci).trim();var pr=parseInt(p.substring(ci+1).trim());result.push({name:nm,price:isNaN(pr)?basePrice:pr});}else{result.push({name:p,price:basePrice});}}
+        else{result.push({name:p,price:basePrice});}
     }
-    if (!anyOff) return '';
-    var next = getNextOpenTime();
-    var msg = timingSettings.unavailableMessage || defaultTimingSettings.unavailableMessage;
-    return '<div class="timing-banner">' +
-        '<div class="timing-banner-icon">⏰</div>' +
-        '<div class="timing-banner-text">' +
-        '<h3>Service Time Restricted</h3>' +
-        '<p>' + msg + '</p>' +
-        (next ? '<p style="margin-top:0.25rem;font-weight:600">👇 Opens: ' + next + '</p>' : '') +
-        '</div>' +
-        '<div class="timing-banner-time"><i class="fas fa-clock"></i> ' + formatTime(timingSettings.startTime) + ' – ' + formatTime(timingSettings.endTime) + '</div>' +
-        '</div>';
+    return result;
+}
+function getDisplayPrice(product){
+    var vtypes=getVariationTypes(product);
+    if(vtypes.length>0){
+        // Pehli variation type ke prices dekho
+        var opts=vtypes[0].options;
+        if(opts.length>1){
+            var prices=[];for(var i=0;i<opts.length;i++)prices.push(opts[i].price);
+            var mn=Math.min.apply(null,prices),mx=Math.max.apply(null,prices);
+            return mn===mx?'Rs. '+mn:'Rs. '+mn+' – '+mx;
+        }
+        // Agar sirf 1 option hai to uska price ya base price
+        if(opts.length===1)return'Rs. '+opts[0].price;
+    }
+    return'Rs. '+product.price;
+}
+function getFirstVariationLabel(product){
+    var vtypes=getVariationTypes(product);
+    if(vtypes.length>0&&vtypes[0].options.length>0)return vtypes[0].options[0].name;
+    if(product.variation){
+        var first=product.variation.split(',')[0];
+        return first.split(':')[0].trim();
+    }
+    return'';
+}
+
+// ═══════════════════════════════════════════════════
+// VARIATION BUILDER (Admin Add/Edit)
+// ═══════════════════════════════════════════════════
+var varBuilderCounter=0;
+function addVarTypeBuilder(mode){
+    var container=document.getElementById(mode==='add'?'addVarBuilders':'editVarBuilders');
+    var id='vb_'+(++varBuilderCounter);
+    var div=document.createElement('div');
+    div.className='var-builder';
+    div.id=id;
+    div.innerHTML='<div class="var-builder-header"><input type="text" placeholder="Variation Type (e.g. Size, Flavor, Color)" class="var-type-name"><button class="var-remove-type" onclick="this.closest(\'.var-builder\').remove()"><i class="fas fa-times"></i></button></div>'+
+    '<div class="var-opt-row"><input type="text" placeholder="Option name (e.g. Small)" class="var-opt-name"><input type="number" placeholder="Price" class="var-opt-price"><button class="var-opt-remove" onclick="this.closest(\'.var-opt-row\').remove()"><i class="fas fa-times"></i></button></div>'+
+    '<button type="button" class="var-add-opt" onclick="addVarOptRow(this)"><i class="fas fa-plus"></i> Option Add Karein</button>';
+    container.appendChild(div);
+}
+function addVarOptRow(btn){
+    var row=document.createElement('div');
+    row.className='var-opt-row';
+    row.innerHTML='<input type="text" placeholder="Option name" class="var-opt-name"><input type="number" placeholder="Price" class="var-opt-price"><button class="var-opt-remove" onclick="this.closest(\'.var-opt-row\').remove()"><i class="fas fa-times"></i></button>';
+    btn.parentNode.insertBefore(row,btn);
+}
+function collectVariationTypes(containerId){
+    var container=document.getElementById(containerId);
+    if(!container)return[];
+    var builders=container.querySelectorAll('.var-builder');
+    var result=[];
+    for(var i=0;i<builders.length;i++){
+        var b=builders[i];
+        var typeName=b.querySelector('.var-type-name').value.trim();
+        if(!typeName)continue;
+        var optRows=b.querySelectorAll('.var-opt-row');
+        var options=[];
+        for(var j=0;j<optRows.length;j++){
+            var name=optRows[j].querySelector('.var-opt-name').value.trim();
+            var price=parseInt(optRows[j].querySelector('.var-opt-price').value);
+            if(name)options.push({name:name,price:isNaN(price)?0:price});
+        }
+        if(options.length>0)result.push({type:typeName,options:options});
+    }
+    return result;
+}
+function buildVarEditorsFromData(containerId,data){
+    var container=document.getElementById(containerId);
+    container.innerHTML='';
+    if(!data||!data.length)return;
+    for(var i=0;i<data.length;i++){
+        var vt=data[i];
+        var id='vb_'+(++varBuilderCounter);
+        var div=document.createElement('div');
+        div.className='var-builder';
+        div.id=id;
+        var optsHTML='';
+        for(var j=0;j<vt.options.length;j++){
+            optsHTML+='<div class="var-opt-row"><input type="text" placeholder="Option name" class="var-opt-name" value="'+vt.options[j].name+'"><input type="number" placeholder="Price" class="var-opt-price" value="'+vt.options[j].price+'"><button class="var-opt-remove" onclick="this.closest(\'.var-opt-row\').remove()"><i class="fas fa-times"></i></button></div>';
+        }
+        div.innerHTML='<div class="var-builder-header"><input type="text" placeholder="Variation Type" class="var-type-name" value="'+vt.type+'"><button class="var-remove-type" onclick="this.closest(\'.var-builder\').remove()"><i class="fas fa-times"></i></button></div>'+optsHTML+
+        '<button type="button" class="var-add-opt" onclick="addVarOptRow(this)"><i class="fas fa-plus"></i> Option Add Karein</button>';
+        container.appendChild(div);
+    }
 }
 
 // ═══════════════════════════════════════════════════
 // ADMIN LOGIN
 // ═══════════════════════════════════════════════════
-function showAdminLogin() {
-    document.getElementById('loginOverlay').classList.add('active');
-    setTimeout(function(){ document.getElementById('adminPassword').focus(); }, 100);
-}
-function hideAdminLogin() {
-    document.getElementById('loginOverlay').classList.remove('active');
-    document.getElementById('adminPassword').value = '';
-}
-function loginAdmin() {
-    if (document.getElementById('adminPassword').value === ADMIN_PASSWORD) {
-        isAdminLoggedIn = true;
-        hideAdminLogin();
-        document.getElementById('adminHeaderBtn').classList.add('hidden');
-        document.getElementById('logoutFab').style.display = 'flex';
-        document.getElementById('notifBell').style.display = 'flex';
-        document.getElementById('sidebarAdminSection').style.display = 'block';
-        renderSidebarNav();
-        fillCategoryDropdowns();
-        renderSections();
-    } else {
-        alert('❌ Wrong password!');
-    }
-}
-function logoutAdmin() { if (confirm('Logout karna chahte hain?')) location.reload(); }
-function handleLogout() { logoutAdmin(); }
+function showAdminLogin(){document.getElementById('loginOverlay').classList.add('active');setTimeout(function(){document.getElementById('adminPassword').focus();},100);}
+function hideAdminLogin(){document.getElementById('loginOverlay').classList.remove('active');document.getElementById('adminPassword').value='';}
+function loginAdmin(){if(document.getElementById('adminPassword').value===ADMIN_PASSWORD){isAdminLoggedIn=true;hideAdminLogin();document.getElementById('adminHeaderBtn').classList.add('hidden');document.getElementById('logoutFab').style.display='flex';document.getElementById('notifBell').style.display='flex';document.getElementById('sidebarAdminSection').style.display='block';renderSidebarNav();fillCategoryDropdowns();renderSections();}else{alert('❌ Wrong password!');}}
+function logoutAdmin(){if(confirm('Logout karna chahte hain?'))location.reload();}
+function handleLogout(){logoutAdmin();}
 
 // ═══════════════════════════════════════════════════
 // SIDEBAR
 // ═══════════════════════════════════════════════════
-function toggleSidebar() {
-    document.getElementById('sidebarOverlay').classList.toggle('active');
-    document.getElementById('sidebar').classList.toggle('active');
+function toggleSidebar(){document.getElementById('sidebarOverlay').classList.toggle('active');document.getElementById('sidebar').classList.toggle('active');}
+function showSection(section,el){currentSection=section;var items=document.querySelectorAll('#sidebar .nav-item');for(var i=0;i<items.length;i++)items[i].classList.remove('active');if(el)el.classList.add('active');renderSections();toggleSidebar();}
+function renderSidebarNav(){
+    var c=document.getElementById('sidebarRestaurantList');if(!c)return;
+    var html='';var keys=Object.keys(categories);
+    for(var i=0;i<keys.length;i++){var k=keys[i],cat=categories[k];html+='<div class="nav-item" onclick="showSection(\''+k+'\',this)" data-label="'+cat.name+'"><i class="fas '+cat.icon+'"></i><span>'+cat.name+'</span></div>';}
+    c.innerHTML=html;
 }
-function showSection(section, el) {
-    currentSection = section;
-    var items = document.querySelectorAll('#sidebar .nav-item');
-    for (var i = 0; i < items.length; i++) items[i].classList.remove('active');
-    if (el) el.classList.add('active');
-    renderSections();
-    toggleSidebar();
-}
-function renderSidebarNav() {
-    var c = document.getElementById('sidebarRestaurantList');
-    if (!c) return;
-    var html = '';
-    var keys = Object.keys(categories);
-    for (var i = 0; i < keys.length; i++) {
-        var k = keys[i], cat = categories[k];
-        var avail = isWithinServiceHours(k);
-        html += '<div class="nav-item" onclick="showSection(\'' + k + '\',this)" data-label="' + cat.name + '" style="' + (!avail && !isAdminLoggedIn ? 'opacity:0.5;' : '') + '">' +
-            '<i class="fas ' + cat.icon + '"></i><span>' + cat.name + '</span>' +
-            (!avail && !isAdminLoggedIn ? '<i class="fas fa-moon" style="margin-left:auto;font-size:0.75rem;color:#f59e0b"></i>' : '') +
-            '</div>';
-    }
-    c.innerHTML = html;
-}
-function filterSidebarNav() {
-    var q = document.getElementById('sidebarSearchInput').value.toLowerCase();
-    var items = document.querySelectorAll('#sidebarRestaurantList .nav-item');
-    for (var i = 0; i < items.length; i++) {
-        var lbl = items[i].getAttribute('data-label') || '';
-        items[i].style.display = lbl.toLowerCase().indexOf(q) >= 0 ? 'flex' : 'none';
-    }
-    var allItem = document.querySelector('.sidebar-nav .nav-item[data-label="All Items"]');
-    if (allItem) allItem.style.display = 'all items'.indexOf(q) >= 0 ? 'flex' : 'none';
-}
+function filterSidebarNav(){var q=document.getElementById('sidebarSearchInput').value.toLowerCase();var items=document.querySelectorAll('#sidebarRestaurantList .nav-item');for(var i=0;i<items.length;i++){var lbl=items[i].getAttribute('data-label')||'';items[i].style.display=lbl.toLowerCase().indexOf(q)>=0?'flex':'none';}var allItem=document.querySelector('.sidebar-nav .nav-item[data-label="All Items"]');if(allItem)allItem.style.display='all items'.indexOf(q)>=0?'flex':'none';}
 
 // ═══════════════════════════════════════════════════
-// RENDERING HELPERS
+// RENDERING
 // ═══════════════════════════════════════════════════
-function renderProductIcon(product) {
-    if (product && product.image) {
-        return '<img src="' + product.image + '" alt="" loading="lazy" onerror="this.parentElement.innerHTML=\'' + (product.emoji || '📦').replace(/'/g, "\\'") + '\'">';
-    }
-    return (product && product.emoji) ? product.emoji : '📦';
-}
+function renderProductIcon(product){if(product&&product.image){return'<img src="'+product.image+'" alt="" loading="lazy" onerror="this.parentElement.innerHTML=\''+(product.emoji||'📦').replace(/'/g,"\\'")+'\'">';}return(product&&product.emoji)?product.emoji:'📦';}
 
-function parseVariations(str, basePrice) {
-    if (!str || !str.trim()) return [];
-    var parts = str.split(',');
-    var result = [];
-    var hasPrice = false;
-    for (var i = 0; i < parts.length; i++) {
-        if (parts[i].trim().indexOf(':') >= 0) { hasPrice = true; break; }
+function createSectionHTML(key,category){
+    var html='<div class="section-header"><h2 class="section-title"><i class="fas '+category.icon+'"></i> '+category.name+'</h2><span class="section-badge">'+category.products.length+' Items</span></div>'+
+    '<div class="category-card"><div class="category-header '+category.class+'"><div class="category-icon"><i class="fas '+category.icon+'"></i></div><div><div class="category-title">'+category.name+'</div><div class="category-subtitle">'+category.subtitle+'</div></div></div>'+
+    '<div class="products-container"><div class="products-grid">';
+    for(var i=0;i<category.products.length;i++){
+        var product=category.products[i];
+        var avail=isProductAvailable(product);
+        var uClass=avail?'':' unavailable';
+        var uOverlay=avail?'':'<div class="unavailable-overlay"><span><i class="fas fa-moon"></i><br>'+getUnavailableReason(product)+'</span></div>';
+        var dealBadge=product.price>1000?'<span class="deal-badge">DEAL</span>':'';
+        var varText=getFirstVariationLabel(product)?'<div class="product-variation">'+getFirstVariationLabel(product)+'</div>':'';
+        var onclick=avail?' onclick="openProductDetail('+product.id+',\''+key+'\')"':'';
+        var btnOnclick=avail?' onclick="event.stopPropagation();openProductDetail('+product.id+',\''+key+'\')"':' disabled';
+        var btnIcon=avail?'fa-plus':'fa-moon';
+        var btnText=avail?'Add':'Off';
+        html+='<div class="product-item'+uClass+'"'+onclick+'>'+dealBadge+uOverlay+'<div class="product-img">'+renderProductIcon(product)+'</div><div class="product-name">'+product.name+'</div><div class="product-price">'+getDisplayPrice(product)+'</div>'+varText+'<button class="add-btn"'+btnOnclick+'><i class="fas '+btnIcon+'"></i> '+btnText+'</button></div>';
     }
-    for (var i = 0; i < parts.length; i++) {
-        var p = parts[i].trim();
-        if (!p) continue;
-        if (hasPrice) {
-            var ci = p.lastIndexOf(':');
-            if (ci > 0) {
-                var name = p.substring(0, ci).trim();
-                var price = parseInt(p.substring(ci + 1).trim());
-                result.push({name: name, price: isNaN(price) ? basePrice : price});
-            } else {
-                result.push({name: p, price: basePrice});
-            }
-        } else {
-            result.push({name: p, price: basePrice});
-        }
-    }
-    return result;
+    html+='</div></div></div>';return html;
 }
-
-function getDisplayPrice(product) {
-    var vars = parseVariations(product.variation, product.price);
-    if (vars.length > 1) {
-        var prices = []; 
-        for (var i = 0; i < vars.length; i++) prices.push(vars[i].price);
-        var min = Math.min.apply(null, prices);
-        var max = Math.max.apply(null, prices);
-        return min === max ? 'Rs. ' + min : 'Rs. ' + min + ' – ' + max;
-    }
-    return 'Rs. ' + product.price;
-}
-
-function createSectionHTML(key, category) {
-    var available = isWithinServiceHours(key);
-    var unavailMsg = (timingSettings.unavailableMessage || 'Abhi available nahi').split('.')[0];
-    var html = '<div class="section-header">' +
-        '<h2 class="section-title"><i class="fas ' + category.icon + '"></i> ' + category.name + '</h2>' +
-        '<span class="section-badge">' + category.products.length + ' Items</span></div>' +
-        '<div class="category-card"><div class="category-header ' + category.class + '">' +
-        '<div class="category-icon"><i class="fas ' + category.icon + '"></i></div>' +
-        '<div><div class="category-title">' + category.name + '</div>' +
-        '<div class="category-subtitle">' + category.subtitle + '</div></div></div>' +
-        '<div class="products-container"><div class="products-grid">';
-    for (var i = 0; i < category.products.length; i++) {
-        var product = category.products[i];
-        var uClass = !available ? ' unavailable' : '';
-        var uOverlay = !available ? '<div class="unavailable-overlay"><span><i class="fas fa-moon"></i><br>' + unavailMsg + '</span></div>' : '';
-        var dealBadge = product.price > 1000 ? '<span class="deal-badge">DEAL</span>' : '';
-        var varText = product.variation ? '<div class="product-variation">' + product.variation.split(',')[0].split(':')[0].trim() + '</div>' : '';
-        var onclick = available ? ' onclick="openProductDetail(' + product.id + ',\'' + key + '\')"' : '';
-        var btnOnclick = available ? ' onclick="event.stopPropagation();openProductDetail(' + product.id + ',\'' + key + '\')"' : ' disabled';
-        var btnIcon = available ? 'fa-plus' : 'fa-moon';
-        var btnText = available ? 'Add' : 'Unavailable';
-        html += '<div class="product-item' + uClass + '"' + onclick + '>' +
-            dealBadge + uOverlay +
-            '<div class="product-img">' + renderProductIcon(product) + '</div>' +
-            '<div class="product-name">' + product.name + '</div>' +
-            '<div class="product-price">' + getDisplayPrice(product) + '</div>' +
-            varText +
-            '<button class="add-btn"' + btnOnclick + '><i class="fas ' + btnIcon + '"></i> ' + btnText + '</button></div>';
-    }
-    html += '</div></div></div>';
-    return html;
-}
-
-function renderSections() {
-    var container = document.getElementById('mainContainer');
-    var html = getTimingBannerHTML();
-    if (currentSection === 'all') {
-        var keys = Object.keys(categories);
-        for (var i = 0; i < keys.length; i++) {
-            html += createSectionHTML(keys[i], categories[keys[i]]);
-        }
-    } else {
-        html += createSectionHTML(currentSection, categories[currentSection]);
-    }
-    container.innerHTML = html;
+function renderSections(){
+    var container=document.getElementById('mainContainer');
+    var html='';if(currentSection==='all'){var keys=Object.keys(categories);for(var i=0;i<keys.length;i++)html+=createSectionHTML(keys[i],categories[keys[i]]);}else{html+=createSectionHTML(currentSection,categories[currentSection]);}
+    container.innerHTML=html;
 }
 
 // ═══════════════════════════════════════════════════
 // SEARCH
 // ═══════════════════════════════════════════════════
-function searchProducts() {
-    var raw = document.getElementById('searchInput').value;
-    var q = raw.toLowerCase().trim();
-    var container = document.getElementById('mainContainer');
-    if (q === '') { renderSections(); return; }
-    var results = [];
-    var keys = Object.keys(categories);
-    for (var i = 0; i < keys.length; i++) {
-        var k = keys[i], cat = categories[k];
-        var matching = [];
-        for (var j = 0; j < cat.products.length; j++) {
-            var p = cat.products[j];
-            if (p.name.toLowerCase().indexOf(q) >= 0 ||
-                (p.variation && p.variation.toLowerCase().indexOf(q) >= 0) ||
-                cat.name.toLowerCase().indexOf(q) >= 0) {
-                matching.push(p);
+function searchProducts(){
+    var raw=document.getElementById('searchInput').value;var q=raw.toLowerCase().trim();var container=document.getElementById('mainContainer');
+    if(q===''){renderSections();return;}
+    var results=[];var keys=Object.keys(categories);
+    for(var i=0;i<keys.length;i++){var k=keys[i],cat=categories[k];var matching=[];
+    for(var j=0;j<cat.products.length;j++){var p=cat.products[j];if(p.name.toLowerCase().indexOf(q)>=0||(p.variation&&p.variation.toLowerCase().indexOf(q)>=0)||cat.name.toLowerCase().indexOf(q)>=0)matching.push(p);}
+    if(matching.length>0)results.push({key:k,category:cat,products:matching});}
+    if(results.length===0){container.innerHTML='<div style="text-align:center;padding:3rem 1rem;color:#64748b"><div style="font-size:3.5rem;margin-bottom:1rem">🔍</div><h3 style="color:#1e293b;margin-bottom:0.5rem">"'+raw+'" nahi mila</h3><button onclick="document.getElementById(\'searchInput\').value=\'\';renderSections();" style="background:#1e3a5f;color:white;border:none;border-radius:10px;padding:0.6rem 1.5rem;cursor:pointer;font-weight:600"><i class="fas fa-times"></i> Clear</button></div>';return;}
+    var html='';
+    for(var i=0;i<results.length;i++){var r=results[i];html+='<div class="section-header"><h2 class="section-title"><i class="fas '+r.category.icon+'"></i> '+r.category.name+'</h2><span class="section-badge">'+r.products.length+' Found</span></div><div class="category-card"><div class="category-header '+r.category.class+'"><div class="category-icon"><i class="fas '+r.category.icon+'"></i></div><div><div class="category-title">'+r.category.name+'</div></div></div><div class="products-container"><div class="products-grid">';
+    for(var j=0;j<r.products.length;j++){var p=r.products[j];html+='<div class="product-item" onclick="openProductDetail('+p.id+',\''+r.key+'\')"><div class="product-img">'+renderProductIcon(p)+'</div><div class="product-name">'+p.name+'</div><div class="product-price">'+getDisplayPrice(p)+'</div>'+(getFirstVariationLabel(p)?'<div class="product-variation">'+getFirstVariationLabel(p)+'</div>':'')+'<button class="add-btn" onclick="event.stopPropagation();openProductDetail('+p.id+',\''+r.key+'\')"><i class="fas fa-plus"></i> Add</button></div>';}
+    html+='</div></div></div>';}container.innerHTML=html;
+}
+
+// ═══════════════════════════════════════════════════
+// PRODUCT DETAIL MODAL (Multiple Variation Types)
+// ═══════════════════════════════════════════════════
+var _pdState={productId:null,categoryKey:null,qty:1,selectedOptions:{}};
+
+function openProductDetail(productId,categoryKey){
+    if(!isProductAvailable(getProductById(categoryKey,productId))){var p=getProductById(categoryKey,productId);alert('⏰ '+getUnavailableReason(p));return;}
+    var cat=categories[categoryKey];if(!cat)return;
+    var product=null;for(var i=0;i<cat.products.length;i++){if(cat.products[i].id===productId){product=cat.products[i];break;}}
+    if(!product)return;
+    _pdState={productId:productId,categoryKey:categoryKey,qty:1,selectedOptions:{}};
+    document.getElementById('pdRestaurantName').textContent=cat.name;
+    var imgWrap=document.getElementById('pdImage');
+    if(product.image){imgWrap.innerHTML='<img src="'+product.image+'" alt="" onerror="this.parentElement.innerHTML=\''+(product.emoji||'📦').replace(/'/g,"\\'")+'\'">';}else{imgWrap.innerHTML=product.emoji||'📦';}
+    document.getElementById('pdName').textContent=product.name;
+    document.getElementById('pdBasePrice').textContent=getDisplayPrice(product);
+    // Build variation groups
+    var vtypes=getVariationTypes(product);
+    var varSection=document.getElementById('pdVariationsSection');
+    if(vtypes.length>0){
+        var html='';var allSelected=true;
+        for(var i=0;i<vtypes.length;i++){
+            var vt=vtypes[i];
+            _pdState.selectedOptions[vt.type]=vt.options[0];
+            html+='<div class="pd-var-group"><span class="pd-var-type-label">'+vt.type+'</span><div class="pd-var-options">';
+            for(var j=0;j<vt.options.length;j++){
+                var opt=vt.options[j];
+                html+='<button class="pd-var-opt'+(j===0?' active':'')+'" data-vtype="'+vt.type+'" data-vname="'+opt.name.replace(/"/g,'&quot;')+'" data-vprice="'+opt.price+'" onclick="pdSelectOpt(this)"><span class="vname">'+opt.name+'</span><span class="vprice">'+(opt.price>0?'Rs. '+opt.price:'')+'</span></button>';
             }
+            html+='</div></div>';
         }
-        if (matching.length > 0) results.push({key: k, category: cat, products: matching});
-    }
-    if (results.length === 0) {
-        var btns = '';
-        for (var i = 0; i < keys.length; i++) {
-            btns += '<button onclick="document.getElementById(\'searchInput\').value=\'' + categories[keys[i]].name + '\';searchProducts();" style="background:#f1f5f9;border:2px solid #e2e8f0;border-radius:20px;padding:0.4rem 1rem;cursor:pointer;font-size:0.85rem;font-weight:600;color:#1e3a5f">' + categories[keys[i]].name + '</button>';
-        }
-        container.innerHTML = '<div style="text-align:center;padding:3rem 1rem;color:#64748b"><div style="font-size:3.5rem;margin-bottom:1rem">🔍</div><h3 style="color:#1e293b;margin-bottom:0.5rem">"' + raw + '" nahi mila</h3><div style="display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin:1.5rem 0">' + btns + '</div><button onclick="document.getElementById(\'searchInput\').value=\'\';renderSections();" style="background:#1e3a5f;color:white;border:none;border-radius:10px;padding:0.6rem 1.5rem;cursor:pointer;font-weight:600"><i class="fas fa-times"></i> Clear</button></div>';
-        return;
-    }
-    var html = '';
-    for (var i = 0; i < results.length; i++) {
-        var r = results[i];
-        html += '<div class="section-header"><h2 class="section-title"><i class="fas ' + r.category.icon + '"></i> ' + r.category.name + '</h2><span class="section-badge">' + r.products.length + ' Found</span></div><div class="category-card"><div class="category-header ' + r.category.class + '"><div class="category-icon"><i class="fas ' + r.category.icon + '"></i></div><div><div class="category-title">' + r.category.name + '</div><div class="category-subtitle">Search Results</div></div></div><div class="products-container"><div class="products-grid">';
-        for (var j = 0; j < r.products.length; j++) {
-            var p = r.products[j];
-            html += '<div class="product-item" onclick="openProductDetail(' + p.id + ',\'' + r.key + '\')">' +
-                (p.price > 1000 ? '<span class="deal-badge">DEAL</span>' : '') +
-                '<div class="product-img">' + renderProductIcon(p) + '</div>' +
-                '<div class="product-name">' + p.name + '</div>' +
-                '<div class="product-price">Rs. ' + p.price + '</div>' +
-                (p.variation ? '<div class="product-variation">' + p.variation + '</div>' : '') +
-                '<button class="add-btn" onclick="event.stopPropagation();openProductDetail(' + p.id + ',\'' + r.key + '\')"><i class="fas fa-plus"></i> Add</button></div>';
-        }
-        html += '</div></div></div>';
-    }
-    container.innerHTML = html;
-}
-
-// ═══════════════════════════════════════════════════
-// PRODUCT DETAIL MODAL
-// ═══════════════════════════════════════════════════
-var _pdState = {productId: null, categoryKey: null, qty: 1, selectedVar: null};
-
-function openProductDetail(productId, categoryKey) {
-    if (!isWithinServiceHours(categoryKey)) {
-        var msg = timingSettings.unavailableMessage || 'Yeh items abhi available nahi hain.';
-        var next = getNextOpenTime();
-        alert('⏰ ' + msg + (next ? '\n👇 Opens: ' + next : ''));
-        return;
-    }
-    var cat = categories[categoryKey];
-    if (!cat) return;
-    var product = null;
-    for (var i = 0; i < cat.products.length; i++) {
-        if (cat.products[i].id === productId) { product = cat.products[i]; break; }
-    }
-    if (!product) return;
-    _pdState = {productId: productId, categoryKey: categoryKey, qty: 1, selectedVar: null};
-    document.getElementById('pdRestaurantName').textContent = cat.name;
-    var imgWrap = document.getElementById('pdImage');
-    if (product.image) {
-        imgWrap.innerHTML = '<img src="' + product.image + '" alt="" onerror="this.parentElement.innerHTML=\'' + (product.emoji || '📦').replace(/'/g, "\\'") + '\'">';
-    } else {
-        imgWrap.innerHTML = product.emoji || '📦';
-    }
-    document.getElementById('pdName').textContent = product.name;
-    document.getElementById('pdBasePrice').textContent = getDisplayPrice(product);
-    var vars = parseVariations(product.variation, product.price);
-    var varSection = document.getElementById('pdVariationsSection');
-    var varContainer = document.getElementById('pdVariations');
-    if (vars.length > 1) {
-        varSection.style.display = 'block';
-        var vhtml = '';
-        for (var i = 0; i < vars.length; i++) {
-            var v = vars[i];
-            vhtml += '<button class="pd-var-btn' + (i === 0 ? ' active' : '') + '" onclick="pdSelectVar(this,\'' + v.name.replace(/'/g, "\\'") + '\',' + v.price + ')"><span class="var-name">' + v.name + '</span><span class="var-price">Rs. ' + v.price + '</span></button>';
-        }
-        varContainer.innerHTML = vhtml;
-        _pdState.selectedVar = vars[0];
-    } else {
-        varSection.style.display = 'none';
-        _pdState.selectedVar = vars.length === 1 ? vars[0] : {name: '', price: product.price};
-    }
-    document.getElementById('pdQty').textContent = '1';
-    _pdState.qty = 1;
+        varSection.innerHTML=html;
+    }else{varSection.innerHTML='';}
+    document.getElementById('pdQty').textContent='1';_pdState.qty=1;
     pdUpdateTotal();
-    document.getElementById('pdAddBtn').disabled = false;
-    document.getElementById('pdOverlay').classList.add('active');
-    document.body.style.overflow = 'hidden';
+    document.getElementById('pdAddBtn').disabled=false;
+    document.getElementById('pdOverlay').classList.add('active');document.body.style.overflow='hidden';
 }
-
-function pdSelectVar(btn, name, price) {
-    var btns = document.querySelectorAll('.pd-var-btn');
-    for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+function getProductById(catKey,pid){if(!categories[catKey])return null;for(var i=0;i<categories[catKey].products.length;i++){if(categories[catKey].products[i].id===pid)return categories[catKey].products[i];}return null;}
+function pdSelectOpt(btn){
+    var vtype=btn.getAttribute('data-vtype');var vname=btn.getAttribute('data-vname');var vprice=parseInt(btn.getAttribute('data-vprice'));
+    var siblings=btn.parentNode.querySelectorAll('.pd-var-opt');
+    for(var i=0;i<siblings.length;i++)siblings[i].classList.remove('active');
     btn.classList.add('active');
-    _pdState.selectedVar = {name: name, price: price};
+    _pdState.selectedOptions[vtype]={name:vname,price:vprice};
     pdUpdateTotal();
 }
-function pdQtyChange(d) {
-    _pdState.qty = Math.max(1, _pdState.qty + d);
-    document.getElementById('pdQty').textContent = _pdState.qty;
-    pdUpdateTotal();
-}
-function pdUpdateTotal() {
-    var price = _pdState.selectedVar ? _pdState.selectedVar.price : 0;
-    document.getElementById('pdTotalPrice').textContent = 'Rs. ' + (price * _pdState.qty);
-}
-function playCartSound() {
-    try { var ctx = new (window.AudioContext || window.webkitAudioContext)(); var o = ctx.createOscillator(); var g = ctx.createGain(); o.connect(g); g.connect(ctx.destination); o.frequency.value = 800; g.gain.value = 0.08; o.start(); o.stop(ctx.currentTime + 0.1); } catch(e) {}
-}
-function pdAddToCart() {
-    var productId = _pdState.productId, categoryKey = _pdState.categoryKey, qty = _pdState.qty, selectedVar = _pdState.selectedVar;
-    if (!categoryKey || !categories[categoryKey]) return;
-    var product = null;
-    for (var i = 0; i < categories[categoryKey].products.length; i++) {
-        if (categories[categoryKey].products[i].id === productId) { product = categories[categoryKey].products[i]; break; }
+function pdQtyChange(d){_pdState.qty=Math.max(1,_pdState.qty+d);document.getElementById('pdQty').textContent=_pdState.qty;pdUpdateTotal();}
+function pdCalcPrice(){
+    // Base price + sab variation prices add karo
+    var product=getProductById(_pdState.categoryKey,_pdState.productId);if(!product)return 0;
+    var total=product.price;
+    var vtypes=getVariationTypes(product);
+    // Agar variationTypes hain to base price 0 man lo (prices already individual hain)
+    if(vtypes.length>0){
+        total=0;
+        var keys=Object.keys(_pdState.selectedOptions);
+        for(var i=0;i<keys.length;i++){var sel=_pdState.selectedOptions[keys[i]];if(sel)total+=sel.price;}
+        if(total===0)total=product.price;// fallback
     }
-    if (!product) return;
-    var price = selectedVar ? selectedVar.price : product.price;
-    var varName = selectedVar ? selectedVar.name : (product.variation || '');
-    var cartKey = productId + '__' + varName;
-    var existing = null;
-    for (var i = 0; i < cart.length; i++) {
-        if (cart[i]._cartKey === cartKey) { existing = cart[i]; break; }
-    }
-    if (existing) { existing.quantity += qty; }
-    else { cart.push({id: productId, _cartKey: cartKey, name: product.name, price: price, emoji: product.emoji, image: product.image || '', variation: varName, quantity: qty, category: categoryKey}); }
-    updateCartUI();
-    playCartSound();
-    closePdModalDirect();
-    var toast = document.createElement('div');
-    toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1e3a5f;color:white;padding:0.6rem 1.25rem;border-radius:50px;font-size:0.875rem;font-weight:600;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,0.2);pointer-events:none';
-    toast.innerHTML = '✅ Cart mein add hua!';
-    document.body.appendChild(toast);
-    setTimeout(function(){ if (toast.parentNode) toast.parentNode.removeChild(toast); }, 2000);
+    return total;
 }
-function closePdModalDirect() {
-    document.getElementById('pdOverlay').classList.remove('active');
-    document.body.style.overflow = '';
+function pdUpdateTotal(){var price=pdCalcPrice();document.getElementById('pdTotalPrice').textContent='Rs. '+(price*_pdState.qty);}
+function playCartSound(){try{var ctx=new(window.AudioContext||window.webkitAudioContext)();var o=ctx.createOscillator();var g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=800;g.gain.value=0.08;o.start();o.stop(ctx.currentTime+0.1);}catch(e){}}
+function pdAddToCart(){
+    var productId=_pdState.productId,categoryKey=_pdState.categoryKey,qty=_pdState.qty;
+    var product=getProductById(categoryKey,productId);if(!product)return;
+    var unitPrice=pdCalcPrice();
+    // Variant string banao
+    var varParts=[];var varKeys=Object.keys(_pdState.selectedOptions);
+    for(var i=0;i<varKeys.length;i++){var sel=_pdState.selectedOptions[varKeys[i]];if(sel)varParts.push(sel.name);}
+    var varStr=varParts.join(', ');
+    var cartKey=productId+'__'+varStr;
+    var existing=null;for(var i=0;i<cart.length;i++){if(cart[i]._cartKey===cartKey){existing=cart[i];break;}}
+    if(existing){existing.quantity+=qty;}
+    else{cart.push({id:productId,_cartKey:cartKey,name:product.name,price:unitPrice,emoji:product.emoji,image:product.image||'',variation:varStr,quantity:qty,category:categoryKey});}
+    updateCartUI();playCartSound();closePdModalDirect();
+    var toast=document.createElement('div');toast.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1e3a5f;color:white;padding:0.6rem 1.25rem;border-radius:50px;font-size:0.875rem;font-weight:600;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,0.2);pointer-events:none';toast.innerHTML='✅ Cart mein add hua!';document.body.appendChild(toast);setTimeout(function(){if(toast.parentNode)toast.parentNode.removeChild(toast);},2000);
 }
-function closePdModal(e) {
-    if (e.target === document.getElementById('pdOverlay')) closePdModalDirect();
-}
+function closePdModalDirect(){document.getElementById('pdOverlay').classList.remove('active');document.body.style.overflow='';}
+function closePdModal(e){if(e.target===document.getElementById('pdOverlay'))closePdModalDirect();}
 
 // ═══════════════════════════════════════════════════
-// CART FUNCTIONS
+// CART
 // ═══════════════════════════════════════════════════
-function updateQuantity(cartKey, change) {
-    for (var i = 0; i < cart.length; i++) {
-        var ck = cart[i]._cartKey || String(cart[i].id);
-        if (ck === String(cartKey)) {
-            cart[i].quantity += change;
-            if (cart[i].quantity <= 0) cart.splice(i, 1);
-            break;
-        }
-    }
-    updateCartUI();
+function updateQuantity(cartKey,change){for(var i=0;i<cart.length;i++){if(cart[i]._cartKey===cartKey){cart[i].quantity+=change;if(cart[i].quantity<=0)cart.splice(i,1);break;}}updateCartUI();}
+function removeFromCart(cartKey){cart=cart.filter(function(c){return c._cartKey!==cartKey;});updateCartUI();}
+function updateCartUI(){
+    var cartCount=document.getElementById('cartCount');var cartItems=document.getElementById('cartItems');var cartFooter=document.getElementById('cartFooter');var cartTotalEl=document.getElementById('cartTotal');var cartSubtotalEl=document.getElementById('cartSubtotal');
+    var DELIVERY=100;var totalItems=0,subTotal=0;
+    for(var i=0;i<cart.length;i++){totalItems+=cart[i].quantity;subTotal+=cart[i].price*cart[i].quantity;}
+    cartCount.textContent=totalItems;
+    if(cart.length===0){cartItems.innerHTML='<div class="empty-cart"><i class="fas fa-shopping-basket"></i><p>Your cart is empty</p></div>';cartFooter.style.display='none';}
+    else{var html='';for(var i=0;i<cart.length;i++){var item=cart[i];var key=item._cartKey;var safeKey=key.replace(/'/g,"\\'");
+    html+='<div class="cart-item"><div class="cart-item-img">'+renderProductIcon(item)+'</div><div class="cart-item-details"><div class="cart-item-name">'+item.name+'</div>'+(item.variation?'<div class="cart-item-variants">'+item.variation+'</div>':'')+'<div class="cart-item-price">Rs. '+item.price+' each</div><div class="quantity-controls"><button class="qty-btn" onclick="updateQuantity(\''+safeKey+'\',-1)"><i class="fas fa-minus"></i></button><span class="qty-value">'+item.quantity+'</span><button class="qty-btn" onclick="updateQuantity(\''+safeKey+'\',1)"><i class="fas fa-plus"></i></button></div></div><div class="remove-item" onclick="removeFromCart(\''+safeKey+'\')"><i class="fas fa-trash"></i></div></div>';}
+    cartItems.innerHTML=html;cartFooter.style.display='block';if(cartSubtotalEl)cartSubtotalEl.textContent='Rs. '+subTotal;cartTotalEl.textContent='Rs. '+(subTotal+DELIVERY);}
 }
-function removeFromCart(cartKey) {
-    var newCart = [];
-    for (var i = 0; i < cart.length; i++) {
-        var ck = cart[i]._cartKey || String(cart[i].id);
-        if (ck !== String(cartKey)) newCart.push(cart[i]);
-    }
-    cart = newCart;
-    updateCartUI();
-}
-function updateCartUI() {
-    var cartCount = document.getElementById('cartCount');
-    var cartItems = document.getElementById('cartItems');
-    var cartFooter = document.getElementById('cartFooter');
-    var cartTotalEl = document.getElementById('cartTotal');
-    var cartSubtotalEl = document.getElementById('cartSubtotal');
-    var DELIVERY = 100;
-    var totalItems = 0, subTotal = 0;
-    for (var i = 0; i < cart.length; i++) {
-        totalItems += cart[i].quantity;
-        subTotal += cart[i].price * cart[i].quantity;
-    }
-    cartCount.textContent = totalItems;
-    if (cart.length === 0) {
-        cartItems.innerHTML = '<div class="empty-cart"><i class="fas fa-shopping-basket"></i><p>Your cart is empty</p></div>';
-        cartFooter.style.display = 'none';
-    } else {
-        var html = '';
-        for (var i = 0; i < cart.length; i++) {
-            var item = cart[i];
-            var key = item._cartKey || String(item.id);
-            var safeKey = key.replace(/'/g, "\\'");
-            html += '<div class="cart-item"><div class="cart-item-img">' + renderProductIcon(item) + '</div>' +
-                '<div class="cart-item-details"><div class="cart-item-name">' + item.name + '</div>' +
-                (item.variation ? '<div style="font-size:0.75rem;color:#64748b">' + item.variation + '</div>' : '') +
-                '<div class="cart-item-price">Rs. ' + item.price + ' each</div>' +
-                '<div class="quantity-controls">' +
-                '<button class="qty-btn" onclick="updateQuantity(\'' + safeKey + '\',-1)"><i class="fas fa-minus"></i></button>' +
-                '<span class="qty-value">' + item.quantity + '</span>' +
-                '<button class="qty-btn" onclick="updateQuantity(\'' + safeKey + '\',1)"><i class="fas fa-plus"></i></button>' +
-                '</div></div>' +
-                '<div class="remove-item" onclick="removeFromCart(\'' + safeKey + '\')"><i class="fas fa-trash"></i></div></div>';
-        }
-        cartItems.innerHTML = html;
-        cartFooter.style.display = 'block';
-        if (cartSubtotalEl) cartSubtotalEl.textContent = 'Rs. ' + subTotal;
-        cartTotalEl.textContent = 'Rs. ' + (subTotal + DELIVERY);
-    }
-}
-function toggleCart() {
-    document.getElementById('cartOverlay').classList.toggle('active');
-    document.getElementById('cartSidebar').classList.toggle('active');
-}
-function updatePaymentStyle() {
-    var opts = document.querySelectorAll('.payment-option');
-    for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
-    var sel = document.querySelector('input[name="paymentMethod"]:checked');
-    if (sel) sel.closest('.payment-option').classList.add('selected');
-}
-function checkoutWhatsApp() {
-    if (cart.length === 0) return;
-    var address = document.getElementById('deliveryAddress').value.trim();
-    if (!address) { alert('Delivery address likhein!'); document.getElementById('deliveryAddress').focus(); return; }
-    var payRadio = document.querySelector('input[name="paymentMethod"]:checked');
-    var payVal = payRadio ? payRadio.value : 'cash';
-    var payLabels = {cash: '💵 Cash on Delivery', online: '📱 Online Payment (EasyPaisa/JazzCash)', half: '🤝 Half Cash & Half Online'};
-    var DELIVERY = 100, subTotal = 0;
-    for (var i = 0; i < cart.length; i++) subTotal += cart[i].price * cart[i].quantity;
-    var grand = subTotal + DELIVERY;
-    var msg = '*🛒 New Order - Dastak Delivery Matli*%0A%0A*📦 Order Details:*%0A━━━━━━━━━━━━━━━%0A%0A';
-    var grouped = {};
-    for (var i = 0; i < cart.length; i++) {
-        var c = cart[i].category;
-        if (!grouped[c]) grouped[c] = [];
-        grouped[c].push(cart[i]);
-    }
-    var gkeys = Object.keys(grouped);
-    for (var i = 0; i < gkeys.length; i++) {
-        var cat = gkeys[i];
-        msg += '*' + categories[cat].name + ':*%0A';
-        for (var j = 0; j < grouped[cat].length; j++) {
-            var it = grouped[cat][j];
-            msg += '• ' + it.emoji + ' ' + it.name;
-            if (it.variation) msg += ' (' + it.variation + ')';
-            msg += '%0A  ' + it.quantity + ' × Rs. ' + it.price + ' = Rs. ' + (it.quantity * it.price) + '%0A';
-        }
-        msg += '%0A';
-    }
-    msg += '━━━━━━━━━━━━━━━%0A*🧾 Items Total: Rs. ' + subTotal + '*%0A*🛵 Delivery: Rs. ' + DELIVERY + '*%0A*💰 Grand Total: Rs. ' + grand + '*%0A%0A*💳 Payment:* ' + (payLabels[payVal] || 'Cash') + '%0A%0A*📍 Address:*%0A' + address + '%0A%0APlease confirm my order. Thank you! 🙏';
-    window.open('https://wa.me/923202609175?text=' + msg, '_blank');
+function toggleCart(){document.getElementById('cartOverlay').classList.toggle('active');document.getElementById('cartSidebar').classList.toggle('active');}
+function updatePaymentStyle(){var opts=document.querySelectorAll('.payment-option');for(var i=0;i<opts.length;i++)opts[i].classList.remove('selected');var sel=document.querySelector('input[name="paymentMethod"]:checked');if(sel)sel.closest('.payment-option').classList.add('selected');}
+function checkoutWhatsApp(){
+    if(cart.length===0)return;var address=document.getElementById('deliveryAddress').value.trim();if(!address){alert('Delivery address likhein!');document.getElementById('deliveryAddress').focus();return;}
+    var payRadio=document.querySelector('input[name="paymentMethod"]:checked');var payVal=payRadio?payRadio.value:'cash';var payLabels={cash:'💵 Cash on Delivery',online:'📱 Online Payment (EasyPaisa/JazzCash)',half:'🤝 Half Cash & Half Online'};
+    var DELIVERY=100,subTotal=0;for(var i=0;i<cart.length;i++)subTotal+=cart[i].price*cart[i].quantity;var grand=subTotal+DELIVERY;
+    var msg='*🛒 New Order - Dastak Delivery Matli*%0A%0A*📦 Order Details:*%0A━━━━━━━━━━━━━━━%0A%0A';
+    var grouped={};for(var i=0;i<cart.length;i++){var c=cart[i].category;if(!grouped[c])grouped[c]=[];grouped[c].push(cart[i]);}
+    var gkeys=Object.keys(grouped);
+    for(var i=0;i<gkeys.length;i++){var cat=gkeys[i];msg+='*'+categories[cat].name+':*%0A';for(var j=0;j<grouped[cat].length;j++){var it=grouped[cat][j];msg+='• '+it.emoji+' '+it.name;if(it.variation)msg+=' ('+it.variation+')';msg+='%0A  '+it.quantity+' × Rs. '+it.price+' = Rs. '+(it.quantity*it.price)+'%0A';}msg+='%0A';}
+    msg+='━━━━━━━━━━━━━━━%0A*🧾 Items Total: Rs. '+subTotal+'*%0A*🛵 Delivery: Rs. '+DELIVERY+'*%0A*💰 Grand Total: Rs. '+grand+'*%0A%0A*💳 Payment:* '+(payLabels[payVal]||'Cash')+'%0A%0A*📍 Address:*%0A'+address+'%0A%0APlease confirm my order. Thank you! 🙏';
+    window.open('https://wa.me/923202609175?text='+msg,'_blank');
 }
 
 // ═══════════════════════════════════════════════════
 // ADMIN PANEL
 // ═══════════════════════════════════════════════════
-function openAdmin() {
-    document.getElementById('adminOverlay').classList.add('active');
-    document.getElementById('adminPanel').classList.add('active');
-    toggleSidebar();
-    fillCategoryDropdowns();
-    renderAdminProducts();
-}
-function closeAdmin() {
-    document.getElementById('adminOverlay').classList.remove('active');
-    document.getElementById('adminPanel').classList.remove('active');
-}
-function switchTab(tab, el) {
-    var tabs = document.querySelectorAll('.admin-tab');
-    for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
-    if (el) el.classList.add('active');
-    var contents = document.querySelectorAll('.tab-content');
-    for (var i = 0; i < contents.length; i++) contents[i].classList.remove('active');
-    var tabEl = document.getElementById('tab-' + tab);
-    if (tabEl) tabEl.classList.add('active');
-    if (tab === 'edit') renderAdminProducts();
-    if (tab === 'restaurants') renderAdminRestaurants();
-    if (tab === 'timing') loadTimingTab();
-}
-function fillCategoryDropdowns() {
-    var opts = '';
-    var keys = Object.keys(categories);
-    for (var i = 0; i < keys.length; i++) opts += '<option value="' + keys[i] + '">' + categories[keys[i]].name + '</option>';
-    var s1 = document.getElementById('adminProductCategory');
-    var s2 = document.getElementById('editProductCategorySelect');
-    if (s1) s1.innerHTML = opts;
-    if (s2) s2.innerHTML = opts;
-}
-function renderAdminProducts() {
-    var list = document.getElementById('adminProductsList');
-    var html = '';
-    var keys = Object.keys(categories);
-    for (var i = 0; i < keys.length; i++) {
-        var k = keys[i], cat = categories[k];
-        html += '<div class="category-group"><div class="category-header-admin"><span><i class="fas ' + cat.icon + '"></i> ' + cat.name + '</span><span style="font-size:0.75rem;color:#64748b">' + cat.products.length + ' items</span></div>';
-        for (var j = 0; j < cat.products.length; j++) {
-            var p = cat.products[j];
-            html += '<div class="product-list-item"><div class="product-info"><div class="product-name-admin">' + p.emoji + ' ' + p.name + '</div><div class="product-price-admin">Rs. ' + p.price + (p.variation ? ' • ' + p.variation : '') + '</div></div><div class="product-actions"><button class="edit-btn" onclick="openEditModal(\'' + k + '\',' + p.id + ')"><i class="fas fa-edit"></i> Edit</button><button class="delete-btn" onclick="deleteProduct(\'' + k + '\',' + p.id + ')"><i class="fas fa-trash"></i></button></div></div>';
-        }
-        html += '</div>';
-    }
-    list.innerHTML = html;
+function openAdmin(){document.getElementById('adminOverlay').classList.add('active');document.getElementById('adminPanel').classList.add('active');toggleSidebar();fillCategoryDropdowns();renderAdminProducts();}
+function closeAdmin(e){if(e.target===document.getElementById('adminOverlay'))closeAdminDirect();}
+function closeAdminDirect(){document.getElementById('adminOverlay').classList.remove('active');document.getElementById('adminPanel').classList.remove('active');}
+function switchTab(tab,el){var tabs=document.querySelectorAll('.admin-tab');for(var i=0;i<tabs.length;i++)tabs[i].classList.remove('active');if(el)el.classList.add('active');var contents=document.querySelectorAll('.tab-content');for(var i=0;i<contents.length;i++)contents[i].classList.remove('active');var tabEl=document.getElementById('tab-'+tab);if(tabEl)tabEl.classList.add('active');if(tab==='edit')renderAdminProducts();if(tab==='restaurants')renderAdminRestaurants();if(tab==='add'){document.getElementById('addVarBuilders').innerHTML='';document.getElementById('addTimingEnabled').checked=false;document.getElementById('addTimingFields').style.display='none';}}
+function fillCategoryDropdowns(){var opts='';var keys=Object.keys(categories);for(var i=0;i<keys.length;i++)opts+='<option value="'+keys[i]+'">'+categories[keys[i]].name+'</option>';var s1=document.getElementById('adminProductCategory');var s2=document.getElementById('editProductCategorySelect');if(s1)s1.innerHTML=opts;if(s2)s2.innerHTML=opts;}
+
+function filterAdminProducts(){renderAdminProducts();}
+function renderAdminProducts(){
+    var sq=(document.getElementById('adminEditSearch')?document.getElementById('adminEditSearch').value:'').toLowerCase().trim();
+    var list=document.getElementById('adminProductsList');var html='';var keys=Object.keys(categories);var totalCount=0,shownCount=0;
+    for(var i=0;i<keys.length;i++){var k=keys[i],cat=categories[k];var catHtml='';
+    for(var j=0;j<cat.products.length;j++){var p=cat.products[j];totalCount++;
+    if(sq&&p.name.toLowerCase().indexOf(sq)<0&&!(p.variation&&p.variation.toLowerCase().indexOf(sq)>=0)&&cat.name.toLowerCase().indexOf(sq)<0)continue;
+    shownCount++;
+    var vtypes=getVariationTypes(p);var varInfo='';
+    if(vtypes.length>0){varInfo='<div class="product-var-admin">';for(var v=0;v<vtypes.length;v++){varInfo+=vtypes[v].type+': ';var optNames=[];for(var o=0;o<vtypes[v].options.length;o++)optNames.push(vtypes[v].options[o].name+' (Rs.'+vtypes[v].options[o].price+')');varInfo+=optNames.join(', ');if(v<vtypes.length-1)varInfo+=' | ';}varInfo+='</div>';}
+    else if(p.variation){varInfo='<div class="product-var-admin">'+p.variation+'</div>';}
+    html+='<div class="product-list-item"><div class="product-info"><div class="product-name-admin">'+p.emoji+' '+p.name+'</div><div class="product-price-admin">Rs. '+p.price+'</div>'+varInfo+getProductTimingHTML(p)+'</div><div class="product-actions"><button class="edit-btn" onclick="openEditModal(\''+k+'\','+p.id+')"><i class="fas fa-edit"></i> Edit</button><button class="delete-btn" onclick="deleteProduct(\''+k+'\','+p.id+')"><i class="fas fa-trash"></i></button></div></div>';}
+   if(catHtml)html+='<div class="category-group"><div class="category-header-admin"><span><i class="fas '+cat.icon+'"></i> '+cat.name+'</span><span style="font-size:0.75rem;color:#64748b">'+cat.products.length+' items</span></div>'+catHtml+'</div>';}
+    var countEl=document.getElementById('adminEditCount');
+    if(countEl)countEl.textContent=sq?'Showing '+shownCount+' of '+totalCount+' items':totalCount+' total items';
+    if(!html&&!sq)html='<div style="text-align:center;padding:2rem;color:#64748b"><i class="fas fa-box-open" style="font-size:2rem;margin-bottom:0.5rem;display:block;opacity:0.4"></i>Koi item nahi mila</div>';
+    list.innerHTML=html;
 }
 
 // ═══════════════════════════════════════════════════
 // RESTAURANT MANAGEMENT
 // ═══════════════════════════════════════════════════
-function renderAdminRestaurants() {
-    var list = document.getElementById('adminRestaurantsList');
-    var html = '';
-    var keys = Object.keys(categories);
-    for (var i = 0; i < keys.length; i++) {
-        var k = keys[i], cat = categories[k];
-        html += '<div class="restaurant-list-item"><div class="restaurant-info"><div class="restaurant-name-admin"><i class="fas ' + cat.icon + '" style="color:#1e3a5f;margin-right:0.5rem"></i>' + cat.name + '</div><div class="restaurant-sub-admin">' + (cat.subtitle || '') + ' • ' + cat.products.length + ' items</div></div><div class="product-actions"><button class="edit-btn" onclick="openEditRestModal(\'' + k + '\')"><i class="fas fa-edit"></i></button><button class="delete-btn" onclick="deleteRestaurant(\'' + k + '\')"><i class="fas fa-trash"></i></button></div></div>';
-    }
-    list.innerHTML = html || '<p style="color:#64748b;text-align:center;padding:1rem">Koi restaurant nahi.</p>';
-}
-function addRestaurant() {
-    var name = document.getElementById('newRestName').value.trim();
-    var subtitle = document.getElementById('newRestSubtitle').value.trim();
-    var icon = document.getElementById('newRestIcon').value;
-    var colorClass = document.getElementById('newRestColor').value;
-    if (!name) { alert('Restaurant ka naam likhein!'); return; }
-    var key = name.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '') + '_' + Date.now();
-    categories[key] = {name: name, icon: icon, class: colorClass, subtitle: subtitle || name, products: []};
-    localStorage.setItem('dastakCategories', JSON.stringify(categories));
-    document.getElementById('newRestName').value = '';
-    document.getElementById('newRestSubtitle').value = '';
-    renderSidebarNav(); fillCategoryDropdowns(); renderAdminRestaurants(); renderSections();
-    alert('✅ "' + name + '" restaurant add ho gaya!');
-}
-function openEditRestModal(key) {
-    var cat = categories[key];
-    document.getElementById('editRestKey').value = key;
-    document.getElementById('editRestName').value = cat.name;
-    document.getElementById('editRestSubtitle').value = cat.subtitle || '';
-    document.getElementById('editRestIcon').value = cat.icon;
-    document.getElementById('editRestColor').value = cat.class;
-    document.getElementById('editRestOverlay').classList.add('active');
-    document.getElementById('editRestModal').classList.add('active');
-}
-function closeEditRestModal() {
-    document.getElementById('editRestOverlay').classList.remove('active');
-    document.getElementById('editRestModal').classList.remove('active');
-}
-function saveRestaurantEdit() {
-    var key = document.getElementById('editRestKey').value;
-    categories[key].name = document.getElementById('editRestName').value.trim();
-    categories[key].subtitle = document.getElementById('editRestSubtitle').value.trim();
-    categories[key].icon = document.getElementById('editRestIcon').value;
-    categories[key].class = document.getElementById('editRestColor').value;
-    localStorage.setItem('dastakCategories', JSON.stringify(categories));
-    closeEditRestModal(); renderAdminRestaurants(); fillCategoryDropdowns(); renderSidebarNav(); renderSections();
-    alert('✅ Restaurant update ho gaya!');
-}
-function deleteRestaurant(key) {
-    var cat = categories[key];
-    var msg = cat.products.length > 0 ? '"' + cat.name + '" mein ' + cat.products.length + ' items hain. Delete karna chahte hain?' : '"' + cat.name + '" delete karna chahte hain?';
-    if (!confirm(msg)) return;
-    delete categories[key];
-    localStorage.setItem('dastakCategories', JSON.stringify(categories));
-    renderAdminRestaurants(); fillCategoryDropdowns(); renderSidebarNav(); renderSections();
-}
+function renderAdminRestaurants(){var list=document.getElementById('adminRestaurantsList');var html='';var keys=Object.keys(categories);for(var i=0;i<keys.length;i++){var k=keys[i],cat=categories[k];html+='<div class="restaurant-list-item"><div class="restaurant-info"><div class="restaurant-name-admin"><i class="fas '+cat.icon+'" style="color:#1e3a5f;margin-right:0.5rem"></i>'+cat.name+'</div><div class="restaurant-sub-admin">'+(cat.subtitle||'')+' • '+cat.products.length+' items</div></div><div class="product-actions"><button class="edit-btn" onclick="openEditRestModal(\''+k+'\')"><i class="fas fa-edit"></i></button><button class="delete-btn" onclick="deleteRestaurant(\''+k+'\')"><i class="fas fa-trash"></i></button></div></div>';}list.innerHTML=html||'<p style="color:#64748b;text-align:center;padding:1rem">Koi restaurant nahi.</p>';}
+function addRestaurant(){var name=document.getElementById('newRestName').value.trim();var subtitle=document.getElementById('newRestSubtitle').value.trim();var icon=document.getElementById('newRestIcon').value;var colorClass=document.getElementById('newRestColor').value;if(!name){alert('Restaurant ka naam likhein!');return;}var key=name.toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'')+'_'+Date.now();categories[key]={name:name,icon:icon,class:colorClass,subtitle:subtitle||name,products:[]};localStorage.setItem('dastakCategories',JSON.stringify(categories));document.getElementById('newRestName').value='';document.getElementById('newRestSubtitle').value='';renderSidebarNav();fillCategoryDropdowns();renderAdminRestaurants();renderSections();alert('✅ "'+name+'" restaurant add ho gaya!');}
+function openEditRestModal(key){var cat=categories[key];document.getElementById('editRestKey').value=key;document.getElementById('editRestName').value=cat.name;document.getElementById('editRestSubtitle').value=cat.subtitle||'';document.getElementById('editRestIcon').value=cat.icon;document.getElementById('editRestColor').value=cat.class;document.getElementById('editRestOverlay').classList.add('active');document.getElementById('editRestModal').classList.add('active');}
+function closeEditRestModal(){document.getElementById('editRestOverlay').classList.remove('active');document.getElementById('editRestModal').classList.remove('active');}
+function saveRestaurantEdit(){var key=document.getElementById('editRestKey').value;categories[key].name=document.getElementById('editRestName').value.trim();categories[key].subtitle=document.getElementById('editRestSubtitle').value.trim();categories[key].icon=document.getElementById('editRestIcon').value;categories[key].class=document.getElementById('editRestColor').value;localStorage.setItem('dastakCategories',JSON.stringify(categories));closeEditRestModal();renderAdminRestaurants();fillCategoryDropdowns();renderSidebarNav();renderSections();alert('✅ Restaurant update ho gaya!');}
+function deleteRestaurant(key){var cat=categories[key];if(!confirm('"'+cat.name+'" delete karna chahte hain?'))return;delete categories[key];localStorage.setItem('dastakCategories',JSON.stringify(categories));renderAdminRestaurants();fillCategoryDropdowns();renderSidebarNav();renderSections();}
 
 // ═══════════════════════════════════════════════════
 // ADD / EDIT / DELETE PRODUCTS
 // ═══════════════════════════════════════════════════
-function addProduct() {
-    var name = document.getElementById('adminProductName').value.trim();
-    var price = parseInt(document.getElementById('adminProductPrice').value);
-    var category = document.getElementById('adminProductCategory').value;
-    var variation = document.getElementById('adminProductVariation').value.trim();
-    var emoji = document.getElementById('adminProductEmoji').value.trim() || '📦';
-    if (!name || !price) { alert('Naam aur price zaroori hain!'); return; }
-    if (!categories[category]) { alert('Pehle restaurant select karein!'); return; }
-    var allIds = [];
-    var keys = Object.keys(categories);
-    for (var i = 0; i < keys.length; i++) {
-        for (var j = 0; j < categories[keys[i]].products.length; j++) {
-            allIds.push(categories[keys[i]].products[j].id);
-        }
+function addProduct(){
+    var name=document.getElementById('adminProductName').value.trim();var price=parseInt(document.getElementById('adminProductPrice').value);var category=document.getElementById('adminProductCategory').value;var emoji=document.getElementById('adminProductEmoji').value.trim()||'📦';
+    if(!name||!price){alert('Naam aur price zaroori hain!');return;}if(!categories[category]){alert('Pehle restaurant select karein!');return;}
+    var allIds=[];var keys=Object.keys(categories);for(var i=0;i<keys.length;i++){for(var j=0;j<categories[keys[i]].products.length;j++)allIds.push(categories[keys[i]].products[j].id);}
+    var newId=allIds.length>0?Math.max.apply(null,allIds)+1:1;
+    var newProduct={id:newId,name:name,price:price,emoji:emoji};
+    // Collect variation types
+    var vtypes=collectVariationTypes('addVarBuilders');
+    if(vtypes.length>0)newProduct.variationTypes=vtypes;
+    // Collect individual timing
+    if(document.getElementById('addTimingEnabled').checked){
+        newProduct.timing={enabled:true,startTime:document.getElementById('addTimingStart').value,endTime:document.getElementById('addTimingEnd').value};
     }
-    var newId = allIds.length > 0 ? Math.max.apply(null, allIds) + 1 : 1;
-    var newProduct = {id: newId, name: name, price: price, emoji: emoji};
-    if (variation) newProduct.variation = variation;
     categories[category].products.push(newProduct);
-    localStorage.setItem('dastakCategories', JSON.stringify(categories));
-    document.getElementById('adminProductName').value = '';
-    document.getElementById('adminProductPrice').value = '';
-    document.getElementById('adminProductVariation').value = '';
-    document.getElementById('adminProductEmoji').value = '';
-    renderSections();
-    alert('✅ "' + name + '" add ho gaya "' + categories[category].name + '" mein!');
+    localStorage.setItem('dastakCategories',JSON.stringify(categories));
+    document.getElementById('adminProductName').value='';document.getElementById('adminProductPrice').value='';document.getElementById('adminProductEmoji').value='';
+    document.getElementById('addVarBuilders').innerHTML='';document.getElementById('addTimingEnabled').checked=false;document.getElementById('addTimingFields').style.display='none';
+    renderSections();alert('✅ "'+name+'" add ho gaya!');
 }
-function openEditModal(categoryKey, productId) {
-    var product = null;
-    for (var i = 0; i < categories[categoryKey].products.length; i++) {
-        if (categories[categoryKey].products[i].id === productId) { product = categories[categoryKey].products[i]; break; }
-    }
-    if (!product) return;
-    editingProduct = {categoryKey: categoryKey, productId: productId};
-    document.getElementById('editProductId').value = productId;
-    document.getElementById('editProductCategory').value = categoryKey;
-    fillCategoryDropdowns();
-    document.getElementById('editProductCategorySelect').value = categoryKey;
-    document.getElementById('editProductName').value = product.name;
-    document.getElementById('editProductPrice').value = product.price;
-    document.getElementById('editProductVariation').value = product.variation || '';
-    document.getElementById('editProductEmoji').value = product.emoji;
-    document.getElementById('editOverlay').classList.add('active');
-    document.getElementById('editModal').classList.add('active');
+function openEditModal(categoryKey,productId){
+    var product=null;for(var i=0;i<categories[categoryKey].products.length;i++){if(categories[categoryKey].products[i].id===productId){product=categories[categoryKey].products[i];break;}}
+    if(!product)return;editingProduct={categoryKey:categoryKey,productId:productId};
+    document.getElementById('editProductId').value=productId;document.getElementById('editProductOrigCategory').value=categoryKey;
+    fillCategoryDropdowns();document.getElementById('editProductCategorySelect').value=categoryKey;
+    document.getElementById('editProductName').value=product.name;document.getElementById('editProductPrice').value=product.price;document.getElementById('editProductEmoji').value=product.emoji||'';
+    // Load variation types
+    var vtypes=getVariationTypes(product);buildVarEditorsFromData('editVarBuilders',vtypes);
+    // Load timing
+    if(product.timing&&product.timing.enabled){document.getElementById('editTimingEnabled').checked=true;document.getElementById('editTimingFields').style.display='flex';document.getElementById('editTimingStart').value=product.timing.startTime||'18:00';document.getElementById('editTimingEnd').value=product.timing.endTime||'01:30';}
+    else{document.getElementById('editTimingEnabled').checked=false;document.getElementById('editTimingFields').style.display='none';}
+    document.getElementById('editOverlay').classList.add('active');document.getElementById('editModal').classList.add('active');
 }
-function closeEditModal() {
-    document.getElementById('editOverlay').classList.remove('active');
-    document.getElementById('editModal').classList.remove('active');
-    editingProduct = null;
+function closeEditModal(){document.getElementById('editOverlay').classList.remove('active');document.getElementById('editModal').classList.remove('active');editingProduct=null;}
+function saveEdit(){
+    if(!editingProduct)return;var oldCat=document.getElementById('editProductOrigCategory').value;var newCat=document.getElementById('editProductCategorySelect').value;var pid=parseInt(document.getElementById('editProductId').value);
+    var product=null;for(var i=0;i<categories[oldCat].products.length;i++){if(categories[oldCat].products[i].id===pid){product=categories[oldCat].products[i];break;}}
+    if(!product)return;
+    product.name=document.getElementById('editProductName').value.trim();product.price=parseInt(document.getElementById('editProductPrice').value);product.emoji=document.getElementById('editProductEmoji').value.trim()||product.emoji;
+    // Variation types
+    var vtypes=collectVariationTypes('editVarBuilders');
+    if(vtypes.length>0){product.variationTypes=vtypes;delete product.variation;}// naya format set karo
+    else{delete product.variationTypes;}// agar koi variation nahi to remove karo
+    // Timing
+    if(document.getElementById('editTimingEnabled').checked){product.timing={enabled:true,startTime:document.getElementById('editTimingStart').value,endTime:document.getElementById('editTimingEnd').value};}else{delete product.timing;}
+    // Move to different category
+    if(newCat!==oldCat){var newProds=[];for(var i=0;i<categories[oldCat].products.length;i++){if(categories[oldCat].products[i].id!==pid)newProds.push(categories[oldCat].products[i]);}categories[oldCat].products=newProds;categories[newCat].products.push(product);}
+    localStorage.setItem('dastakCategories',JSON.stringify(categories));closeEditModal();renderAdminProducts();renderSections();alert('✅ Product update ho gaya!');
 }
-function saveEdit() {
-    if (!editingProduct) return;
-    var oldCat = document.getElementById('editProductCategory').value;
-    var newCat = document.getElementById('editProductCategorySelect').value;
-    var pid = parseInt(document.getElementById('editProductId').value);
-    var product = null;
-    for (var i = 0; i < categories[oldCat].products.length; i++) {
-        if (categories[oldCat].products[i].id === pid) { product = categories[oldCat].products[i]; break; }
-    }
-    if (!product) return;
-    product.name = document.getElementById('editProductName').value.trim();
-    product.price = parseInt(document.getElementById('editProductPrice').value);
-    product.variation = document.getElementById('editProductVariation').value.trim();
-    product.emoji = document.getElementById('editProductEmoji').value.trim() || product.emoji;
-    if (newCat !== oldCat) {
-        var newProds = [];
-        for (var i = 0; i < categories[oldCat].products.length; i++) {
-            if (categories[oldCat].products[i].id !== pid) newProds.push(categories[oldCat].products[i]);
-        }
-        categories[oldCat].products = newProds;
-        categories[newCat].products.push(product);
-    }
-    localStorage.setItem('dastakCategories', JSON.stringify(categories));
-    closeEditModal(); renderAdminProducts(); renderSections();
-    alert('✅ Product update ho gaya!');
-}
-function deleteProduct(categoryKey, productId) {
-    if (!confirm('Delete this product?')) return;
-    var newProds = [];
-    for (var i = 0; i < categories[categoryKey].products.length; i++) {
-        if (categories[categoryKey].products[i].id !== productId) newProds.push(categories[categoryKey].products[i]);
-    }
-    categories[categoryKey].products = newProds;
-    localStorage.setItem('dastakCategories', JSON.stringify(categories));
-    renderAdminProducts(); renderSections();
-}
-
-// ═══════════════════════════════════════════════════
-// TIMING SETTINGS (ADMIN)
-// ═══════════════════════════════════════════════════
-function timingToggleChanged() {
-    var enabled = document.getElementById('timingEnabled').checked;
-    document.getElementById('timingFields').style.display = enabled ? 'block' : 'none';
-}
-function loadTimingTab() {
-    document.getElementById('timingEnabled').checked = timingSettings.enabled;
-    document.getElementById('timingStart').value = timingSettings.startTime;
-    document.getElementById('timingEnd').value = timingSettings.endTime;
-    document.getElementById('timingMessage').value = timingSettings.unavailableMessage || '';
-    timingToggleChanged();
-    // Render restaurant overrides
-    var html = '';
-    var keys = Object.keys(categories);
-    for (var i = 0; i < keys.length; i++) {
-        var k = keys[i], cat = categories[k];
-        var checked = timingSettings.restaurantOverrides[k] === false ? 'checked' : '';
-        html += '<div class="timing-rest-row"><span>' + cat.name + '</span><label><input type="checkbox" data-rest-key="' + k + '" ' + checked + '> 24/7 Available (no restriction)</label></div>';
-    }
-    document.getElementById('timingRestaurants').innerHTML = html;
-    // Current status
-    var now = new Date();
-    document.getElementById('timingCurrentTime').textContent = now.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true});
-    if (timingSettings.enabled) {
-        document.getElementById('timingCurrentStatus').innerHTML = '<span style="color:#059669">✅ Time restriction is ACTIVE</span>';
-    } else {
-        document.getElementById('timingCurrentStatus').innerHTML = '<span style="color:#64748b">⏸️ Time restriction is DISABLED</span>';
-    }
-}
-function saveTimingSettings() {
-    timingSettings.enabled = document.getElementById('timingEnabled').checked;
-    timingSettings.startTime = document.getElementById('timingStart').value;
-    timingSettings.endTime = document.getElementById('timingEnd').value;
-    timingSettings.unavailableMessage = document.getElementById('timingMessage').value.trim() || defaultTimingSettings.unavailableMessage;
-    timingSettings.restaurantOverrides = {};
-    var checkboxes = document.querySelectorAll('#timingRestaurants input[type="checkbox"]');
-    for (var i = 0; i < checkboxes.length; i++) {
-        var cb = checkboxes[i];
-        if (cb.checked) timingSettings.restaurantOverrides[cb.getAttribute('data-rest-key')] = false;
-    }
-    localStorage.setItem('dastakTiming', JSON.stringify(timingSettings));
-    renderSidebarNav(); renderSections();
-    alert('✅ Timing settings save ho gayi!');
-}
+function deleteProduct(categoryKey,productId){if(!confirm('Delete this product?'))return;categories[categoryKey].products=categories[categoryKey].products.filter(function(p){return p.id!==productId;});localStorage.setItem('dastakCategories',JSON.stringify(categories));renderAdminProducts();renderSections();}
 
 // ═══════════════════════════════════════════════════
 // NOTIFICATIONS
 // ═══════════════════════════════════════════════════
-function requestNotificationPermission() {
-    if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission();
-}
-function openNotifModal() { document.getElementById('notifOverlay').classList.add('active'); }
-function closeNotifModal() { document.getElementById('notifOverlay').classList.remove('active'); }
-function sendNotification() {
-    var title = document.getElementById('notifTitle').value.trim() || '🔔 Dastak Delivery';
-    var message = document.getElementById('notifMessage').value.trim();
-    if (!message) { alert('Pehle message likhein!'); return; }
-    localStorage.setItem('dastakNotification', JSON.stringify({title: title, message: message, time: Date.now()}));
-    showNotifBanner(title, message);
-    if ('Notification' in window && Notification.permission === 'granted') new Notification(title, {body: message});
-    document.getElementById('notifTitle').value = '';
-    document.getElementById('notifMessage').value = '';
-    closeNotifModal();
-    alert('✅ Notification send ho gayi!');
-}
-function sendAdminNotif() {
-    var title = document.getElementById('adminNotifTitle').value.trim() || '🔔 Dastak Delivery';
-    var message = document.getElementById('adminNotifMessage').value.trim();
-    if (!message) { alert('Pehle message likhein!'); return; }
-    localStorage.setItem('dastakNotification', JSON.stringify({title: title, message: message, time: Date.now()}));
-    showNotifBanner(title, message);
-    if ('Notification' in window && Notification.permission === 'granted') new Notification(title, {body: message});
-    document.getElementById('adminNotifTitle').value = '';
-    document.getElementById('adminNotifMessage').value = '';
-    alert('✅ Notification send ho gayi!');
-}
-function showNotifBanner(title, message) {
-    document.getElementById('notifBannerText').textContent = message;
-    document.getElementById('notifBannerTitle').textContent = title;
-    document.getElementById('notifBanner').classList.add('show');
-    setTimeout(function(){ document.getElementById('notifBanner').classList.remove('show'); }, 6000);
-}
-function closeNotifBanner() { document.getElementById('notifBanner').classList.remove('show'); }
-window.addEventListener('storage', function(e) {
-    if (e.key === 'dastakNotification' && e.newValue && !isAdminLoggedIn) {
-        var n = JSON.parse(e.newValue);
-        showNotifBanner(n.title, n.message);
-        if ('Notification' in window && Notification.permission === 'granted') new Notification(n.title, {body: n.message});
-    }
-});
+function requestNotificationPermission(){if('Notification' in window&&Notification.permission==='default')Notification.requestPermission();}
+function openNotifModal(){document.getElementById('notifOverlay').classList.add('active');}
+function closeNotifModal(){document.getElementById('notifOverlay').classList.remove('active');}
+function sendNotification(){var title=document.getElementById('notifTitle').value.trim()||'🔔 Dastak Delivery';var message=document.getElementById('notifMessage').value.trim();if(!message){alert('Pehle message likhein!');return;}localStorage.setItem('dastakNotification',JSON.stringify({title:title,message:message,time:Date.now()}));showNotifBanner(title,message);if('Notification' in window&&Notification.permission==='granted')new Notification(title,{body:message});document.getElementById('notifTitle').value='';document.getElementById('notifMessage').value='';closeNotifModal();alert('✅ Notification send ho gayi!');}
+function sendAdminNotif(){var title=document.getElementById('adminNotifTitle').value.trim()||'🔔 Dastak Delivery';var message=document.getElementById('adminNotifMessage').value.trim();if(!message){alert('Pehle message likhein!');return;}localStorage.setItem('dastakNotification',JSON.stringify({title:title,message:message,time:Date.now()}));showNotifBanner(title,message);if('Notification' in window&&Notification.permission==='granted')new Notification(title,{body:message});document.getElementById('adminNotifTitle').value='';document.getElementById('adminNotifMessage').value='';alert('✅ Notification send ho gayi!');}
+function showNotifBanner(title,message){document.getElementById('notifBannerText').textContent=message;document.getElementById('notifBannerTitle').textContent=title;document.getElementById('notifBanner').classList.add('show');setTimeout(function(){document.getElementById('notifBanner').classList.remove('show');},6000);}
+function closeNotifBanner(){document.getElementById('notifBanner').classList.remove('show');}
+window.addEventListener('storage',function(e){if(e.key==='dastakNotification'&&e.newValue&&!isAdminLoggedIn){var n=JSON.parse(e.newValue);showNotifBanner(n.title,n.message);if('Notification' in window&&Notification.permission==='granted')new Notification(n.title,{body:n.message});}});
 
 // ═══════════════════════════════════════════════════
 // RESET
 // ═══════════════════════════════════════════════════
-function resetData() {
-    if (!confirm('This will reset ALL data to default. Are you sure?')) return;
-    localStorage.removeItem('dastakCategories');
-    localStorage.removeItem('dastakTiming');
-    categories = JSON.parse(JSON.stringify(defaultData));
-    timingSettings = JSON.parse(JSON.stringify(defaultTimingSettings));
-    renderSections(); renderAdminProducts(); renderSidebarNav();
-    alert('Data reset to default successfully!');
-}
+function resetData(){if(!confirm('Yeh sab data reset karega. Are you sure?'))return;localStorage.removeItem('dastakCategories');categories=JSON.parse(JSON.stringify(defaultData));renderSections();renderAdminProducts();renderSidebarNav();alert('Data reset to default successfully!');}
 
 // ═══════════════════════════════════════════════════
-// INIT ON PAGE LOAD
+// INIT
 // ═══════════════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', function() {
-    renderSidebarNav();
-    renderSections();
-    requestNotificationPermission();
-});
+document.addEventListener('DOMContentLoaded',function(){renderSidebarNav();renderSections();requestNotificationPermission();});
 </script>
 </body>
 </html>
