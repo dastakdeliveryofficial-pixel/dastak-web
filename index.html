@@ -73,7 +73,7 @@
         .category-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.35rem;background:rgba(255,255,255,0.2);flex-shrink:0}
         .category-title{font-size:1.05rem;font-weight:700}
         .category-subtitle{font-size:0.78rem;opacity:0.9}
-        .ipp{background:linear-gradient(135deg,#dc2626,#991b1b)}.almadina{background:linear-gradient(135deg,#059669,#047857)}.domino{background:linear-gradient(135deg,#2563eb,#1d4ed8)}.siraj{background:linear-gradient(135deg,#d97706,#b45309)}.friend{background:linear-gradient(135deg,#7c3aed,#6d28d9)}.special{background:linear-gradient(135deg,#ec4899,#db2777)}.deals{background:linear-gradient(135deg,#f59e0b,#d97706)}.cheezybite{background:linear-gradient(135deg,#e11d48,#be123c)}.pkrestaurant{background:linear-gradient(135deg,#0891b2,#0e7490)}.almurtaza{background:linear-gradient(135deg,#65a30d,#4d7c0f)}.hussain{background:linear-gradient(135deg,#c2410c,#9a3412)}
+        .ipp{background:linear-gradient(135deg,#dc2626,#991b1b)}.almadina{background:linear-gradient(135deg,#059669,#047857)}.domino{background:linear-gradient(135deg,#2563eb,#1d4ed8)}.siraj{background:linear-gradient(135deg,#d97706,#b45309)}.friend{background:linear-gradient(135deg,#7c3aed,#6d28d9)}.special{background:linear-gradient(135deg,#ec4899,#db2777)}.deals{background:linear-gradient(135deg,#f59e0b,#d97706)}.cheezybite{background:linear-gradient(135deg,#e11d48,#be123c)}.pkrestaurant{background:linear-gradient(135deg,#0891b2,#0e7490)}.almurtaza{background:linear-gradient(135deg,#65a30d,#4d7c0f)}.hussain{background:linear-gradient(135deg,#c2410c,#9a3412)}.grocerytheme{background:linear-gradient(135deg,#16a34a,#15803d)}.marttheme{background:linear-gradient(135deg,#0d9488,#0f766e)}.medtheme{background:linear-gradient(135deg,#dc2626,#b91c1c)}.genstoretheme{background:linear-gradient(135deg,#4f46e5,#4338ca)}
         .products-container{padding:0.875rem 1rem}
         .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:0.55rem}
         .product-item{background:#f8fafc;border-radius:12px;padding:0.6rem;text-align:center;cursor:pointer;transition:all 0.3s;border:2px solid transparent;position:relative}
@@ -269,10 +269,43 @@
         .footer{background:#0f172a;color:white;padding:1.5rem 0;text-align:center;margin-top:2.5rem}
         .restaurant-list-item{display:flex;justify-content:space-between;align-items:center;padding:0.65rem;background:#f8fafc;border-radius:8px;margin-bottom:0.35rem;border:1px solid #e2e8f0}
         .restaurant-info{flex:1}
-        .restaurant-name-admin{font-weight:600;color:#1e293b;font-size:0.875rem}
+        .restaurant-name-admin{display:flex;align-items:center;gap:0.5rem;font-weight:600;color:#1e293b;font-size:0.875rem}
+        .restaurant-thumb-admin{width:26px;height:26px;border-radius:7px;object-fit:cover;flex-shrink:0}
         .restaurant-sub-admin{font-size:0.72rem;color:#64748b;margin-top:0.1rem}
         @keyframes slideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
         .category-card{animation:slideIn 0.5s ease-out forwards}
+
+        /* ===== RESTAURANT GRID (home) ===== */
+        .restaurant-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:1rem}
+        .restaurant-card{background:white;border-radius:18px;overflow:hidden;box-shadow:0 4px 16px rgba(15,23,42,0.08);cursor:pointer;transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.25s;animation:slideIn 0.45s ease-out forwards;border:1px solid #eef2f7}
+        .restaurant-card:hover{transform:translateY(-5px);box-shadow:0 14px 32px rgba(15,23,42,0.14)}
+        .restaurant-card:active{transform:scale(0.97)}
+        .restaurant-card-image{height:128px;position:relative;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:rgba(255,255,255,0.92);overflow:hidden}
+        .restaurant-card-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+        .restaurant-card-image .rc-badge{position:absolute;top:0.5rem;left:0.5rem;background:rgba(15,23,42,0.55);backdrop-filter:blur(3px);color:white;font-size:0.62rem;font-weight:700;padding:0.22rem 0.55rem;border-radius:20px;z-index:2;letter-spacing:0.02em}
+        .restaurant-card-body{padding:0.7rem 0.85rem 0.9rem}
+        .restaurant-card-name{font-weight:700;font-size:0.9rem;color:#1e293b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:0.15rem}
+        .restaurant-card-sub{font-size:0.7rem;color:#64748b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:0.5rem}
+        .restaurant-card-meta{display:flex;align-items:center;justify-content:space-between;font-size:0.68rem;color:#94a3b8;padding-top:0.5rem;border-top:1px dashed #e2e8f0}
+        .restaurant-card-meta .rc-cta{color:#1e3a5f;font-weight:700;display:flex;align-items:center;gap:0.25rem}
+
+        /* ===== SLIDE-IN RESTAURANT MENU VIEW ===== */
+        .menu-view-overlay{position:fixed;inset:0;background:#f8fafc;z-index:2500;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);overflow-y:auto;-webkit-overflow-scrolling:touch}
+        .menu-view-overlay.active{transform:translateX(0)}
+        .menu-banner{height:190px;position:relative;display:flex;align-items:flex-end;padding:1.1rem;color:white;background-size:cover;background-position:center;flex-shrink:0}
+        .menu-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+        .menu-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.72),rgba(0,0,0,0.05) 65%);z-index:1}
+        .menu-banner-content{position:relative;z-index:2}
+        .menu-banner-content .mb-name{font-size:1.25rem;font-weight:800}
+        .menu-banner-content .mb-sub{font-size:0.8rem;opacity:0.9;margin-top:0.15rem}
+        .menu-banner-content .mb-count{display:inline-block;margin-top:0.45rem;background:rgba(255,255,255,0.2);backdrop-filter:blur(4px);font-size:0.68rem;font-weight:700;padding:0.25rem 0.65rem;border-radius:20px}
+        .menu-back-btn{position:absolute;top:1rem;left:1rem;z-index:5;width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,0.42);color:white;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;backdrop-filter:blur(4px);font-size:0.95rem}
+        .menu-swipe-tag{position:absolute;top:1rem;right:1rem;z-index:5;background:rgba(0,0,0,0.42);color:white;font-size:0.62rem;font-weight:600;padding:0.3rem 0.6rem;border-radius:20px;backdrop-filter:blur(4px);display:flex;align-items:center;gap:0.3rem}
+        .menu-nav-arrow{position:fixed;top:95px;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.95);color:#1e3a5f;display:none;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,0.18);cursor:pointer;z-index:2600;border:none;font-size:0.9rem}
+        .menu-nav-arrow.mn-left{left:0.6rem}
+        .menu-nav-arrow.mn-right{right:0.6rem}
+        .menu-content-track{padding:0.9rem 0 2rem}
+        @media(min-width:640px){.restaurant-grid{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}}
         @media(max-width:480px){
             .logo span{font-size:0.9rem}
             .products-grid{grid-template-columns:repeat(2,1fr)}
@@ -365,7 +398,7 @@
     <div class="sidebar-nav">
         <div class="nav-section">
             <div class="nav-section-title">Restaurants</div>
-            <div class="nav-item active" onclick="showSection('all',this)" data-label="All Items"><i class="fas fa-th-large"></i><span>All Items</span></div>
+            <div class="nav-item active" onclick="goHome(this)" data-label="All Items"><i class="fas fa-th-large"></i><span>All Restaurants</span></div>
             <div id="sidebarRestaurantList"></div>
         </div>
         <div class="admin-section" id="sidebarAdminSection" style="display:none">
@@ -423,9 +456,10 @@
                     <div class="form-group"><label class="form-label">Tagline</label><input type="text" class="form-input" id="newRestSubtitle" placeholder="e.g. Best Broast in Matli"></div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group"><label class="form-label">Icon</label><select class="form-select" id="newRestIcon"><option value="fa-utensils">🍴 Utensils</option><option value="fa-pizza-slice">🍕 Pizza</option><option value="fa-bowl-rice">🍛 Biryani</option><option value="fa-bread-slice">🍞 Bakery</option><option value="fa-burger">🍔 Burger</option><option value="fa-star">⭐ Star</option><option value="fa-fire">🔥 Fire</option><option value="fa-drumstick-bite">🍗 Chicken</option></select></div>
-                    <div class="form-group"><label class="form-label">Color Theme</label><select class="form-select" id="newRestColor"><option value="ipp">🔴 Red</option><option value="almadina">🟢 Green</option><option value="domino">🔵 Blue</option><option value="siraj">🟠 Orange</option><option value="friend">🟣 Purple</option><option value="special">🩷 Pink</option><option value="deals">🟡 Gold</option></select></div>
+                    <div class="form-group"><label class="form-label">Icon</label><select class="form-select" id="newRestIcon"><option value="fa-utensils">🍴 Utensils</option><option value="fa-pizza-slice">🍕 Pizza</option><option value="fa-bowl-rice">🍛 Biryani</option><option value="fa-bread-slice">🍞 Bakery</option><option value="fa-burger">🍔 Burger</option><option value="fa-star">⭐ Star</option><option value="fa-fire">🔥 Fire</option><option value="fa-drumstick-bite">🍗 Chicken</option><option value="fa-cart-shopping">🛒 Grocery Cart</option><option value="fa-store">🏬 Store</option><option value="fa-pills">💊 Pills</option><option value="fa-briefcase-medical">⚕️ Medical</option></select></div>
+                    <div class="form-group"><label class="form-label">Color Theme</label><select class="form-select" id="newRestColor"><option value="ipp">🔴 Red</option><option value="almadina">🟢 Green</option><option value="domino">🔵 Blue</option><option value="siraj">🟠 Orange</option><option value="friend">🟣 Purple</option><option value="special">🩷 Pink</option><option value="deals">🟡 Gold</option><option value="grocerytheme">🥦 Grocery Green</option><option value="marttheme">🏪 Mart Teal</option><option value="medtheme">⚕️ Medical Red</option><option value="genstoretheme">🛍️ Store Indigo</option></select></div>
                 </div>
+                <div class="form-group"><label class="form-label">Restaurant Image URL (optional)</label><input type="text" class="form-input" id="newRestImage" placeholder="https://... (jitna acha photo, utna acha look)"></div>
                 <button class="admin-btn" onclick="addRestaurant()" style="margin-top:0.4rem"><i class="fas fa-store"></i> Restaurant Add Karein</button>
             </div>
             <div style="border-top:2px solid #e2e8f0;padding-top:1.1rem">
@@ -495,8 +529,9 @@
         <input type="hidden" id="editRestKey">
         <div class="form-group"><label class="form-label">Restaurant Name</label><input type="text" class="form-input" id="editRestName"></div>
         <div class="form-group"><label class="form-label">Tagline</label><input type="text" class="form-input" id="editRestSubtitle"></div>
-        <div class="form-group"><label class="form-label">Icon</label><select class="form-select" id="editRestIcon"><option value="fa-utensils">🍴 Utensils</option><option value="fa-pizza-slice">🍕 Pizza</option><option value="fa-bowl-rice">🍛 Biryani</option><option value="fa-bread-slice">🍞 Bakery</option><option value="fa-burger">🍔 Burger</option><option value="fa-star">⭐ Star</option><option value="fa-fire">🔥 Fire</option><option value="fa-drumstick-bite">🍗 Chicken</option></select></div>
-        <div class="form-group"><label class="form-label">Color Theme</label><select class="form-select" id="editRestColor"><option value="ipp">🔴 Red</option><option value="almadina">🟢 Green</option><option value="domino">🔵 Blue</option><option value="siraj">🟠 Orange</option><option value="friend">🟣 Purple</option><option value="special">🩷 Pink</option><option value="deals">🟡 Gold</option></select></div>
+        <div class="form-group"><label class="form-label">Icon</label><select class="form-select" id="editRestIcon"><option value="fa-utensils">🍴 Utensils</option><option value="fa-pizza-slice">🍕 Pizza</option><option value="fa-bowl-rice">🍛 Biryani</option><option value="fa-bread-slice">🍞 Bakery</option><option value="fa-burger">🍔 Burger</option><option value="fa-star">⭐ Star</option><option value="fa-fire">🔥 Fire</option><option value="fa-drumstick-bite">🍗 Chicken</option><option value="fa-cart-shopping">🛒 Grocery Cart</option><option value="fa-store">🏬 Store</option><option value="fa-pills">💊 Pills</option><option value="fa-briefcase-medical">⚕️ Medical</option></select></div>
+        <div class="form-group"><label class="form-label">Color Theme</label><select class="form-select" id="editRestColor"><option value="ipp">🔴 Red</option><option value="almadina">🟢 Green</option><option value="domino">🔵 Blue</option><option value="siraj">🟠 Orange</option><option value="friend">🟣 Purple</option><option value="special">🩷 Pink</option><option value="deals">🟡 Gold</option><option value="grocerytheme">🥦 Grocery Green</option><option value="marttheme">🏪 Mart Teal</option><option value="medtheme">⚕️ Medical Red</option><option value="genstoretheme">🛍️ Store Indigo</option></select></div>
+        <div class="form-group"><label class="form-label">Restaurant Image URL (optional)</label><input type="text" class="form-input" id="editRestImage" placeholder="https://..."></div>
         <button class="admin-btn" onclick="saveRestaurantEdit()"><i class="fas fa-save"></i> Save Changes</button>
     </div>
 </div>
@@ -533,6 +568,22 @@
         <div style="text-align:center;padding:4rem 1rem;color:#64748b"><div style="font-size:2.5rem;margin-bottom:1rem">⏳</div><p>Restaurants load ho rahe hain...</p></div>
     </div>
 </main>
+
+<!-- Restaurant Menu Slide View -->
+<button class="menu-nav-arrow mn-left" id="menuArrowLeft" onclick="slideToRestaurant(-1)"><i class="fas fa-chevron-left"></i></button>
+<button class="menu-nav-arrow mn-right" id="menuArrowRight" onclick="slideToRestaurant(1)"><i class="fas fa-chevron-right"></i></button>
+<div class="menu-view-overlay" id="menuViewOverlay">
+    <div class="menu-banner" id="menuBanner">
+        <button class="menu-back-btn" onclick="closeRestaurantMenu()"><i class="fas fa-arrow-left"></i></button>
+        <span class="menu-swipe-tag"><i class="fas fa-arrows-left-right"></i> Slide karein</span>
+        <div class="menu-banner-content">
+            <div class="mb-name" id="menuRestName"></div>
+            <div class="mb-sub" id="menuRestSub"></div>
+            <span class="mb-count" id="menuItemCount"></span>
+        </div>
+    </div>
+    <div class="container menu-content-track" id="menuContent"></div>
+</div>
 
 <!-- Cart Sidebar -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
@@ -787,6 +838,78 @@ special:{name:"Special Flavor",icon:"fa-star",class:"special",subtitle:"Premium 
 {id:117,name:"Special Pasta",price:499,emoji:"🍝",variation:"Regular"},{id:118,name:"Creamy Pasta",price:599,emoji:"🍝",variation:"Regular"},
 {id:119,name:"Chicken Shawarma",price:199,emoji:"🌯",variation:"Regular"},{id:120,name:"Zinger Shawarma",price:249,emoji:"🌯",variation:"Regular"},
 {id:121,name:"Loaded Fries",price:499,emoji:"🍟",variation:"Regular"},{id:122,name:"Pizza Fries",price:549,emoji:"🍟",variation:"Regular"}
+]},
+groceries:{name:"Dastak Groceries",icon:"fa-cart-shopping",class:"grocerytheme",subtitle:"Rozmarra ka Grocery Samaan - Ghar Baithe",image:"",products:[
+{id:2001,name:"Sella Basmati Rice 1kg",price:320,emoji:"🍚"},
+{id:2002,name:"Wheat Atta (Aata) 5kg",price:850,emoji:"🌾"},
+{id:2003,name:"Sugar (Cheeni) 1kg",price:175,emoji:"🍬"},
+{id:2004,name:"Cooking Oil (Dalda) 1L",price:650,emoji:"🛢️"},
+{id:2005,name:"Banaspati Ghee 1kg",price:680,emoji:"🧈"},
+{id:2006,name:"Chana Daal 1kg",price:320,emoji:"🥘"},
+{id:2007,name:"Masoor Daal 1kg",price:340,emoji:"🥘"},
+{id:2008,name:"Iodized Salt 800g",price:90,emoji:"🧂"},
+{id:2009,name:"Lipton Yellow Label Tea 190g",price:340,emoji:"🍵"},
+{id:2010,name:"Shan Biryani Masala 60g",price:123,emoji:"🍛"},
+{id:2011,name:"National Mixed Pickle 320g",price:222,emoji:"🥒"},
+{id:2012,name:"Nestle UHT Milk 1L",price:320,emoji:"🥛"},
+{id:2013,name:"Olpers Milk 1L",price:310,emoji:"🥛"},
+{id:2014,name:"Eggs (Dozen)",price:380,emoji:"🥚"},
+{id:2015,name:"Bread - Large Loaf",price:170,emoji:"🍞"},
+{id:2016,name:"LU Prince Chocolate Biscuit Pack",price:199,emoji:"🍪"},
+{id:2017,name:"Lays Chips",price:100,emoji:"🍟"},
+{id:2018,name:"Mountain Dew 1.5L",price:178,emoji:"🥤"},
+{id:2019,name:"Coca Cola 1.5L",price:150,emoji:"🥤"},
+{id:2020,name:"National Synthetic Vinegar 300ml",price:94,emoji:"🍶"},
+{id:2021,name:"Rooh Afza 800ml",price:450,emoji:"🧃"},
+{id:2022,name:"Basmati Rice Premium 5kg",price:1600,emoji:"🍚"},
+{id:2023,name:"Red Chilli Powder 200g",price:180,emoji:"🌶️"},
+{id:2024,name:"Turmeric (Haldi) Powder 200g",price:150,emoji:"🟡"}
+]},
+mart:{name:"Dastak Mart",icon:"fa-store",class:"marttheme",subtitle:"Coming Soon - Admin Panel se Products Add Karein",image:"",products:[
+]},
+medical:{name:"Dastak Medical Store",icon:"fa-briefcase-medical",class:"medtheme",subtitle:"Medicines & Healthcare - Ghar Tak Delivery",image:"",products:[
+{id:2201,name:"Panadol Tablets (20s)",price:60,emoji:"💊"},
+{id:2202,name:"Panadol Extra (20s)",price:90,emoji:"💊"},
+{id:2203,name:"Disprin Tablets (10s)",price:40,emoji:"💊"},
+{id:2204,name:"Brufen 400mg (10 Tablets)",price:85,emoji:"💊"},
+{id:2205,name:"Augmentin 625mg (6 Tablets)",price:450,emoji:"💊"},
+{id:2206,name:"ORS Sachet",price:25,emoji:"🧃"},
+{id:2207,name:"Surgical Face Mask (Box of 50)",price:500,emoji:"😷"},
+{id:2208,name:"Hand Sanitizer 250ml",price:250,emoji:"🧴"},
+{id:2209,name:"Digital Thermometer",price:650,emoji:"🌡️"},
+{id:2210,name:"First Aid Bandage Roll",price:120,emoji:"🩹"},
+{id:2211,name:"Vitamin C Tablets (30s)",price:550,emoji:"💊"},
+{id:2212,name:"Centrum Multivitamin (30 Tabs)",price:1800,emoji:"💊"},
+{id:2213,name:"Baby Diapers - Medium (Pack of 20)",price:950,emoji:"👶"},
+{id:2214,name:"Cough Syrup 100ml",price:180,emoji:"🍯"},
+{id:2215,name:"Dettol Antiseptic Liquid 125ml",price:220,emoji:"🧴"},
+{id:2216,name:"Digital BP Monitor",price:4500,emoji:"🩺"},
+{id:2217,name:"Glucometer with Strips",price:2800,emoji:"🩺"},
+{id:2218,name:"Calamine Lotion 100ml",price:280,emoji:"🧴"},
+{id:2219,name:"Eno Sachet",price:35,emoji:"🧂"},
+{id:2220,name:"Zincovit Syrup - Kids 200ml",price:320,emoji:"🍯"}
+]},
+generalstore:{name:"Dastak General Store",icon:"fa-bag-shopping",class:"genstoretheme",subtitle:"Sab Kuch Ek Jaga - Grocery, Personal Care & Electronics",image:"",products:[
+{id:2101,name:"Himalaya Purifying Neem Face Wash 50ml",price:195,emoji:"🧴"},
+{id:2102,name:"Colgate Max Cavity Protection Toothpaste 200g",price:374,emoji:"🪥"},
+{id:2103,name:"Colgate Premier Clean Toothbrush (3pcs)",price:144,emoji:"🪥"},
+{id:2104,name:"Mother Care Baby Lotion 36ml",price:118,emoji:"🍼"},
+{id:2105,name:"AirPods Pro 2 (2nd Gen)",price:989,emoji:"🎧"},
+{id:2106,name:"USB to C-Type Cable",price:295,emoji:"🔌"},
+{id:2107,name:"iPhone Adapter 20W",price:616,emoji:"🔌"},
+{id:2108,name:"JBL M3-T Mini Wireless Speaker",price:990,emoji:"🔊"},
+{id:2109,name:"Miady Power Bank 10,000mAh",price:1999,emoji:"🔋"},
+{id:2110,name:"Dabur Vatika Hair Oil 200ml",price:400,emoji:"💆"},
+{id:2111,name:"Oateo Quick Cooking Oats 400g",price:592,emoji:"🥣"},
+{id:2112,name:"Colgate Zig Zag Soft Toothbrush 2pcs",price:144,emoji:"🪥"},
+{id:2113,name:"Skin White 7 Day Beauty Cream 250g",price:252,emoji:"🧴"},
+{id:2114,name:"Pretty Watermelon Face Wash 100g",price:180,emoji:"🧴"},
+{id:2115,name:"Toilet Tissue Rolls (Pack of 10)",price:350,emoji:"🧻"},
+{id:2116,name:"Dishwashing Liquid 500ml",price:280,emoji:"🧽"},
+{id:2117,name:"Mosquito Repellent Spray",price:450,emoji:"🦟"},
+{id:2118,name:"Jhaadu (Broom)",price:250,emoji:"🧹"},
+{id:2119,name:"Stationery Notebook Pack",price:150,emoji:"📓"},
+{id:2120,name:"Mobile Screen Protector",price:250,emoji:"📱"}
 ]}};
 
 var categories=JSON.parse(localStorage.getItem('dastakCategories'))||JSON.parse(JSON.stringify(defaultData));
@@ -798,205 +921,4 @@ function getProductTimingHTML(p){if(!p.timing||!p.timing.enabled)return'<span cl
 function getUnavailableReason(p){if(!p.timing||!p.timing.enabled)return'Abhi available nahi';return'Available '+formatTime(p.timing.startTime)+' se '+formatTime(p.timing.endTime);}
 
 function getVariationTypes(p){if(p.variationTypes&&p.variationTypes.length>0)return p.variationTypes;if(p.variation){var opts=parseOldVariation(p.variation,p.price);if(opts.length>0)return[{type:"Option",options:opts}];}return[];}
-function parseOldVariation(str,basePrice){if(!str||!str.trim())return[];var parts=str.split(',');var result=[];var hasPrice=false;for(var i=0;i<parts.length;i++){if(parts[i].indexOf(':')>=0){hasPrice=true;break;}}for(var i=0;i<parts.length;i++){var p=parts[i].trim();if(!p)continue;if(hasPrice){var ci=p.lastIndexOf(':');if(ci>0){var nm=p.substring(0,ci).trim();var pr=parseInt(p.substring(ci+1).trim());result.push({name:nm,price:isNaN(pr)?basePrice:pr});}else{result.push({name:p,price:basePrice});}}else{result.push({name:p,price:basePrice});}}return result;}
-function getDisplayPrice(p){var vt=getVariationTypes(p);if(vt.length>0){var opts=vt[0].options;if(opts.length>1){var prices=[];for(var i=0;i<opts.length;i++)prices.push(opts[i].price);var mn=Math.min.apply(null,prices),mx=Math.max.apply(null,prices);return mn===mx?'Rs. '+mn:'Rs. '+mn+' - '+mx;}if(opts.length===1)return'Rs. '+opts[0].price;}return'Rs. '+p.price;}
-function getFirstVariationLabel(p){var vt=getVariationTypes(p);if(vt.length>0&&vt[0].options.length>0)return vt[0].options[0].name;if(p.variation){return p.variation.split(',')[0].split(':')[0].trim();}return'';}
-
-var varBuilderCounter=0;
-function addVarTypeBuilder(mode){var c=document.getElementById(mode==='add'?'addVarBuilders':'editVarBuilders');var id='vb_'+(++varBuilderCounter);var d=document.createElement('div');d.className='var-builder';d.id=id;d.innerHTML='<div class="var-builder-header"><input type="text" placeholder="Variation Type (e.g. Size)" class="var-type-name"><button class="var-remove-type" onclick="this.closest(\'.var-builder\').remove()"><i class="fas fa-times"></i></button></div><div class="var-opt-row"><input type="text" placeholder="Option name" class="var-opt-name"><input type="number" placeholder="Price" class="var-opt-price"><button class="var-opt-remove" onclick="this.closest(\'.var-opt-row\').remove()"><i class="fas fa-times"></i></button></div><button type="button" class="var-add-opt" onclick="addVarOptRow(this)"><i class="fas fa-plus"></i> Option Add Karein</button>';c.appendChild(d);}
-function addVarOptRow(btn){var r=document.createElement('div');r.className='var-opt-row';r.innerHTML='<input type="text" placeholder="Option name" class="var-opt-name"><input type="number" placeholder="Price" class="var-opt-price"><button class="var-opt-remove" onclick="this.closest(\'.var-opt-row\').remove()"><i class="fas fa-times"></i></button>';btn.parentNode.insertBefore(r,btn);}
-function collectVariationTypes(cid){var c=document.getElementById(cid);if(!c)return[];var bs=c.querySelectorAll('.var-builder');var result=[];for(var i=0;i<bs.length;i++){var b=bs[i];var tn=b.querySelector('.var-type-name').value.trim();if(!tn)continue;var ors=b.querySelectorAll('.var-opt-row');var opts=[];for(var j=0;j<ors.length;j++){var n=ors[j].querySelector('.var-opt-name').value.trim();var pr=parseInt(ors[j].querySelector('.var-opt-price').value);if(n)opts.push({name:n,price:isNaN(pr)?0:pr});}if(opts.length>0)result.push({type:tn,options:opts});}return result;}
-function buildVarEditorsFromData(cid,data){var c=document.getElementById(cid);c.innerHTML='';if(!data||!data.length)return;for(var i=0;i<data.length;i++){var vt=data[i];var id='vb_'+(++varBuilderCounter);var d=document.createElement('div');d.className='var-builder';d.id=id;var oh='';for(var j=0;j<vt.options.length;j++){oh+='<div class="var-opt-row"><input type="text" placeholder="Option" class="var-opt-name" value="'+vt.options[j].name+'"><input type="number" placeholder="Price" class="var-opt-price" value="'+vt.options[j].price+'"><button class="var-opt-remove" onclick="this.closest(\'.var-opt-row\').remove()"><i class="fas fa-times"></i></button></div>';}d.innerHTML='<div class="var-builder-header"><input type="text" placeholder="Variation Type" class="var-type-name" value="'+vt.type+'"><button class="var-remove-type" onclick="this.closest(\'.var-builder\').remove()"><i class="fas fa-times"></i></button></div>'+oh+'<button type="button" class="var-add-opt" onclick="addVarOptRow(this)"><i class="fas fa-plus"></i> Option Add Karein</button>';c.appendChild(d);}}
-
-function showAdminLogin(){document.getElementById('loginOverlay').classList.add('active');setTimeout(function(){document.getElementById('adminPassword').focus();},100);}
-function hideAdminLogin(){document.getElementById('loginOverlay').classList.remove('active');document.getElementById('adminPassword').value='';}
-function loginAdmin(){if(document.getElementById('adminPassword').value===ADMIN_PASSWORD){isAdminLoggedIn=true;hideAdminLogin();document.getElementById('adminHeaderBtn').classList.add('hidden');document.getElementById('logoutFab').style.display='flex';document.getElementById('notifBell').style.display='flex';document.getElementById('sidebarAdminSection').style.display='block';renderSidebarNav();fillCategoryDropdowns();renderSections();}else{alert('Wrong password!');}}
-function logoutAdmin(){if(confirm('Logout karna chahte hain?'))location.reload();}
-function handleLogout(){logoutAdmin();}
-
-function toggleSidebar(){document.getElementById('sidebarOverlay').classList.toggle('active');document.getElementById('sidebar').classList.toggle('active');}
-function showSection(s,el){currentSection=s;var items=document.querySelectorAll('#sidebar .nav-item');for(var i=0;i<items.length;i++)items[i].classList.remove('active');if(el)el.classList.add('active');renderSections();toggleSidebar();}
-function renderSidebarNav(){var c=document.getElementById('sidebarRestaurantList');if(!c)return;var h='';var keys=Object.keys(categories);for(var i=0;i<keys.length;i++){var k=keys[i],cat=categories[k];h+='<div class="nav-item" onclick="showSection(\''+k+'\',this)" data-label="'+cat.name+'"><i class="fas '+cat.icon+'"></i><span>'+cat.name+'</span></div>';}c.innerHTML=h;}
-function filterSidebarNav(){var q=document.getElementById('sidebarSearchInput').value.toLowerCase();var items=document.querySelectorAll('#sidebarRestaurantList .nav-item');for(var i=0;i<items.length;i++){var l=items[i].getAttribute('data-label')||'';items[i].style.display=l.toLowerCase().indexOf(q)>=0?'flex':'none';}}
-
-function renderProductIcon(p){if(p&&p.image)return'<img src="'+p.image+'" alt="" loading="lazy" onerror="this.parentElement.innerHTML=\''+(p.emoji||'📦').replace(/'/g,"\\'")+'\'">';return(p&&p.emoji)?p.emoji:'📦';}
-function createSectionHTML(key,cat){
-    var h='<div class="section-header"><h2 class="section-title"><i class="fas '+cat.icon+'"></i> '+cat.name+'</h2><span class="section-badge">'+cat.products.length+' Items</span></div>'+
-    '<div class="category-card"><div class="category-header '+cat.class+'"><div class="category-icon"><i class="fas '+cat.icon+'"></i></div><div><div class="category-title">'+cat.name+'</div><div class="category-subtitle">'+cat.subtitle+'</div></div></div><div class="products-container"><div class="products-grid">';
-    for(var i=0;i<cat.products.length;i++){
-        var p=cat.products[i];var av=isProductAvailable(p);
-        var uc=av?'':' unavailable';
-        var uo=av?'':'<div class="unavailable-overlay"><span><i class="fas fa-moon"></i><br>'+getUnavailableReason(p)+'</span></div>';
-        var db=p.price>1000?'<span class="deal-badge">DEAL</span>':'';
-        var vt=getFirstVariationLabel(p)?'<div class="product-variation">'+getFirstVariationLabel(p)+'</div>':'';
-        var oc=av?' onclick="openProductDetail('+p.id+',\''+key+'\')"':'';
-        var bc=av?' onclick="event.stopPropagation();openProductDetail('+p.id+',\''+key+'\')"':' disabled';
-        h+='<div class="product-item'+uc+'"'+oc+'>'+db+uo+'<div class="product-img">'+renderProductIcon(p)+'</div><div class="product-name">'+p.name+'</div><div class="product-price">'+getDisplayPrice(p)+'</div>'+vt+'<button class="add-btn"'+bc+'><i class="fas '+(av?'fa-plus':'fa-moon')+'"></i> '+(av?'Add':'Off')+'</button></div>';
-    }
-    h+='</div></div></div>';return h;
-}
-function renderSections(){var c=document.getElementById('mainContainer');var h='';if(currentSection==='all'){var keys=Object.keys(categories);for(var i=0;i<keys.length;i++)h+=createSectionHTML(keys[i],categories[keys[i]]);}else if(categories[currentSection]){h+=createSectionHTML(currentSection,categories[currentSection]);}c.innerHTML=h;}
-
-function searchProducts(){
-    var raw=document.getElementById('searchInput').value;var q=raw.toLowerCase().trim();var c=document.getElementById('mainContainer');
-    if(q===''){renderSections();return;}
-    var results=[];var keys=Object.keys(categories);
-    for(var i=0;i<keys.length;i++){var k=keys[i],cat=categories[k];var m=[];for(var j=0;j<cat.products.length;j++){var p=cat.products[j];if(p.name.toLowerCase().indexOf(q)>=0||(p.variation&&p.variation.toLowerCase().indexOf(q)>=0)||cat.name.toLowerCase().indexOf(q)>=0)m.push(p);}if(m.length>0)results.push({key:k,category:cat,products:m});}
-    if(results.length===0){c.innerHTML='<div style="text-align:center;padding:3rem 1rem;color:#64748b"><div style="font-size:3rem;margin-bottom:1rem">🔍</div><h3>"'+raw+'" nahi mila</h3><button onclick="document.getElementById(\'searchInput\').value=\'\';renderSections();" style="background:#1e3a5f;color:white;border:none;border-radius:10px;padding:0.55rem 1.1rem;cursor:pointer;font-weight:600;margin-top:0.75rem"><i class="fas fa-times"></i> Clear</button></div>';return;}
-    var h='';for(var i=0;i<results.length;i++){var r=results[i];h+='<div class="section-header"><h2 class="section-title"><i class="fas '+r.category.icon+'"></i> '+r.category.name+'</h2><span class="section-badge">'+r.products.length+' Found</span></div><div class="category-card"><div class="category-header '+r.category.class+'"><div class="category-icon"><i class="fas '+r.category.icon+'"></i></div><div><div class="category-title">'+r.category.name+'</div></div></div><div class="products-container"><div class="products-grid">';for(var j=0;j<r.products.length;j++){var p=r.products[j];h+='<div class="product-item" onclick="openProductDetail('+p.id+',\''+r.key+'\')"><div class="product-img">'+renderProductIcon(p)+'</div><div class="product-name">'+p.name+'</div><div class="product-price">'+getDisplayPrice(p)+'</div>'+(getFirstVariationLabel(p)?'<div class="product-variation">'+getFirstVariationLabel(p)+'</div>':'')+'<button class="add-btn" onclick="event.stopPropagation();openProductDetail('+p.id+',\''+r.key+'\')"><i class="fas fa-plus"></i> Add</button></div>';}h+='</div></div></div>';}c.innerHTML=h;
-}
-
-var _pd={productId:null,categoryKey:null,qty:1,selectedOptions:{}};
-function getProductById(ck,pid){if(!categories[ck])return null;for(var i=0;i<categories[ck].products.length;i++){if(categories[ck].products[i].id===pid)return categories[ck].products[i];}return null;}
-function openProductDetail(productId,categoryKey){
-    var p=getProductById(categoryKey,productId);if(!p)return;
-    if(!isProductAvailable(p)){alert(''+getUnavailableReason(p));return;}
-    var cat=categories[categoryKey];
-    _pd={productId:productId,categoryKey:categoryKey,qty:1,selectedOptions:{}};
-    document.getElementById('pdRestaurantName').textContent=cat.name;
-    var iw=document.getElementById('pdImage');if(p.image){iw.innerHTML='<img src="'+p.image+'" alt="">';}else{iw.innerHTML=p.emoji||'📦';}
-    document.getElementById('pdName').textContent=p.name;
-    document.getElementById('pdBasePrice').textContent=getDisplayPrice(p);
-    var vtypes=getVariationTypes(p);var vs=document.getElementById('pdVariationsSection');
-    if(vtypes.length>0){var h='';for(var i=0;i<vtypes.length;i++){var vt=vtypes[i];_pd.selectedOptions[vt.type]=vt.options[0];h+='<div class="pd-var-group"><span class="pd-var-type-label">'+vt.type+'</span><div class="pd-var-options">';for(var j=0;j<vt.options.length;j++){var opt=vt.options[j];h+='<button class="pd-var-opt'+(j===0?' active':'')+'" data-vtype="'+vt.type+'" data-vname="'+opt.name.replace(/"/g,'&quot;')+'" data-vprice="'+opt.price+'" onclick="pdSelectOpt(this)"><span class="vname">'+opt.name+'</span><span class="vprice">'+(opt.price>0?'Rs. '+opt.price:'')+'</span></button>';}h+='</div></div>';}vs.innerHTML=h;}else{vs.innerHTML='';}
-    document.getElementById('pdQty').textContent='1';_pd.qty=1;pdUpdateTotal();
-    document.getElementById('pdAddBtn').disabled=false;
-    document.getElementById('pdOverlay').classList.add('active');document.body.style.overflow='hidden';
-}
-function pdSelectOpt(btn){var vt=btn.getAttribute('data-vtype');var vn=btn.getAttribute('data-vname');var vp=parseInt(btn.getAttribute('data-vprice'));var sib=btn.parentNode.querySelectorAll('.pd-var-opt');for(var i=0;i<sib.length;i++)sib[i].classList.remove('active');btn.classList.add('active');_pd.selectedOptions[vt]={name:vn,price:vp};pdUpdateTotal();}
-function pdQtyChange(d){_pd.qty=Math.max(1,_pd.qty+d);document.getElementById('pdQty').textContent=_pd.qty;pdUpdateTotal();}
-function pdCalcPrice(){var p=getProductById(_pd.categoryKey,_pd.productId);if(!p)return 0;var vtypes=getVariationTypes(p);if(vtypes.length>0){var total=0;var keys=Object.keys(_pd.selectedOptions);for(var i=0;i<keys.length;i++){var sel=_pd.selectedOptions[keys[i]];if(sel)total+=sel.price;}return total>0?total:p.price;}return p.price;}
-function pdUpdateTotal(){var pr=pdCalcPrice();document.getElementById('pdTotalPrice').textContent='Rs. '+(pr*_pd.qty);}
-function playCartSound(){try{var ctx=new(window.AudioContext||window.webkitAudioContext)();var o=ctx.createOscillator();var g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=800;g.gain.value=0.08;o.start();o.stop(ctx.currentTime+0.1);}catch(e){}}
-function pdAddToCart(){
-    var p=getProductById(_pd.categoryKey,_pd.productId);if(!p)return;
-    var unitPrice=pdCalcPrice();
-    var varParts=[];var vkeys=Object.keys(_pd.selectedOptions);for(var i=0;i<vkeys.length;i++){var sel=_pd.selectedOptions[vkeys[i]];if(sel)varParts.push(sel.name);}
-    var varStr=varParts.join(', ');var cartKey=_pd.productId+'__'+varStr;
-    var ex=null;for(var i=0;i<cart.length;i++){if(cart[i]._cartKey===cartKey){ex=cart[i];break;}}
-    if(ex){ex.quantity+=_pd.qty;}else{cart.push({id:_pd.productId,_cartKey:cartKey,name:p.name,price:unitPrice,emoji:p.emoji,image:p.image||'',variation:varStr,quantity:_pd.qty,category:_pd.categoryKey});}
-    updateCartUI();playCartSound();closePdModalDirect();
-    var t=document.createElement('div');t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1e3a5f;color:white;padding:0.5rem 1rem;border-radius:50px;font-size:0.8rem;font-weight:600;z-index:9999;pointer-events:none';t.innerHTML='Cart mein add hua!';document.body.appendChild(t);setTimeout(function(){if(t.parentNode)t.parentNode.removeChild(t);},2000);
-}
-function closePdModalDirect(){document.getElementById('pdOverlay').classList.remove('active');document.body.style.overflow='';}
-function closePdModal(e){if(e.target===document.getElementById('pdOverlay'))closePdModalDirect();}
-
-/* CART TOGGLE - collapsible details */
-function toggleCartDetails(){
-    cartDetailsOpen=!cartDetailsOpen;
-    var panel=document.getElementById('cartDetailsPanel');var icon=document.getElementById('cartToggleIcon');var label=document.getElementById('cartToggleLabel');
-    if(cartDetailsOpen){panel.classList.add('open');icon.classList.add('rotated');label.textContent='Minimize';}
-    else{panel.classList.remove('open');icon.classList.remove('rotated');label.textContent='Details & Checkout';}
-}
-
-function updateQuantity(ck,ch){for(var i=0;i<cart.length;i++){if(cart[i]._cartKey===ck){cart[i].quantity+=ch;if(cart[i].quantity<=0)cart.splice(i,1);break;}}updateCartUI();}
-function removeFromCart(ck){cart=cart.filter(function(c){return c._cartKey!==ck;});updateCartUI();}
-function updateCartUI(){
-    var cc=document.getElementById('cartCount');var ci=document.getElementById('cartItems');var cf=document.getElementById('cartFooter');
-    var ctEl=document.getElementById('cartTotal');var csEl=document.getElementById('cartSubtotal');var cstEl=document.getElementById('cartSummaryTotal');
-    var DEL=100;var total=0,sub=0;for(var i=0;i<cart.length;i++){total+=cart[i].quantity;sub+=cart[i].price*cart[i].quantity;}
-    cc.textContent=total;
-    if(cart.length===0){ci.innerHTML='<div class="empty-cart"><i class="fas fa-shopping-basket"></i><p>Your cart is empty</p></div>';cf.style.display='none';}
-    else{
-        var h='';for(var i=0;i<cart.length;i++){var it=cart[i];var k=it._cartKey;var sk=k.replace(/'/g,"\\'");
-        h+='<div class="cart-item"><div class="cart-item-img">'+renderProductIcon(it)+'</div><div class="cart-item-details"><div class="cart-item-name">'+it.name+'</div>'+(it.variation?'<div class="cart-item-variants">'+it.variation+'</div>':'')+'<div class="cart-item-price">Rs. '+it.price+' each</div><div class="quantity-controls"><button class="qty-btn" onclick="updateQuantity(\''+sk+'\',-1)"><i class="fas fa-minus"></i></button><span class="qty-value">'+it.quantity+'</span><button class="qty-btn" onclick="updateQuantity(\''+sk+'\',1)"><i class="fas fa-plus"></i></button></div></div><div class="remove-item" onclick="removeFromCart(\''+sk+'\')"><i class="fas fa-trash"></i></div></div>';}
-        ci.innerHTML=h;cf.style.display='block';
-        if(csEl)csEl.textContent='Rs. '+sub;if(ctEl)ctEl.textContent='Rs. '+(sub+DEL);if(cstEl)cstEl.textContent='Rs. '+(sub+DEL);
-    }
-}
-function toggleCart(){document.getElementById('cartOverlay').classList.toggle('active');document.getElementById('cartSidebar').classList.toggle('active');}
-function updatePaymentStyle(){var opts=document.querySelectorAll('.payment-option');for(var i=0;i<opts.length;i++)opts[i].classList.remove('selected');var sel=document.querySelector('input[name="paymentMethod"]:checked');if(sel)sel.closest('.payment-option').classList.add('selected');}
-
-/* WHATSAPP CHECKOUT - FIXED complete message */
-function checkoutWhatsApp(){
-    if(cart.length===0)return;
-    var addr=document.getElementById('deliveryAddress').value.trim();
-    if(!addr){if(!cartDetailsOpen)toggleCartDetails();alert('Delivery address likhein!');document.getElementById('deliveryAddress').focus();return;}
-    var pr=document.querySelector('input[name="paymentMethod"]:checked');
-    var pv=pr?pr.value:'cash';
-    var pl={cash:'Cash on Delivery',online:'Online Payment (EasyPaisa/JazzCash)',half:'Half Cash & Half Online'};
-    var DEL=100,sub=0;for(var i=0;i<cart.length;i++)sub+=cart[i].price*cart[i].quantity;var grand=sub+DEL;
-    var grouped={};for(var i=0;i<cart.length;i++){var c=cart[i].category;if(!grouped[c])grouped[c]=[];grouped[c].push(cart[i]);}
-    var lines='';var gk=Object.keys(grouped);
-    for(var i=0;i<gk.length;i++){
-        var ck=gk[i];lines+='*'+categories[ck].name+'*%0A';
-        for(var j=0;j<grouped[ck].length;j++){
-            var it=grouped[ck][j];
-            lines+=it.emoji+' '+encodeURIComponent(it.name);
-            if(it.variation)lines+=' ('+encodeURIComponent(it.variation)+')';
-            lines+='%0A  Qty: '+it.quantity+' x Rs.'+it.price+' = Rs.'+(it.quantity*it.price)+'%0A';
-        }
-        if(i<gk.length-1)lines+='%0A';
-    }
-    var msg='*DASTAK DELIVERY - NEW ORDER*%0AMatli%0A%0A'
-        +'*ORDER ITEMS:*%0A'
-        +'-----------------------------%0A'
-        +lines
-        +'-----------------------------%0A'
-        +'Items Total: Rs.'+sub+'%0A'
-        +'Delivery Charges: Rs.100%0A'
-        +'*GRAND TOTAL: Rs.'+grand+'*%0A%0A'
-        +'*Payment:* '+encodeURIComponent(pl[pv]||'Cash on Delivery')+'%0A%0A'
-        +'*Delivery Address:*%0A'
-        +encodeURIComponent(addr)+'%0A%0A'
-        +'Please confirm my order. Thank you!';
-    window.open('https://wa.me/923202609175?text='+msg,'_blank');
-}
-
-function openAdmin(){document.getElementById('adminOverlay').classList.add('active');document.getElementById('adminPanel').classList.add('active');toggleSidebar();fillCategoryDropdowns();renderAdminProducts();}
-function closeAdmin(e){if(e.target===document.getElementById('adminOverlay'))closeAdminDirect();}
-function closeAdminDirect(){document.getElementById('adminOverlay').classList.remove('active');document.getElementById('adminPanel').classList.remove('active');}
-function switchTab(tab,el){var tabs=document.querySelectorAll('.admin-tab');for(var i=0;i<tabs.length;i++)tabs[i].classList.remove('active');if(el)el.classList.add('active');var cts=document.querySelectorAll('.tab-content');for(var i=0;i<cts.length;i++)cts[i].classList.remove('active');var te=document.getElementById('tab-'+tab);if(te)te.classList.add('active');if(tab==='edit')renderAdminProducts();if(tab==='restaurants')renderAdminRestaurants();if(tab==='add'){document.getElementById('addVarBuilders').innerHTML='';document.getElementById('addTimingEnabled').checked=false;document.getElementById('addTimingFields').style.display='none';}}
-function fillCategoryDropdowns(){var o='';var keys=Object.keys(categories);for(var i=0;i<keys.length;i++)o+='<option value="'+keys[i]+'">'+categories[keys[i]].name+'</option>';var s1=document.getElementById('adminProductCategory'),s2=document.getElementById('editProductCategorySelect');if(s1)s1.innerHTML=o;if(s2)s2.innerHTML=o;}
-
-/* EDIT/DELETE - FIXED: shows ALL items */
-function renderAdminProducts(){
-    var sq='';var se=document.getElementById('adminEditSearch');if(se)sq=se.value.toLowerCase().trim();
-    var list=document.getElementById('adminProductsList');if(!list)return;
-    var h='';var keys=Object.keys(categories);var total=0,shown=0;
-    for(var i=0;i<keys.length;i++){
-        var k=keys[i],cat=categories[k];var catH='';
-        for(var j=0;j<cat.products.length;j++){
-            var p=cat.products[j];total++;
-            if(sq&&p.name.toLowerCase().indexOf(sq)<0&&!(p.variation&&p.variation.toLowerCase().indexOf(sq)>=0)&&cat.name.toLowerCase().indexOf(sq)<0)continue;
-            shown++;
-            var vt=getVariationTypes(p);var vi='';
-            if(vt.length>0){vi='<div class="product-var-admin">';for(var v=0;v<vt.length;v++){vi+=vt[v].type+': ';var on=[];for(var o=0;o<vt[v].options.length;o++)on.push(vt[v].options[o].name+' Rs.'+vt[v].options[o].price);vi+=on.join(', ');if(v<vt.length-1)vi+=' | ';}vi+='</div>';}
-            else if(p.variation){vi='<div class="product-var-admin">'+p.variation+'</div>';}
-            catH+='<div class="product-list-item"><div class="product-info"><div class="product-name-admin">'+p.emoji+' '+p.name+'</div><div class="product-price-admin">Rs. '+p.price+'</div>'+vi+getProductTimingHTML(p)+'</div><div class="product-actions"><button class="edit-btn" onclick="openEditModal(\''+k+'\','+p.id+')"><i class="fas fa-edit"></i></button><button class="delete-btn" onclick="deleteProduct(\''+k+'\','+p.id+')"><i class="fas fa-trash"></i></button></div></div>';
-        }
-        if(catH)h+='<div class="category-group"><div class="category-header-admin"><span><i class="fas '+cat.icon+'"></i> '+cat.name+'</span><span style="font-size:0.7rem;color:#64748b">'+cat.products.length+' items</span></div>'+catH+'</div>';
-    }
-    var ce=document.getElementById('adminEditCount');if(ce)ce.textContent=sq?shown+' of '+total+' items':total+' total items';
-    if(!h)h='<div style="text-align:center;padding:2rem;color:#64748b"><i class="fas fa-box-open" style="font-size:2rem;margin-bottom:0.5rem;display:block;opacity:0.4"></i>Koi item nahi mila</div>';
-    list.innerHTML=h;
-}
-
-function renderAdminRestaurants(){var list=document.getElementById('adminRestaurantsList');var h='';var keys=Object.keys(categories);for(var i=0;i<keys.length;i++){var k=keys[i],cat=categories[k];h+='<div class="restaurant-list-item"><div class="restaurant-info"><div class="restaurant-name-admin"><i class="fas '+cat.icon+'" style="color:#1e3a5f;margin-right:0.5rem"></i>'+cat.name+'</div><div class="restaurant-sub-admin">'+(cat.subtitle||'')+' - '+cat.products.length+' items</div></div><div class="product-actions"><button class="edit-btn" onclick="openEditRestModal(\''+k+'\')"><i class="fas fa-edit"></i></button><button class="delete-btn" onclick="deleteRestaurant(\''+k+'\')"><i class="fas fa-trash"></i></button></div></div>';}list.innerHTML=h||'<p style="color:#64748b;text-align:center;padding:1rem">Koi restaurant nahi.</p>';}
-function addRestaurant(){var name=document.getElementById('newRestName').value.trim();var sub=document.getElementById('newRestSubtitle').value.trim();var icon=document.getElementById('newRestIcon').value;var col=document.getElementById('newRestColor').value;if(!name){alert('Naam likhein!');return;}var key=name.toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'')+'_'+Date.now();categories[key]={name:name,icon:icon,class:col,subtitle:sub||name,products:[]};localStorage.setItem('dastakCategories',JSON.stringify(categories));document.getElementById('newRestName').value='';document.getElementById('newRestSubtitle').value='';renderSidebarNav();fillCategoryDropdowns();renderAdminRestaurants();renderSections();alert('"'+name+'" add ho gaya!');}
-function openEditRestModal(k){var cat=categories[k];document.getElementById('editRestKey').value=k;document.getElementById('editRestName').value=cat.name;document.getElementById('editRestSubtitle').value=cat.subtitle||'';document.getElementById('editRestIcon').value=cat.icon;document.getElementById('editRestColor').value=cat.class;document.getElementById('editRestOverlay').classList.add('active');document.getElementById('editRestModal').classList.add('active');}
-function closeEditRestModal(){document.getElementById('editRestOverlay').classList.remove('active');document.getElementById('editRestModal').classList.remove('active');}
-function saveRestaurantEdit(){var k=document.getElementById('editRestKey').value;categories[k].name=document.getElementById('editRestName').value.trim();categories[k].subtitle=document.getElementById('editRestSubtitle').value.trim();categories[k].icon=document.getElementById('editRestIcon').value;categories[k].class=document.getElementById('editRestColor').value;localStorage.setItem('dastakCategories',JSON.stringify(categories));closeEditRestModal();renderAdminRestaurants();fillCategoryDropdowns();renderSidebarNav();renderSections();alert('Update ho gaya!');}
-function deleteRestaurant(k){if(!confirm('"'+categories[k].name+'" delete karna chahte hain?'))return;delete categories[k];localStorage.setItem('dastakCategories',JSON.stringify(categories));renderAdminRestaurants();fillCategoryDropdowns();renderSidebarNav();renderSections();}
-
-function addProduct(){var name=document.getElementById('adminProductName').value.trim();var price=parseInt(document.getElementById('adminProductPrice').value);var cat=document.getElementById('adminProductCategory').value;var emoji=document.getElementById('adminProductEmoji').value.trim()||'📦';if(!name||!price){alert('Naam aur price zaroori hain!');return;}if(!categories[cat])return;var allIds=[];var keys=Object.keys(categories);for(var i=0;i<keys.length;i++){for(var j=0;j<categories[keys[i]].products.length;j++)allIds.push(categories[keys[i]].products[j].id);}var newId=allIds.length>0?Math.max.apply(null,allIds)+1:1;var np={id:newId,name:name,price:price,emoji:emoji};var vt=collectVariationTypes('addVarBuilders');if(vt.length>0)np.variationTypes=vt;if(document.getElementById('addTimingEnabled').checked){np.timing={enabled:true,startTime:document.getElementById('addTimingStart').value,endTime:document.getElementById('addTimingEnd').value};}categories[cat].products.push(np);localStorage.setItem('dastakCategories',JSON.stringify(categories));document.getElementById('adminProductName').value='';document.getElementById('adminProductPrice').value='';document.getElementById('adminProductEmoji').value='';document.getElementById('addVarBuilders').innerHTML='';document.getElementById('addTimingEnabled').checked=false;document.getElementById('addTimingFields').style.display='none';renderSections();alert('"'+name+'" add ho gaya!');}
-function openEditModal(catKey,productId){var p=null;for(var i=0;i<categories[catKey].products.length;i++){if(categories[catKey].products[i].id===productId){p=categories[catKey].products[i];break;}}if(!p)return;editingProduct={categoryKey:catKey,productId:productId};document.getElementById('editProductId').value=productId;document.getElementById('editProductOrigCategory').value=catKey;fillCategoryDropdowns();document.getElementById('editProductCategorySelect').value=catKey;document.getElementById('editProductName').value=p.name;document.getElementById('editProductPrice').value=p.price;document.getElementById('editProductEmoji').value=p.emoji||'';var vt=getVariationTypes(p);buildVarEditorsFromData('editVarBuilders',vt);if(p.timing&&p.timing.enabled){document.getElementById('editTimingEnabled').checked=true;document.getElementById('editTimingFields').style.display='flex';document.getElementById('editTimingStart').value=p.timing.startTime||'18:00';document.getElementById('editTimingEnd').value=p.timing.endTime||'01:30';}else{document.getElementById('editTimingEnabled').checked=false;document.getElementById('editTimingFields').style.display='none';}document.getElementById('editOverlay').classList.add('active');document.getElementById('editModal').classList.add('active');}
-function closeEditModal(){document.getElementById('editOverlay').classList.remove('active');document.getElementById('editModal').classList.remove('active');editingProduct=null;}
-function saveEdit(){if(!editingProduct)return;var oc=document.getElementById('editProductOrigCategory').value;var nc=document.getElementById('editProductCategorySelect').value;var pid=parseInt(document.getElementById('editProductId').value);var p=null;for(var i=0;i<categories[oc].products.length;i++){if(categories[oc].products[i].id===pid){p=categories[oc].products[i];break;}}if(!p)return;p.name=document.getElementById('editProductName').value.trim();p.price=parseInt(document.getElementById('editProductPrice').value);p.emoji=document.getElementById('editProductEmoji').value.trim()||p.emoji;var vt=collectVariationTypes('editVarBuilders');if(vt.length>0){p.variationTypes=vt;delete p.variation;}else{delete p.variationTypes;}if(document.getElementById('editTimingEnabled').checked){p.timing={enabled:true,startTime:document.getElementById('editTimingStart').value,endTime:document.getElementById('editTimingEnd').value};}else{delete p.timing;}if(nc!==oc){var np=[];for(var i=0;i<categories[oc].products.length;i++){if(categories[oc].products[i].id!==pid)np.push(categories[oc].products[i]);}categories[oc].products=np;categories[nc].products.push(p);}localStorage.setItem('dastakCategories',JSON.stringify(categories));closeEditModal();renderAdminProducts();renderSections();alert('Update ho gaya!');}
-function deleteProduct(ck,pid){if(!confirm('Delete?'))return;categories[ck].products=categories[ck].products.filter(function(p){return p.id!==pid;});localStorage.setItem('dastakCategories',JSON.stringify(categories));renderAdminProducts();renderSections();}
-
-function requestNotificationPermission(){if('Notification' in window&&Notification.permission==='default')Notification.requestPermission();}
-function openNotifModal(){document.getElementById('notifOverlay').classList.add('active');}
-function closeNotifModal(){document.getElementById('notifOverlay').classList.remove('active');}
-function sendNotification(){var t=document.getElementById('notifTitle').value.trim()||'Dastak Delivery';var m=document.getElementById('notifMessage').value.trim();if(!m){alert('Message likhein!');return;}localStorage.setItem('dastakNotification',JSON.stringify({title:t,message:m,time:Date.now()}));showNotifBanner(t,m);document.getElementById('notifTitle').value='';document.getElementById('notifMessage').value='';closeNotifModal();alert('Notification send ho gayi!');}
-function sendAdminNotif(){var t=document.getElementById('adminNotifTitle').value.trim()||'Dastak Delivery';var m=document.getElementById('adminNotifMessage').value.trim();if(!m){alert('Message likhein!');return;}localStorage.setItem('dastakNotification',JSON.stringify({title:t,message:m,time:Date.now()}));showNotifBanner(t,m);document.getElementById('adminNotifTitle').value='';document.getElementById('adminNotifMessage').value='';alert('Notification send ho gayi!');}
-function showNotifBanner(t,m){document.getElementById('notifBannerText').textContent=m;document.getElementById('notifBannerTitle').textContent=t;document.getElementById('notifBanner').classList.add('show');setTimeout(function(){document.getElementById('notifBanner').classList.remove('show');},6000);}
-function closeNotifBanner(){document.getElementById('notifBanner').classList.remove('show');}
-window.addEventListener('storage',function(e){if(e.key==='dastakNotification'&&e.newValue&&!isAdminLoggedIn){var n=JSON.parse(e.newValue);showNotifBanner(n.title,n.message);}});
-
-function resetData(){if(!confirm('Sab data reset ho jaega. Sure?'))return;localStorage.removeItem('dastakCategories');categories=JSON.parse(JSON.stringify(defaultData));renderSections();renderAdminProducts();renderSidebarNav();alert('Data reset ho gaya!');}
-
-document.addEventListener('DOMContentLoaded',function(){renderSidebarNav();renderSections();requestNotificationPermission();});
-</script>
-</body>
-</html>
+function parseOldVariation(str,basePrice){i
