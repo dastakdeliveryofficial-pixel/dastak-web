@@ -697,6 +697,7 @@
         </div>
     </aside>
 
+    <main id="portal-main" class="flex-1 flex flex-col h-full relative overflow-hidden w-full" style="display:none;">
     <main class="flex-1 flex flex-col h-full relative overflow-hidden w-full">
         <header class="bg-white shadow-sm z-30 px-4 py-3 flex justify-between items-center hidden" id="main-header">
             <div class="flex items-center gap-3">
@@ -3243,56 +3244,6 @@ function initFoodApp(){
     initMenuSwipe();
 }
 </script>
-
-
-<script>
-// ============================================
-// FOOD APP <-> RIDER PORTAL INTEGRATION
-// ============================================
-
-var _currentApp = 'food'; // 'food' or 'portal'
-
-function showFoodApp() {
-    _currentApp = 'food';
-    document.getElementById('food-app-section').style.display = 'block';
-    // Hide rider portal elements
-    document.getElementById('sidebar').removeAttribute('data-ready');
-    document.getElementById('main-header').classList.add('hidden');
-    document.body.style.overflow = '';
-    document.body.style.background = 'var(--paper, #F8EFDD)';
-    // Init food app
-    initFoodApp();
-    // Update URL
-    if(history.replaceState) history.replaceState({app:'food'}, '', '#food');
-}
-
-function switchToRiderPortal() {
-    _currentApp = 'portal';
-    document.getElementById('food-app-section').style.display = 'none';
-    document.body.style.background = '';
-    if(window.auth && window.auth.currentUser) {
-        // Already logged in — show portal
-        var userData = app.data.currentUser;
-        if(userData) {
-            document.getElementById('sidebar').setAttribute('data-ready','1');
-            document.getElementById('main-header').classList.remove('hidden');
-            var initView = userData.role === 'admin' ? 'admin-dashboard' : 'rider-dashboard';
-            app.navigate(initView);
-        } else {
-            app.showLogin();
-        }
-    } else {
-        // Show login
-        app.showLogin();
-    }
-    if(history.replaceState) history.replaceState({app:'portal'}, '', '#portal');
-}
-
-function switchToFoodApp() {
-    showFoodApp();
-}
-
-
             const win = window.open('','_blank'); win.document.write(html); win.document.close(); setTimeout(()=>win.print(),500);
         },
 
@@ -6292,6 +6243,7 @@ var _currentApp = 'food'; // 'food' or 'portal'
 
 function showFoodApp() {
     _currentApp = 'food';
+    document.getElementById('portal-main').style.display = 'none';
     document.getElementById('food-app-section').style.display = 'block';
     // Hide rider portal elements
     document.getElementById('sidebar').removeAttribute('data-ready');
@@ -6306,6 +6258,7 @@ function showFoodApp() {
 
 function switchToRiderPortal() {
     _currentApp = 'portal';
+    document.getElementById('portal-main').style.display = 'flex';
     document.getElementById('food-app-section').style.display = 'none';
     document.body.style.background = '';
     if(window.auth && window.auth.currentUser) {
