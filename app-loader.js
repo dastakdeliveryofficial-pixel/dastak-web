@@ -1,133 +1,4146 @@
-// ===== SEQUENTIAL LOADING CONTROL =====
-let appsInitialized = {
-    food: false,
-    rider: false
-};
-
-// Initialize Food App on page load
-function initFoodApp() {
-    if (appsInitialized.food) return;
-    console.log('📦 Initializing Food App...');
-    
-    // Show food app section
-    const foodSection = document.getElementById('food-app-section');
-    if (foodSection) {
-        foodSection.style.display = 'block';
-    }
-    
-    // Call your existing food app initialization functions here
-    // Example: loadRestaurants(), initCart(), etc.
-    // loadRestaurants();
-    
-    appsInitialized.food = true;
-    console.log('✅ Food App initialized');
+{
+  "cheezybite": {
+    "name": "Cheezy Bite Pizza & Grill",
+    "icon": "fa-pizza-slice",
+    "class": "cheezybite",
+    "subtitle": "Near Marvi Hospital, Main Road Matli",
+    "type": "food",
+    "products": [
+      {
+        "id": 300,
+        "name": "Nawabi Pizza",
+        "price": 500,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 500
+              },
+              {
+                "name": "Medium",
+                "price": 950
+              },
+              {
+                "name": "Large",
+                "price": 1400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 303,
+        "name": "Malai Boti Pizza",
+        "price": 500,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 500
+              },
+              {
+                "name": "Medium",
+                "price": 950
+              },
+              {
+                "name": "Large",
+                "price": 1400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 306,
+        "name": "Lazania Pizza",
+        "price": 500,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 500
+              },
+              {
+                "name": "Medium",
+                "price": 950
+              },
+              {
+                "name": "Large",
+                "price": 1400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 309,
+        "name": "Crown Crust Pizza",
+        "price": 500,
+        "emoji": "👑",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 500
+              },
+              {
+                "name": "Medium",
+                "price": 950
+              },
+              {
+                "name": "Large",
+                "price": 1400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 312,
+        "name": "Behari Kabab Pizza",
+        "price": 500,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 500
+              },
+              {
+                "name": "Medium",
+                "price": 950
+              },
+              {
+                "name": "Large",
+                "price": 1400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 315,
+        "name": "Kabab Crust Pizza",
+        "price": 500,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 500
+              },
+              {
+                "name": "Medium",
+                "price": 950
+              },
+              {
+                "name": "Large",
+                "price": 1400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 318,
+        "name": "Supreme Pizza",
+        "price": 500,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 500
+              },
+              {
+                "name": "Medium",
+                "price": 950
+              },
+              {
+                "name": "Large",
+                "price": 1400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 321,
+        "name": "Four Season Pizza",
+        "price": 500,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 500
+              },
+              {
+                "name": "Medium",
+                "price": 950
+              },
+              {
+                "name": "Large",
+                "price": 1400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 324,
+        "name": "Paproni Pizza",
+        "price": 500,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 500
+              },
+              {
+                "name": "Medium",
+                "price": 950
+              },
+              {
+                "name": "Large",
+                "price": 1400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 327,
+        "name": "Royal Roll Crust Pizza",
+        "price": 500,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 500
+              },
+              {
+                "name": "Medium",
+                "price": 950
+              },
+              {
+                "name": "Large",
+                "price": 1400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 330,
+        "name": "Matka Pizza",
+        "price": 600,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 600
+              },
+              {
+                "name": "Medium",
+                "price": 800
+              },
+              {
+                "name": "Large",
+                "price": 1400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 333,
+        "name": "Chicken Tikka Pizza",
+        "price": 400,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 400
+              },
+              {
+                "name": "Medium",
+                "price": 800
+              },
+              {
+                "name": "Large",
+                "price": 1000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 336,
+        "name": "Chicken Fajita Pizza",
+        "price": 400,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 400
+              },
+              {
+                "name": "Medium",
+                "price": 800
+              },
+              {
+                "name": "Large",
+                "price": 1000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 339,
+        "name": "Smoky Chicken Pizza",
+        "price": 400,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 400
+              },
+              {
+                "name": "Medium",
+                "price": 800
+              },
+              {
+                "name": "Large",
+                "price": 1000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 342,
+        "name": "Achari Pizza",
+        "price": 400,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 400
+              },
+              {
+                "name": "Medium",
+                "price": 800
+              },
+              {
+                "name": "Large",
+                "price": 1000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 345,
+        "name": "Hot & Spicy Pizza",
+        "price": 400,
+        "emoji": "🌶️",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 400
+              },
+              {
+                "name": "Medium",
+                "price": 800
+              },
+              {
+                "name": "Large",
+                "price": 1000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 348,
+        "name": "Vegi Lover Pizza",
+        "price": 400,
+        "emoji": "🥦",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 400
+              },
+              {
+                "name": "Medium",
+                "price": 800
+              },
+              {
+                "name": "Large",
+                "price": 1000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 351,
+        "name": "Cheese Lover Pizza",
+        "price": 400,
+        "emoji": "🧀",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 400
+              },
+              {
+                "name": "Medium",
+                "price": 800
+              },
+              {
+                "name": "Large",
+                "price": 1000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 354,
+        "name": "Mayo Garlic Pizza",
+        "price": 400,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 400
+              },
+              {
+                "name": "Medium",
+                "price": 800
+              },
+              {
+                "name": "Large",
+                "price": 1000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 357,
+        "name": "Afghani Tikka Pizza",
+        "price": 400,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 400
+              },
+              {
+                "name": "Medium",
+                "price": 800
+              },
+              {
+                "name": "Large",
+                "price": 1000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 360,
+        "name": "Student Deal",
+        "price": 500,
+        "emoji": "🎓",
+        "variation": "1 Zinger + 1 Fries + 1 Regular Drink"
+      },
+      {
+        "id": 361,
+        "name": "Deal 2",
+        "price": 1600,
+        "emoji": "🎁",
+        "variation": "3 Paty Burger + 3 Zinger Shawarma + 1 Ltr Drink"
+      },
+      {
+        "id": 362,
+        "name": "Deal 3",
+        "price": 750,
+        "emoji": "🎁",
+        "variation": "4 Pcs Hot Shot + 4 Pcs Hot Wings + 4 Pcs Nuggets + 500ml Drink"
+      },
+      {
+        "id": 363,
+        "name": "Deal 4",
+        "price": 600,
+        "emoji": "🎁",
+        "variation": "Half Crown Pasta + Half Fries + Half Ltr Drink"
+      },
+      {
+        "id": 364,
+        "name": "Mix Treat Deal",
+        "price": 1600,
+        "emoji": "🎁",
+        "variation": "1 Large Pizza + 1 Paratha Roll + 5 Wings + 1.5 Ltr Drink"
+      },
+      {
+        "id": 365,
+        "name": "Delight Deal",
+        "price": 1450,
+        "emoji": "🎁",
+        "variation": "2 Small Pizza + 2 Zinger Burger + 1 Ltr Drink"
+      },
+      {
+        "id": 366,
+        "name": "Lunch & Midnight Deal",
+        "price": 2150,
+        "emoji": "🌙",
+        "variation": "2 Large Pizza + 2 Ltr Drink"
+      },
+      {
+        "id": 367,
+        "name": "Med Pizza Deal",
+        "price": 1750,
+        "emoji": "🎁",
+        "variation": "2 Medium Pizza + 1.5 Ltr Drink"
+      },
+      {
+        "id": 368,
+        "name": "Small Pizza Deal",
+        "price": 1700,
+        "emoji": "🎁",
+        "variation": "4 Small Pizza + 1.5 Ltr Drink"
+      },
+      {
+        "id": 369,
+        "name": "Family Deal 1",
+        "price": 2000,
+        "emoji": "👨‍👩‍👧‍👦",
+        "variation": "3 Small Pizza + Full Creamy Pasta + 1.5 Ltr Drink"
+      },
+      {
+        "id": 370,
+        "name": "Family Deal 2",
+        "price": 2700,
+        "emoji": "👨‍👩‍👧‍👦",
+        "variation": "2 Medium Pizza + 2 Zinger Burger + 2 Chapli Burger + 1 Jumbo Drink"
+      },
+      {
+        "id": 371,
+        "name": "Afghani Sandwich",
+        "price": 500,
+        "emoji": "🥪",
+        "variation": "Regular"
+      },
+      {
+        "id": 372,
+        "name": "Max Chicken Sandwich",
+        "price": 500,
+        "emoji": "🥪",
+        "variation": "Regular"
+      },
+      {
+        "id": 373,
+        "name": "Tikka Sandwich",
+        "price": 500,
+        "emoji": "🥪",
+        "variation": "Regular"
+      },
+      {
+        "id": 374,
+        "name": "Special Lawa Burger",
+        "price": 700,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 375,
+        "name": "Zinger Burger",
+        "price": 300,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 376,
+        "name": "Grill Burger",
+        "price": 400,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 377,
+        "name": "Tower Burger",
+        "price": 500,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 378,
+        "name": "Patti Burger",
+        "price": 280,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 379,
+        "name": "Chapli Burger",
+        "price": 280,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 380,
+        "name": "Barbeque Burger",
+        "price": 500,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 381,
+        "name": "Yum Pum Burger",
+        "price": 500,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 382,
+        "name": "Pizza Burger",
+        "price": 550,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 383,
+        "name": "Turkish Shawarma",
+        "price": 500,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 384,
+        "name": "Zinger Shawarma",
+        "price": 250,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 385,
+        "name": "Behari Shawarma",
+        "price": 300,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 386,
+        "name": "Shahi Shawarma",
+        "price": 350,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 387,
+        "name": "Chicken Spicy Tikka",
+        "price": 400,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 388,
+        "name": "Chicken Malai Boti",
+        "price": 430,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 389,
+        "name": "Chicken Behari Boti",
+        "price": 250,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 390,
+        "name": "Chicken Reshmi Kabab",
+        "price": 250,
+        "emoji": "🧆",
+        "variation": "Regular"
+      },
+      {
+        "id": 391,
+        "name": "Chicken Gola Kabab",
+        "price": 250,
+        "emoji": "🧆",
+        "variation": "Regular"
+      },
+      {
+        "id": 392,
+        "name": "Chicken Broast",
+        "price": 430,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 393,
+        "name": "Hot Wings",
+        "price": 600,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 394,
+        "name": "BBQ Wings",
+        "price": 700,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 395,
+        "name": "Nuggets",
+        "price": 550,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 396,
+        "name": "Crispy Chicken",
+        "price": 200,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 397,
+        "name": "Hot Shot",
+        "price": 500,
+        "emoji": "🌶️",
+        "variation": "Regular"
+      },
+      {
+        "id": 398,
+        "name": "Hot Shot Cheese Wings",
+        "price": 700,
+        "emoji": "🌶️",
+        "variation": "Regular"
+      },
+      {
+        "id": 399,
+        "name": "Macaroni Pasta",
+        "price": 300,
+        "emoji": "🍝",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 300
+              },
+              {
+                "name": "Full",
+                "price": 600
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 401,
+        "name": "Spaghetti Pasta",
+        "price": 300,
+        "emoji": "🍝",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 300
+              },
+              {
+                "name": "Full",
+                "price": 600
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 403,
+        "name": "Crunchy Pasta",
+        "price": 300,
+        "emoji": "🍝",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 300
+              },
+              {
+                "name": "Full",
+                "price": 600
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 405,
+        "name": "Lasania Pasta",
+        "price": 400,
+        "emoji": "🍝",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 400
+              },
+              {
+                "name": "Full",
+                "price": 800
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 407,
+        "name": "Creamy Pasta",
+        "price": 400,
+        "emoji": "🍝",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 400
+              },
+              {
+                "name": "Full",
+                "price": 800
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 409,
+        "name": "BBQ Lacha Paratha",
+        "price": 500,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 410,
+        "name": "Pizza Paratha",
+        "price": 400,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 411,
+        "name": "Zinger Cheese Paratha",
+        "price": 350,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 412,
+        "name": "Chicken Cheese Paratha",
+        "price": 300,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 413,
+        "name": "Chicken Paratha",
+        "price": 250,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 414,
+        "name": "Mayo Fries",
+        "price": 200,
+        "emoji": "🍟",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 200
+              },
+              {
+                "name": "Large",
+                "price": 400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 416,
+        "name": "Pizza Fries",
+        "price": 250,
+        "emoji": "🍟",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 250
+              },
+              {
+                "name": "Large",
+                "price": 500
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 418,
+        "name": "Loaded Fries",
+        "price": 300,
+        "emoji": "🍟",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 300
+              },
+              {
+                "name": "Large",
+                "price": 450
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 420,
+        "name": "Plain Fries",
+        "price": 150,
+        "emoji": "🍟",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 150
+              },
+              {
+                "name": "Large",
+                "price": 300
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "pkrestaurant": {
+    "name": "P.K. Restaurant",
+    "icon": "fa-utensils",
+    "class": "pkrestaurant",
+    "subtitle": "Matli — Desi & Fast Food",
+    "type": "food",
+    "products": [
+      {
+        "id": 500,
+        "name": "Special Pizza Paratha",
+        "price": 600,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 501,
+        "name": "Pizza Paratha",
+        "price": 450,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 502,
+        "name": "Pizza Pratha (Special)",
+        "price": 550,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 503,
+        "name": "Vegetable Paratha",
+        "price": 350,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 504,
+        "name": "BBQ Paratha",
+        "price": 400,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 505,
+        "name": "Chicken Kabab Roll",
+        "price": 250,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 506,
+        "name": "Shagger Roll",
+        "price": 300,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 507,
+        "name": "Chicken Roll",
+        "price": 200,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 508,
+        "name": "Chicken Chatni Roll",
+        "price": 200,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 509,
+        "name": "Chicken Mayo Roll",
+        "price": 200,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 510,
+        "name": "Zinger Roll",
+        "price": 250,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 511,
+        "name": "Chicken Tikka",
+        "price": 400,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 512,
+        "name": "Chicken Malai Tikka",
+        "price": 450,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 513,
+        "name": "Chicken Green Tikka",
+        "price": 450,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 514,
+        "name": "Spicy Boti",
+        "price": 250,
+        "emoji": "🍢",
+        "variation": "Regular"
+      },
+      {
+        "id": 515,
+        "name": "Malai Boti",
+        "price": 250,
+        "emoji": "🍢",
+        "variation": "Regular"
+      },
+      {
+        "id": 516,
+        "name": "Behari Boti",
+        "price": 250,
+        "emoji": "🍢",
+        "variation": "Regular"
+      },
+      {
+        "id": 517,
+        "name": "Reshmi Kabab",
+        "price": 200,
+        "emoji": "🧆",
+        "variation": "Regular"
+      },
+      {
+        "id": 518,
+        "name": "Gola Kabab",
+        "price": 250,
+        "emoji": "🧆",
+        "variation": "Regular"
+      },
+      {
+        "id": 519,
+        "name": "Chicken Qorma",
+        "price": 300,
+        "emoji": "🥘",
+        "variation": "Regular"
+      },
+      {
+        "id": 520,
+        "name": "Qeema Fry",
+        "price": 300,
+        "emoji": "🥘",
+        "variation": "Regular"
+      },
+      {
+        "id": 521,
+        "name": "Daal Moong",
+        "price": 200,
+        "emoji": "🥣",
+        "variation": "Regular"
+      },
+      {
+        "id": 522,
+        "name": "Daal Chana",
+        "price": 200,
+        "emoji": "🥣",
+        "variation": "Regular"
+      },
+      {
+        "id": 523,
+        "name": "Sabzi",
+        "price": 200,
+        "emoji": "🥦",
+        "variation": "Regular"
+      },
+      {
+        "id": 524,
+        "name": "Anda Qeema",
+        "price": 200,
+        "emoji": "🍳",
+        "variation": "Regular"
+      },
+      {
+        "id": 525,
+        "name": "Anda Choola",
+        "price": 250,
+        "emoji": "🍳",
+        "variation": "Regular"
+      },
+      {
+        "id": 526,
+        "name": "Chapati",
+        "price": 20,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 527,
+        "name": "Roti",
+        "price": 20,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 528,
+        "name": "Qandhari Naan (Single)",
+        "price": 30,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 529,
+        "name": "Qandhari Naan (Double)",
+        "price": 60,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 530,
+        "name": "Zinger Burger",
+        "price": 350,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 531,
+        "name": "Broast",
+        "price": 400,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 532,
+        "name": "Sandwich",
+        "price": 350,
+        "emoji": "🥪",
+        "variation": "Regular"
+      },
+      {
+        "id": 533,
+        "name": "Finger Chips",
+        "price": 200,
+        "emoji": "🍟",
+        "variation": "Regular"
+      },
+      {
+        "id": 534,
+        "name": "Cold Drink Regular",
+        "price": 70,
+        "emoji": "🥤",
+        "variation": "Regular"
+      },
+      {
+        "id": 535,
+        "name": "Cold Drink 1.5 Ltr",
+        "price": 220,
+        "emoji": "🥤",
+        "variation": "1.5 Ltr"
+      },
+      {
+        "id": 536,
+        "name": "Cold Drink 1 Ltr",
+        "price": 170,
+        "emoji": "🥤",
+        "variation": "1 Ltr"
+      },
+      {
+        "id": 537,
+        "name": "Cold Drink 500ml",
+        "price": 120,
+        "emoji": "🥤",
+        "variation": "500ml"
+      },
+      {
+        "id": 538,
+        "name": "Salad",
+        "price": 100,
+        "emoji": "🥗",
+        "variation": "Regular"
+      },
+      {
+        "id": 539,
+        "name": "Raita",
+        "price": 100,
+        "emoji": "🥣",
+        "variation": "Regular"
+      },
+      {
+        "id": 540,
+        "name": "Special Doodh Patti Chai",
+        "price": 100,
+        "emoji": "☕",
+        "variation": "Regular"
+      },
+      {
+        "id": 541,
+        "name": "Doodh Patti Chai",
+        "price": 80,
+        "emoji": "☕",
+        "variation": "Regular"
+      },
+      {
+        "id": 542,
+        "name": "Anda",
+        "price": 70,
+        "emoji": "🥚",
+        "variation": "Regular"
+      },
+      {
+        "id": 543,
+        "name": "Paratha",
+        "price": 50,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 544,
+        "name": "Choola",
+        "price": 200,
+        "emoji": "🥣",
+        "variation": "Regular"
+      },
+      {
+        "id": 546,
+        "name": "Mineral Water",
+        "price": 60,
+        "emoji": "💧",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 60
+              },
+              {
+                "name": "Large",
+                "price": 120
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "almurtaza": {
+    "name": "Al-Murtaza Hotel & Restaurant",
+    "icon": "fa-bowl-rice",
+    "class": "almurtaza",
+    "subtitle": "Lazzat aur Zaiqe se Bharpoor",
+    "type": "food",
+    "products": [
+      {
+        "id": 600,
+        "name": "Zinger Burger",
+        "price": 400,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 601,
+        "name": "Broast",
+        "price": 450,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 602,
+        "name": "Club Sandwich",
+        "price": 400,
+        "emoji": "🥪",
+        "variation": "Regular"
+      },
+      {
+        "id": 603,
+        "name": "Nuggets",
+        "price": 400,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 604,
+        "name": "Fries",
+        "price": 150,
+        "emoji": "🍟",
+        "variation": "Regular"
+      },
+      {
+        "id": 605,
+        "name": "Chicken Reshmi Kabab",
+        "price": 200,
+        "emoji": "🧆",
+        "variation": "Regular"
+      },
+      {
+        "id": 606,
+        "name": "Chicken Gola Kabab",
+        "price": 250,
+        "emoji": "🧆",
+        "variation": "Regular"
+      },
+      {
+        "id": 607,
+        "name": "Beef Reshmi Kabab",
+        "price": 250,
+        "emoji": "🧆",
+        "variation": "Regular"
+      },
+      {
+        "id": 608,
+        "name": "Beef Gola Kabab",
+        "price": 300,
+        "emoji": "🧆",
+        "variation": "Regular"
+      },
+      {
+        "id": 609,
+        "name": "Chicken Chatni Roll",
+        "price": 250,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 610,
+        "name": "Chicken Spacy Roll",
+        "price": 250,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 611,
+        "name": "Chicken Mayo Roll",
+        "price": 250,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 612,
+        "name": "Chicken Reshmi Kabab Roll",
+        "price": 250,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 613,
+        "name": "Chicken Malai Boti Roll",
+        "price": 300,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 614,
+        "name": "Chicken Green Boti Roll",
+        "price": 300,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 615,
+        "name": "Chicken Crispy Roll",
+        "price": 250,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 616,
+        "name": "Chicken Spacy Tikka",
+        "price": 400,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 617,
+        "name": "Chicken Malai Tikka",
+        "price": 450,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 618,
+        "name": "Chicken Green Tikka",
+        "price": 450,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 619,
+        "name": "Chicken Spacy Boti",
+        "price": 250,
+        "emoji": "🍢",
+        "variation": "Regular"
+      },
+      {
+        "id": 620,
+        "name": "Chicken Malai Boti",
+        "price": 250,
+        "emoji": "🍢",
+        "variation": "Regular"
+      },
+      {
+        "id": 621,
+        "name": "Chicken Green Boti",
+        "price": 250,
+        "emoji": "🍢",
+        "variation": "Regular"
+      },
+      {
+        "id": 622,
+        "name": "Beef Spacy Boti",
+        "price": 300,
+        "emoji": "🍢",
+        "variation": "Regular"
+      },
+      {
+        "id": 623,
+        "name": "Daal Moong Double Fry",
+        "price": 200,
+        "emoji": "🥣",
+        "variation": "Regular"
+      },
+      {
+        "id": 624,
+        "name": "Lakhni Daal Moong",
+        "price": 250,
+        "emoji": "🥣",
+        "variation": "Regular"
+      },
+      {
+        "id": 625,
+        "name": "Chana Daal Double Fry",
+        "price": 200,
+        "emoji": "🥣",
+        "variation": "Regular"
+      },
+      {
+        "id": 626,
+        "name": "Lakhni Daal Chana",
+        "price": 250,
+        "emoji": "🥣",
+        "variation": "Regular"
+      },
+      {
+        "id": 627,
+        "name": "Chicken Qorma",
+        "price": 250,
+        "emoji": "🥘",
+        "variation": "Regular"
+      },
+      {
+        "id": 628,
+        "name": "Sabzi",
+        "price": 200,
+        "emoji": "🥦",
+        "variation": "Regular"
+      },
+      {
+        "id": 629,
+        "name": "Roti",
+        "price": 20,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 630,
+        "name": "Chai",
+        "price": 80,
+        "emoji": "☕",
+        "variation": "Regular"
+      },
+      {
+        "id": 631,
+        "name": "Doodh Patti Chai",
+        "price": 80,
+        "emoji": "☕",
+        "variation": "Regular"
+      },
+      {
+        "id": 632,
+        "name": "Chapati Roti",
+        "price": 20,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 633,
+        "name": "Pani Bari Bottle",
+        "price": 120,
+        "emoji": "💧",
+        "variation": "Regular"
+      },
+      {
+        "id": 634,
+        "name": "Pani Chhoti Bottle",
+        "price": 60,
+        "emoji": "💧",
+        "variation": "Regular"
+      },
+      {
+        "id": 635,
+        "name": "Regular Cold Drink",
+        "price": 60,
+        "emoji": "🥤",
+        "variation": "Regular"
+      },
+      {
+        "id": 636,
+        "name": "Cold Drink 1.5 Ltr",
+        "price": 220,
+        "emoji": "🥤",
+        "variation": "1.5 Ltr"
+      },
+      {
+        "id": 637,
+        "name": "Raita Regular",
+        "price": 40,
+        "emoji": "🥣",
+        "variation": "Regular"
+      },
+      {
+        "id": 638,
+        "name": "Salad",
+        "price": 80,
+        "emoji": "🥗",
+        "variation": "Regular"
+      },
+      {
+        "id": 639,
+        "name": "Steak Regular",
+        "price": 60,
+        "emoji": "🥩",
+        "variation": "Regular"
+      },
+      {
+        "id": 640,
+        "name": "Special Raita",
+        "price": 50,
+        "emoji": "🥣",
+        "variation": "Regular"
+      },
+      {
+        "id": 641,
+        "name": "Special Salad",
+        "price": 100,
+        "emoji": "🥗",
+        "variation": "Regular"
+      },
+      {
+        "id": 642,
+        "name": "Al-Murtaza Special Mutton Karahi",
+        "price": 2000,
+        "emoji": "🥘",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 2000
+              },
+              {
+                "name": "Full",
+                "price": 4000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 644,
+        "name": "Mutton Peshawari Karahi",
+        "price": 2000,
+        "emoji": "🥘",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 2000
+              },
+              {
+                "name": "Full",
+                "price": 4000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 646,
+        "name": "Mutton White Karahi",
+        "price": 2100,
+        "emoji": "🥘",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 2100
+              },
+              {
+                "name": "Full",
+                "price": 4200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 648,
+        "name": "Mutton Green Karahi",
+        "price": 2100,
+        "emoji": "🥘",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 2100
+              },
+              {
+                "name": "Full",
+                "price": 4200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 650,
+        "name": "Mutton Brown",
+        "price": 2000,
+        "emoji": "🥘",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 2000
+              },
+              {
+                "name": "Full",
+                "price": 4000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 652,
+        "name": "Mutton Balochi Karahi Lahsun",
+        "price": 2000,
+        "emoji": "🥘",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 2000
+              },
+              {
+                "name": "Full",
+                "price": 4000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 654,
+        "name": "Mutton Namkeen Karahi",
+        "price": 2000,
+        "emoji": "🥘",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 2000
+              },
+              {
+                "name": "Full",
+                "price": 4000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 656,
+        "name": "Al-Murtaza Chicken Special Karahi",
+        "price": 1100,
+        "emoji": "🍗",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 1100
+              },
+              {
+                "name": "Full",
+                "price": 2200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 658,
+        "name": "Chicken Peshawari Karahi",
+        "price": 1000,
+        "emoji": "🍗",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 1000
+              },
+              {
+                "name": "Full",
+                "price": 2000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 660,
+        "name": "Chicken White Karahi",
+        "price": 1100,
+        "emoji": "🍗",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 1100
+              },
+              {
+                "name": "Full",
+                "price": 2200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 662,
+        "name": "Chicken Green Karahi",
+        "price": 1100,
+        "emoji": "🍗",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 1100
+              },
+              {
+                "name": "Full",
+                "price": 2200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 664,
+        "name": "Chicken Balochi Karahi",
+        "price": 1000,
+        "emoji": "🍗",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 1000
+              },
+              {
+                "name": "Full",
+                "price": 2000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 666,
+        "name": "Chicken Brown",
+        "price": 1000,
+        "emoji": "🍗",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 1000
+              },
+              {
+                "name": "Full",
+                "price": 2000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 668,
+        "name": "Chicken Handi",
+        "price": 1200,
+        "emoji": "🍗",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 1200
+              },
+              {
+                "name": "Full",
+                "price": 2400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 670,
+        "name": "Al-Murtaza Desi Chicken Bt Karahi",
+        "price": 1350,
+        "emoji": "🍗",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 1350
+              },
+              {
+                "name": "Full",
+                "price": 2700
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "hussain": {
+    "name": "Hussain Food Corner",
+    "icon": "fa-utensils",
+    "class": "hussain",
+    "subtitle": "Home Delivery - 0307-7939900",
+    "type": "food",
+    "products": [
+      {
+        "id": 200,
+        "name": "HFC Special Pizza",
+        "price": 550,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 550
+              },
+              {
+                "name": "Medium",
+                "price": 900
+              },
+              {
+                "name": "Large",
+                "price": 1250
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 203,
+        "name": "Tikka Pizza",
+        "price": 500,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 500
+              },
+              {
+                "name": "Medium",
+                "price": 850
+              },
+              {
+                "name": "Large",
+                "price": 1200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 206,
+        "name": "Fajita Pizza",
+        "price": 500,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 500
+              },
+              {
+                "name": "Medium",
+                "price": 850
+              },
+              {
+                "name": "Large",
+                "price": 1200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 209,
+        "name": "Lazania Pizza",
+        "price": 750,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 750
+              },
+              {
+                "name": "Medium",
+                "price": 1150
+              },
+              {
+                "name": "Large",
+                "price": 1600
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 212,
+        "name": "Calzone Pizza",
+        "price": 750,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 750
+              },
+              {
+                "name": "Medium",
+                "price": 1150
+              },
+              {
+                "name": "Large",
+                "price": 1600
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 215,
+        "name": "BBQ Pizza",
+        "price": 650,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 650
+              },
+              {
+                "name": "Medium",
+                "price": 1000
+              },
+              {
+                "name": "Large",
+                "price": 1400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 218,
+        "name": "Pepperoni Pizza",
+        "price": 700,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 700
+              },
+              {
+                "name": "Medium",
+                "price": 1200
+              },
+              {
+                "name": "Large",
+                "price": 1700
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 221,
+        "name": "Mughlai Pizza",
+        "price": 700,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 700
+              },
+              {
+                "name": "Medium",
+                "price": 1100
+              },
+              {
+                "name": "Large",
+                "price": 1500
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 224,
+        "name": "Mughlai Kababish",
+        "price": 1400,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 1400
+              },
+              {
+                "name": "Full",
+                "price": 1800
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 226,
+        "name": "Kababish Pizza",
+        "price": 750,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 750
+              },
+              {
+                "name": "Medium",
+                "price": 1150
+              },
+              {
+                "name": "Large",
+                "price": 1600
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 229,
+        "name": "Crown Pizza",
+        "price": 1150,
+        "emoji": "👑",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 1150
+              },
+              {
+                "name": "Large",
+                "price": 1600
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 231,
+        "name": "Vegetable Pizza",
+        "price": 500,
+        "emoji": "🥦",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 500
+              },
+              {
+                "name": "Medium",
+                "price": 800
+              },
+              {
+                "name": "Large",
+                "price": 1100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 234,
+        "name": "Cheese Lover Pizza",
+        "price": 500,
+        "emoji": "🧀",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 500
+              },
+              {
+                "name": "Medium",
+                "price": 800
+              },
+              {
+                "name": "Large",
+                "price": 1100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 237,
+        "name": "Pizza Roll",
+        "price": 550,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 238,
+        "name": "Pizza Pratha",
+        "price": 500,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 239,
+        "name": "Creamy Pasta",
+        "price": 500,
+        "emoji": "🍝",
+        "variation": "Regular"
+      },
+      {
+        "id": 240,
+        "name": "Spicy Pasta",
+        "price": 500,
+        "emoji": "🍝",
+        "variation": "Regular"
+      },
+      {
+        "id": 241,
+        "name": "Vegi Pasta",
+        "price": 450,
+        "emoji": "🍝",
+        "variation": "Regular"
+      },
+      {
+        "id": 242,
+        "name": "Pizza Fries",
+        "price": 450,
+        "emoji": "🍟",
+        "variation": "Regular"
+      },
+      {
+        "id": 243,
+        "name": "Plain Fries",
+        "price": 200,
+        "emoji": "🍟",
+        "variation": "Regular"
+      },
+      {
+        "id": 244,
+        "name": "Masala Fries",
+        "price": 200,
+        "emoji": "🍟",
+        "variation": "Regular"
+      },
+      {
+        "id": 245,
+        "name": "Mayo Fries",
+        "price": 250,
+        "emoji": "🍟",
+        "variation": "Regular"
+      },
+      {
+        "id": 246,
+        "name": "Spicy Tikka Chest",
+        "price": 400,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 247,
+        "name": "Spicy Tikka Leg",
+        "price": 380,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 248,
+        "name": "Malai Tikka",
+        "price": 450,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 249,
+        "name": "Achari Tikka",
+        "price": 450,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 250,
+        "name": "Spicy Boti",
+        "price": 270,
+        "emoji": "🍢",
+        "variation": "Regular"
+      },
+      {
+        "id": 251,
+        "name": "Behari Boti",
+        "price": 300,
+        "emoji": "🍢",
+        "variation": "Regular"
+      },
+      {
+        "id": 252,
+        "name": "Achari Boti",
+        "price": 300,
+        "emoji": "🍢",
+        "variation": "Regular"
+      },
+      {
+        "id": 253,
+        "name": "Malai Boti",
+        "price": 280,
+        "emoji": "🍢",
+        "variation": "Regular"
+      },
+      {
+        "id": 254,
+        "name": "Beef Boti",
+        "price": 400,
+        "emoji": "🍢",
+        "variation": "Regular"
+      },
+      {
+        "id": 255,
+        "name": "Reshmi Kabab",
+        "price": 150,
+        "emoji": "🧆",
+        "variation": "Regular"
+      },
+      {
+        "id": 256,
+        "name": "Seekh Kabab",
+        "price": 150,
+        "emoji": "🧆",
+        "variation": "Regular"
+      },
+      {
+        "id": 257,
+        "name": "Beef Kabab",
+        "price": 250,
+        "emoji": "🧆",
+        "variation": "Regular"
+      },
+      {
+        "id": 258,
+        "name": "Gola Kabab",
+        "price": 350,
+        "emoji": "🧆",
+        "variation": "Regular"
+      },
+      {
+        "id": 259,
+        "name": "Zinger Burger",
+        "price": 350,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 260,
+        "name": "Crispy Mayo Burger",
+        "price": 400,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 261,
+        "name": "Cheese Burger",
+        "price": 430,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 262,
+        "name": "Arabic Subway Burger",
+        "price": 450,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 263,
+        "name": "Jumbo Burger",
+        "price": 650,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 264,
+        "name": "BBQ Burger",
+        "price": 400,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 265,
+        "name": "Peti Burger",
+        "price": 350,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 266,
+        "name": "Peti Cheese Burger",
+        "price": 430,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 267,
+        "name": "Vegi Burger",
+        "price": 250,
+        "emoji": "🥗",
+        "variation": "Regular"
+      },
+      {
+        "id": 268,
+        "name": "Club Sandwich",
+        "price": 450,
+        "emoji": "🥪",
+        "variation": "Regular"
+      },
+      {
+        "id": 269,
+        "name": "Creamy Club",
+        "price": 450,
+        "emoji": "🥪",
+        "variation": "Regular"
+      },
+      {
+        "id": 270,
+        "name": "BBQ Club",
+        "price": 550,
+        "emoji": "🥪",
+        "variation": "Regular"
+      },
+      {
+        "id": 271,
+        "name": "Special Roll",
+        "price": 350,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 272,
+        "name": "Chatni Roll",
+        "price": 250,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 273,
+        "name": "Malai Chatni Roll",
+        "price": 250,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 274,
+        "name": "Malai Mayo Roll",
+        "price": 270,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 275,
+        "name": "Mayo Cheese Roll",
+        "price": 350,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 276,
+        "name": "Achari Roll",
+        "price": 300,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 277,
+        "name": "Garlic Roll",
+        "price": 300,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 278,
+        "name": "Kabab Roll",
+        "price": 250,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 279,
+        "name": "Zinger Roll",
+        "price": 270,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 280,
+        "name": "Dawn Zinger Roll",
+        "price": 270,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 281,
+        "name": "Dawn Cheese Roll",
+        "price": 350,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 282,
+        "name": "Vegetable Roll",
+        "price": 220,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 283,
+        "name": "Injected Broast Qtr Leg",
+        "price": 550,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 284,
+        "name": "Injected Broast Qtr Chest",
+        "price": 600,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 285,
+        "name": "Injected Broast Half 4Pcs",
+        "price": 1150,
+        "emoji": "🍗",
+        "variation": "4 Pcs"
+      },
+      {
+        "id": 286,
+        "name": "Injected Broast Full 8Pcs",
+        "price": 2200,
+        "emoji": "🍗",
+        "variation": "8 Pcs"
+      },
+      {
+        "id": 287,
+        "name": "Arabian Inj. Nuggets",
+        "price": 550,
+        "emoji": "🍗",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 550
+              },
+              {
+                "name": "Full",
+                "price": 1050
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 289,
+        "name": "Regular Broast Qtr",
+        "price": 450,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 290,
+        "name": "Regular Broast Special Mayo",
+        "price": 500,
+        "emoji": "🍗",
+        "variation": "Regular"
+      },
+      {
+        "id": 291,
+        "name": "Hot Shot",
+        "price": 600,
+        "emoji": "🌶️",
+        "variation": "10 Piece"
+      },
+      {
+        "id": 292,
+        "name": "Raita",
+        "price": 50,
+        "emoji": "🥣",
+        "variation": "Regular"
+      },
+      {
+        "id": 293,
+        "name": "Imli Chatni",
+        "price": 40,
+        "emoji": "🫙",
+        "variation": "Regular"
+      },
+      {
+        "id": 294,
+        "name": "Spicy Red Chatni",
+        "price": 70,
+        "emoji": "🌶️",
+        "variation": "Regular"
+      },
+      {
+        "id": 295,
+        "name": "Mayo Dip",
+        "price": 50,
+        "emoji": "🫙",
+        "variation": "Regular"
+      },
+      {
+        "id": 296,
+        "name": "Special Mayo",
+        "price": 80,
+        "emoji": "🫙",
+        "variation": "Regular"
+      },
+      {
+        "id": 297,
+        "name": "Chapati",
+        "price": 20,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 298,
+        "name": "Poori Pratha",
+        "price": 50,
+        "emoji": "🫓",
+        "variation": "Regular"
+      },
+      {
+        "id": 299,
+        "name": "Bread Slice",
+        "price": 15,
+        "emoji": "🍞",
+        "variation": "Regular"
+      }
+    ]
+  },
+  "ipp": {
+    "name": "Italian Pizza Palace (IPP)",
+    "icon": "fa-pizza-slice",
+    "class": "ipp",
+    "subtitle": "Best Pizza & Fast Food in Matli",
+    "type": "food",
+    "products": [
+      {
+        "id": 1,
+        "name": "Deal 1 - This or That",
+        "price": 590,
+        "emoji": "🍔",
+        "variation": "1 Zinger + 2 Shawarma OR 1 Small Pizza + 4 Wings"
+      },
+      {
+        "id": 2,
+        "name": "All in One Deal",
+        "price": 1200,
+        "emoji": "🎁",
+        "variation": "1 Small Pizza + 2 Shawarma + 1 Zinger + 4 Wings"
+      },
+      {
+        "id": 3,
+        "name": "Italian Deal",
+        "price": 800,
+        "emoji": "🍕",
+        "variation": "1 Small Pizza + 1 Zinger + 345ml Drink"
+      },
+      {
+        "id": 4,
+        "name": "Family Deal",
+        "price": 1550,
+        "emoji": "👨‍👩‍👧‍👦",
+        "variation": "1 Large Pizza + 2 Shawarma + 4 Wings + 1 Drink"
+      },
+      {
+        "id": 5,
+        "name": "Weekend Family Deal",
+        "price": 1400,
+        "emoji": "🎉",
+        "variation": "1 Large Pizza + 4 Wings + 2 Shawarma"
+      },
+      {
+        "id": 6,
+        "name": "Mega Deal",
+        "price": 2000,
+        "emoji": "🚀",
+        "variation": "1 Large Special Pizza + 3 Zinger + 6 Wings"
+      },
+      {
+        "id": 7,
+        "name": "Super Saver",
+        "price": 1150,
+        "emoji": "💰",
+        "variation": "1 Small Pizza + 2 Shawarma + 1 Fries + 4 Wings + Drink"
+      },
+      {
+        "id": 8,
+        "name": "Shawarma Special",
+        "price": 500,
+        "emoji": "🌯",
+        "variation": "2 Chicken Shawarma + 2 Wings + 1 Fries"
+      },
+      {
+        "id": 9,
+        "name": "Italian Deal 2",
+        "price": 700,
+        "emoji": "🍟",
+        "variation": "2 Zinger Burgers + Fries + 345ml Drink"
+      },
+      {
+        "id": 10,
+        "name": "Special Family Deal",
+        "price": 1690,
+        "emoji": "🍕",
+        "variation": "1 Large + 1 Small Pizza + 6 Wings + Fries + Drink"
+      },
+      {
+        "id": 11,
+        "name": "Chicken Fajita",
+        "price": 450,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 450
+              },
+              {
+                "name": "Medium",
+                "price": 750
+              },
+              {
+                "name": "Large",
+                "price": 1000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "name": "Special Pizza",
+        "price": 450,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 450
+              },
+              {
+                "name": "Medium",
+                "price": 750
+              },
+              {
+                "name": "Large",
+                "price": 1000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "name": "Tikka Pizza",
+        "price": 500,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 500
+              },
+              {
+                "name": "Medium",
+                "price": 850
+              },
+              {
+                "name": "Large",
+                "price": 1200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 20,
+        "name": "Cheese Lover",
+        "price": 550,
+        "emoji": "🧀",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 550
+              },
+              {
+                "name": "Medium",
+                "price": 800
+              },
+              {
+                "name": "Large",
+                "price": 1100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 23,
+        "name": "BBQ Pizza",
+        "price": 650,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 650
+              },
+              {
+                "name": "Medium",
+                "price": 1000
+              },
+              {
+                "name": "Large",
+                "price": 1400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 26,
+        "name": "Zinger Burger",
+        "price": 320,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 27,
+        "name": "Chicken Burger",
+        "price": 250,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 28,
+        "name": "Tower Burger",
+        "price": 450,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 29,
+        "name": "Cheese Burger",
+        "price": 400,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 30,
+        "name": "Chicken Shawarma",
+        "price": 120,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 31,
+        "name": "Special Shawarma",
+        "price": 150,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 32,
+        "name": "Zinger Roll",
+        "price": 230,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 33,
+        "name": "French Fries",
+        "price": 150,
+        "emoji": "🍟",
+        "variation": "Regular"
+      },
+      {
+        "id": 34,
+        "name": "Hot Crispy Wings",
+        "price": 200,
+        "emoji": "🍗",
+        "variation": "4 Pcs"
+      }
+    ]
+  },
+  "almadina": {
+    "name": "Al Madina Biryani",
+    "icon": "fa-bowl-rice",
+    "class": "almadina",
+    "subtitle": "Sindhi Biryani Specialist",
+    "type": "food",
+    "products": [
+      {
+        "id": 35,
+        "name": "Beef Biryani",
+        "price": 90,
+        "emoji": "🍛",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Quarter",
+                "price": 90
+              },
+              {
+                "name": "Half",
+                "price": 130
+              },
+              {
+                "name": "Full",
+                "price": 180
+              },
+              {
+                "name": "1 KG",
+                "price": 360
+              },
+              {
+                "name": "2 KG",
+                "price": 720
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 40,
+        "name": "Chicken Biryani",
+        "price": 140,
+        "emoji": "🍗",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Quarter",
+                "price": 140
+              },
+              {
+                "name": "Half",
+                "price": 180
+              },
+              {
+                "name": "Full",
+                "price": 230
+              },
+              {
+                "name": "1 KG",
+                "price": 460
+              },
+              {
+                "name": "2 KG",
+                "price": 920
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 45,
+        "name": "Achari Chicken Biryani",
+        "price": 230,
+        "emoji": "🌶️",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 230
+              },
+              {
+                "name": "Full",
+                "price": 460
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 47,
+        "name": "Kofta Biryani",
+        "price": 280,
+        "emoji": "🧆",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 280
+              },
+              {
+                "name": "Medium",
+                "price": 560
+              },
+              {
+                "name": "Large",
+                "price": 560
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 50,
+        "name": "Special Raita",
+        "price": 100,
+        "emoji": "🥣",
+        "variation": "Full Bowl"
+      },
+      {
+        "id": 51,
+        "name": "Cold Drink",
+        "price": 60,
+        "emoji": "🥤",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Half",
+                "price": 60
+              },
+              {
+                "name": "Full",
+                "price": 70
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 53,
+        "name": "Raita",
+        "price": 20,
+        "emoji": "🥣",
+        "variation": "Small"
+      }
+    ]
+  },
+  "domino": {
+    "name": "Domino Pizza",
+    "icon": "fa-pizza-slice",
+    "class": "domino",
+    "subtitle": "Family Restaurant & Deals",
+    "type": "food",
+    "products": [
+      {
+        "id": 54,
+        "name": "Deal #1",
+        "price": 499,
+        "emoji": "🎁",
+        "variation": "1 Zinger + 1 Fries + 500ml Drink"
+      },
+      {
+        "id": 55,
+        "name": "Deal #2",
+        "price": 1549,
+        "emoji": "🎁",
+        "variation": "5 Zinger + 1 Ltr Drink"
+      },
+      {
+        "id": 56,
+        "name": "Deal #3",
+        "price": 899,
+        "emoji": "🎁",
+        "variation": "1 Small Pizza + 1 Zinger + 1 Fries + 500ml Drink"
+      },
+      {
+        "id": 57,
+        "name": "Deal #4",
+        "price": 1899,
+        "emoji": "🎁",
+        "variation": "1 Large Pizza + 1 Zinger + 1 Paratha Roll + 1 Large Fries + 1 Ltr Drink"
+      },
+      {
+        "id": 58,
+        "name": "Deal #5",
+        "price": 1249,
+        "emoji": "🎁",
+        "variation": "1 Medium Pizza + 5 Hot Shots + 1 Fries + 500ml Drink"
+      },
+      {
+        "id": 59,
+        "name": "Deal #6",
+        "price": 1599,
+        "emoji": "🎁",
+        "variation": "1 Medium Pizza + 2 Zinger + 1 Fries + 1.5 Ltr Drink"
+      },
+      {
+        "id": 60,
+        "name": "Deal #7",
+        "price": 1749,
+        "emoji": "🎁",
+        "variation": "1 Small + 1 Medium Pizza + 5 Hot Wings + 1 Fries + 1 Ltr Drink"
+      },
+      {
+        "id": 61,
+        "name": "Deal #8",
+        "price": 1549,
+        "emoji": "🎁",
+        "variation": "2 Small Pizza + 2 Zinger + 1 Ltr Drink"
+      },
+      {
+        "id": 62,
+        "name": "Deal #9",
+        "price": 2149,
+        "emoji": "🎁",
+        "variation": "1 Large Pizza + 2 Zinger + 2 Shawarma + 1 Ltr Drink"
+      },
+      {
+        "id": 63,
+        "name": "Birthday Deal",
+        "price": 6999,
+        "emoji": "🎂",
+        "variation": "4 Medium Pizza + 4 Zinger + 3 Large Fries + 1 Pound Cake + 2x1.5 Ltr Drink"
+      },
+      {
+        "id": 64,
+        "name": "Domino Special Pizza",
+        "price": 499,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 499
+              },
+              {
+                "name": "Medium",
+                "price": 899
+              },
+              {
+                "name": "Large",
+                "price": 1249
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 67,
+        "name": "Peri Peri Pizza",
+        "price": 499,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 499
+              },
+              {
+                "name": "Large",
+                "price": 949
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 69,
+        "name": "Chicken Tikka Pizza",
+        "price": 449,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 449
+              },
+              {
+                "name": "Large",
+                "price": 849
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 71,
+        "name": "Zinger Burger",
+        "price": 299,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 72,
+        "name": "Chicken Patty Burger",
+        "price": 249,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 73,
+        "name": "Tower Burger",
+        "price": 499,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 74,
+        "name": "Hot Wings",
+        "price": 499,
+        "emoji": "🍗",
+        "variation": "10 Pcs"
+      },
+      {
+        "id": 75,
+        "name": "Peri Peri Wings",
+        "price": 549,
+        "emoji": "🍗",
+        "variation": "10 Pcs"
+      },
+      {
+        "id": 76,
+        "name": "Chicken Broast Chest",
+        "price": 399,
+        "emoji": "🍗",
+        "variation": "2 Pcs"
+      }
+    ]
+  },
+  "siraj": {
+    "name": "Siraj Home Food",
+    "icon": "fa-utensils",
+    "class": "siraj",
+    "subtitle": "Home Style Desi Food",
+    "type": "food",
+    "products": [
+      {
+        "id": 77,
+        "name": "Qeema ka Salan",
+        "price": 250,
+        "emoji": "🥘",
+        "variation": "Full Plate"
+      },
+      {
+        "id": 78,
+        "name": "Roti",
+        "price": 30,
+        "emoji": "🫓",
+        "variation": "Per Piece"
+      },
+      {
+        "id": 79,
+        "name": "Shami Kabab",
+        "price": 100,
+        "emoji": "🧆",
+        "variation": "3 Pcs"
+      },
+      {
+        "id": 80,
+        "name": "Anda Paratha",
+        "price": 120,
+        "emoji": "🥚",
+        "variation": "1 Pc"
+      },
+      {
+        "id": 81,
+        "name": "Kofta ka Salan",
+        "price": 250,
+        "emoji": "🥘",
+        "variation": "Full Plate"
+      },
+      {
+        "id": 82,
+        "name": "Achar",
+        "price": 100,
+        "emoji": "🌶️",
+        "variation": "Bottle"
+      },
+      {
+        "id": 83,
+        "name": "Macaroni",
+        "price": 200,
+        "emoji": "🍝",
+        "variation": "Full Plate"
+      },
+      {
+        "id": 84,
+        "name": "Fried Kofta",
+        "price": 300,
+        "emoji": "🧆",
+        "variation": "5 Pcs"
+      },
+      {
+        "id": 85,
+        "name": "Chawal ki Roti",
+        "price": 30,
+        "emoji": "🫓",
+        "variation": "Per Piece"
+      },
+      {
+        "id": 86,
+        "name": "Anda Qeema",
+        "price": 200,
+        "emoji": "🍳",
+        "variation": "Full Plate"
+      },
+      {
+        "id": 87,
+        "name": "Aloo Fry",
+        "price": 100,
+        "emoji": "🥔",
+        "variation": "Full Plate"
+      },
+      {
+        "id": 88,
+        "name": "Kadahi",
+        "price": 500,
+        "emoji": "🥘",
+        "variation": "1 Pao"
+      }
+    ]
+  },
+  "friend": {
+    "name": "Friend Bakery",
+    "icon": "fa-bread-slice",
+    "class": "friend",
+    "subtitle": "Fresh Bakery & Deals",
+    "type": "food",
+    "products": [
+      {
+        "id": 89,
+        "name": "Deal 1",
+        "price": 1100,
+        "emoji": "🎁",
+        "variation": "2 Small Pizza + 1 Zinger + 1 Zinger Roll + 1 Ltr Drink"
+      },
+      {
+        "id": 90,
+        "name": "Deal 2",
+        "price": 1250,
+        "emoji": "🎁",
+        "variation": "1 Medium Pizza + 1 Zinger + 1 Zinger Roll + 1.5 Ltr Drink"
+      },
+      {
+        "id": 91,
+        "name": "Deal 3",
+        "price": 1000,
+        "emoji": "🎁",
+        "variation": "1 Medium Pizza + 1 Pizza Fries + 1 Zinger Roll"
+      },
+      {
+        "id": 92,
+        "name": "Deal 4",
+        "price": 550,
+        "emoji": "🎁",
+        "variation": "2 Zinger Burger + 1 Cool Drink 500ml"
+      },
+      {
+        "id": 93,
+        "name": "Deal 5",
+        "price": 800,
+        "emoji": "🎁",
+        "variation": "1 Zinger Burger + 1 Zinger Roll + 1 Pasta + 1 Cool Drink 500ml"
+      },
+      {
+        "id": 94,
+        "name": "Deal 6",
+        "price": 1600,
+        "emoji": "🎁",
+        "variation": "1 Large Pizza + 1 Small Pizza + 1.5 Ltr Drink"
+      },
+      {
+        "id": 95,
+        "name": "Small Pizza",
+        "price": 500,
+        "emoji": "🍕",
+        "variation": "Regular"
+      },
+      {
+        "id": 96,
+        "name": "Medium Pizza",
+        "price": 800,
+        "emoji": "🍕",
+        "variation": "Regular"
+      },
+      {
+        "id": 97,
+        "name": "Large Pizza",
+        "price": 1400,
+        "emoji": "🍕",
+        "variation": "Regular"
+      },
+      {
+        "id": 98,
+        "name": "Zinger Burger",
+        "price": 280,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 99,
+        "name": "Zinger Roll",
+        "price": 250,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 100,
+        "name": "Pasta",
+        "price": 350,
+        "emoji": "🍝",
+        "variation": "Regular"
+      }
+    ]
+  },
+  "special": {
+    "name": "Special Flavor",
+    "icon": "fa-star",
+    "class": "special",
+    "subtitle": "Premium Taste & Quality",
+    "type": "food",
+    "products": [
+      {
+        "id": 101,
+        "name": "Super Deal 1",
+        "price": 1399,
+        "emoji": "🎁",
+        "variation": "3 Small Pizza + 1 Ltr Cold Drink"
+      },
+      {
+        "id": 102,
+        "name": "Super Deal 2",
+        "price": 1699,
+        "emoji": "🎁",
+        "variation": "2 Medium Pizza + 1 Ltr Cold Drink"
+      },
+      {
+        "id": 103,
+        "name": "Super Deal 3",
+        "price": 2249,
+        "emoji": "🎁",
+        "variation": "2 Large Pizza + 1.5 Ltr Cold Drink"
+      },
+      {
+        "id": 104,
+        "name": "Domino Special",
+        "price": 499,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 499
+              },
+              {
+                "name": "Medium",
+                "price": 899
+              },
+              {
+                "name": "Large",
+                "price": 1699
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 107,
+        "name": "Peri Peri Pizza",
+        "price": 499,
+        "emoji": "🍕",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 499
+              },
+              {
+                "name": "Large",
+                "price": 949
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 109,
+        "name": "Double Cheese Pizza",
+        "price": 549,
+        "emoji": "🧀",
+        "variationTypes": [
+          {
+            "type": "Size",
+            "options": [
+              {
+                "name": "Small",
+                "price": 549
+              },
+              {
+                "name": "Large",
+                "price": 949
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 111,
+        "name": "Zinger Burger",
+        "price": 299,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 112,
+        "name": "Zinger Cheese Burger",
+        "price": 349,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 113,
+        "name": "Tower Burger",
+        "price": 499,
+        "emoji": "🍔",
+        "variation": "Regular"
+      },
+      {
+        "id": 114,
+        "name": "Chicken Roll",
+        "price": 199,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 115,
+        "name": "Zinger Roll",
+        "price": 199,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 116,
+        "name": "Kabab Roll",
+        "price": 299,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 117,
+        "name": "Special Pasta",
+        "price": 499,
+        "emoji": "🍝",
+        "variation": "Regular"
+      },
+      {
+        "id": 118,
+        "name": "Creamy Pasta",
+        "price": 599,
+        "emoji": "🍝",
+        "variation": "Regular"
+      },
+      {
+        "id": 119,
+        "name": "Chicken Shawarma",
+        "price": 199,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 120,
+        "name": "Zinger Shawarma",
+        "price": 249,
+        "emoji": "🌯",
+        "variation": "Regular"
+      },
+      {
+        "id": 121,
+        "name": "Loaded Fries",
+        "price": 499,
+        "emoji": "🍟",
+        "variation": "Regular"
+      },
+      {
+        "id": 122,
+        "name": "Pizza Fries",
+        "price": 549,
+        "emoji": "🍟",
+        "variation": "Regular"
+      }
+    ]
+  },
+  "groceries": {
+    "name": "Dastak Groceries",
+    "icon": "fa-cart-shopping",
+    "class": "grocerytheme",
+    "subtitle": "Rozmarra ka Grocery Samaan - Ghar Baithe",
+    "type": "store",
+    "image": "",
+    "products": [
+      {
+        "id": 2001,
+        "name": "Sella Basmati Rice 1kg",
+        "price": 320,
+        "emoji": "🍚"
+      },
+      {
+        "id": 2002,
+        "name": "Wheat Atta (Aata) 5kg",
+        "price": 850,
+        "emoji": "🌾"
+      },
+      {
+        "id": 2003,
+        "name": "Sugar (Cheeni) 1kg",
+        "price": 175,
+        "emoji": "🍬"
+      },
+      {
+        "id": 2004,
+        "name": "Cooking Oil (Dalda) 1L",
+        "price": 650,
+        "emoji": "🛢️"
+      },
+      {
+        "id": 2005,
+        "name": "Banaspati Ghee 1kg",
+        "price": 680,
+        "emoji": "🧈"
+      },
+      {
+        "id": 2006,
+        "name": "Chana Daal 1kg",
+        "price": 320,
+        "emoji": "🥘"
+      },
+      {
+        "id": 2007,
+        "name": "Masoor Daal 1kg",
+        "price": 340,
+        "emoji": "🥘"
+      },
+      {
+        "id": 2008,
+        "name": "Iodized Salt 800g",
+        "price": 90,
+        "emoji": "🧂"
+      },
+      {
+        "id": 2009,
+        "name": "Lipton Yellow Label Tea 190g",
+        "price": 340,
+        "emoji": "🍵"
+      },
+      {
+        "id": 2010,
+        "name": "Shan Biryani Masala 60g",
+        "price": 123,
+        "emoji": "🍛"
+      },
+      {
+        "id": 2011,
+        "name": "National Mixed Pickle 320g",
+        "price": 222,
+        "emoji": "🥒"
+      },
+      {
+        "id": 2012,
+        "name": "Nestle UHT Milk 1L",
+        "price": 320,
+        "emoji": "🥛"
+      },
+      {
+        "id": 2013,
+        "name": "Olpers Milk 1L",
+        "price": 310,
+        "emoji": "🥛"
+      },
+      {
+        "id": 2014,
+        "name": "Eggs (Dozen)",
+        "price": 380,
+        "emoji": "🥚"
+      },
+      {
+        "id": 2015,
+        "name": "Bread - Large Loaf",
+        "price": 170,
+        "emoji": "🍞"
+      },
+      {
+        "id": 2016,
+        "name": "LU Prince Chocolate Biscuit Pack",
+        "price": 199,
+        "emoji": "🍪"
+      },
+      {
+        "id": 2017,
+        "name": "Lays Chips",
+        "price": 100,
+        "emoji": "🍟"
+      },
+      {
+        "id": 2018,
+        "name": "Mountain Dew 1.5L",
+        "price": 178,
+        "emoji": "🥤"
+      },
+      {
+        "id": 2019,
+        "name": "Coca Cola 1.5L",
+        "price": 150,
+        "emoji": "🥤"
+      },
+      {
+        "id": 2020,
+        "name": "National Synthetic Vinegar 300ml",
+        "price": 94,
+        "emoji": "🍶"
+      },
+      {
+        "id": 2021,
+        "name": "Rooh Afza 800ml",
+        "price": 450,
+        "emoji": "🧃"
+      },
+      {
+        "id": 2022,
+        "name": "Basmati Rice Premium 5kg",
+        "price": 1600,
+        "emoji": "🍚"
+      },
+      {
+        "id": 2023,
+        "name": "Red Chilli Powder 200g",
+        "price": 180,
+        "emoji": "🌶️"
+      },
+      {
+        "id": 2024,
+        "name": "Turmeric (Haldi) Powder 200g",
+        "price": 150,
+        "emoji": "🟡"
+      }
+    ]
+  },
+  "mart": {
+    "name": "Dastak Mart",
+    "icon": "fa-store",
+    "class": "marttheme",
+    "subtitle": "Coming Soon - Admin Panel se Products Add Karein",
+    "type": "store",
+    "image": "",
+    "products": []
+  },
+  "medical": {
+    "name": "Dastak Medical Store",
+    "icon": "fa-briefcase-medical",
+    "class": "medtheme",
+    "subtitle": "Medicines & Healthcare - Ghar Tak Delivery",
+    "type": "store",
+    "image": "",
+    "products": [
+      {
+        "id": 2201,
+        "name": "Panadol Tablets (20s)",
+        "price": 60,
+        "emoji": "💊"
+      },
+      {
+        "id": 2202,
+        "name": "Panadol Extra (20s)",
+        "price": 90,
+        "emoji": "💊"
+      },
+      {
+        "id": 2203,
+        "name": "Disprin Tablets (10s)",
+        "price": 40,
+        "emoji": "💊"
+      },
+      {
+        "id": 2204,
+        "name": "Brufen 400mg (10 Tablets)",
+        "price": 85,
+        "emoji": "💊"
+      },
+      {
+        "id": 2205,
+        "name": "Augmentin 625mg (6 Tablets)",
+        "price": 450,
+        "emoji": "💊"
+      },
+      {
+        "id": 2206,
+        "name": "ORS Sachet",
+        "price": 25,
+        "emoji": "🧃"
+      },
+      {
+        "id": 2207,
+        "name": "Surgical Face Mask (Box of 50)",
+        "price": 500,
+        "emoji": "😷"
+      },
+      {
+        "id": 2208,
+        "name": "Hand Sanitizer 250ml",
+        "price": 250,
+        "emoji": "🧴"
+      },
+      {
+        "id": 2209,
+        "name": "Digital Thermometer",
+        "price": 650,
+        "emoji": "🌡️"
+      },
+      {
+        "id": 2210,
+        "name": "First Aid Bandage Roll",
+        "price": 120,
+        "emoji": "🩹"
+      },
+      {
+        "id": 2211,
+        "name": "Vitamin C Tablets (30s)",
+        "price": 550,
+        "emoji": "💊"
+      },
+      {
+        "id": 2212,
+        "name": "Centrum Multivitamin (30 Tabs)",
+        "price": 1800,
+        "emoji": "💊"
+      },
+      {
+        "id": 2213,
+        "name": "Baby Diapers - Medium (Pack of 20)",
+        "price": 950,
+        "emoji": "👶"
+      },
+      {
+        "id": 2214,
+        "name": "Cough Syrup 100ml",
+        "price": 180,
+        "emoji": "🍯"
+      },
+      {
+        "id": 2215,
+        "name": "Dettol Antiseptic Liquid 125ml",
+        "price": 220,
+        "emoji": "🧴"
+      },
+      {
+        "id": 2216,
+        "name": "Digital BP Monitor",
+        "price": 4500,
+        "emoji": "🩺"
+      },
+      {
+        "id": 2217,
+        "name": "Glucometer with Strips",
+        "price": 2800,
+        "emoji": "🩺"
+      },
+      {
+        "id": 2218,
+        "name": "Calamine Lotion 100ml",
+        "price": 280,
+        "emoji": "🧴"
+      },
+      {
+        "id": 2219,
+        "name": "Eno Sachet",
+        "price": 35,
+        "emoji": "🧂"
+      },
+      {
+        "id": 2220,
+        "name": "Zincovit Syrup - Kids 200ml",
+        "price": 320,
+        "emoji": "🍯"
+      }
+    ]
+  },
+  "generalstore": {
+    "name": "Dastak General Store",
+    "icon": "fa-bag-shopping",
+    "class": "genstoretheme",
+    "subtitle": "Sab Kuch Ek Jaga - Grocery, Personal Care & Electronics",
+    "type": "store",
+    "image": "",
+    "products": [
+      {
+        "id": 2101,
+        "name": "Himalaya Purifying Neem Face Wash 50ml",
+        "price": 195,
+        "emoji": "🧴"
+      },
+      {
+        "id": 2102,
+        "name": "Colgate Max Cavity Protection Toothpaste 200g",
+        "price": 374,
+        "emoji": "🪥"
+      },
+      {
+        "id": 2103,
+        "name": "Colgate Premier Clean Toothbrush (3pcs)",
+        "price": 144,
+        "emoji": "🪥"
+      },
+      {
+        "id": 2104,
+        "name": "Mother Care Baby Lotion 36ml",
+        "price": 118,
+        "emoji": "🍼"
+      },
+      {
+        "id": 2105,
+        "name": "AirPods Pro 2 (2nd Gen)",
+        "price": 989,
+        "emoji": "🎧"
+      },
+      {
+        "id": 2106,
+        "name": "USB to C-Type Cable",
+        "price": 295,
+        "emoji": "🔌"
+      },
+      {
+        "id": 2107,
+        "name": "iPhone Adapter 20W",
+        "price": 616,
+        "emoji": "🔌"
+      },
+      {
+        "id": 2108,
+        "name": "JBL M3-T Mini Wireless Speaker",
+        "price": 990,
+        "emoji": "🔊"
+      },
+      {
+        "id": 2109,
+        "name": "Miady Power Bank 10,000mAh",
+        "price": 1999,
+        "emoji": "🔋"
+      },
+      {
+        "id": 2110,
+        "name": "Dabur Vatika Hair Oil 200ml",
+        "price": 400,
+        "emoji": "💆"
+      },
+      {
+        "id": 2111,
+        "name": "Oateo Quick Cooking Oats 400g",
+        "price": 592,
+        "emoji": "🥣"
+      },
+      {
+        "id": 2112,
+        "name": "Colgate Zig Zag Soft Toothbrush 2pcs",
+        "price": 144,
+        "emoji": "🪥"
+      },
+      {
+        "id": 2113,
+        "name": "Skin White 7 Day Beauty Cream 250g",
+        "price": 252,
+        "emoji": "🧴"
+      },
+      {
+        "id": 2114,
+        "name": "Pretty Watermelon Face Wash 100g",
+        "price": 180,
+        "emoji": "🧴"
+      },
+      {
+        "id": 2115,
+        "name": "Toilet Tissue Rolls (Pack of 10)",
+        "price": 350,
+        "emoji": "🧻"
+      },
+      {
+        "id": 2116,
+        "name": "Dishwashing Liquid 500ml",
+        "price": 280,
+        "emoji": "🧽"
+      },
+      {
+        "id": 2117,
+        "name": "Mosquito Repellent Spray",
+        "price": 450,
+        "emoji": "🦟"
+      },
+      {
+        "id": 2118,
+        "name": "Jhaadu (Broom)",
+        "price": 250,
+        "emoji": "🧹"
+      },
+      {
+        "id": 2119,
+        "name": "Stationery Notebook Pack",
+        "price": 150,
+        "emoji": "📓"
+      },
+      {
+        "id": 2120,
+        "name": "Mobile Screen Protector",
+        "price": 250,
+        "emoji": "📱"
+      }
+    ]
+  }
 }
-
-// Initialize Rider Portal on demand
-function initRiderPortal() {
-    if (appsInitialized.rider) return;
-    console.log('🏍️ Initializing Rider Portal...');
-    
-    // Show main header and portal elements
-    const mainHeader = document.getElementById('main-header');
-    if (mainHeader) {
-        mainHeader.classList.remove('hidden');
-    }
-    
-    const sidebar = document.getElementById('sidebar');
-    if (sidebar) {
-        sidebar.setAttribute('data-ready', 'true');
-    }
-    
-    // Call your existing rider portal initialization functions here
-    // Example: loadRiderData(), initMap(), etc.
-    // loadRiderData();
-    
-    appsInitialized.rider = true;
-    console.log('✅ Rider Portal initialized');
-}
-
-// Updated switchToRiderPortal function
-function switchToRiderPortal() {
-    console.log('🔄 Switching to Rider Portal...');
-    
-    // Hide food app
-    const foodSection = document.getElementById('food-app-section');
-    if (foodSection) {
-        foodSection.style.display = 'none';
-    }
-    
-    // Show rider portal
-    const mainHeader = document.getElementById('main-header');
-    if (mainHeader) {
-        mainHeader.classList.remove('hidden');
-    }
-    
-    const sidebar = document.getElementById('sidebar');
-    if (sidebar) {
-        sidebar.style.display = 'flex';
-    }
-    
-    // Initialize rider portal if not already done
-    initRiderPortal();
-    
-    // Update active navigation
-    updateBottomNav('portal');
-}
-
-// Go back to Food App
-function bnavGoHome() {
-    console.log('🍽️ Going back to Food App...');
-    
-    // Hide rider portal
-    const mainHeader = document.getElementById('main-header');
-    if (mainHeader) {
-        mainHeader.classList.add('hidden');
-    }
-    
-    const sidebar = document.getElementById('sidebar');
-    if (sidebar) {
-        sidebar.style.display = 'none';
-    }
-    
-    // Show food app
-    const foodSection = document.getElementById('food-app-section');
-    if (foodSection) {
-        foodSection.style.display = 'block';
-    }
-    
-    // Update active navigation
-    updateBottomNav('home');
-}
-
-// Update bottom navigation active state
-function updateBottomNav(tab) {
-    // Remove active from all nav items
-    document.querySelectorAll('.bnav-item').forEach(item => {
-        item.classList.remove('active');
-    });
-    
-    // Add active to selected nav item
-    if (tab === 'home') {
-        const homeBtn = document.getElementById('bnavHome');
-        if (homeBtn) homeBtn.classList.add('active');
-    } else if (tab === 'portal') {
-        const portalBtn = document.getElementById('bnavAdmin');
-        if (portalBtn) portalBtn.classList.add('active');
-    }
-}
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('⏳ Page loaded - initializing Food App first...');
-    initFoodApp();
-    console.log('✅ Setup complete! Food App is ready. Rider Portal will load on demand.');
-});
-
-// Also handle window load event
-window.addEventListener('load', function() {
-    // Ensure food app is initialized
-    if (!appsInitialized.food) {
-        initFoodApp();
-    }
-});
