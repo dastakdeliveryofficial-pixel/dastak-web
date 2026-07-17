@@ -3808,27 +3808,6 @@
     "type": "food",
     "products": [
       {
-        "id": 532,
-        "name": "Sandwich",
-        "price": 350,
-        "emoji": "🥪",
-        "variation": "Regular"
-      },
-      {
-        "id": 533,
-        "name": "Finger Chips",
-        "price": 200,
-        "emoji": "🍟",
-        "variation": "Regular"
-      },
-      {
-        "id": 534,
-        "name": "Cold Drink Regular",
-        "price": 70,
-        "emoji": "🥤",
-        "variation": "Regular"
-      },
-      {
         "id": 535,
         "name": "Cold Drink 1.5 Ltr",
         "price": 220,
