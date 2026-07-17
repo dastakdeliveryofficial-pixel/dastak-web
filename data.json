@@ -3808,27 +3808,6 @@
     "type": "food",
     "products": [
       {
-        "id": 535,
-        "name": "Cold Drink 1.5 Ltr",
-        "price": 220,
-        "emoji": "🥤",
-        "variation": "1.5 Ltr"
-      },
-      {
-        "id": 536,
-        "name": "Cold Drink 1 Ltr",
-        "price": 170,
-        "emoji": "🥤",
-        "variation": "1 Ltr"
-      },
-      {
-        "id": 537,
-        "name": "Cold Drink 500ml",
-        "price": 120,
-        "emoji": "🥤",
-        "variation": "500ml"
-      },
-      {
         "id": 538,
         "name": "Salad",
         "price": 100,
