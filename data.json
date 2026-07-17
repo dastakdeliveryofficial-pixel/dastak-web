@@ -3806,36 +3806,7 @@
     "class": "pkrestaurant",
     "subtitle": "Matli — Desi & Fast Food",
     "type": "food",
-    "products": [
-      {
-        "id": 544,
-        "name": "Choola",
-        "price": 200,
-        "emoji": "🥣",
-        "variation": "Regular"
-      },
-      {
-        "id": 546,
-        "name": "Mineral Water",
-        "price": 60,
-        "emoji": "💧",
-        "variationTypes": [
-          {
-            "type": "Size",
-            "options": [
-              {
-                "name": "Half",
-                "price": 60
-              },
-              {
-                "name": "Large",
-                "price": 120
-              }
-            ]
-          }
-        ]
-      }
-    ],
+    "products": [],
     "image": ""
   }
 }
