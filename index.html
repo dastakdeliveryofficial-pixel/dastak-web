@@ -819,25 +819,44 @@ function refreshSyncStatusDisplay(){
     el.innerHTML=msg;
 }
 function loadFromGitHub(){
+    var token=getGithubToken();
+    if(token){loadFromGitHubApi(token);return;}
     var branches=[ghActiveBranch,'main','master'];
     (function tryBranch(i){
         if(i>=branches.length)return;
         var branch=branches[i];
         fetch('https://raw.githubusercontent.com/'+GITHUB_OWNER+'/'+GITHUB_REPO+'/'+branch+'/'+GITHUB_DATA_PATH+'?t='+Date.now())
         .then(function(r){if(!r.ok)throw new Error('404');return r.json();})
-        .then(function(remote){
-            if(!remote||typeof remote!=='object')throw new Error('bad data');
-            ghActiveBranch=branch;localStorage.setItem('dastakGithubBranch',branch);
-            categories=remote;
-            migrateCategories();
-            mergeDuplicateVariationsOnce(true);
-            localStorage.setItem('dastakCategories',JSON.stringify(categories));
-            renderSidebarNav();renderSections();fillCategoryDropdowns();
-            if(document.getElementById('adminProductsList'))renderAdminProducts();
-            if(document.getElementById('adminRestaurantsList'))renderAdminRestaurants();
+        .then(function(remote){applyRemoteCategories(remote,branch);})
+        .catch(function(){tryBranch(i+1);});
+    })(0);
+}
+function loadFromGitHubApi(token){
+    var branches=[ghActiveBranch,'main','master'];
+    (function tryBranch(i){
+        if(i>=branches.length)return;
+        var branch=branches[i];
+        var apiUrl='https://api.github.com/repos/'+GITHUB_OWNER+'/'+GITHUB_REPO+'/contents/'+GITHUB_DATA_PATH+'?ref='+branch+'&t='+Date.now();
+        fetch(apiUrl,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github+json','If-None-Match':''}})
+        .then(function(r){if(!r.ok)throw new Error('status '+r.status);return r.json();})
+        .then(function(info){
+            if(!info||!info.content)throw new Error('no content');
+            var remote=JSON.parse(base64ToUtf8(info.content.replace(/\n/g,'')));
+            applyRemoteCategories(remote,branch);
         })
         .catch(function(){tryBranch(i+1);});
     })(0);
+}
+function applyRemoteCategories(remote,branch){
+    if(!remote||typeof remote!=='object')return;
+    ghActiveBranch=branch;localStorage.setItem('dastakGithubBranch',branch);
+    categories=remote;
+    migrateCategories();
+    mergeDuplicateVariationsOnce(true);
+    localStorage.setItem('dastakCategories',JSON.stringify(categories));
+    renderSidebarNav();renderSections();fillCategoryDropdowns();
+    if(document.getElementById('adminProductsList'))renderAdminProducts();
+    if(document.getElementById('adminRestaurantsList'))renderAdminRestaurants();
 }
 function showSyncToast(msg,isError){
     var t=document.createElement('div');
