@@ -3808,27 +3808,6 @@
     "type": "food",
     "products": [
       {
-        "id": 514,
-        "name": "Spicy Boti",
-        "price": 250,
-        "emoji": "🍢",
-        "variation": "Regular"
-      },
-      {
-        "id": 515,
-        "name": "Malai Boti",
-        "price": 250,
-        "emoji": "🍢",
-        "variation": "Regular"
-      },
-      {
-        "id": 516,
-        "name": "Behari Boti",
-        "price": 250,
-        "emoji": "🍢",
-        "variation": "Regular"
-      },
-      {
         "id": 517,
         "name": "Reshmi Kabab",
         "price": 200,
