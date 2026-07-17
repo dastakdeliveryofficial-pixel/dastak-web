@@ -3808,27 +3808,6 @@
     "type": "food",
     "products": [
       {
-        "id": 520,
-        "name": "Qeema Fry",
-        "price": 300,
-        "emoji": "🥘",
-        "variation": "Regular"
-      },
-      {
-        "id": 521,
-        "name": "Daal Moong",
-        "price": 200,
-        "emoji": "🥣",
-        "variation": "Regular"
-      },
-      {
-        "id": 522,
-        "name": "Daal Chana",
-        "price": 200,
-        "emoji": "🥣",
-        "variation": "Regular"
-      },
-      {
         "id": 523,
         "name": "Sabzi",
         "price": 200,
