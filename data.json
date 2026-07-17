@@ -3808,27 +3808,6 @@
     "type": "food",
     "products": [
       {
-        "id": 529,
-        "name": "Qandhari Naan (Double)",
-        "price": 60,
-        "emoji": "🫓",
-        "variation": "Regular"
-      },
-      {
-        "id": 530,
-        "name": "Zinger Burger",
-        "price": 350,
-        "emoji": "🍔",
-        "variation": "Regular"
-      },
-      {
-        "id": 531,
-        "name": "Broast",
-        "price": 400,
-        "emoji": "🍗",
-        "variation": "Regular"
-      },
-      {
         "id": 532,
         "name": "Sandwich",
         "price": 350,
