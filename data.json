@@ -3808,27 +3808,6 @@
     "type": "food",
     "products": [
       {
-        "id": 526,
-        "name": "Chapati",
-        "price": 20,
-        "emoji": "🫓",
-        "variation": "Regular"
-      },
-      {
-        "id": 527,
-        "name": "Roti",
-        "price": 20,
-        "emoji": "🫓",
-        "variation": "Regular"
-      },
-      {
-        "id": 528,
-        "name": "Qandhari Naan (Single)",
-        "price": 30,
-        "emoji": "🫓",
-        "variation": "Regular"
-      },
-      {
         "id": 529,
         "name": "Qandhari Naan (Double)",
         "price": 60,
