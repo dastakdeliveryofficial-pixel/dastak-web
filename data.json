@@ -3808,27 +3808,6 @@
     "type": "food",
     "products": [
       {
-        "id": 511,
-        "name": "Chicken Tikka",
-        "price": 400,
-        "emoji": "🍗",
-        "variation": "Regular"
-      },
-      {
-        "id": 512,
-        "name": "Chicken Malai Tikka",
-        "price": 450,
-        "emoji": "🍗",
-        "variation": "Regular"
-      },
-      {
-        "id": 513,
-        "name": "Chicken Green Tikka",
-        "price": 450,
-        "emoji": "🍗",
-        "variation": "Regular"
-      },
-      {
         "id": 514,
         "name": "Spicy Boti",
         "price": 250,
