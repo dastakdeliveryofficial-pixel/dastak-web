@@ -3808,27 +3808,6 @@
     "type": "food",
     "products": [
       {
-        "id": 523,
-        "name": "Sabzi",
-        "price": 200,
-        "emoji": "🥦",
-        "variation": "Regular"
-      },
-      {
-        "id": 524,
-        "name": "Anda Qeema",
-        "price": 200,
-        "emoji": "🍳",
-        "variation": "Regular"
-      },
-      {
-        "id": 525,
-        "name": "Anda Choola",
-        "price": 250,
-        "emoji": "🍳",
-        "variation": "Regular"
-      },
-      {
         "id": 526,
         "name": "Chapati",
         "price": 20,
