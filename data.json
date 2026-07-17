@@ -3808,27 +3808,6 @@
     "type": "food",
     "products": [
       {
-        "id": 502,
-        "name": "Pizza Pratha (Special)",
-        "price": 550,
-        "emoji": "🫓",
-        "variation": "Regular"
-      },
-      {
-        "id": 503,
-        "name": "Vegetable Paratha",
-        "price": 350,
-        "emoji": "🫓",
-        "variation": "Regular"
-      },
-      {
-        "id": 504,
-        "name": "BBQ Paratha",
-        "price": 400,
-        "emoji": "🫓",
-        "variation": "Regular"
-      },
-      {
         "id": 505,
         "name": "Chicken Kabab Roll",
         "price": 250,
