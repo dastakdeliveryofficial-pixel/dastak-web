@@ -3799,14 +3799,5 @@
         "emoji": "📱"
       }
     ]
-  },
-  "pkrestaurant": {
-    "name": "P.K. Restaurant",
-    "icon": "fa-utensils",
-    "class": "pkrestaurant",
-    "subtitle": "Matli — Desi & Fast Food",
-    "type": "food",
-    "products": [],
-    "image": ""
   }
 }
