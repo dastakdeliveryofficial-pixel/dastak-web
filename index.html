@@ -4,29 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dastak Delivery - Matli</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         :root{
-            --indigo:#1B3358;--indigo-deep:#0E1F38;
-            --maroon:#A32638;--maroon-deep:#7A1A28;--maroon-bright:#C23B4A;--maroon-tint:#F6DCDD;
-            --mustard:#E2A63B;--mustard-deep:#C6862A;--mustard-tint:#FBEBC9;
-            --success:#2F6F4E;--success-deep:#245A3F;--success-tint:#DCEEE0;
-            --teal:#3E6E6C;--teal-deep:#2C504F;
-            --ink:#241A15;--muted:#7C6C5C;--muted-light:#A8977F;
-            --border:#E7D9BE;--border-strong:#D8C5A2;
-            --paper:#F8EFDD;--bg-soft:#FBF4E6;--bg-soft2:#F3E8D2;--surface:#FFFCF5;
-            --tint:#FBEFD6;--tint-border:#E8CE93;
-            --font-display:'Fraunces',serif;--font-body:'Work Sans',sans-serif;
+            --indigo:#DF003D;--indigo-deep:#8F0027;
+            --maroon:#B8102F;--maroon-deep:#7A0920;--maroon-bright:#FF2D55;--maroon-tint:#FDE3E8;
+            --mustard:#FFBF03;--mustard-deep:#D89A00;--mustard-tint:#FFF3D1;
+            --success:#2F8F52;--success-deep:#236B3E;--success-tint:#DCEEE0;
+            --teal:#2B2B2B;--teal-deep:#161616;
+            --ink:#1A1A1A;--muted:#6E6E6E;--muted-light:#9E9E9E;
+            --border:#F3D9DE;--border-strong:#E8B9C4;
+            --paper:#FFF8F6;--bg-soft:#FFF1F3;--bg-soft2:#FDE6EA;--surface:#FFFFFF;
+            --tint:#FFF3D1;--tint-border:#FFBF03;
+            --font-display:'Baloo 2',sans-serif;--font-body:'Poppins',sans-serif;
         }
         body{font-family:var(--font-body);background-color:var(--paper);color:var(--ink)}
         h1,h2,h3,.logo span,.section-title,.category-title,.sidebar-title,.pd-name,.cart-title,.admin-title,.modal-title,.restaurant-card-name,.mb-name{font-family:var(--font-display)}
         .header::after,.sidebar-header::after,.category-header::after{content:'';position:absolute;left:0;right:0;bottom:0;height:5px;background:repeating-linear-gradient(-45deg,var(--mustard) 0 10px,var(--maroon) 10px 20px)}
         .category-header{position:relative}
         .restaurant-card-image::before,.menu-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;z-index:3;background:repeating-linear-gradient(-45deg,var(--mustard) 0 8px,var(--maroon) 8px 16px)}
-        .brand-mark{width:32px;height:32px;border-radius:50%;background:var(--maroon);display:flex;align-items:center;justify-content:center;border:2px solid var(--mustard);flex-shrink:0;box-shadow:0 0 0 2px var(--indigo-deep) inset}
-        .logo .brand-mark i{color:white;font-size:0.85rem}
+        .brand-mark{width:36px;height:36px;border-radius:50%;background:var(--indigo);display:flex;align-items:center;justify-content:center;border:2px solid var(--mustard);flex-shrink:0;box-shadow:0 0 0 2px var(--indigo-deep) inset;overflow:hidden}
+        .logo .brand-mark img{width:100%;height:100%;object-fit:cover}
         /* HEADER FIX - mobile responsive */
         .header{background:linear-gradient(135deg,var(--indigo) 0%,var(--indigo-deep) 100%);color:white;padding:0.65rem 0;position:sticky;top:0;z-index:1000;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
         .container{max-width:1200px;margin:0 auto;padding:0 0.75rem}
@@ -196,8 +196,13 @@
         .tab-content.active{display:block}
         .form-group{margin-bottom:1rem}
         .form-label{display:block;font-weight:600;color:var(--ink);margin-bottom:0.4rem;font-size:0.85rem}
-        .form-input,.form-select{width:100%;padding:0.6rem 0.8rem;border:2px solid var(--border);border-radius:10px;font-size:0.9rem;outline:none;transition:all 0.3s;font-family:'Inter',sans-serif}
-        .form-input:focus,.form-select:focus{border-color:var(--indigo);box-shadow:0 0 0 4px rgba(27,51,88,0.1)}
+        .form-input,.form-select{width:100%;padding:0.6rem 0.8rem;border:2px solid var(--border);border-radius:10px;font-size:0.9rem;outline:none;transition:all 0.3s;font-family:var(--font-body)}
+        .form-input:focus,.form-select:focus{border-color:var(--indigo);box-shadow:0 0 0 4px rgba(223,0,61,0.12)}
+        .img-upload-row{display:flex;align-items:center;gap:0.7rem;flex-wrap:wrap}
+        .img-upload-btn{display:inline-flex;align-items:center;gap:0.5rem;background:var(--surface);border:2px dashed var(--border-strong);color:var(--indigo);padding:0.6rem 0.9rem;border-radius:10px;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+        .img-upload-btn:hover{border-color:var(--indigo);background:var(--bg-soft)}
+        .img-upload-preview{width:54px;height:54px;border-radius:10px;object-fit:cover;border:2px solid var(--border)}
+        .img-upload-clear{width:30px;height:30px;border-radius:50%;background:var(--maroon);color:white;border:none;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.75rem;flex-shrink:0}
         .form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.875rem}
         .admin-btn{background:linear-gradient(135deg,var(--indigo) 0%,var(--indigo-deep) 100%);color:white;border:none;padding:0.8rem;border-radius:10px;font-size:0.9rem;font-weight:600;cursor:pointer;width:100%;transition:all 0.3s;margin-top:0.75rem}
         .admin-btn:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(27,51,88,0.3)}
@@ -482,6 +487,15 @@
             <div class="form-group"><label class="form-label">Restaurant *</label><select class="form-select" id="adminProductCategory"></select></div>
             <div class="form-group"><label class="form-label">Emoji/Icon</label><input type="text" class="form-input" id="adminProductEmoji" placeholder="e.g. 🍔" maxlength="2" style="max-width:110px"></div>
             <div class="form-group">
+                <label class="form-label">Product Photo (optional — emoji ki jagah asli photo dikhegi)</label>
+                <div class="img-upload-row">
+                    <label class="img-upload-btn"><i class="fas fa-camera"></i> Gallery se Photo Chunein<input type="file" accept="image/*" style="display:none" onchange="handleImageUpload(this,'adminProductImage','adminProductImgPreview',500,500)"></label>
+                    <img id="adminProductImgPreview" class="img-upload-preview" style="display:none">
+                    <button type="button" class="img-upload-clear" id="adminProductImgClearBtn" style="display:none" onclick="clearUploadedImage('adminProductImage','adminProductImgPreview','adminProductImgClearBtn')"><i class="fas fa-times"></i></button>
+                </div>
+                <input type="hidden" id="adminProductImage">
+            </div>
+            <div class="form-group">
                 <label class="form-label"><i class="fas fa-sliders-h" style="color:var(--mustard)"></i> Variations (Optional)</label>
                 <p class="variation-hint">💡 Size, Flavor jitni types chahiye add karein. Har type mein multiple options de sakte hain.</p>
                 <div id="addVarBuilders"></div>
@@ -510,7 +524,15 @@
                     <div class="form-group"><label class="form-label">Type</label><select class="form-select" id="newRestType"><option value="food">🍽️ Restaurant (Food)</option><option value="store">🛒 Store (Grocery/Medical/etc)</option></select></div>
                     <div class="form-group"><label class="form-label">Color Theme</label><select class="form-select" id="newRestColor"><option value="ipp">🔴 Red</option><option value="almadina">🟢 Green</option><option value="domino">🔵 Blue</option><option value="siraj">🟠 Orange</option><option value="friend">🟣 Purple</option><option value="special">🩷 Pink</option><option value="deals">🟡 Gold</option><option value="grocerytheme">🥦 Grocery Green</option><option value="marttheme">🏪 Mart Teal</option><option value="medtheme">⚕️ Medical Red</option><option value="genstoretheme">🛍️ Store Indigo</option></select></div>
                 </div>
-                <div class="form-group"><label class="form-label">Restaurant Image URL (optional)</label><input type="text" class="form-input" id="newRestImage" placeholder="https://... (jitna acha photo, utna acha look)"></div>
+                <div class="form-group">
+                    <label class="form-label">Restaurant Photo (optional)</label>
+                    <div class="img-upload-row">
+                        <label class="img-upload-btn"><i class="fas fa-camera"></i> Gallery se Photo Chunein<input type="file" accept="image/*" style="display:none" onchange="handleImageUpload(this,'newRestImage','newRestImgPreview',600,400)"></label>
+                        <img id="newRestImgPreview" class="img-upload-preview" style="display:none">
+                        <button type="button" class="img-upload-clear" id="newRestImgClearBtn" style="display:none" onclick="clearUploadedImage('newRestImage','newRestImgPreview','newRestImgClearBtn')"><i class="fas fa-times"></i></button>
+                    </div>
+                    <input type="hidden" id="newRestImage">
+                </div>
                 <button class="admin-btn" onclick="addRestaurant()" style="margin-top:0.4rem"><i class="fas fa-store"></i> Restaurant Add Karein</button>
             </div>
             <div style="border-top:2px solid var(--border);padding-top:1.1rem">
@@ -571,6 +593,15 @@
         </div>
         <div class="form-group"><label class="form-label">Emoji</label><input type="text" class="form-input" id="editProductEmoji" maxlength="2" style="max-width:110px"></div>
         <div class="form-group">
+            <label class="form-label">Product Photo (optional)</label>
+            <div class="img-upload-row">
+                <label class="img-upload-btn"><i class="fas fa-camera"></i> Gallery se Photo Chunein<input type="file" accept="image/*" style="display:none" onchange="handleImageUpload(this,'editProductImage','editProductImgPreview',500,500)"></label>
+                <img id="editProductImgPreview" class="img-upload-preview" style="display:none">
+                <button type="button" class="img-upload-clear" id="editProductImgClearBtn" style="display:none" onclick="clearUploadedImage('editProductImage','editProductImgPreview','editProductImgClearBtn')"><i class="fas fa-times"></i></button>
+            </div>
+            <input type="hidden" id="editProductImage">
+        </div>
+        <div class="form-group">
             <label class="form-label"><i class="fas fa-sliders-h" style="color:var(--mustard)"></i> Variations</label>
             <div id="editVarBuilders"></div>
             <button type="button" class="add-var-type-btn" onclick="addVarTypeBuilder('edit')"><i class="fas fa-plus"></i> Variation Type Add Karein</button>
@@ -598,7 +629,15 @@
         <div class="form-group"><label class="form-label">Icon</label><select class="form-select" id="editRestIcon"><option value="fa-utensils">🍴 Utensils</option><option value="fa-pizza-slice">🍕 Pizza</option><option value="fa-bowl-rice">🍛 Biryani</option><option value="fa-bread-slice">🍞 Bakery</option><option value="fa-burger">🍔 Burger</option><option value="fa-star">⭐ Star</option><option value="fa-fire">🔥 Fire</option><option value="fa-drumstick-bite">🍗 Chicken</option><option value="fa-cart-shopping">🛒 Grocery Cart</option><option value="fa-store">🏬 Store</option><option value="fa-pills">💊 Pills</option><option value="fa-briefcase-medical">⚕️ Medical</option></select></div>
         <div class="form-group"><label class="form-label">Type</label><select class="form-select" id="editRestType"><option value="food">🍽️ Restaurant (Food)</option><option value="store">🛒 Store (Grocery/Medical/etc)</option></select></div>
         <div class="form-group"><label class="form-label">Color Theme</label><select class="form-select" id="editRestColor"><option value="ipp">🔴 Red</option><option value="almadina">🟢 Green</option><option value="domino">🔵 Blue</option><option value="siraj">🟠 Orange</option><option value="friend">🟣 Purple</option><option value="special">🩷 Pink</option><option value="deals">🟡 Gold</option><option value="grocerytheme">🥦 Grocery Green</option><option value="marttheme">🏪 Mart Teal</option><option value="medtheme">⚕️ Medical Red</option><option value="genstoretheme">🛍️ Store Indigo</option></select></div>
-        <div class="form-group"><label class="form-label">Restaurant Image URL (optional)</label><input type="text" class="form-input" id="editRestImage" placeholder="https://..."></div>
+        <div class="form-group">
+            <label class="form-label">Restaurant Photo (optional)</label>
+            <div class="img-upload-row">
+                <label class="img-upload-btn"><i class="fas fa-camera"></i> Gallery se Photo Chunein<input type="file" accept="image/*" style="display:none" onchange="handleImageUpload(this,'editRestImage','editRestImgPreview',600,400)"></label>
+                <img id="editRestImgPreview" class="img-upload-preview" style="display:none">
+                <button type="button" class="img-upload-clear" id="editRestImgClearBtn" style="display:none" onclick="clearUploadedImage('editRestImage','editRestImgPreview','editRestImgClearBtn')"><i class="fas fa-times"></i></button>
+            </div>
+            <input type="hidden" id="editRestImage">
+        </div>
         <button class="admin-btn" onclick="saveRestaurantEdit()"><i class="fas fa-save"></i> Save Changes</button>
     </div>
 </div>
@@ -609,7 +648,7 @@
         <div class="header-content">
             <div class="header-left">
                 <button class="menu-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-                <div class="logo"><span class="brand-mark"><i class="fas fa-motorcycle"></i></span><span>Dastak Delivery</span></div>
+                <div class="logo"><span class="brand-mark"><img src="data:image/jpeg;base64,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" alt="Dastak Delivery"></span><span>Dastak Delivery</span></div>
             </div>
             <div class="header-right">
                 <button class="admin-header-btn" id="adminHeaderBtn" onclick="showAdminLogin()"><i class="fas fa-shield-alt"></i><span>Admin</span></button>
@@ -939,6 +978,36 @@ function showSection(s,el){openRestaurantMenu(s);toggleSidebar();}
 function renderSidebarNav(){var c=document.getElementById('sidebarRestaurantList');if(!c)return;var h='';var keys=Object.keys(categories);for(var i=0;i<keys.length;i++){var k=keys[i],cat=categories[k];h+='<div class="nav-item" onclick="showSection(\''+k+'\',this)" data-label="'+cat.name+'"><i class="fas '+cat.icon+'"></i><span>'+cat.name+'</span></div>';}c.innerHTML=h;}
 function filterSidebarNav(){var q=document.getElementById('sidebarSearchInput').value.toLowerCase();var items=document.querySelectorAll('#sidebarRestaurantList .nav-item');for(var i=0;i<items.length;i++){var l=items[i].getAttribute('data-label')||'';items[i].style.display=l.toLowerCase().indexOf(q)>=0?'flex':'none';}}
 
+function handleImageUpload(inputEl,hiddenInputId,previewImgId,maxW,maxH){
+    var file=inputEl.files&&inputEl.files[0];if(!file)return;
+    if(!/^image\//.test(file.type)){alert('Sirf image file select karein (jpg, png waghera).');inputEl.value='';return;}
+    if(file.size>15*1024*1024){alert('Photo bohat badi hai (15MB se kam honi chahiye). Chhoti photo try karein.');inputEl.value='';return;}
+    var reader=new FileReader();
+    reader.onload=function(e){
+        var img=new Image();
+        img.onload=function(){
+            var w=img.width,h=img.height;
+            var scale=Math.min(1,maxW/w,maxH/h);
+            var cw=Math.round(w*scale),ch=Math.round(h*scale);
+            var canvas=document.createElement('canvas');canvas.width=cw;canvas.height=ch;
+            canvas.getContext('2d').drawImage(img,0,0,cw,ch);
+            var dataUrl=canvas.toDataURL('image/jpeg',0.72);
+            document.getElementById(hiddenInputId).value=dataUrl;
+            var pv=document.getElementById(previewImgId);pv.src=dataUrl;pv.style.display='block';
+            var cb=document.getElementById(previewImgId.replace('Preview','ClearBtn'));if(cb)cb.style.display='inline-flex';
+        };
+        img.onerror=function(){alert('Ye photo load nahi ho saki, koi aur try karein.');};
+        img.src=e.target.result;
+    };
+    reader.onerror=function(){alert('Photo read nahi ho saki, dobara try karein.');};
+    reader.readAsDataURL(file);
+    inputEl.value='';
+}
+function clearUploadedImage(hiddenInputId,previewImgId,clearBtnId){
+    document.getElementById(hiddenInputId).value='';
+    var pv=document.getElementById(previewImgId);pv.style.display='none';pv.src='';
+    var cb=document.getElementById(clearBtnId);if(cb)cb.style.display='none';
+}
 function renderProductIcon(p){if(p&&p.image)return'<img src="'+p.image+'" alt="" loading="lazy" onerror="this.parentElement.innerHTML=\''+(p.emoji||'📦').replace(/'/g,"\\'")+'\'">';return(p&&p.emoji)?p.emoji:'📦';}
 function productsGridHTML(key,cat){
     var h='<div class="products-list">';
@@ -1182,15 +1251,15 @@ function renderAdminProducts(){
 
 function renderAdminRestaurants(){var list=document.getElementById('adminRestaurantsList');var h='';var keys=Object.keys(categories);for(var i=0;i<keys.length;i++){var k=keys[i],cat=categories[k];var thumb=cat.image?'<img class="restaurant-thumb-admin" src="'+cat.image+'" onerror="this.remove()">':'';h+='<div class="restaurant-list-item"><div class="restaurant-info"><div class="restaurant-name-admin">'+thumb+'<i class="fas '+cat.icon+'" style="color:var(--indigo)"></i>'+cat.name+'</div><div class="restaurant-sub-admin">'+(cat.subtitle||'')+' - '+cat.products.length+' items</div></div><div class="product-actions"><button class="edit-btn" onclick="openEditRestModal(\''+k+'\')"><i class="fas fa-edit"></i></button><button class="delete-btn" onclick="deleteRestaurant(\''+k+'\')"><i class="fas fa-trash"></i></button></div></div>';}list.innerHTML=h||'<p style="color:var(--muted);text-align:center;padding:1rem">Koi restaurant nahi.</p>';}
 function addRestaurant(){var name=document.getElementById('newRestName').value.trim();var sub=document.getElementById('newRestSubtitle').value.trim();var icon=document.getElementById('newRestIcon').value;var col=document.getElementById('newRestColor').value;var img=document.getElementById('newRestImage').value.trim();var typ=document.getElementById('newRestType').value;if(!name){alert('Naam likhein!');return;}var key=name.toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'')+'_'+Date.now();categories[key]={name:name,icon:icon,class:col,subtitle:sub||name,type:typ,image:img,products:[]};localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);document.getElementById('newRestName').value='';document.getElementById('newRestSubtitle').value='';document.getElementById('newRestImage').value='';renderSidebarNav();fillCategoryDropdowns();renderAdminRestaurants();renderSections();alert('"'+name+'" add ho gaya!');}
-function openEditRestModal(k){var cat=categories[k];document.getElementById('editRestKey').value=k;document.getElementById('editRestName').value=cat.name;document.getElementById('editRestSubtitle').value=cat.subtitle||'';document.getElementById('editRestIcon').value=cat.icon;document.getElementById('editRestColor').value=cat.class;document.getElementById('editRestType').value=cat.type||'food';document.getElementById('editRestImage').value=cat.image||'';document.getElementById('editRestOverlay').classList.add('active');document.getElementById('editRestModal').classList.add('active');}
+function openEditRestModal(k){var cat=categories[k];document.getElementById('editRestKey').value=k;document.getElementById('editRestName').value=cat.name;document.getElementById('editRestSubtitle').value=cat.subtitle||'';document.getElementById('editRestIcon').value=cat.icon;document.getElementById('editRestColor').value=cat.class;document.getElementById('editRestType').value=cat.type||'food';document.getElementById('editRestImage').value=cat.image||'';var erp=document.getElementById('editRestImgPreview'),erc=document.getElementById('editRestImgClearBtn');if(cat.image){erp.src=cat.image;erp.style.display='block';erc.style.display='inline-flex';}else{erp.style.display='none';erc.style.display='none';}document.getElementById('editRestOverlay').classList.add('active');document.getElementById('editRestModal').classList.add('active');}
 function closeEditRestModal(){document.getElementById('editRestOverlay').classList.remove('active');document.getElementById('editRestModal').classList.remove('active');}
 function saveRestaurantEdit(){var k=document.getElementById('editRestKey').value;categories[k].name=document.getElementById('editRestName').value.trim();categories[k].subtitle=document.getElementById('editRestSubtitle').value.trim();categories[k].icon=document.getElementById('editRestIcon').value;categories[k].class=document.getElementById('editRestColor').value;categories[k].type=document.getElementById('editRestType').value;categories[k].image=document.getElementById('editRestImage').value.trim();localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);closeEditRestModal();renderAdminRestaurants();fillCategoryDropdowns();renderSidebarNav();renderSections();alert('Update ho gaya!');}
 function deleteRestaurant(k){if(!confirm('"'+categories[k].name+'" delete karna chahte hain?'))return;delete categories[k];localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);renderAdminRestaurants();fillCategoryDropdowns();renderSidebarNav();renderSections();}
 
-function addProduct(){var name=document.getElementById('adminProductName').value.trim();var price=parseInt(document.getElementById('adminProductPrice').value);var cat=document.getElementById('adminProductCategory').value;var emoji=document.getElementById('adminProductEmoji').value.trim()||'📦';if(!name||!price){alert('Naam aur price zaroori hain!');return;}if(!categories[cat]){alert('Ye restaurant/category ab exist nahi karta. Dropdown refresh ho raha hai, dobara select karke try karein.');fillCategoryDropdowns();return;}var allIds=[];var keys=Object.keys(categories);for(var i=0;i<keys.length;i++){for(var j=0;j<categories[keys[i]].products.length;j++)allIds.push(categories[keys[i]].products[j].id);}var newId=allIds.length>0?Math.max.apply(null,allIds)+1:1;var np={id:newId,name:name,price:price,emoji:emoji};var vt=collectVariationTypes('addVarBuilders');if(vt.length>0)np.variationTypes=vt;if(document.getElementById('addTimingEnabled').checked){np.timing={enabled:true,startTime:document.getElementById('addTimingStart').value,endTime:document.getElementById('addTimingEnd').value};}categories[cat].products.push(np);localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);document.getElementById('adminProductName').value='';document.getElementById('adminProductPrice').value='';document.getElementById('adminProductEmoji').value='';document.getElementById('addVarBuilders').innerHTML='';document.getElementById('addTimingEnabled').checked=false;document.getElementById('addTimingFields').style.display='none';renderSections();alert('"'+name+'" add ho gaya!');}
-function openEditModal(catKey,productId){var p=null;for(var i=0;i<categories[catKey].products.length;i++){if(categories[catKey].products[i].id===productId){p=categories[catKey].products[i];break;}}if(!p)return;editingProduct={categoryKey:catKey,productId:productId};document.getElementById('editProductId').value=productId;document.getElementById('editProductOrigCategory').value=catKey;fillCategoryDropdowns();document.getElementById('editProductCategorySelect').value=catKey;document.getElementById('editProductName').value=p.name;document.getElementById('editProductPrice').value=p.price;document.getElementById('editProductEmoji').value=p.emoji||'';var vt=getVariationTypes(p);buildVarEditorsFromData('editVarBuilders',vt);if(p.timing&&p.timing.enabled){document.getElementById('editTimingEnabled').checked=true;document.getElementById('editTimingFields').style.display='flex';document.getElementById('editTimingStart').value=p.timing.startTime||'18:00';document.getElementById('editTimingEnd').value=p.timing.endTime||'01:30';}else{document.getElementById('editTimingEnabled').checked=false;document.getElementById('editTimingFields').style.display='none';}document.getElementById('editOverlay').classList.add('active');document.getElementById('editModal').classList.add('active');}
+function addProduct(){var name=document.getElementById('adminProductName').value.trim();var price=parseInt(document.getElementById('adminProductPrice').value);var cat=document.getElementById('adminProductCategory').value;var emoji=document.getElementById('adminProductEmoji').value.trim()||'📦';var img=document.getElementById('adminProductImage').value.trim();if(!name||!price){alert('Naam aur price zaroori hain!');return;}if(!categories[cat]){alert('Ye restaurant/category ab exist nahi karta. Dropdown refresh ho raha hai, dobara select karke try karein.');fillCategoryDropdowns();return;}var allIds=[];var keys=Object.keys(categories);for(var i=0;i<keys.length;i++){for(var j=0;j<categories[keys[i]].products.length;j++)allIds.push(categories[keys[i]].products[j].id);}var newId=allIds.length>0?Math.max.apply(null,allIds)+1:1;var np={id:newId,name:name,price:price,emoji:emoji};if(img)np.image=img;var vt=collectVariationTypes('addVarBuilders');if(vt.length>0)np.variationTypes=vt;if(document.getElementById('addTimingEnabled').checked){np.timing={enabled:true,startTime:document.getElementById('addTimingStart').value,endTime:document.getElementById('addTimingEnd').value};}categories[cat].products.push(np);localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);document.getElementById('adminProductName').value='';document.getElementById('adminProductPrice').value='';document.getElementById('adminProductEmoji').value='';clearUploadedImage('adminProductImage','adminProductImgPreview','adminProductImgClearBtn');document.getElementById('addVarBuilders').innerHTML='';document.getElementById('addTimingEnabled').checked=false;document.getElementById('addTimingFields').style.display='none';renderSections();alert('"'+name+'" add ho gaya!');}
+function openEditModal(catKey,productId){var p=null;for(var i=0;i<categories[catKey].products.length;i++){if(categories[catKey].products[i].id===productId){p=categories[catKey].products[i];break;}}if(!p)return;editingProduct={categoryKey:catKey,productId:productId};document.getElementById('editProductId').value=productId;document.getElementById('editProductOrigCategory').value=catKey;fillCategoryDropdowns();document.getElementById('editProductCategorySelect').value=catKey;document.getElementById('editProductName').value=p.name;document.getElementById('editProductPrice').value=p.price;document.getElementById('editProductEmoji').value=p.emoji||'';document.getElementById('editProductImage').value=p.image||'';var epip=document.getElementById('editProductImgPreview'),epic=document.getElementById('editProductImgClearBtn');if(p.image){epip.src=p.image;epip.style.display='block';epic.style.display='inline-flex';}else{epip.style.display='none';epic.style.display='none';}var vt=getVariationTypes(p);buildVarEditorsFromData('editVarBuilders',vt);if(p.timing&&p.timing.enabled){document.getElementById('editTimingEnabled').checked=true;document.getElementById('editTimingFields').style.display='flex';document.getElementById('editTimingStart').value=p.timing.startTime||'18:00';document.getElementById('editTimingEnd').value=p.timing.endTime||'01:30';}else{document.getElementById('editTimingEnabled').checked=false;document.getElementById('editTimingFields').style.display='none';}document.getElementById('editOverlay').classList.add('active');document.getElementById('editModal').classList.add('active');}
 function closeEditModal(){document.getElementById('editOverlay').classList.remove('active');document.getElementById('editModal').classList.remove('active');editingProduct=null;}
-function saveEdit(){if(!editingProduct)return;var oc=document.getElementById('editProductOrigCategory').value;var nc=document.getElementById('editProductCategorySelect').value;if(!categories[oc]||!categories[nc]){alert('Category data purani ho gayi thi, refresh ho rahi hai. Dobara try karein.');fillCategoryDropdowns();closeEditModal();return;}var pid=parseInt(document.getElementById('editProductId').value);var p=null;for(var i=0;i<categories[oc].products.length;i++){if(categories[oc].products[i].id===pid){p=categories[oc].products[i];break;}}if(!p)return;p.name=document.getElementById('editProductName').value.trim();p.price=parseInt(document.getElementById('editProductPrice').value);p.emoji=document.getElementById('editProductEmoji').value.trim()||p.emoji;var vt=collectVariationTypes('editVarBuilders');if(vt.length>0){p.variationTypes=vt;delete p.variation;}else{delete p.variationTypes;}if(document.getElementById('editTimingEnabled').checked){p.timing={enabled:true,startTime:document.getElementById('editTimingStart').value,endTime:document.getElementById('editTimingEnd').value};}else{delete p.timing;}if(nc!==oc){var np=[];for(var i=0;i<categories[oc].products.length;i++){if(categories[oc].products[i].id!==pid)np.push(categories[oc].products[i]);}categories[oc].products=np;categories[nc].products.push(p);}localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);closeEditModal();renderAdminProducts();renderSections();alert('Update ho gaya!');}
+function saveEdit(){if(!editingProduct)return;var oc=document.getElementById('editProductOrigCategory').value;var nc=document.getElementById('editProductCategorySelect').value;if(!categories[oc]||!categories[nc]){alert('Category data purani ho gayi thi, refresh ho rahi hai. Dobara try karein.');fillCategoryDropdowns();closeEditModal();return;}var pid=parseInt(document.getElementById('editProductId').value);var p=null;for(var i=0;i<categories[oc].products.length;i++){if(categories[oc].products[i].id===pid){p=categories[oc].products[i];break;}}if(!p)return;p.name=document.getElementById('editProductName').value.trim();p.price=parseInt(document.getElementById('editProductPrice').value);p.emoji=document.getElementById('editProductEmoji').value.trim()||p.emoji;var pimg=document.getElementById('editProductImage').value.trim();if(pimg)p.image=pimg;else delete p.image;var vt=collectVariationTypes('editVarBuilders');if(vt.length>0){p.variationTypes=vt;delete p.variation;}else{delete p.variationTypes;}if(document.getElementById('editTimingEnabled').checked){p.timing={enabled:true,startTime:document.getElementById('editTimingStart').value,endTime:document.getElementById('editTimingEnd').value};}else{delete p.timing;}if(nc!==oc){var np=[];for(var i=0;i<categories[oc].products.length;i++){if(categories[oc].products[i].id!==pid)np.push(categories[oc].products[i]);}categories[oc].products=np;categories[nc].products.push(p);}localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);closeEditModal();renderAdminProducts();renderSections();alert('Update ho gaya!');}
 function deleteProduct(ck,pid){if(!confirm('Delete?'))return;categories[ck].products=categories[ck].products.filter(function(p){return p.id!==pid;});localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);renderAdminProducts();renderSections();}
 
 function requestNotificationPermission(){if('Notification' in window&&Notification.permission==='default')Notification.requestPermission();}
