@@ -1004,7 +1004,8 @@
         ]
       }
     ],
-    "image": ""
+    "image": "",
+    "logoImage": ""
   },
   "almurtaza": {
     "name": "Al-Murtaza Hotel & Restaurant",
@@ -1623,7 +1624,8 @@
         ]
       }
     ],
-    "image": ""
+    "image": "",
+    "logoImage": ""
   },
   "hussain": {
     "name": "Hussain Food Corner",
@@ -2391,7 +2393,8 @@
         "variation": "Regular"
       }
     ],
-    "image": ""
+    "image": "",
+    "logoImage": ""
   },
   "ipp": {
     "name": "Italian Pizza Palace (IPP)",
@@ -2659,7 +2662,8 @@
         "variation": "4 Pcs"
       }
     ],
-    "image": ""
+    "image": "",
+    "logoImage": ""
   },
   "almadina": {
     "name": "Al Madina Biryani",
@@ -2816,7 +2820,8 @@
         "variation": "Small"
       }
     ],
-    "image": ""
+    "image": "",
+    "logoImage": ""
   },
   "domino": {
     "name": "Domino Pizza",
@@ -3005,7 +3010,8 @@
         "variation": "2 Pcs"
       }
     ],
-    "image": ""
+    "image": "",
+    "logoImage": ""
   },
   "siraj": {
     "name": "Siraj Home Food",
@@ -3099,7 +3105,8 @@
         "variation": "1 Pao"
       }
     ],
-    "image": ""
+    "image": "",
+    "logoImage": ""
   },
   "friend": {
     "name": "Friend Bakery",
@@ -3193,7 +3200,8 @@
         "variation": "Regular"
       }
     ],
-    "image": ""
+    "image": "",
+    "logoImage": ""
   },
   "special": {
     "name": "Special Flavor",
@@ -3375,7 +3383,8 @@
         "variation": "Regular"
       }
     ],
-    "image": ""
+    "image": "",
+    "logoImage": ""
   },
   "groceries": {
     "name": "Dastak Groceries",
@@ -3529,7 +3538,8 @@
         "price": 150,
         "emoji": "🟡"
       }
-    ]
+    ],
+    "logoImage": ""
   },
   "mart": {
     "name": "Dastak Mart",
@@ -3538,7 +3548,8 @@
     "subtitle": "Coming Soon - Admin Panel se Products Add Karein",
     "type": "store",
     "image": "",
-    "products": []
+    "products": [],
+    "logoImage": ""
   },
   "medical": {
     "name": "Dastak Medical Store",
@@ -3668,7 +3679,8 @@
         "price": 320,
         "emoji": "🍯"
       }
-    ]
+    ],
+    "logoImage": ""
   },
   "generalstore": {
     "name": "Dastak General Store",
@@ -3798,6 +3810,7 @@
         "price": 250,
         "emoji": "📱"
       }
-    ]
+    ],
+    "logoImage": ""
   }
 }
