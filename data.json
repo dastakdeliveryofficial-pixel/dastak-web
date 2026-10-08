@@ -293,31 +293,6 @@
         ]
       },
       {
-        "id": 330,
-        "name": "Matka Pizza",
-        "price": 600,
-        "emoji": "🍕",
-        "variationTypes": [
-          {
-            "type": "Size",
-            "options": [
-              {
-                "name": "Small",
-                "price": 600
-              },
-              {
-                "name": "Medium",
-                "price": 800
-              },
-              {
-                "name": "Large",
-                "price": 1400
-              }
-            ]
-          }
-        ]
-      },
-      {
         "id": 333,
         "name": "Chicken Tikka Pizza",
         "price": 400,
