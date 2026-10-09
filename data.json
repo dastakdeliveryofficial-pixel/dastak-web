@@ -850,24 +850,54 @@
       },
       {
         "id": 409,
-        "name": "BBQ Lacha Paratha",
+        "name": "BBQ Lacha roll",
         "price": 500,
         "emoji": "🫓",
-        "variation": "Regular"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 500
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 410,
         "name": "Pizza Paratha",
         "price": 400,
         "emoji": "🫓",
-        "variation": "Regular"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 400
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 411,
-        "name": "Zinger Cheese Paratha",
+        "name": "Zinger Cheese roll",
         "price": 350,
         "emoji": "🫓",
-        "variation": "Regular"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 350
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 412,
