@@ -2786,7 +2786,12 @@
               }
             ]
           }
-        ]
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 26,
@@ -2803,7 +2808,12 @@
               }
             ]
           }
-        ]
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 28,
@@ -2905,7 +2915,22 @@
         "name": "French Fries",
         "price": 150,
         "emoji": "🍟",
-        "variation": "Regular"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 150
+              }
+            ]
+          }
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 34,
