@@ -2691,16 +2691,19 @@
       {
         "id": 26,
         "name": "Zinger Burger",
-        "price": 320,
+        "price": 350,
         "emoji": "🍔",
-        "variation": "Regular"
-      },
-      {
-        "id": 27,
-        "name": "Chicken Burger",
-        "price": 250,
-        "emoji": "🍔",
-        "variation": "Regular"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 320
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 28,
