@@ -901,17 +901,37 @@
       },
       {
         "id": 412,
-        "name": "Chicken Cheese Paratha",
+        "name": "Chicken Cheese Roll",
         "price": 300,
         "emoji": "🫓",
-        "variation": "Regular"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 300
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 413,
-        "name": "Chicken Paratha",
+        "name": "Chicken Roll",
         "price": 250,
         "emoji": "🫓",
-        "variation": "Regular"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 250
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 414,
