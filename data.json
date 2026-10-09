@@ -2586,7 +2586,7 @@
       {
         "id": 14,
         "name": "Special Pizza",
-        "price": 450,
+        "price": 550,
         "emoji": "🍕",
         "variationTypes": [
           {
@@ -2594,19 +2594,24 @@
             "options": [
               {
                 "name": "Small",
-                "price": 450
+                "price": 550
               },
               {
                 "name": "Medium",
-                "price": 750
+                "price": 800
               },
               {
                 "name": "Large",
-                "price": 1000
+                "price": 1100
               }
             ]
           }
-        ]
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 17,
