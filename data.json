@@ -2541,7 +2541,22 @@
         "name": "Special Family Deal",
         "price": 1690,
         "emoji": "🍕",
-        "variation": "1 Large + 1 Small Pizza + 6 Wings + Fries + Drink"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "1 Large + 1 Small Pizza + 6 Wings + Fries + 1 litre rink",
+                "price": 1790
+              }
+            ]
+          }
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 11,
