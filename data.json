@@ -2479,7 +2479,17 @@
         "name": "Family Deal",
         "price": 1550,
         "emoji": "👨‍👩‍👧‍👦",
-        "variation": "1 Large Pizza + 2 Shawarma + 4 Wings + 1 Drink"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "1 Large Pizza + 2 Shawarma + 4 Wings + 1 Drink",
+                "price": 1650
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 5,
