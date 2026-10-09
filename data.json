@@ -2995,6 +2995,17 @@
           "startTime": "18:00",
           "endTime": "01:30"
         }
+      },
+      {
+        "id": 2224,
+        "name": "Family Deal (3 Small Pizza + 3 Zinger Burger + 1 litre Cold Drink",
+        "price": 200,
+        "emoji": "📦",
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       }
     ],
     "image": "",
