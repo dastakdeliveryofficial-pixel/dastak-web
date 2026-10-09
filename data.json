@@ -2496,7 +2496,17 @@
         "name": "Weekend Family Deal",
         "price": 1400,
         "emoji": "🎉",
-        "variation": "1 Large Pizza + 4 Wings + 2 Shawarma"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "1 Large Pizza + 4 Wings + 2 Shawarma",
+                "price": 1550
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 6,
