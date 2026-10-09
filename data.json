@@ -1236,9 +1236,19 @@
       {
         "id": 623,
         "name": "Daal Moong Double Fry",
-        "price": 200,
+        "price": 250,
         "emoji": "🥣",
-        "variation": "Regular"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 250
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 624,
