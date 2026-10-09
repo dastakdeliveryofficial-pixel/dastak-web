@@ -2671,7 +2671,12 @@
               }
             ]
           }
-        ]
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 14,
@@ -2886,7 +2891,22 @@
         "name": "Special Shawarma",
         "price": 150,
         "emoji": "🌯",
-        "variation": "Regular"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 150
+              }
+            ]
+          }
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 32,
