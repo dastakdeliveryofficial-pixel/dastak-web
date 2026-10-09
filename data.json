@@ -2565,21 +2565,66 @@
         "name": "Super Saver",
         "price": 1150,
         "emoji": "💰",
-        "variation": "1 Small Pizza + 2 Shawarma + 1 Fries + 4 Wings + Drink"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "1 Small Pizza + 2 Shawarma + 1 Fries + 4 Wings + Drink",
+                "price": 1150
+              }
+            ]
+          }
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 8,
         "name": "Shawarma Special",
         "price": 500,
         "emoji": "🌯",
-        "variation": "2 Chicken Shawarma + 2 Wings + 1 Fries"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "2 Chicken Shawarma + 2 Wings + 1 Fries",
+                "price": 500
+              }
+            ]
+          }
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 9,
         "name": "Italian Deal 2",
         "price": 700,
         "emoji": "🍟",
-        "variation": "2 Zinger Burgers + Fries + 345ml Drink"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "2 Zinger Burgers + Fries + 345ml Drink",
+                "price": 700
+              }
+            ]
+          }
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 10,
