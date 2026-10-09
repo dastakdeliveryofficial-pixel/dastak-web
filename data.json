@@ -732,13 +732,6 @@
         "variation": "Regular"
       },
       {
-        "id": 394,
-        "name": "BBQ Wings",
-        "price": 700,
-        "emoji": "🍗",
-        "variation": "Regular"
-      },
-      {
         "id": 395,
         "name": "Nuggets",
         "price": 550,
@@ -769,27 +762,6 @@
       {
         "id": 399,
         "name": "Macaroni Pasta",
-        "price": 300,
-        "emoji": "🍝",
-        "variationTypes": [
-          {
-            "type": "Size",
-            "options": [
-              {
-                "name": "Half",
-                "price": 300
-              },
-              {
-                "name": "Full",
-                "price": 600
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 401,
-        "name": "Spaghetti Pasta",
         "price": 300,
         "emoji": "🍝",
         "variationTypes": [
