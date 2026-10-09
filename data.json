@@ -2509,7 +2509,12 @@
               }
             ]
           }
-        ]
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 5,
@@ -2526,7 +2531,12 @@
               }
             ]
           }
-        ]
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 6,
