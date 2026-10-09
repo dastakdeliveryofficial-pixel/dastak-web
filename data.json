@@ -783,7 +783,7 @@
       {
         "id": 403,
         "name": "Crunchy Pasta",
-        "price": 300,
+        "price": 400,
         "emoji": "🍝",
         "variationTypes": [
           {
@@ -799,7 +799,12 @@
               }
             ]
           }
-        ]
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 405,
