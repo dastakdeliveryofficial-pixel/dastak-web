@@ -1141,16 +1141,41 @@
       {
         "id": 613,
         "name": "Chicken Malai Boti Roll",
-        "price": 300,
+        "price": 250,
         "emoji": "🌯",
-        "variation": "Regular"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 280
+              }
+            ]
+          }
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 614,
         "name": "Chicken Green Boti Roll",
-        "price": 300,
+        "price": 250,
         "emoji": "🌯",
-        "variation": "Regular"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 250
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 615,
