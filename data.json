@@ -2730,16 +2730,46 @@
       {
         "id": 29,
         "name": "Cheese Burger",
-        "price": 400,
+        "price": 430,
         "emoji": "🍔",
-        "variation": "Regular"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 430
+              }
+            ]
+          }
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 30,
         "name": "Chicken Shawarma",
-        "price": 120,
+        "price": 150,
         "emoji": "🌯",
-        "variation": "Regular"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 150
+              }
+            ]
+          }
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 31,
