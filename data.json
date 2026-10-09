@@ -2455,7 +2455,22 @@
         "name": "All in One Deal",
         "price": 1200,
         "emoji": "🎁",
-        "variation": "1 Small Pizza + 2 Shawarma + 1 Zinger + 4 Wings"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "1 Small Pizza + 2 Shawarma + 1 Zinger + 4 Wings",
+                "price": 1200
+              }
+            ]
+          }
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 3,
@@ -2472,7 +2487,12 @@
               }
             ]
           }
-        ]
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 4,
@@ -2810,9 +2830,24 @@
       {
         "id": 34,
         "name": "Hot Crispy Wings",
-        "price": 200,
+        "price": 70,
         "emoji": "🍗",
-        "variation": "4 Pcs"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "4 Pcs",
+                "price": 250
+              }
+            ]
+          }
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       }
     ],
     "image": "",
