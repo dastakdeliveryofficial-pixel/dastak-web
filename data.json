@@ -2781,9 +2781,24 @@
       {
         "id": 32,
         "name": "Zinger Roll",
-        "price": 230,
+        "price": 250,
         "emoji": "🌯",
-        "variation": "Regular"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "Regular",
+                "price": 280
+              }
+            ]
+          }
+        ],
+        "timing": {
+          "enabled": true,
+          "startTime": "18:00",
+          "endTime": "01:30"
+        }
       },
       {
         "id": 33,
