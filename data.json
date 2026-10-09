@@ -2462,7 +2462,17 @@
         "name": "Italian Deal",
         "price": 800,
         "emoji": "🍕",
-        "variation": "1 Small Pizza + 1 Zinger + 345ml Drink"
+        "variationTypes": [
+          {
+            "type": "Option",
+            "options": [
+              {
+                "name": "1 Small Pizza + 1 Zinger + 345ml Drink",
+                "price": 850
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 4,
