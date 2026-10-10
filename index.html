@@ -702,9 +702,9 @@
             <svg class="hero-skyline" viewBox="0 0 400 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M0,70 L0,40 L15,40 L15,25 L22,18 L29,25 L29,40 L45,40 L45,30 L55,30 L55,40 L75,40 L75,20 Q75,10 85,10 Q95,10 95,20 L95,40 L115,40 L115,32 L125,32 L125,40 L150,40 L150,15 L158,8 L166,15 L166,40 L190,40 L190,28 L200,28 L200,40 L220,40 L220,18 Q220,8 230,8 Q240,8 240,18 L240,40 L260,40 L260,32 L270,32 L270,40 L290,40 L290,22 L298,14 L306,22 L306,40 L330,40 L330,30 L340,30 L340,40 L360,40 L360,25 Q360,15 370,15 Q380,15 380,25 L380,40 L400,40 L400,70 Z" fill="white"/>
             </svg>
-            <div class="hero-eyebrow"><i class="fas fa-location-dot"></i> Matli</div>
+            <div class="hero-eyebrow"><i class="fas fa-location-dot"></i> Tando Muhammad Khan</div>
             <h1 class="hero-heading">✨ Aaj Kya Mangwana Hai? ✨</h1>
-            <div class="hero-tagline">Aapki Zaroorat,<br>Hamari Zimmedari ♡</div>
+            <div class="hero-tagline">Darwaze par hi nahi,<br>dil par bhi hogi dastak ♡</div>
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
                 <input type="text" class="search-input" id="searchInput" placeholder="Restaurant ya item dhundein..." onkeyup="searchProducts()">
@@ -804,13 +804,11 @@ var defaultData={"cheezybite":{"name":"Cheezy Bite Pizza & Grill","icon":"fa-piz
 var categories=JSON.parse(localStorage.getItem('dastakCategories'))||JSON.parse(JSON.stringify(defaultData));
 function migrateCategories(){
     var changed=false;
-    var defKeys=Object.keys(defaultData);
-    for(var i=0;i<defKeys.length;i++){
-        var k=defKeys[i];
-        if(!categories[k]){
-            categories[k]=JSON.parse(JSON.stringify(defaultData[k]));
-            changed=true;
-        }
+    /* Default restaurants sirf tab wapas daalte hain jab data bilkul khali ho.
+       Warna admin ne jo restaurant delete kiya wo reload par wapas aa jata tha. */
+    if(!categories||typeof categories!=='object'||Object.keys(categories).length===0){
+        categories=JSON.parse(JSON.stringify(defaultData));
+        changed=true;
     }
     var allKeys=Object.keys(categories);
     for(var j=0;j<allKeys.length;j++){
