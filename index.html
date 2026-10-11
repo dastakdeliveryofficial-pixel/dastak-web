@@ -380,7 +380,29 @@
             .header-action-btn span{display:none}
             .header-action-btn{padding:0 0.5rem;min-width:32px}
         }
-    </style>
+    
+        /* ===== DELIVERY / OPEN-CLOSE / IMAGE ZOOM ===== */
+        .delivery-note{font-size:0.7rem;color:var(--muted);text-align:right;margin:-0.1rem 0 0.5rem;line-height:1.35}
+        .closed-banner{margin:0.9rem 0.9rem 0;background:var(--maroon-tint);border:1.5px solid var(--maroon);color:var(--maroon-deep);border-radius:12px;padding:0.7rem 0.85rem;font-size:0.8rem;font-weight:600;display:flex;gap:0.5rem;align-items:flex-start;line-height:1.4}
+        .open-pill{margin:0.9rem 0.9rem 0;background:var(--success-tint);color:var(--success-deep);border-radius:12px;padding:0.5rem 0.85rem;font-size:0.76rem;font-weight:600}
+        .rc-status{position:absolute;bottom:8px;right:8px;font-size:0.6rem;font-weight:800;padding:0.2rem 0.55rem;border-radius:20px;z-index:3;color:white;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
+        .rc-status.open{background:var(--success)}
+        .rc-status.closed{background:var(--maroon)}
+        .restaurant-card.is-closed .restaurant-card-image img{filter:grayscale(0.75)}
+        .product-row-add.locked{background:var(--muted-light)}
+        .product-row-img.zoomable{cursor:zoom-in}
+        .img-zoom-hint{position:absolute;right:3px;bottom:3px;background:rgba(0,0,0,0.55);color:white;border-radius:50%;width:18px;height:18px;font-size:0.55rem;display:flex;align-items:center;justify-content:center}
+        .pd-image-wrap.zoomable{cursor:zoom-in}
+        .pd-closed-note{display:none;margin:0 0 0.7rem;background:var(--maroon-tint);color:var(--maroon-deep);border-radius:10px;padding:0.55rem 0.7rem;font-size:0.76rem;font-weight:600;line-height:1.4}
+        .pd-add-btn:disabled{background:var(--muted-light);cursor:not-allowed}
+        .img-lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:6000;display:none;align-items:center;justify-content:center;flex-direction:column;padding:1rem}
+        .img-lightbox.active{display:flex}
+        .img-lightbox img{max-width:100%;max-height:78vh;border-radius:12px;object-fit:contain}
+        .img-lightbox-cap{color:white;margin-top:0.8rem;font-weight:600;text-align:center;font-size:0.9rem}
+        .img-lightbox-close{position:absolute;top:1rem;right:1rem;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.2);color:white;border:none;font-size:1rem;cursor:pointer}
+        .area-row{display:flex;gap:0.4rem;align-items:center;margin-bottom:0.45rem}
+        .area-row .form-input{padding:0.5rem 0.65rem}
+</style>
 </head>
 <body>
 <!-- Product Detail Modal -->
@@ -406,11 +428,18 @@
                 </div>
             </div>
         </div>
+        <div class="pd-closed-note" id="pdClosedNote"></div>
         <button class="pd-add-btn" id="pdAddBtn" onclick="pdAddToCart()">
             <span><i class="fas fa-shopping-bag"></i> Add to Cart</span>
             <span class="pd-btn-price" id="pdTotalPrice">Rs. 0</span>
         </button>
     </div>
+</div>
+
+<div class="img-lightbox" id="imgLightbox" onclick="closeImgLightbox()">
+    <button class="img-lightbox-close" onclick="closeImgLightbox()"><i class="fas fa-times"></i></button>
+    <img id="imgLightboxImg" alt="" onclick="event.stopPropagation()">
+    <div class="img-lightbox-cap" id="imgLightboxCap"></div>
 </div>
 
 <div class="notif-banner" id="notifBanner">
@@ -485,6 +514,7 @@
             <button class="admin-tab" onclick="switchTab('reset',this)">🔄 Reset</button>
             <button class="admin-tab" onclick="switchTab('sync',this)">🔗 GitHub Sync</button>
             <button class="admin-tab" onclick="switchTab('brand',this)">🎨 Branding</button>
+            <button class="admin-tab" onclick="switchTab('delivery',this)">🛵 Delivery</button>
         </div>
         <div class="tab-content active" id="tab-add">
             <div class="form-row">
@@ -531,6 +561,11 @@
                     <div class="form-group"><label class="form-label">Type</label><select class="form-select" id="newRestType"><option value="food">🍽️ Restaurant (Food)</option><option value="store">🛒 Store (Grocery/Medical/etc)</option></select></div>
                     <div class="form-group"><label class="form-label">Color Theme</label><select class="form-select" id="newRestColor"><option value="ipp">🔴 Red</option><option value="almadina">🟢 Green</option><option value="domino">🔵 Blue</option><option value="siraj">🟠 Orange</option><option value="friend">🟣 Purple</option><option value="special">🩷 Pink</option><option value="deals">🟡 Gold</option><option value="grocerytheme">🥦 Grocery Green</option><option value="marttheme">🏪 Mart Teal</option><option value="medtheme">⚕️ Medical Red</option><option value="genstoretheme">🛍️ Store Indigo</option></select></div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group"><label class="form-label">Khulne ka waqt (optional)</label><input type="time" class="form-input" id="newRestOpen"></div>
+                    <div class="form-group"><label class="form-label">Band hone ka waqt (optional)</label><input type="time" class="form-input" id="newRestClose"></div>
+                </div>
+                <div class="form-group"><label style="display:flex;gap:0.5rem;align-items:center;font-size:0.85rem;font-weight:600"><input type="checkbox" id="newRestClosed"> Abhi band rakhein (manual)</label></div>
                 <div class="form-group">
                     <label class="form-label">Cover Photo (bara banner - card aur menu ke top pe)</label>
                     <div class="img-upload-row">
@@ -592,6 +627,26 @@
             </div>
             <div id="githubSyncStatus" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:0.75rem;font-size:0.8rem;color:var(--muted)">Status: not checked yet</div>
             <p style="color:var(--muted);font-size:0.72rem;margin-top:0.9rem;line-height:1.5">Repo: <strong>dastakdeliveryofficial-pixel/dastak-web</strong> · File: <strong>data.json</strong><br>Token banane ke liye: GitHub → Settings → Developer settings → Personal access tokens → Fine-grained token → is repo ko "Contents: Read & Write" permission dein.</p>
+        </div>
+        <div class="tab-content" id="tab-delivery">
+            <div style="background:var(--mustard-tint);border:2px solid var(--mustard);border-radius:12px;padding:0.8rem;margin-bottom:1rem">
+                <p style="color:var(--mustard-deep);font-size:0.8rem;line-height:1.5"><i class="fas fa-circle-info"></i> Customer checkout par pehle <strong>area</strong> chunta hai, phir ghar/street likhta hai. Delivery = us area ka charge. Agar bohat saare alag restaurants/shops se order ho to extra charge judta hai.</p>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label class="form-label">Itne restaurants/shops tak sirf area ka charge</label><input type="number" min="1" class="form-input" id="delIncluded" placeholder="3"></div>
+                <div class="form-group"><label class="form-label">Is se zyada har restaurant/shop par extra (Rs.)</label><input type="number" min="0" class="form-input" id="delExtra" placeholder="50"></div>
+            </div>
+            <div class="form-group"><label class="form-label">Area select na ho to default charge (Rs.)</label><input type="number" min="0" class="form-input" id="delDefault" placeholder="100" style="max-width:140px"></div>
+            <button class="admin-btn" onclick="saveDeliveryRules()" style="margin-bottom:1.2rem"><i class="fas fa-save"></i> Rules Save Karein</button>
+            <div style="border-top:2px solid var(--border);padding-top:1rem">
+                <h3 style="margin-bottom:0.7rem;font-size:1rem">🗺️ Delivery Areas</h3>
+                <div class="form-row">
+                    <div class="form-group"><label class="form-label">Area ka naam</label><input type="text" class="form-input" id="newAreaName" placeholder="e.g. Matli Main Bazaar"></div>
+                    <div class="form-group"><label class="form-label">Delivery charge (Rs.)</label><input type="number" min="0" class="form-input" id="newAreaCharge" placeholder="100"></div>
+                </div>
+                <button class="admin-btn" onclick="addDeliveryArea()" style="margin-bottom:1rem"><i class="fas fa-plus"></i> Area Add Karein</button>
+                <div id="deliveryAreasList"></div>
+            </div>
         </div>
         <div class="tab-content" id="tab-brand">
             <div class="form-group">
@@ -661,7 +716,12 @@
         <div class="form-group"><label class="form-label">Icon</label><select class="form-select" id="editRestIcon"><option value="fa-utensils">🍴 Utensils</option><option value="fa-pizza-slice">🍕 Pizza</option><option value="fa-bowl-rice">🍛 Biryani</option><option value="fa-bread-slice">🍞 Bakery</option><option value="fa-burger">🍔 Burger</option><option value="fa-star">⭐ Star</option><option value="fa-fire">🔥 Fire</option><option value="fa-drumstick-bite">🍗 Chicken</option><option value="fa-cart-shopping">🛒 Grocery Cart</option><option value="fa-store">🏬 Store</option><option value="fa-pills">💊 Pills</option><option value="fa-briefcase-medical">⚕️ Medical</option></select></div>
         <div class="form-group"><label class="form-label">Type</label><select class="form-select" id="editRestType"><option value="food">🍽️ Restaurant (Food)</option><option value="store">🛒 Store (Grocery/Medical/etc)</option></select></div>
         <div class="form-group"><label class="form-label">Color Theme</label><select class="form-select" id="editRestColor"><option value="ipp">🔴 Red</option><option value="almadina">🟢 Green</option><option value="domino">🔵 Blue</option><option value="siraj">🟠 Orange</option><option value="friend">🟣 Purple</option><option value="special">🩷 Pink</option><option value="deals">🟡 Gold</option><option value="grocerytheme">🥦 Grocery Green</option><option value="marttheme">🏪 Mart Teal</option><option value="medtheme">⚕️ Medical Red</option><option value="genstoretheme">🛍️ Store Indigo</option></select></div>
-        <div class="form-group">
+        <div class="form-row">
+                    <div class="form-group"><label class="form-label">Khulne ka waqt (optional)</label><input type="time" class="form-input" id="editRestOpen"></div>
+                    <div class="form-group"><label class="form-label">Band hone ka waqt (optional)</label><input type="time" class="form-input" id="editRestClose"></div>
+                </div>
+                <div class="form-group"><label style="display:flex;gap:0.5rem;align-items:center;font-size:0.85rem;font-weight:600"><input type="checkbox" id="editRestClosed"> Abhi band rakhein (manual)</label></div>
+                <div class="form-group">
             <label class="form-label">Cover Photo (bara banner)</label>
             <div class="img-upload-row">
                 <label class="img-upload-btn"><i class="fas fa-camera"></i> Gallery se Photo Chunein<input type="file" accept="image/*" style="display:none" onchange="handleImageUpload(this,'editRestImage','editRestImgPreview',700,450)"></label>
@@ -702,9 +762,9 @@
             <svg class="hero-skyline" viewBox="0 0 400 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M0,70 L0,40 L15,40 L15,25 L22,18 L29,25 L29,40 L45,40 L45,30 L55,30 L55,40 L75,40 L75,20 Q75,10 85,10 Q95,10 95,20 L95,40 L115,40 L115,32 L125,32 L125,40 L150,40 L150,15 L158,8 L166,15 L166,40 L190,40 L190,28 L200,28 L200,40 L220,40 L220,18 Q220,8 230,8 Q240,8 240,18 L240,40 L260,40 L260,32 L270,32 L270,40 L290,40 L290,22 L298,14 L306,22 L306,40 L330,40 L330,30 L340,30 L340,40 L360,40 L360,25 Q360,15 370,15 Q380,15 380,25 L380,40 L400,40 L400,70 Z" fill="white"/>
             </svg>
-            <div class="hero-eyebrow"><i class="fas fa-location-dot"></i> Tando Muhammad Khan</div>
+            <div class="hero-eyebrow"><i class="fas fa-location-dot"></i> Matli</div>
             <h1 class="hero-heading">✨ Aaj Kya Mangwana Hai? ✨</h1>
-            <div class="hero-tagline">Darwaze par hi nahi,<br>dil par bhi hogi dastak ♡</div>
+            <div class="hero-tagline">Apki zaroorat,<br>hamari zimmedari</div>
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
                 <input type="text" class="search-input" id="searchInput" placeholder="Restaurant ya item dhundein..." onkeyup="searchProducts()">
@@ -761,7 +821,7 @@
     <div class="cart-footer" id="cartFooter" style="display:none">
         <div class="cart-summary-bar" onclick="toggleCartDetails()" id="cartSummaryBar">
             <div class="cart-summary-left">
-                <span style="font-size:0.72rem;color:var(--muted)">Items + Rs.100 Delivery</span>
+                <span id="cartSummaryLabel" style="font-size:0.72rem;color:var(--muted)">Items + Rs.100 Delivery</span>
                 <span class="cart-summary-total" id="cartSummaryTotal">Rs. 0</span>
             </div>
             <div class="cart-toggle-btn" id="cartToggleBtn">
@@ -770,8 +830,12 @@
             </div>
         </div>
         <div class="cart-details-panel" id="cartDetailsPanel">
-            <label class="address-label">📍 Delivery Address *</label>
-            <textarea class="address-input" id="deliveryAddress" rows="2" placeholder="Apna complete address likhein..."></textarea>
+            <div id="deliveryAreaWrap" style="display:none">
+                <label class="address-label">🗺️ Delivery Area *</label>
+                <select class="address-input" id="deliveryArea" onchange="onAreaChange()" style="margin-bottom:0.6rem"></select>
+            </div>
+            <label class="address-label">📍 Ghar / Street / Kiske ghar par *</label>
+            <textarea class="address-input" id="deliveryAddress" rows="2" placeholder="Ghar number, gali ya street, kiske ghar ke paas..."></textarea>
             <label class="payment-label">💳 Payment Method *</label>
             <div class="payment-options">
                 <label class="payment-option selected" id="pay-cash"><input type="radio" name="paymentMethod" value="cash" checked onchange="updatePaymentStyle()"><span>💵 Cash on Delivery</span></label>
@@ -779,7 +843,8 @@
                 <label class="payment-option" id="pay-half"><input type="radio" name="paymentMethod" value="half" onchange="updatePaymentStyle()"><span>🤝 Half Cash &amp; Half Online</span></label>
             </div>
             <div class="delivery-row"><span>Items Total:</span><span id="cartSubtotal">Rs. 0</span></div>
-            <div class="delivery-row"><span>🛵 Delivery:</span><span>Rs. 100</span></div>
+            <div class="delivery-row"><span>🛵 Delivery:</span><span id="cartDelivery">Rs. 100</span></div>
+            <div class="delivery-note" id="cartDeliveryNote"></div>
             <div class="cart-grand-total"><span>Grand Total:</span><span id="cartTotal">Rs. 0</span></div>
         </div>
         <button class="checkout-btn" onclick="checkoutWhatsApp()"><i class="fab fa-whatsapp"></i> Order on WhatsApp</button>
@@ -892,6 +957,7 @@ var GITHUB_OWNER='dastakdeliveryofficial-pixel';
 var GITHUB_REPO='dastak-web';
 var GITHUB_DATA_PATH='data.json';
 var GITHUB_SETTINGS_PATH='settings.json';
+var localSettingsMutated=false;
 var siteSettings=JSON.parse(localStorage.getItem('dastakSiteSettings')||'{}');
 function applySiteSettings(){
     var hb=document.querySelector('.hero-band');
@@ -900,23 +966,28 @@ function applySiteSettings(){
 function saveHeroBanner(){
     var val=document.getElementById('heroBannerInput').value.trim();
     if(!val){alert('Pehle gallery se photo select karein.');return;}
-    siteSettings.heroBanner=val;
+    localSettingsMutated=true;siteSettings.heroBanner=val;
     localStorage.setItem('dastakSiteSettings',JSON.stringify(siteSettings));
     applySiteSettings();
     pushSettingsToGitHub(true);
 }
 function resetHeroBanner(){
     if(!confirm('Default banner wapis lagana chahte hain?'))return;
-    delete siteSettings.heroBanner;
+    localSettingsMutated=true;delete siteSettings.heroBanner;
     localStorage.setItem('dastakSiteSettings',JSON.stringify(siteSettings));
     applySiteSettings();
     document.getElementById('heroBannerPreview').style.display='none';
     document.getElementById('heroBannerInput').value='';
     pushSettingsToGitHub(true);
 }
+var ghSettingsBusy=false,ghSettingsQueued=false;
 function pushSettingsToGitHub(showAlert){
     var token=getGithubToken();
     if(!token){if(showAlert)alert('Pehle GitHub Sync tab mein Token daal kar save karein.');else showSyncToast('⚠️ Sirf is phone par save hua — GitHub Sync token set nahi hai',true);return;}
+    if(ghSettingsBusy){ghSettingsQueued=true;return;}
+    ghSettingsBusy=true;doSettingsPush(token,showAlert,0);
+}
+function doSettingsPush(token,showAlert,attempt){
     var apiUrl='https://api.github.com/repos/'+GITHUB_OWNER+'/'+GITHUB_REPO+'/contents/'+GITHUB_SETTINGS_PATH;
     fetch(apiUrl+'?ref='+ghActiveBranch+'&t='+Date.now(),{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github+json'}})
     .then(function(r){if(r.status===404)return{sha:null};if(!r.ok)throw new Error('Status '+r.status);return r.json();})
@@ -927,12 +998,131 @@ function pushSettingsToGitHub(showAlert){
     })
     .then(function(r){
         if(!r.ok)return r.json().then(function(e){throw new Error(e.message||('Status '+r.status));});
-        if(showAlert)alert('✅ Banner GitHub par sync ho gaya!');else showSyncToast('✅ GitHub par sync ho gaya',false);
+        if(showAlert)alert('✅ Settings GitHub par sync ho gayi!');else showSyncToast('✅ GitHub par sync ho gaya',false);
+        finishSettingsPush();
     })
     .catch(function(err){
+        var conflict=err.message&&(err.message.indexOf('does not match')>=0||err.message.indexOf('409')>=0);
+        if(conflict&&attempt<2){setTimeout(function(){doSettingsPush(token,showAlert,attempt+1);},500+attempt*500);return;}
         alert('❌ GitHub par save nahi ho saka: '+err.message+'\n\nData is phone par mehfooz hai, dobara try karein.');
+        finishSettingsPush();
     });
 }
+function finishSettingsPush(){
+    ghSettingsBusy=false;
+    if(ghSettingsQueued){ghSettingsQueued=false;setTimeout(function(){pushSettingsToGitHub(false);},300);}
+}
+
+/* ===== DELIVERY AREAS & CHARGES ===== */
+function dkEsc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function getDeliveryAreas(){return Array.isArray(siteSettings.deliveryAreas)?siteSettings.deliveryAreas:[];}
+function getDeliveryRules(){
+    var r=siteSettings.deliveryRules||{};
+    var inc=parseInt(r.includedStops),ex=parseInt(r.extraPerStop),def=parseInt(r.defaultCharge);
+    return{includedStops:(inc>0?inc:3),extraPerStop:(ex>=0?ex:50),defaultCharge:(def>=0?def:100)};
+}
+function cartStopCount(){var s={};for(var i=0;i<cart.length;i++)s[cart[i].category]=1;return Object.keys(s).length;}
+function getSelectedArea(){
+    var el=document.getElementById('deliveryArea');if(!el||!el.value)return null;
+    var a=getDeliveryAreas();for(var i=0;i<a.length;i++){if(a[i].id===el.value)return a[i];}return null;
+}
+function calcDelivery(){
+    var rules=getDeliveryRules();var area=getSelectedArea();
+    var base=rules.defaultCharge;if(area){var ac=parseInt(area.charge);if(ac>=0)base=ac;}
+    var stops=cartStopCount();var extraStops=Math.max(0,stops-rules.includedStops);var extra=extraStops*rules.extraPerStop;
+    return{base:base,extra:extra,extraStops:extraStops,stops:stops,total:base+extra,area:area,rules:rules};
+}
+function populateDeliveryAreaSelect(){
+    var wrap=document.getElementById('deliveryAreaWrap'),sel=document.getElementById('deliveryArea');if(!wrap||!sel)return;
+    var areas=getDeliveryAreas();var cur=sel.value||localStorage.getItem('dastakLastArea')||'';
+    if(areas.length===0){wrap.style.display='none';sel.innerHTML='';return;}
+    var h='<option value="">-- Apna area chunein --</option>';
+    for(var i=0;i<areas.length;i++)h+='<option value="'+dkEsc(areas[i].id)+'">'+dkEsc(areas[i].name)+' (Rs. '+parseInt(areas[i].charge)+')</option>';
+    sel.innerHTML=h;wrap.style.display='block';
+    sel.value=cur;if(sel.value!==cur)sel.value='';
+}
+function onAreaChange(){var el=document.getElementById('deliveryArea');if(el)localStorage.setItem('dastakLastArea',el.value);updateCartUI();}
+function saveSiteSettingsAndSync(){
+    localSettingsMutated=true;
+    localStorage.setItem('dastakSiteSettings',JSON.stringify(siteSettings));
+    populateDeliveryAreaSelect();updateCartUI();
+    pushSettingsToGitHub(false);
+}
+function loadDeliveryAdminUI(){
+    var r=getDeliveryRules();
+    document.getElementById('delIncluded').value=r.includedStops;
+    document.getElementById('delExtra').value=r.extraPerStop;
+    document.getElementById('delDefault').value=r.defaultCharge;
+    renderDeliveryAreasAdmin();
+}
+function saveDeliveryRules(){
+    var inc=parseInt(document.getElementById('delIncluded').value),ex=parseInt(document.getElementById('delExtra').value),def=parseInt(document.getElementById('delDefault').value);
+    if(!(inc>0)||!(ex>=0)||!(def>=0)){alert('Teeno numbers sahi likhein (pehla kam az kam 1).');return;}
+    siteSettings.deliveryRules={includedStops:inc,extraPerStop:ex,defaultCharge:def};
+    saveSiteSettingsAndSync();
+}
+function renderDeliveryAreasAdmin(){
+    var el=document.getElementById('deliveryAreasList');if(!el)return;
+    var a=getDeliveryAreas();
+    if(a.length===0){el.innerHTML='<p style="color:var(--muted);font-size:0.8rem;text-align:center;padding:0.8rem">Abhi koi area add nahi hua.</p>';return;}
+    var h='';
+    for(var i=0;i<a.length;i++){
+        var id=dkEsc(a[i].id);
+        h+='<div class="area-row"><input type="text" class="form-input" id="areaName_'+id+'" value="'+dkEsc(a[i].name)+'" onchange="updateDeliveryArea(\''+id+'\')"><input type="number" min="0" class="form-input" style="max-width:90px" id="areaCharge_'+id+'" value="'+parseInt(a[i].charge)+'" onchange="updateDeliveryArea(\''+id+'\')"><button class="delete-btn" onclick="deleteDeliveryArea(\''+id+'\')"><i class="fas fa-trash"></i></button></div>';
+    }
+    el.innerHTML=h;
+}
+function addDeliveryArea(){
+    var name=document.getElementById('newAreaName').value.trim();var ch=parseInt(document.getElementById('newAreaCharge').value);
+    if(!name||!(ch>=0)){alert('Area ka naam aur charge dono likhein.');return;}
+    var list=getDeliveryAreas().slice();list.push({id:'a'+Date.now(),name:name,charge:ch});
+    siteSettings.deliveryAreas=list;
+    document.getElementById('newAreaName').value='';document.getElementById('newAreaCharge').value='';
+    saveSiteSettingsAndSync();renderDeliveryAreasAdmin();
+}
+function updateDeliveryArea(id){
+    var nm=document.getElementById('areaName_'+id),ch=document.getElementById('areaCharge_'+id);if(!nm||!ch)return;
+    var name=nm.value.trim(),charge=parseInt(ch.value);
+    if(!name||!(charge>=0)){alert('Naam aur charge sahi likhein.');renderDeliveryAreasAdmin();return;}
+    var list=getDeliveryAreas().slice();
+    for(var i=0;i<list.length;i++){if(list[i].id===id){list[i]={id:id,name:name,charge:charge};break;}}
+    siteSettings.deliveryAreas=list;saveSiteSettingsAndSync();
+}
+function deleteDeliveryArea(id){
+    if(!confirm('Ye area delete karna chahte hain?'))return;
+    siteSettings.deliveryAreas=getDeliveryAreas().filter(function(a){return a.id!==id;});
+    saveSiteSettingsAndSync();renderDeliveryAreasAdmin();
+}
+
+/* ===== RESTAURANT OPEN / CLOSE ===== */
+function fmt12(t){if(!t)return'';var p=String(t).split(':');var h=parseInt(p[0]),m=p[1]||'00';var ap=h>=12?'PM':'AM';h=h%12;if(h===0)h=12;return h+':'+m+' '+ap;}
+function parseHM(t){if(!t)return null;var p=String(t).split(':');var h=parseInt(p[0]),m=parseInt(p[1]);if(isNaN(h)||isNaN(m))return null;return h*60+m;}
+function getRestaurantStatus(cat){
+    if(!cat)return{open:true};
+    if(cat.forceClosed)return{open:false,text:'Abhi band hai'};
+    var o=parseHM(cat.openTime),c2=parseHM(cat.closeTime);
+    if(o===null||c2===null||o===c2)return{open:true};
+    var now=new Date();var m=now.getHours()*60+now.getMinutes();
+    var isOpen=(o<c2)?(m>=o&&m<c2):(m>=o||m<c2);
+    if(isOpen)return{open:true,text:'Khula hai - '+fmt12(cat.closeTime)+' tak'};
+    return{open:false,text:'Abhi band hai - '+fmt12(cat.openTime)+' par khulega'};
+}
+function toggleRestaurantClosed(k){
+    var cat=categories[k];if(!cat)return;
+    localMutatedAfterLoad=true;cat.forceClosed=!cat.forceClosed;
+    localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);
+    renderAdminRestaurants();renderSections();
+    showSyncToast(cat.name+(getRestaurantStatus(cat).open?' ab khula hai':' ab band hai'),false);
+}
+
+/* ===== PRODUCT IMAGE ZOOM ===== */
+function openProductImage(key,id){
+    var p=getProductById(key,id);if(!p||!p.image)return;
+    document.getElementById('imgLightboxImg').src=p.image;
+    document.getElementById('imgLightboxCap').textContent=p.name+' - '+getDisplayPrice(p);
+    document.getElementById('imgLightbox').classList.add('active');
+}
+function closeImgLightbox(){document.getElementById('imgLightbox').classList.remove('active');document.getElementById('imgLightboxImg').src='';}
 function loadSettingsFromGitHub(){
     var token=getGithubToken();
     var branches=[ghActiveBranch,'main','master'];
@@ -944,9 +1134,10 @@ function loadSettingsFromGitHub(){
             :fetch('https://raw.githubusercontent.com/'+GITHUB_OWNER+'/'+GITHUB_REPO+'/'+branch+'/'+GITHUB_SETTINGS_PATH+'?t='+Date.now()).then(function(r){if(!r.ok)throw new Error('404');return r.json();});
         req.then(function(remote){
             if(!remote||typeof remote!=='object')return;
+            if(localSettingsMutated)return;
             siteSettings=remote;
             localStorage.setItem('dastakSiteSettings',JSON.stringify(siteSettings));
-            applySiteSettings();
+            applySiteSettings();populateDeliveryAreaSelect();updateCartUI();
         }).catch(function(){tryBranch(i+1);});
     })(0);
 }
@@ -1118,6 +1309,7 @@ function clearUploadedImage(hiddenInputId,previewImgId,clearBtnId){
 }
 function renderProductIcon(p){if(p&&p.image)return'<img src="'+p.image+'" alt="" loading="lazy" onerror="this.parentElement.innerHTML=\''+(p.emoji||'📦').replace(/'/g,"\\'")+'\'">';return(p&&p.emoji)?p.emoji:'📦';}
 function productsGridHTML(key,cat){
+    var st=getRestaurantStatus(cat);
     var h='<div class="products-list">';
     for(var i=0;i<cat.products.length;i++){
         var p=cat.products[i];var av=isProductAvailable(p);
@@ -1127,7 +1319,7 @@ function productsGridHTML(key,cat){
         var vt=getFirstVariationLabel(p)?'<div class="product-row-variation">'+getFirstVariationLabel(p)+'</div>':'';
         var oc=av?' onclick="openProductDetail('+p.id+',\''+key+'\')"':'';
         var bc=av?' onclick="event.stopPropagation();openProductDetail('+p.id+',\''+key+'\')"':' disabled';
-        h+='<div class="product-row'+uc+'"'+oc+'>'+uo+'<div class="product-row-img">'+renderProductIcon(p)+db+'</div><div class="product-row-info"><div class="product-row-name">'+p.name+'</div>'+vt+'<div class="product-row-price">'+getDisplayPrice(p)+'</div></div><button class="product-row-add"'+bc+'><i class="fas '+(av?'fa-plus':'fa-moon')+'"></i></button></div>';
+        h+='<div class="product-row'+uc+'"'+oc+'>'+uo+'<div class="product-row-img'+(p.image?' zoomable':'')+'"'+(p.image?' onclick="event.stopPropagation();openProductImage(\''+key+'\','+p.id+')"':'')+'>'+renderProductIcon(p)+db+(p.image?'<span class="img-zoom-hint"><i class="fas fa-magnifying-glass-plus"></i></span>':'')+'</div><div class="product-row-info"><div class="product-row-name">'+p.name+'</div>'+vt+'<div class="product-row-price">'+getDisplayPrice(p)+'</div></div><button class="product-row-add'+(st.open?'':' locked')+'"'+bc+'><i class="fas '+(av?(st.open?'fa-plus':'fa-clock'):'fa-moon')+'"></i></button></div>';
     }
     h+='</div>';return h;
 }
@@ -1138,8 +1330,9 @@ function createSectionHTML(key,cat){return '<div class="section-header"><h2 clas
 function restaurantCardHTML(k,cat,i){
     var img=cat.image?'<img src="'+cat.image+'" alt="" loading="lazy" onerror="this.remove()">':'';
     var logo=cat.logoImage?'<div class="rc-logo"><img src="'+cat.logoImage+'" alt="" onerror="this.parentElement.remove()"></div>':'';
-    return '<div class="restaurant-card" style="animation-delay:'+(i*0.04)+'s" onclick="openRestaurantMenu(\''+k+'\')">'+
-       '<div class="restaurant-card-image '+cat.class+'"><span class="rc-badge"><i class="fas fa-utensils"></i> '+cat.products.length+'</span><i class="fas '+cat.icon+'"></i>'+img+logo+'</div>'+
+    var st=getRestaurantStatus(cat);var chip=(cat.forceClosed||(cat.openTime&&cat.closeTime))?'<span class="rc-status '+(st.open?'open':'closed')+'">'+(st.open?'Khula':'Band')+'</span>':'';
+    return '<div class="restaurant-card'+(st.open?'':' is-closed')+'" style="animation-delay:'+(i*0.04)+'s" onclick="openRestaurantMenu(\''+k+'\')">'+
+       '<div class="restaurant-card-image '+cat.class+'"><span class="rc-badge"><i class="fas fa-utensils"></i> '+cat.products.length+'</span><i class="fas '+cat.icon+'"></i>'+img+logo+chip+'</div>'+
        '<div class="restaurant-card-body"><div class="restaurant-card-name">'+cat.name+'</div><div class="restaurant-card-sub">'+(cat.subtitle||'')+'</div>'+
        '<div class="restaurant-card-meta"><span>'+cat.products.length+' items</span><span class="rc-cta">Menu <i class="fas fa-arrow-right"></i></span></div></div></div>';
 }
@@ -1180,7 +1373,10 @@ function renderMenuContent(key){
     if(cat.products.length===0){
         document.getElementById('menuContent').innerHTML='<div style="text-align:center;padding:3rem 1rem;color:var(--muted)"><i class="fas fa-box-open" style="font-size:2.5rem;margin-bottom:0.8rem;display:block;opacity:0.4"></i>Abhi products add nahi hue.<br>Jald hi available hoga!</div>';
     }else{
-        document.getElementById('menuContent').innerHTML=productsGridHTML(key,cat);
+        var mst=getRestaurantStatus(cat);var mbanner='';
+        if(!mst.open)mbanner='<div class="closed-banner"><i class="fas fa-clock" style="margin-top:2px"></i><span>'+mst.text+'. Aap menu aur prices dekh sakte hain, lekin abhi order nahi ho sakta.</span></div>';
+        else if(cat.openTime&&cat.closeTime)mbanner='<div class="open-pill"><i class="fas fa-circle-check"></i> '+mst.text+'</div>';
+        document.getElementById('menuContent').innerHTML=mbanner+productsGridHTML(key,cat);
     }
     var multi=restaurantKeys.length>1;
     document.getElementById('menuArrowLeft').style.display=multi?'flex':'none';
@@ -1229,7 +1425,7 @@ function searchProducts(){
     var results=[];var keys=Object.keys(categories);
     for(var i=0;i<keys.length;i++){var k=keys[i],cat=categories[k];var m=[];for(var j=0;j<cat.products.length;j++){var p=cat.products[j];if(p.name.toLowerCase().indexOf(q)>=0||(p.variation&&p.variation.toLowerCase().indexOf(q)>=0)||cat.name.toLowerCase().indexOf(q)>=0)m.push(p);}if(m.length>0)results.push({key:k,category:cat,products:m});}
     if(results.length===0){c.innerHTML='<div style="text-align:center;padding:3rem 1rem;color:var(--muted)"><div style="font-size:3rem;margin-bottom:1rem">🔍</div><h3>"'+raw+'" nahi mila</h3><button onclick="document.getElementById(\'searchInput\').value=\'\';renderSections();" style="background:var(--indigo);color:white;border:none;border-radius:10px;padding:0.55rem 1.1rem;cursor:pointer;font-weight:600;margin-top:0.75rem"><i class="fas fa-times"></i> Clear</button></div>';return;}
-    var h='';for(var i=0;i<results.length;i++){var r=results[i];h+='<div class="home-section-title" style="margin-top:1rem"><i class="fas '+r.category.icon+'"></i> '+r.category.name+' <span style="color:var(--muted);font-weight:500;font-size:0.75rem">('+r.products.length+' found)</span></div>';h+='<div class="products-list">';for(var j=0;j<r.products.length;j++){var p=r.products[j];h+='<div class="product-row" onclick="openProductDetail('+p.id+',\''+r.key+'\')"><div class="product-row-img">'+renderProductIcon(p)+'</div><div class="product-row-info"><div class="product-row-name">'+p.name+'</div>'+(getFirstVariationLabel(p)?'<div class="product-row-variation">'+getFirstVariationLabel(p)+'</div>':'')+'<div class="product-row-price">'+getDisplayPrice(p)+'</div></div><button class="product-row-add" onclick="event.stopPropagation();openProductDetail('+p.id+',\''+r.key+'\')"><i class="fas fa-plus"></i></button></div>';}h+='</div>';}c.innerHTML=h;
+    var h='';for(var i=0;i<results.length;i++){var r=results[i];h+='<div class="home-section-title" style="margin-top:1rem"><i class="fas '+r.category.icon+'"></i> '+r.category.name+' <span style="color:var(--muted);font-weight:500;font-size:0.75rem">('+r.products.length+' found)</span></div>';h+='<div class="products-list">';for(var j=0;j<r.products.length;j++){var p=r.products[j];h+='<div class="product-row" onclick="openProductDetail('+p.id+',\''+r.key+'\')"><div class="product-row-img'+(p.image?' zoomable':'')+'"'+(p.image?' onclick="event.stopPropagation();openProductImage(\''+r.key+'\','+p.id+')"':'')+'>'+renderProductIcon(p)+(p.image?'<span class="img-zoom-hint"><i class="fas fa-magnifying-glass-plus"></i></span>':'')+'</div><div class="product-row-info"><div class="product-row-name">'+p.name+'</div>'+(getFirstVariationLabel(p)?'<div class="product-row-variation">'+getFirstVariationLabel(p)+'</div>':'')+'<div class="product-row-price">'+getDisplayPrice(p)+'</div></div><button class="product-row-add" onclick="event.stopPropagation();openProductDetail('+p.id+',\''+r.key+'\')"><i class="fas fa-plus"></i></button></div>';}h+='</div>';}c.innerHTML=h;
 }
 
 var _pd={productId:null,categoryKey:null,qty:1,selectedOptions:{}};
@@ -1240,13 +1436,15 @@ function openProductDetail(productId,categoryKey){
     var cat=categories[categoryKey];
     _pd={productId:productId,categoryKey:categoryKey,qty:1,selectedOptions:{}};
     document.getElementById('pdRestaurantName').textContent=cat.name;
+    var iw0=document.getElementById('pdImage');iw0.className='pd-image-wrap'+(p.image?' zoomable':'');iw0.onclick=p.image?function(){openProductImage(categoryKey,productId);}:null;
     var iw=document.getElementById('pdImage');if(p.image){iw.innerHTML='<img src="'+p.image+'" alt="">';}else{iw.innerHTML=p.emoji||'📦';}
     document.getElementById('pdName').textContent=p.name;
     document.getElementById('pdBasePrice').textContent=getDisplayPrice(p);
     var vtypes=getVariationTypes(p);var vs=document.getElementById('pdVariationsSection');
     if(vtypes.length>0){var h='';for(var i=0;i<vtypes.length;i++){var vt=vtypes[i];_pd.selectedOptions[vt.type]=vt.options[0];h+='<div class="pd-var-group"><span class="pd-var-type-label">'+vt.type+'</span><div class="pd-var-options">';for(var j=0;j<vt.options.length;j++){var opt=vt.options[j];h+='<button class="pd-var-opt'+(j===0?' active':'')+'" data-vtype="'+vt.type+'" data-vname="'+opt.name.replace(/"/g,'&quot;')+'" data-vprice="'+opt.price+'" onclick="pdSelectOpt(this)"><span class="vname">'+opt.name+'</span><span class="vprice">'+(opt.price>0?'Rs. '+opt.price:'')+'</span></button>';}h+='</div></div>';}vs.innerHTML=h;}else{vs.innerHTML='';}
     document.getElementById('pdQty').textContent='1';_pd.qty=1;pdUpdateTotal();
-    document.getElementById('pdAddBtn').disabled=false;
+    var pst=getRestaurantStatus(cat);var pbtn=document.getElementById('pdAddBtn'),pnote=document.getElementById('pdClosedNote');
+    pbtn.disabled=!pst.open;if(pnote){if(!pst.open){pnote.style.display='block';pnote.textContent='⏰ '+pst.text+'. Abhi order nahi ho sakta, lekin aap menu dekh sakte hain.';}else{pnote.style.display='none';}}
     document.getElementById('pdOverlay').classList.add('active');document.body.style.overflow='hidden';
 }
 function pdSelectOpt(btn){var vt=btn.getAttribute('data-vtype');var vn=btn.getAttribute('data-vname');var vp=parseInt(btn.getAttribute('data-vprice'));var sib=btn.parentNode.querySelectorAll('.pd-var-opt');for(var i=0;i<sib.length;i++)sib[i].classList.remove('active');btn.classList.add('active');_pd.selectedOptions[vt]={name:vn,price:vp};pdUpdateTotal();}
@@ -1256,6 +1454,7 @@ function pdUpdateTotal(){var pr=pdCalcPrice();document.getElementById('pdTotalPr
 function playCartSound(){try{var ctx=new(window.AudioContext||window.webkitAudioContext)();var o=ctx.createOscillator();var g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=800;g.gain.value=0.08;o.start();o.stop(ctx.currentTime+0.1);}catch(e){}}
 function pdAddToCart(){
     var p=getProductById(_pd.categoryKey,_pd.productId);if(!p)return;
+    var pcat=categories[_pd.categoryKey];if(pcat){var pst2=getRestaurantStatus(pcat);if(!pst2.open){alert(pcat.name+': '+pst2.text);return;}}
     var unitPrice=pdCalcPrice();
     var varParts=[];var vkeys=Object.keys(_pd.selectedOptions);for(var i=0;i<vkeys.length;i++){var sel=_pd.selectedOptions[vkeys[i]];if(sel)varParts.push(sel.name);}
     var varStr=varParts.join(', ');var cartKey=_pd.productId+'__'+varStr;
@@ -1280,7 +1479,7 @@ function removeFromCart(ck){cart=cart.filter(function(c){return c._cartKey!==ck;
 function updateCartUI(){
     var cc=document.getElementById('cartCount');var ci=document.getElementById('cartItems');var cf=document.getElementById('cartFooter');
     var ctEl=document.getElementById('cartTotal');var csEl=document.getElementById('cartSubtotal');var cstEl=document.getElementById('cartSummaryTotal');
-    var DEL=100;var total=0,sub=0;for(var i=0;i<cart.length;i++){total+=cart[i].quantity;sub+=cart[i].price*cart[i].quantity;}
+    var dl=calcDelivery();var DEL=dl.total;var total=0,sub=0;for(var i=0;i<cart.length;i++){total+=cart[i].quantity;sub+=cart[i].price*cart[i].quantity;}
     cc.textContent=total;
     var ccNav=document.getElementById('cartCountNav');if(ccNav)ccNav.textContent=total;
     if(cart.length===0){ci.innerHTML='<div class="empty-cart"><i class="fas fa-shopping-basket"></i><p>Your cart is empty</p></div>';cf.style.display='none';}
@@ -1289,6 +1488,10 @@ function updateCartUI(){
         h+='<div class="cart-item"><div class="cart-item-img">'+renderProductIcon(it)+'</div><div class="cart-item-details"><div class="cart-item-name">'+it.name+'</div>'+(it.variation?'<div class="cart-item-variants">'+it.variation+'</div>':'')+'<div class="cart-item-price">Rs. '+it.price+' each</div><div class="quantity-controls"><button class="qty-btn" onclick="updateQuantity(\''+sk+'\',-1)"><i class="fas fa-minus"></i></button><span class="qty-value">'+it.quantity+'</span><button class="qty-btn" onclick="updateQuantity(\''+sk+'\',1)"><i class="fas fa-plus"></i></button></div></div><div class="remove-item" onclick="removeFromCart(\''+sk+'\')"><i class="fas fa-trash"></i></div></div>';}
         ci.innerHTML=h;cf.style.display='block';
         if(csEl)csEl.textContent='Rs. '+sub;if(ctEl)ctEl.textContent='Rs. '+(sub+DEL);if(cstEl)cstEl.textContent='Rs. '+(sub+DEL);
+        var dEl=document.getElementById('cartDelivery');if(dEl)dEl.textContent='Rs. '+DEL;
+        var sLb=document.getElementById('cartSummaryLabel');if(sLb)sLb.textContent='Items + Rs.'+DEL+' Delivery';
+        var dNote=document.getElementById('cartDeliveryNote');
+        if(dNote){var nt=dl.area?('Area: '+dl.area.name+' = Rs.'+dl.base):('Area abhi chuna nahi (default Rs.'+dl.base+')');if(dl.extra>0)nt+=' + '+dl.extraStops+' extra restaurant/shop x Rs.'+dl.rules.extraPerStop+' = Rs.'+dl.extra;nt+=' ('+dl.stops+' alag jagah se order)';dNote.textContent=nt;}
     }
 }
 function toggleCart(){document.getElementById('cartOverlay').classList.toggle('active');document.getElementById('cartSidebar').classList.toggle('active');}
@@ -1297,12 +1500,16 @@ function updatePaymentStyle(){var opts=document.querySelectorAll('.payment-optio
 /* WHATSAPP CHECKOUT - FIXED complete message */
 function checkoutWhatsApp(){
     if(cart.length===0)return;
+    var closedList=[],seenC={};for(var ci2=0;ci2<cart.length;ci2++){var ck2=cart[ci2].category;if(seenC[ck2])continue;seenC[ck2]=1;var cc2=categories[ck2];if(cc2){var cs2=getRestaurantStatus(cc2);if(!cs2.open)closedList.push('- '+cc2.name+' ('+cs2.text+')');}}
+    if(closedList.length){alert('Ye restaurants/shops abhi band hain:\n'+closedList.join('\n')+'\n\nInka saman cart se hata dein ya khulne ke baad order karein.');return;}
+    var dl=calcDelivery();
+    if(getDeliveryAreas().length>0&&!dl.area){if(!cartDetailsOpen)toggleCartDetails();alert('Pehle apna Delivery Area chunein!');var ae=document.getElementById('deliveryArea');if(ae)ae.focus();return;}
     var addr=document.getElementById('deliveryAddress').value.trim();
     if(!addr){if(!cartDetailsOpen)toggleCartDetails();alert('Delivery address likhein!');document.getElementById('deliveryAddress').focus();return;}
     var pr=document.querySelector('input[name="paymentMethod"]:checked');
     var pv=pr?pr.value:'cash';
     var pl={cash:'Cash on Delivery',online:'Online Payment (EasyPaisa/JazzCash)',half:'Half Cash & Half Online'};
-    var DEL=100,sub=0;for(var i=0;i<cart.length;i++)sub+=cart[i].price*cart[i].quantity;var grand=sub+DEL;
+    var DEL=dl.total,sub=0;for(var i=0;i<cart.length;i++)sub+=cart[i].price*cart[i].quantity;var grand=sub+DEL;
     var grouped={};for(var i=0;i<cart.length;i++){var c=cart[i].category;if(!grouped[c])grouped[c]=[];grouped[c].push(cart[i]);}
     var lines='';var gk=Object.keys(grouped);
     for(var i=0;i<gk.length;i++){
@@ -1322,11 +1529,11 @@ function checkoutWhatsApp(){
         +lines
         +'-----------------------------\n'
         +'Items Total: Rs.'+sub+'\n'
-        +'Delivery Charges: Rs.100\n'
+        +'Delivery Charges: Rs.'+DEL+(dl.extra>0?' (Area Rs.'+dl.base+' + '+dl.extraStops+' extra x Rs.'+dl.rules.extraPerStop+')':'')+'\n'
         +'*GRAND TOTAL: Rs.'+grand+'*\n\n'
         +'*Payment:* '+(pl[pv]||'Cash on Delivery')+'\n\n'
         +'*Delivery Address:*\n'
-        +addr+'\n\n'
+        +(dl.area?('Area: '+dl.area.name+'\n'):'')+addr+'\n\n'
         +'Please confirm my order. Thank you!';
     window.open('https://wa.me/923202609175?text='+encodeURIComponent(msg),'_blank');
 }
@@ -1334,7 +1541,7 @@ function checkoutWhatsApp(){
 function openAdmin(){document.getElementById('adminOverlay').classList.add('active');document.getElementById('adminPanel').classList.add('active');toggleSidebar();fillCategoryDropdowns();renderAdminProducts();}
 function closeAdmin(e){if(e.target===document.getElementById('adminOverlay'))closeAdminDirect();}
 function closeAdminDirect(){document.getElementById('adminOverlay').classList.remove('active');document.getElementById('adminPanel').classList.remove('active');}
-function switchTab(tab,el){var tabs=document.querySelectorAll('.admin-tab');for(var i=0;i<tabs.length;i++)tabs[i].classList.remove('active');if(el)el.classList.add('active');var cts=document.querySelectorAll('.tab-content');for(var i=0;i<cts.length;i++)cts[i].classList.remove('active');var te=document.getElementById('tab-'+tab);if(te)te.classList.add('active');if(tab==='edit')renderAdminProducts();if(tab==='restaurants')renderAdminRestaurants();if(tab==='add'){document.getElementById('addVarBuilders').innerHTML='';document.getElementById('addTimingEnabled').checked=false;document.getElementById('addTimingFields').style.display='none';}if(tab==='sync'){var tk=document.getElementById('githubTokenInput');if(tk)tk.value=getGithubToken();refreshSyncStatusDisplay();}if(tab==='brand'){var hbp=document.getElementById('heroBannerPreview');if(siteSettings.heroBanner){hbp.src=siteSettings.heroBanner;hbp.style.display='block';}else{hbp.style.display='none';}}}
+function switchTab(tab,el){var tabs=document.querySelectorAll('.admin-tab');for(var i=0;i<tabs.length;i++)tabs[i].classList.remove('active');if(el)el.classList.add('active');var cts=document.querySelectorAll('.tab-content');for(var i=0;i<cts.length;i++)cts[i].classList.remove('active');var te=document.getElementById('tab-'+tab);if(te)te.classList.add('active');if(tab==='edit')renderAdminProducts();if(tab==='restaurants')renderAdminRestaurants();if(tab==='add'){document.getElementById('addVarBuilders').innerHTML='';document.getElementById('addTimingEnabled').checked=false;document.getElementById('addTimingFields').style.display='none';}if(tab==='sync'){var tk=document.getElementById('githubTokenInput');if(tk)tk.value=getGithubToken();refreshSyncStatusDisplay();}if(tab==='delivery')loadDeliveryAdminUI();if(tab==='brand'){var hbp=document.getElementById('heroBannerPreview');if(siteSettings.heroBanner){hbp.src=siteSettings.heroBanner;hbp.style.display='block';}else{hbp.style.display='none';}}}
 function fillCategoryDropdowns(){var o='';var keys=Object.keys(categories);for(var i=0;i<keys.length;i++)o+='<option value="'+keys[i]+'">'+categories[keys[i]].name+'</option>';var s1=document.getElementById('adminProductCategory'),s2=document.getElementById('editProductCategorySelect');if(s1)s1.innerHTML=o;if(s2)s2.innerHTML=o;}
 
 /* EDIT/DELETE - FIXED: shows ALL items */
@@ -1360,11 +1567,11 @@ function renderAdminProducts(){
     list.innerHTML=h;
 }
 
-function renderAdminRestaurants(){var list=document.getElementById('adminRestaurantsList');var h='';var keys=Object.keys(categories);for(var i=0;i<keys.length;i++){var k=keys[i],cat=categories[k];var thumb=cat.image?'<img class="restaurant-thumb-admin" src="'+cat.image+'" onerror="this.remove()">':'';h+='<div class="restaurant-list-item"><div class="restaurant-info"><div class="restaurant-name-admin">'+thumb+'<i class="fas '+cat.icon+'" style="color:var(--indigo)"></i>'+cat.name+'</div><div class="restaurant-sub-admin">'+(cat.subtitle||'')+' - '+cat.products.length+' items</div></div><div class="product-actions"><button class="edit-btn" onclick="openEditRestModal(\''+k+'\')"><i class="fas fa-edit"></i></button><button class="delete-btn" onclick="deleteRestaurant(\''+k+'\')"><i class="fas fa-trash"></i></button></div></div>';}list.innerHTML=h||'<p style="color:var(--muted);text-align:center;padding:1rem">Koi restaurant nahi.</p>';}
-function addRestaurant(){localMutatedAfterLoad=true;var name=document.getElementById('newRestName').value.trim();var sub=document.getElementById('newRestSubtitle').value.trim();var icon=document.getElementById('newRestIcon').value;var col=document.getElementById('newRestColor').value;var img=document.getElementById('newRestImage').value.trim();var logo=document.getElementById('newRestLogoImage').value.trim();var typ=document.getElementById('newRestType').value;if(!name){alert('Naam likhein!');return;}var key=name.toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'')+'_'+Date.now();categories[key]={name:name,icon:icon,class:col,subtitle:sub||name,type:typ,image:img,logoImage:logo,products:[]};localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);document.getElementById('newRestName').value='';document.getElementById('newRestSubtitle').value='';clearUploadedImage('newRestImage','newRestImgPreview','newRestImgClearBtn');clearUploadedImage('newRestLogoImage','newRestLogoPreview','newRestLogoClearBtn');renderSidebarNav();fillCategoryDropdowns();renderAdminRestaurants();renderSections();alert('"'+name+'" add ho gaya!');}
-function openEditRestModal(k){var cat=categories[k];document.getElementById('editRestKey').value=k;document.getElementById('editRestName').value=cat.name;document.getElementById('editRestSubtitle').value=cat.subtitle||'';document.getElementById('editRestIcon').value=cat.icon;document.getElementById('editRestColor').value=cat.class;document.getElementById('editRestType').value=cat.type||'food';document.getElementById('editRestImage').value=cat.image||'';var erp=document.getElementById('editRestImgPreview'),erc=document.getElementById('editRestImgClearBtn');if(cat.image){erp.src=cat.image;erp.style.display='block';erc.style.display='inline-flex';}else{erp.style.display='none';erc.style.display='none';}document.getElementById('editRestLogoImage').value=cat.logoImage||'';var elp=document.getElementById('editRestLogoPreview'),elc=document.getElementById('editRestLogoClearBtn');if(cat.logoImage){elp.src=cat.logoImage;elp.style.display='block';elc.style.display='inline-flex';}else{elp.style.display='none';elc.style.display='none';}document.getElementById('editRestOverlay').classList.add('active');document.getElementById('editRestModal').classList.add('active');}
+function renderAdminRestaurants(){var list=document.getElementById('adminRestaurantsList');var h='';var keys=Object.keys(categories);for(var i=0;i<keys.length;i++){var k=keys[i],cat=categories[k];var st=getRestaurantStatus(cat);var tm=(cat.openTime&&cat.closeTime?' | '+fmt12(cat.openTime)+' - '+fmt12(cat.closeTime):'')+(st.open?'':' | 🔴 Band');var thumb=cat.image?'<img class="restaurant-thumb-admin" src="'+cat.image+'" onerror="this.remove()">':'';h+='<div class="restaurant-list-item"><div class="restaurant-info"><div class="restaurant-name-admin">'+thumb+'<i class="fas '+cat.icon+'" style="color:var(--indigo)"></i>'+cat.name+'</div><div class="restaurant-sub-admin">'+(cat.subtitle||'')+' - '+cat.products.length+' items'+tm+'</div></div><div class="product-actions"><button class="edit-btn" title="Open/Band" onclick="toggleRestaurantClosed(\''+k+'\')"><i class="fas '+(st.open?'fa-door-open':'fa-door-closed')+'"></i></button><button class="edit-btn" onclick="openEditRestModal(\''+k+'\')"><i class="fas fa-edit"></i></button><button class="delete-btn" onclick="deleteRestaurant(\''+k+'\')"><i class="fas fa-trash"></i></button></div></div>';}list.innerHTML=h||'<p style="color:var(--muted);text-align:center;padding:1rem">Koi restaurant nahi.</p>';}
+function addRestaurant(){localMutatedAfterLoad=true;var name=document.getElementById('newRestName').value.trim();var sub=document.getElementById('newRestSubtitle').value.trim();var icon=document.getElementById('newRestIcon').value;var col=document.getElementById('newRestColor').value;var img=document.getElementById('newRestImage').value.trim();var logo=document.getElementById('newRestLogoImage').value.trim();var ot=document.getElementById('newRestOpen').value,ct=document.getElementById('newRestClose').value,fc=document.getElementById('newRestClosed').checked;var typ=document.getElementById('newRestType').value;if(!name){alert('Naam likhein!');return;}var key=name.toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'')+'_'+Date.now();categories[key]={name:name,icon:icon,class:col,subtitle:sub||name,type:typ,image:img,logoImage:logo,openTime:ot,closeTime:ct,forceClosed:fc,products:[]};localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);document.getElementById('newRestName').value='';document.getElementById('newRestSubtitle').value='';clearUploadedImage('newRestImage','newRestImgPreview','newRestImgClearBtn');clearUploadedImage('newRestLogoImage','newRestLogoPreview','newRestLogoClearBtn');document.getElementById('newRestOpen').value='';document.getElementById('newRestClose').value='';document.getElementById('newRestClosed').checked=false;renderSidebarNav();fillCategoryDropdowns();renderAdminRestaurants();renderSections();alert('"'+name+'" add ho gaya!');}
+function openEditRestModal(k){var cat=categories[k];document.getElementById('editRestKey').value=k;document.getElementById('editRestName').value=cat.name;document.getElementById('editRestSubtitle').value=cat.subtitle||'';document.getElementById('editRestIcon').value=cat.icon;document.getElementById('editRestColor').value=cat.class;document.getElementById('editRestType').value=cat.type||'food';document.getElementById('editRestOpen').value=cat.openTime||'';document.getElementById('editRestClose').value=cat.closeTime||'';document.getElementById('editRestClosed').checked=!!cat.forceClosed;document.getElementById('editRestImage').value=cat.image||'';var erp=document.getElementById('editRestImgPreview'),erc=document.getElementById('editRestImgClearBtn');if(cat.image){erp.src=cat.image;erp.style.display='block';erc.style.display='inline-flex';}else{erp.style.display='none';erc.style.display='none';}document.getElementById('editRestLogoImage').value=cat.logoImage||'';var elp=document.getElementById('editRestLogoPreview'),elc=document.getElementById('editRestLogoClearBtn');if(cat.logoImage){elp.src=cat.logoImage;elp.style.display='block';elc.style.display='inline-flex';}else{elp.style.display='none';elc.style.display='none';}document.getElementById('editRestOverlay').classList.add('active');document.getElementById('editRestModal').classList.add('active');}
 function closeEditRestModal(){document.getElementById('editRestOverlay').classList.remove('active');document.getElementById('editRestModal').classList.remove('active');}
-function saveRestaurantEdit(){localMutatedAfterLoad=true;var k=document.getElementById('editRestKey').value;categories[k].name=document.getElementById('editRestName').value.trim();categories[k].subtitle=document.getElementById('editRestSubtitle').value.trim();categories[k].icon=document.getElementById('editRestIcon').value;categories[k].class=document.getElementById('editRestColor').value;categories[k].type=document.getElementById('editRestType').value;categories[k].image=document.getElementById('editRestImage').value.trim();categories[k].logoImage=document.getElementById('editRestLogoImage').value.trim();localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);closeEditRestModal();renderAdminRestaurants();fillCategoryDropdowns();renderSidebarNav();renderSections();alert('Update ho gaya!');}
+function saveRestaurantEdit(){localMutatedAfterLoad=true;var k=document.getElementById('editRestKey').value;categories[k].name=document.getElementById('editRestName').value.trim();categories[k].subtitle=document.getElementById('editRestSubtitle').value.trim();categories[k].icon=document.getElementById('editRestIcon').value;categories[k].class=document.getElementById('editRestColor').value;categories[k].type=document.getElementById('editRestType').value;categories[k].image=document.getElementById('editRestImage').value.trim();categories[k].logoImage=document.getElementById('editRestLogoImage').value.trim();categories[k].openTime=document.getElementById('editRestOpen').value;categories[k].closeTime=document.getElementById('editRestClose').value;categories[k].forceClosed=document.getElementById('editRestClosed').checked;localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);closeEditRestModal();renderAdminRestaurants();fillCategoryDropdowns();renderSidebarNav();renderSections();alert('Update ho gaya!');}
 function deleteRestaurant(k){if(!confirm('"'+categories[k].name+'" delete karna chahte hain?'))return;localMutatedAfterLoad=true;delete categories[k];localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);renderAdminRestaurants();fillCategoryDropdowns();renderSidebarNav();renderSections();}
 
 function addProduct(){localMutatedAfterLoad=true;var name=document.getElementById('adminProductName').value.trim();var price=parseInt(document.getElementById('adminProductPrice').value);var cat=document.getElementById('adminProductCategory').value;var emoji=document.getElementById('adminProductEmoji').value.trim()||'📦';var img=document.getElementById('adminProductImage').value.trim();if(!name||!price){alert('Naam aur price zaroori hain!');return;}if(!categories[cat]){alert('Ye restaurant/category ab exist nahi karta. Dropdown refresh ho raha hai, dobara select karke try karein.');fillCategoryDropdowns();return;}var allIds=[];var keys=Object.keys(categories);for(var i=0;i<keys.length;i++){for(var j=0;j<categories[keys[i]].products.length;j++)allIds.push(categories[keys[i]].products[j].id);}var newId=allIds.length>0?Math.max.apply(null,allIds)+1:1;var np={id:newId,name:name,price:price,emoji:emoji};if(img)np.image=img;var vt=collectVariationTypes('addVarBuilders');if(vt.length>0)np.variationTypes=vt;if(document.getElementById('addTimingEnabled').checked){np.timing={enabled:true,startTime:document.getElementById('addTimingStart').value,endTime:document.getElementById('addTimingEnd').value};}categories[cat].products.push(np);localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);document.getElementById('adminProductName').value='';document.getElementById('adminProductPrice').value='';document.getElementById('adminProductEmoji').value='';clearUploadedImage('adminProductImage','adminProductImgPreview','adminProductImgClearBtn');document.getElementById('addVarBuilders').innerHTML='';document.getElementById('addTimingEnabled').checked=false;document.getElementById('addTimingFields').style.display='none';renderSections();alert('"'+name+'" add ho gaya!');}
@@ -1384,7 +1591,7 @@ window.addEventListener('storage',function(e){if(e.key==='dastakNotification'&&e
 
 function resetData(){if(!confirm('Sab data reset ho jaega. Sure?'))return;localMutatedAfterLoad=true;localStorage.removeItem('dastakCategories');categories=JSON.parse(JSON.stringify(defaultData));localStorage.setItem('dastakCategories',JSON.stringify(categories));pushToGitHub(false);renderSections();renderAdminProducts();renderSidebarNav();fillCategoryDropdowns();renderAdminRestaurants();alert('Data reset ho gaya!');}
 
-document.addEventListener('DOMContentLoaded',function(){renderSidebarNav();renderSections();requestNotificationPermission();initMenuSwipe();applySiteSettings();loadFromGitHub();loadSettingsFromGitHub();});
+document.addEventListener('DOMContentLoaded',function(){renderSidebarNav();renderSections();requestNotificationPermission();initMenuSwipe();populateDeliveryAreaSelect();applySiteSettings();loadFromGitHub();loadSettingsFromGitHub();});
 </script>
 </body>
 </html>
